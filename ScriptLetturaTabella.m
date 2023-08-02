@@ -28,3 +28,34 @@ rrow(1).Postconditions
 
 % Access to the "Preconditions" attribute of the first requirement in the requirements table
 rrow(1).Preconditions
+
+
+% Adding data to an empty requirement
+rrow(2).Postconditions = {'y2 > 5'};
+
+
+% For loop for precondition
+for i = 1:2
+    rrow(i).Preconditions
+end
+
+
+% For loop for postcondition
+for i = 1:2
+    rrow(i).Postconditions
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
