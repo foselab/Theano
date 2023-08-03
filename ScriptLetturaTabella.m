@@ -34,14 +34,18 @@ rrow(1).Preconditions
 rrow(2).Postconditions = {'y2 > 5'};
 
 
+% Specify the number of lines
+row = 2
+
+
 % For loop for precondition
-for i = 1:2
+for i = 1:row
     rrow(i).Preconditions
 end
 
 
 % For loop for postcondition
-for i = 1:2
+for i = 1:row
     rrow(i).Postconditions
 end
 

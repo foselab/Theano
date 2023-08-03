@@ -7,11 +7,88 @@
 %endfunction
 %function ChartDataMap(block, system) void
   %createrecord ChartDataElements {\
-    NumChartData   0 \
+    NumChartData   11 \
     ChartDataDefaults {\
       RecordType   "ChartData"\
       Dimensions   []\
       IsTestPoint  0\
+    }\
+    ChartData {\
+      Name         "doneDoubleBufferReInit"\
+      Description  "DoubleBufferInitCheck"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "u1_prev"\
+      Description  "ChangeDetectionDoubleBuffer"\
+      SFName       ""\
+      Path         "u1"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "u1_start"\
+      Description  "ChangeDetectionDoubleBuffer"\
+      SFName       ""\
+      Path         "u1"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "y1_prev"\
+      Description  "ChangeDetectionDoubleBuffer"\
+      SFName       ""\
+      Path         "y1"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "y1_start"\
+      Description  "ChangeDetectionDoubleBuffer"\
+      SFName       ""\
+      Path         "y1"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "y1_isComplete"\
+      Description  "Unknown"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "y2_isComplete"\
+      Description  "Unknown"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "y1_shadow"\
+      Description  "Unknown"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "y2_shadow"\
+      Description  "Unknown"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "y1_isInconsistent"\
+      Description  "Unknown"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "y2_isInconsistent"\
+      Description  "Unknown"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  ""\
     }\
   }
   %return ChartDataElements

@@ -1,0 +1,71 @@
+
+Creating a new model from the contents of Atomic Subsystem "Requirements Table".
+
+New Model File:C:\Users\bened\OneDrive\Documenti\MATLAB\Examples\R2023a\slrequirements\ObserverExampleModelExample\Theano\sldv_output\RequirementsTable\RequirementsTable.slx
+
+Model 'MioProgetto' is configured for a Variable-step solver. Since Simulink Design Verifier cannot be used with Variable-step solvers, the solver type of the extracted model 'RequirementsTable' has been set to Fixed-step discrete with auto step size.
+
+05-Jul-2023 15:14:51
+Checking compatibility for requirements table analysis: model 'RequirementsTable'
+Compiling model...done
+Building model representation...done
+
+05-Jul-2023 15:14:59
+'MioProgetto/Requirements Table' is compatible for requirements table analysis with Simulink Design Verifier.
+
+
+Analyzing requirements table using model representation from 05-Jul-2023 15:14:59...
+
+FALSIFIED
+Chart "Requirements Table"
+Completeness:1073742095:
+Analysis Time = 00:00:16
+
+
+Chart "Requirements Table"
+Completeness:1073742095:
+Analysis Time = 00:00:16
+
+FALSIFIED
+Chart "Requirements Table"
+Completeness:1073742096:
+Analysis Time = 00:00:16
+
+
+Chart "Requirements Table"
+Completeness:1073742096:
+Analysis Time = 00:00:16
+
+VALID
+Chart "Requirements Table"
+Consistency:1073742095:
+Analysis Time = 00:00:17
+
+
+Chart "Requirements Table"
+Consistency:1073742095:
+Analysis Time = 00:00:17
+
+VALID
+Chart "Requirements Table"
+Consistency:1073742096:
+Analysis Time = 00:00:17
+
+
+Chart "Requirements Table"
+Consistency:1073742096:
+Analysis Time = 00:00:17
+
+
+05-Jul-2023 15:15:22
+
+Completed normally.
+
+Generating output files:
+
+05-Jul-2023 15:15:24
+Results generation completed.
+
+    Data file:
+    C:\Users\bened\OneDrive\Documenti\MATLAB\Examples\R2023a\slrequirements\ObserverExampleModelExample\Theano\sldv_output\RequirementsTable\RequirementsTable_sldvdata.mat
+
