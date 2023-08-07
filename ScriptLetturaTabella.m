@@ -1,9 +1,9 @@
 % Open the project in simulink
-open_system('MioProgetto.slx')
+open_system('ProjectExamples/MioProgetto.slx')
 
 
 % Give the name "model" to my projec
-model='MioProgetto.slx';
+model='ProjectExamples/MioProgetto.slx';
 
 
 % Loads the requirement set and the link set into memory
