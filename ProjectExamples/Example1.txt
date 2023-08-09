@@ -1,0 +1,4 @@
+1u1==prev(u1)+1y1 == prev(y1)+2
+2u2 > 2y2 > 5
+1u1==prev(u1)+1y1 == prev(y1)+2
+2u2 > 2y2 > 5
