@@ -1,8 +1,8 @@
 ------- Input Data -----
-u1	test
-u2	test
-y1	test
-y2	test
+u2,Real
+y1,Real
+y2,Real
+u1,Real
 ------- Requirements -----
 u1==prev(u1)+1
 y1 == prev(y1)+2
