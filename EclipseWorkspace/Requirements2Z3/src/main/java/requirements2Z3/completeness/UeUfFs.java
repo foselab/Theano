@@ -1,48 +1,34 @@
-package requirements2Z3;
+package requirements2Z3.completeness;
 
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.RuleNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
+import generated.matlabLexer;
 import generated.matlabParser.Additive_expressionContext;
 import generated.matlabParser.And_expressionContext;
-import generated.matlabParser.Array_elementContext;
-import generated.matlabParser.Array_expressionContext;
-import generated.matlabParser.Array_listContext;
 import generated.matlabParser.Assignment_expressionContext;
-import generated.matlabParser.Assignment_statementContext;
-import generated.matlabParser.Clear_statementContext;
-import generated.matlabParser.Elseif_clauseContext;
 import generated.matlabParser.EostmtContext;
 import generated.matlabParser.Equality_expressionContext;
 import generated.matlabParser.ExpressionContext;
 import generated.matlabParser.Expression_statementContext;
 import generated.matlabParser.File_Context;
-import generated.matlabParser.Func_ident_listContext;
-import generated.matlabParser.Func_return_listContext;
-import generated.matlabParser.Function_declareContext;
-import generated.matlabParser.Function_declare_lhsContext;
-import generated.matlabParser.Global_statementContext;
-import generated.matlabParser.Identifier_listContext;
 import generated.matlabParser.Index_expressionContext;
 import generated.matlabParser.Index_expression_listContext;
-import generated.matlabParser.Iteration_statementContext;
-import generated.matlabParser.Jump_statementContext;
 import generated.matlabParser.Multiplicative_expressionContext;
 import generated.matlabParser.Or_expressionContext;
 import generated.matlabParser.Postfix_expressionContext;
+import generated.matlabParser.Prev_expressionContext;
 import generated.matlabParser.Primary_expressionContext;
 import generated.matlabParser.Relational_expressionContext;
-import generated.matlabParser.Selection_statementContext;
 import generated.matlabParser.StatementContext;
 import generated.matlabParser.Statement_listContext;
-import generated.matlabParser.Translation_unitContext;
 import generated.matlabParser.Unary_expressionContext;
 import generated.matlabParser.Unary_operatorContext;
 import generated.matlabVisitor;
 
-public class Matlab2Z3Visitor implements matlabVisitor<String> {
+public class UeUfFs implements matlabVisitor<String> {
 
 	@Override
 	public String visit(ParseTree tree) {
@@ -66,10 +52,6 @@ public class Matlab2Z3Visitor implements matlabVisitor<String> {
 		return b.toString();
 	}
 
-	@Override
-	public String visitTerminal(TerminalNode node) {
-		return node.getText();
-	}
 
 	@Override
 	public String visitErrorNode(ErrorNode node) {
@@ -94,6 +76,7 @@ public class Matlab2Z3Visitor implements matlabVisitor<String> {
 		for (int i = 0; i < ctx.getChildCount(); i++) {
 			b.append(ctx.getChild(i).accept(this) );
 		}
+		
 
 		return b.toString();
 	}
@@ -122,17 +105,6 @@ public class Matlab2Z3Visitor implements matlabVisitor<String> {
 
 	@Override
 	public String visitIndex_expression_list(Index_expression_listContext ctx) {
-		StringBuilder b = new StringBuilder();
-
-		for (int i = 0; i < ctx.getChildCount(); i++) {
-			b.append(ctx.getChild(i).accept(this) );
-		}
-
-		return b.toString();
-	}
-
-	@Override
-	public String visitArray_expression(Array_expressionContext ctx) {
 		StringBuilder b = new StringBuilder();
 
 		for (int i = 0; i < ctx.getChildCount(); i++) {
@@ -284,40 +256,7 @@ public class Matlab2Z3Visitor implements matlabVisitor<String> {
 
 		return b.toString();
 	}
-
-	@Override
-	public String visitIdentifier_list(Identifier_listContext ctx) {
-		StringBuilder b = new StringBuilder();
-
-		for (int i = 0; i < ctx.getChildCount(); i++) {
-			b.append(ctx.getChild(i).accept(this) );
-		}
-
-		return b.toString();
-	}
-
-	@Override
-	public String visitGlobal_statement(Global_statementContext ctx) {
-		StringBuilder b = new StringBuilder();
-
-		for (int i = 0; i < ctx.getChildCount(); i++) {
-			b.append(ctx.getChild(i).accept(this) );
-		}
-
-		return b.toString();
-	}
-
-	@Override
-	public String visitClear_statement(Clear_statementContext ctx) {
-		StringBuilder b = new StringBuilder();
-
-		for (int i = 0; i < ctx.getChildCount(); i++) {
-			b.append(ctx.getChild(i).accept(this) );
-		}
-
-		return b.toString();
-	}
-
+	
 	@Override
 	public String visitExpression_statement(Expression_statementContext ctx) {
 		StringBuilder b = new StringBuilder();
@@ -330,135 +269,27 @@ public class Matlab2Z3Visitor implements matlabVisitor<String> {
 	}
 
 	@Override
-	public String visitAssignment_statement(Assignment_statementContext ctx) {
-		StringBuilder b = new StringBuilder();
-
-		for (int i = 0; i < ctx.getChildCount(); i++) {
-			b.append(ctx.getChild(i).accept(this) );
+	public String visitTerminal(TerminalNode node) {
+		if(node.getSymbol().getType()==matlabLexer.IDENTIFIER) {
+			return node.getText()+"[i]";
 		}
-
-		return b.toString();
+		if(node.getSymbol().getType()==matlabLexer.CONSTANT) {
+			return node.getText();
+		}
+		if(node.getSymbol().getType()==matlabLexer.NE_OP) {
+			return "!=";
+		}
+		if(node.getSymbol().getType()==matlabLexer.CR) {
+			return "";
+		}
+		return node.getText();
 	}
 
 	@Override
-	public String visitArray_element(Array_elementContext ctx) {
+	public String visitPrev_expression(Prev_expressionContext ctx) {
+
 		StringBuilder b = new StringBuilder();
-
-		for (int i = 0; i < ctx.getChildCount(); i++) {
-			b.append(ctx.getChild(i).accept(this) );
-		}
-
+		b.append("And(Implies((i==0),("+ctx.getChild(2).accept(this)+")),Implies((i>0),("+ctx.getChild(2).getText()+"[i-1]"+")))" );
 		return b.toString();
 	}
-
-	@Override
-	public String visitArray_list(Array_listContext ctx) {
-		StringBuilder b = new StringBuilder();
-
-		for (int i = 0; i < ctx.getChildCount(); i++) {
-			b.append(ctx.getChild(i).accept(this) );
-		}
-
-		return b.toString();
-	}
-
-	@Override
-	public String visitSelection_statement(Selection_statementContext ctx) {
-		StringBuilder b = new StringBuilder();
-
-		for (int i = 0; i < ctx.getChildCount(); i++) {
-			b.append(ctx.getChild(i).accept(this) );
-		}
-
-		return b.toString();
-	}
-
-	@Override
-	public String visitElseif_clause(Elseif_clauseContext ctx) {
-		StringBuilder b = new StringBuilder();
-
-		for (int i = 0; i < ctx.getChildCount(); i++) {
-			b.append(ctx.getChild(i).accept(this) );
-		}
-
-		return b.toString();
-	}
-
-	@Override
-	public String visitIteration_statement(Iteration_statementContext ctx) {
-		StringBuilder b = new StringBuilder();
-
-		for (int i = 0; i < ctx.getChildCount(); i++) {
-			b.append(ctx.getChild(i).accept(this) );
-		}
-
-		return b.toString();
-	}
-
-	@Override
-	public String visitJump_statement(Jump_statementContext ctx) {
-		StringBuilder b = new StringBuilder();
-
-		for (int i = 0; i < ctx.getChildCount(); i++) {
-			b.append(ctx.getChild(i).accept(this) );
-		}
-
-		return b.toString();
-	}
-
-	@Override
-	public String visitTranslation_unit(Translation_unitContext ctx) {
-		StringBuilder b = new StringBuilder();
-
-		for (int i = 0; i < ctx.getChildCount(); i++) {
-			b.append(ctx.getChild(i).accept(this) );
-		}
-
-		return b.toString();
-	}
-
-	@Override
-	public String visitFunc_ident_list(Func_ident_listContext ctx) {
-		StringBuilder b = new StringBuilder();
-
-		for (int i = 0; i < ctx.getChildCount(); i++) {
-			b.append(ctx.getChild(i).accept(this) );
-		}
-
-		return b.toString();
-	}
-
-	@Override
-	public String visitFunc_return_list(Func_return_listContext ctx) {
-		StringBuilder b = new StringBuilder();
-
-		for (int i = 0; i < ctx.getChildCount(); i++) {
-			b.append(ctx.getChild(i).accept(this) );
-		}
-
-		return b.toString();
-	}
-
-	@Override
-	public String visitFunction_declare_lhs(Function_declare_lhsContext ctx) {
-		StringBuilder b = new StringBuilder();
-
-		for (int i = 0; i < ctx.getChildCount(); i++) {
-			b.append(ctx.getChild(i).accept(this) );
-		}
-
-		return b.toString();
-	}
-
-	@Override
-	public String visitFunction_declare(Function_declareContext ctx) {
-		StringBuilder b = new StringBuilder();
-
-		for (int i = 0; i < ctx.getChildCount(); i++) {
-			b.append(ctx.getChild(i).accept(this) );
-		}
-
-		return b.toString();
-	}
-
 }

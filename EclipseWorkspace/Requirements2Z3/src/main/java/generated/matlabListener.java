@@ -32,6 +32,16 @@ public interface matlabListener extends ParseTreeListener {
 	 */
 	void exitPrimary_expression(matlabParser.Primary_expressionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link matlabParser#prev_expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrev_expression(matlabParser.Prev_expressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link matlabParser#prev_expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrev_expression(matlabParser.Prev_expressionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link matlabParser#postfix_expression}.
 	 * @param ctx the parse tree
 	 */
@@ -61,16 +71,6 @@ public interface matlabListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitIndex_expression_list(matlabParser.Index_expression_listContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link matlabParser#array_expression}.
-	 * @param ctx the parse tree
-	 */
-	void enterArray_expression(matlabParser.Array_expressionContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link matlabParser#array_expression}.
-	 * @param ctx the parse tree
-	 */
-	void exitArray_expression(matlabParser.Array_expressionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link matlabParser#unary_expression}.
 	 * @param ctx the parse tree
@@ -202,36 +202,6 @@ public interface matlabListener extends ParseTreeListener {
 	 */
 	void exitStatement_list(matlabParser.Statement_listContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link matlabParser#identifier_list}.
-	 * @param ctx the parse tree
-	 */
-	void enterIdentifier_list(matlabParser.Identifier_listContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link matlabParser#identifier_list}.
-	 * @param ctx the parse tree
-	 */
-	void exitIdentifier_list(matlabParser.Identifier_listContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link matlabParser#global_statement}.
-	 * @param ctx the parse tree
-	 */
-	void enterGlobal_statement(matlabParser.Global_statementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link matlabParser#global_statement}.
-	 * @param ctx the parse tree
-	 */
-	void exitGlobal_statement(matlabParser.Global_statementContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link matlabParser#clear_statement}.
-	 * @param ctx the parse tree
-	 */
-	void enterClear_statement(matlabParser.Clear_statementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link matlabParser#clear_statement}.
-	 * @param ctx the parse tree
-	 */
-	void exitClear_statement(matlabParser.Clear_statementContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link matlabParser#expression_statement}.
 	 * @param ctx the parse tree
 	 */
@@ -241,124 +211,4 @@ public interface matlabListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitExpression_statement(matlabParser.Expression_statementContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link matlabParser#assignment_statement}.
-	 * @param ctx the parse tree
-	 */
-	void enterAssignment_statement(matlabParser.Assignment_statementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link matlabParser#assignment_statement}.
-	 * @param ctx the parse tree
-	 */
-	void exitAssignment_statement(matlabParser.Assignment_statementContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link matlabParser#array_element}.
-	 * @param ctx the parse tree
-	 */
-	void enterArray_element(matlabParser.Array_elementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link matlabParser#array_element}.
-	 * @param ctx the parse tree
-	 */
-	void exitArray_element(matlabParser.Array_elementContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link matlabParser#array_list}.
-	 * @param ctx the parse tree
-	 */
-	void enterArray_list(matlabParser.Array_listContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link matlabParser#array_list}.
-	 * @param ctx the parse tree
-	 */
-	void exitArray_list(matlabParser.Array_listContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link matlabParser#selection_statement}.
-	 * @param ctx the parse tree
-	 */
-	void enterSelection_statement(matlabParser.Selection_statementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link matlabParser#selection_statement}.
-	 * @param ctx the parse tree
-	 */
-	void exitSelection_statement(matlabParser.Selection_statementContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link matlabParser#elseif_clause}.
-	 * @param ctx the parse tree
-	 */
-	void enterElseif_clause(matlabParser.Elseif_clauseContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link matlabParser#elseif_clause}.
-	 * @param ctx the parse tree
-	 */
-	void exitElseif_clause(matlabParser.Elseif_clauseContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link matlabParser#iteration_statement}.
-	 * @param ctx the parse tree
-	 */
-	void enterIteration_statement(matlabParser.Iteration_statementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link matlabParser#iteration_statement}.
-	 * @param ctx the parse tree
-	 */
-	void exitIteration_statement(matlabParser.Iteration_statementContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link matlabParser#jump_statement}.
-	 * @param ctx the parse tree
-	 */
-	void enterJump_statement(matlabParser.Jump_statementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link matlabParser#jump_statement}.
-	 * @param ctx the parse tree
-	 */
-	void exitJump_statement(matlabParser.Jump_statementContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link matlabParser#translation_unit}.
-	 * @param ctx the parse tree
-	 */
-	void enterTranslation_unit(matlabParser.Translation_unitContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link matlabParser#translation_unit}.
-	 * @param ctx the parse tree
-	 */
-	void exitTranslation_unit(matlabParser.Translation_unitContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link matlabParser#func_ident_list}.
-	 * @param ctx the parse tree
-	 */
-	void enterFunc_ident_list(matlabParser.Func_ident_listContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link matlabParser#func_ident_list}.
-	 * @param ctx the parse tree
-	 */
-	void exitFunc_ident_list(matlabParser.Func_ident_listContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link matlabParser#func_return_list}.
-	 * @param ctx the parse tree
-	 */
-	void enterFunc_return_list(matlabParser.Func_return_listContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link matlabParser#func_return_list}.
-	 * @param ctx the parse tree
-	 */
-	void exitFunc_return_list(matlabParser.Func_return_listContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link matlabParser#function_declare_lhs}.
-	 * @param ctx the parse tree
-	 */
-	void enterFunction_declare_lhs(matlabParser.Function_declare_lhsContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link matlabParser#function_declare_lhs}.
-	 * @param ctx the parse tree
-	 */
-	void exitFunction_declare_lhs(matlabParser.Function_declare_lhsContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link matlabParser#function_declare}.
-	 * @param ctx the parse tree
-	 */
-	void enterFunction_declare(matlabParser.Function_declareContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link matlabParser#function_declare}.
-	 * @param ctx the parse tree
-	 */
-	void exitFunction_declare(matlabParser.Function_declareContext ctx);
 }
