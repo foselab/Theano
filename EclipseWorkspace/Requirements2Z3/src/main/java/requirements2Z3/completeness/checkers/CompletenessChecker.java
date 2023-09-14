@@ -16,7 +16,6 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import generated.matlabLexer;
 import generated.matlabParser;
 import requirements2Z3.completeness.visitors.ContainsVariableVisitor;
-import requirements2Z3.completeness.visitors.UeUfFs;
 
 public abstract class CompletenessChecker {
 
@@ -45,6 +44,8 @@ public abstract class CompletenessChecker {
 
 	abstract protected void processRequirements(Scanner sc, Writer wt) throws Exception;
 
+	abstract protected void defineTau(Scanner sc, Writer wt) throws Exception;
+	
 	protected void processVariableDefinitions(Scanner sc, Writer wt) throws IOException, Exception {
 		System.out.println("Processing the variable definitions");
 
@@ -66,7 +67,7 @@ public abstract class CompletenessChecker {
 		}
 		wt.write("I = IntSort()\n");
 		wt.write("R = RealSort()\n");
-		wt.write("tau = Array('tau', I, R)\n");
+		this.defineTau(sc, wt);
 		wt.write("j = Int('j')\n");
 		wt.write("i = Int('i')\n");
 		wt.write("k = Int('k')\n");
@@ -124,11 +125,22 @@ public abstract class CompletenessChecker {
 		while (nextLine != null && !nextLine.startsWith("------- End of Expected Results -----")) {
 
 			if (nextLine.startsWith("Complete")) {
-				wt.write("if (res.r ==  Z3_L_TRUE):\n");
-				wt.write("\t print('Error! Expecting  Complete, but result is incomplete')\n");
-
 				wt.write("if (res.r ==  Z3_L_FALSE):\n");
-				wt.write("\t print('Correct! Expecting  Complete, and result is complete')\n");
+				wt.write("\t print('Correct!')\n");
+				wt.write("else:\n");
+				wt.write("\t if (res.r == Z3_L_TRUE):\n");
+				wt.write("\t\t print('Error')\n");
+				wt.write("\t else:\n");
+				wt.write("\t\t print('MissRes')\n");
+			}
+			if (nextLine.startsWith("Incomplete")) {
+				wt.write("if (res.r ==  Z3_L_FALSE):\n");
+				wt.write("\t print('Error!')\n");
+				wt.write("else:\n");
+				wt.write("\t if (res.r == Z3_L_TRUE):\n");
+				wt.write("\t\t print('Correct')\n");
+				wt.write("\t else:\n");
+				wt.write("\t\t print('MissRes')\n");
 			}
 			nextLine = sc.nextLine();
 		}
@@ -161,8 +173,10 @@ public abstract class CompletenessChecker {
 
 		ParseTree tree = parser.statement_list();
 
-		String result = tree.accept(new UeUfFs());
+		String result = this.visitTree(tree);
 		return result;
 	}
+	
+	abstract protected String visitTree(ParseTree tree);
 
 }

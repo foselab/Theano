@@ -1,5 +1,6 @@
 package requirements2Z3;
 
+import requirements2Z3.completeness.checkers.UeArFsCompletenessCheckers;
 import requirements2Z3.completeness.checkers.UeUfFsCompletenessCheckers;
 
 public class CheckCompleteness {
@@ -13,8 +14,11 @@ public class CheckCompleteness {
 		for (String fileName : requirementsTablesFileNames) {
 
 			System.out.println("Processing the file: " + "./" + folder + "/" + fileName + ".txt");
-			new UeUfFsCompletenessCheckers("./" + folder + "/" + fileName + ".txt",
+			new UeArFsCompletenessCheckers("./" + folder + "/" + fileName + ".txt",
 					"./" + folder + "/" + encoding + "/" + fileName + ".py",2);
+			
+			new UeUfFsCompletenessCheckers("./" + folder + "/" + fileName + ".txt",
+					"./" + folder  + "/UeUfFs" + fileName + ".py",2);
 		}
 	}
 

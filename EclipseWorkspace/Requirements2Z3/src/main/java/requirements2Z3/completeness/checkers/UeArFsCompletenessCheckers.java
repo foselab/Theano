@@ -6,23 +6,22 @@ import java.util.AbstractMap;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.Map.Entry;
-import requirements2Z3.completeness.visitors.UeUfFs;
-
+import requirements2Z3.completeness.visitors.UeArFs;
 
 import org.antlr.v4.runtime.tree.ParseTree;
 
-import requirements2Z3.completeness.visitors.UeArFs;
+import java.util.Map.Entry;
 
-public class UeUfFsCompletenessCheckers extends CompletenessChecker {
+public class UeArFsCompletenessCheckers extends CompletenessChecker {
 
 	private float ts;
-
-	public UeUfFsCompletenessCheckers(String inputFile, String outputFile, float ts) throws Exception {
+	
+	public UeArFsCompletenessCheckers(String inputFile, String outputFile, float ts) throws Exception {
 		super(inputFile, outputFile);
-		this.ts = ts;
+		this.ts=ts;
 	}
 
+	
 	protected void processRequirements(Scanner sc, Writer wt) throws Exception {
 
 		System.out.println("Processing the requirements");
@@ -49,13 +48,14 @@ public class UeUfFsCompletenessCheckers extends CompletenessChecker {
 
 		wt.write("s = Solver()\n");
 
-		String tm = "ForAll(j,Implies(j>=0,(tau(j)<tau(j+1))))";
+		String tm = "ForAll(j,Implies(j>=0,(tau[j]<tau[j+1])))";
 
 		String encodingOutpuVariables = "";
 		boolean firstOutputVariables = true;
 
 		for (String outputVariable : this.outputVariables) {
 
+		
 			Set<String> preconditions = this.getPre(outputVariable, requirements);
 
 			String encodingForAnOutputVariable = "";
@@ -88,30 +88,32 @@ public class UeUfFsCompletenessCheckers extends CompletenessChecker {
 
 		}
 
-		String finalConvertedString = "And(" + tm + ","
-				+ encodingOutpuVariables + ")";
+		String finalConvertedString = "Exists([" + inputVariableStrings + "tau, i] ,And(" + tm + ","
+				+ encodingOutpuVariables + "))";
 
 		wt.write("s.add(" + finalConvertedString + ")\n");
 		// wt.write(conversion(sc.nextLine()+";")+"\n");
 
-		wt.write("s.add(Ts==" + ts + ")\n");
+		wt.write("s.add(Ts=="+ts+")\n");
 
 	}
 
 	protected void processVariableDefinitions(Scanner sc, Writer wt) throws IOException, Exception {
 		super.processVariableDefinitions(sc, wt);
-
+		
 		wt.write("Ts = Real('Ts')\n");
-
+		
 	}
 
 	@Override
 	protected void defineTau(Scanner sc, Writer wt) throws Exception {
-		wt.write("tau = Function('tau', IntSort(), RealSort())\n");
+		wt.write("tau = Array('tau', I, R)\n");
 	}
+
 
 	@Override
 	protected String visitTree(ParseTree tree) {
-		return tree.accept(new UeUfFs());
+		return tree.accept(new UeArFs());
 	}
+
 }

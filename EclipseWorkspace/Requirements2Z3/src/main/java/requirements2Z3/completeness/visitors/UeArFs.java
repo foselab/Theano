@@ -29,7 +29,7 @@ import generated.matlabParser.Unary_expressionContext;
 import generated.matlabParser.Unary_operatorContext;
 import generated.matlabVisitor;
 
-public class UeUfFs implements matlabVisitor<String> {
+public class UeArFs implements matlabVisitor<String> {
 
 	@Override
 	public String visit(ParseTree tree) {
@@ -271,15 +271,9 @@ public class UeUfFs implements matlabVisitor<String> {
 
 	@Override
 	public String visitTerminal(TerminalNode node) {
-		
-		if(node.getSymbol().getText().equals("tau")) {
-			return node.getText()+"(i)";
-		}
 		if(node.getSymbol().getType()==matlabLexer.IDENTIFIER) {
 			return node.getText()+"[i]";
 		}
-		
-		
 		if(node.getSymbol().getType()==matlabLexer.CONSTANT) {
 			return node.getText();
 		}
@@ -306,7 +300,7 @@ public class UeUfFs implements matlabVisitor<String> {
 		
 		String constant=ctx.getChild(5).getText();
 		
-		String part1="tau(i)>="+constant;
+		String part1="tau[i]>="+constant;
 		String part2=constant+">=Ts";
 		String part3="ForAll(k,Implies(And(i-"+constant+"/Ts<=k,k<=i),"+ctx.getChild(2).accept(this)+"))";
 		
