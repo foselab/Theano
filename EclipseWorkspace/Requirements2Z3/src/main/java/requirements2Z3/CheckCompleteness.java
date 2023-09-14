@@ -7,14 +7,14 @@ public class CheckCompleteness {
 	public static void main(String[] args) throws Exception {
 
 		String folder = "TestsCompleteness";
-		String[] requirementsTablesFileNames = new String[] { "Table2" };
+		String[] requirementsTablesFileNames = new String[] { "Table3" };
 		String encoding = "UeUfFs";
 
 		for (String fileName : requirementsTablesFileNames) {
 
 			System.out.println("Processing the file: " + "./" + folder + "/" + fileName + ".txt");
 			new UeUfFsCompletenessCheckers("./" + folder + "/" + fileName + ".txt",
-					"./" + folder + "/" + encoding + "/" + fileName + ".py");
+					"./" + folder + "/" + encoding + "/" + fileName + ".py",2);
 		}
 	}
 

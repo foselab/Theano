@@ -42,6 +42,13 @@ public class matlabBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitDur_expression(matlabParser.Dur_expressionContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitPostfix_expression(matlabParser.Postfix_expressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

@@ -9,6 +9,7 @@ import generated.matlabLexer;
 import generated.matlabParser.Additive_expressionContext;
 import generated.matlabParser.And_expressionContext;
 import generated.matlabParser.Assignment_expressionContext;
+import generated.matlabParser.Dur_expressionContext;
 import generated.matlabParser.EostmtContext;
 import generated.matlabParser.Equality_expressionContext;
 import generated.matlabParser.ExpressionContext;
@@ -284,6 +285,17 @@ public class ContainsVariableVisitor implements matlabVisitor<Boolean> {
 	@Override
 	public Boolean visitPrev_expression(Prev_expressionContext ctx) {
 
+		boolean result = false;
+
+		for (int i = 0; i < ctx.getChildCount(); i++) {
+			result = result || ctx.getChild(i).accept(this);
+		}
+
+		return result;
+	}
+
+	@Override
+	public Boolean visitDur_expression(Dur_expressionContext ctx) {
 		boolean result = false;
 
 		for (int i = 0; i < ctx.getChildCount(); i++) {

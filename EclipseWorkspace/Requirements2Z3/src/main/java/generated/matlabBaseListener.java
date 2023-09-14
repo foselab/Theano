@@ -56,6 +56,18 @@ public class matlabBaseListener implements matlabListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDur_expression(matlabParser.Dur_expressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDur_expression(matlabParser.Dur_expressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterPostfix_expression(matlabParser.Postfix_expressionContext ctx) { }
 	/**
 	 * {@inheritDoc}

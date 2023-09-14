@@ -22,18 +22,19 @@ public class matlabParser extends Parser {
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
 		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, T__15=16, T__16=17, 
-		ARRAYMUL=18, ARRAYDIV=19, ARRAYRDIV=20, ARRAYPOW=21, PREV=22, LE_OP=23, 
-		GE_OP=24, EQ_OP=25, NE_OP=26, IDENTIFIER=27, CONSTANT=28, CR=29, WS=30;
+		ARRAYMUL=18, ARRAYDIV=19, ARRAYRDIV=20, ARRAYPOW=21, PREV=22, DUR=23, 
+		LE_OP=24, GE_OP=25, EQ_OP=26, NE_OP=27, IDENTIFIER=28, CONSTANT=29, CR=30, 
+		WS=31;
 	public static final int
 		RULE_file_ = 0, RULE_primary_expression = 1, RULE_prev_expression = 2, 
-		RULE_postfix_expression = 3, RULE_index_expression = 4, RULE_index_expression_list = 5, 
-		RULE_unary_expression = 6, RULE_unary_operator = 7, RULE_multiplicative_expression = 8, 
-		RULE_additive_expression = 9, RULE_relational_expression = 10, RULE_equality_expression = 11, 
-		RULE_and_expression = 12, RULE_or_expression = 13, RULE_expression = 14, 
-		RULE_assignment_expression = 15, RULE_eostmt = 16, RULE_statement = 17, 
-		RULE_statement_list = 18, RULE_expression_statement = 19;
+		RULE_dur_expression = 3, RULE_postfix_expression = 4, RULE_index_expression = 5, 
+		RULE_index_expression_list = 6, RULE_unary_expression = 7, RULE_unary_operator = 8, 
+		RULE_multiplicative_expression = 9, RULE_additive_expression = 10, RULE_relational_expression = 11, 
+		RULE_equality_expression = 12, RULE_and_expression = 13, RULE_or_expression = 14, 
+		RULE_expression = 15, RULE_assignment_expression = 16, RULE_eostmt = 17, 
+		RULE_statement = 18, RULE_statement_list = 19, RULE_expression_statement = 20;
 	public static final String[] ruleNames = {
-		"file_", "primary_expression", "prev_expression", "postfix_expression", 
+		"file_", "primary_expression", "prev_expression", "dur_expression", "postfix_expression", 
 		"index_expression", "index_expression_list", "unary_expression", "unary_operator", 
 		"multiplicative_expression", "additive_expression", "relational_expression", 
 		"equality_expression", "and_expression", "or_expression", "expression", 
@@ -41,14 +42,14 @@ public class matlabParser extends Parser {
 	};
 
 	private static final String[] _LITERAL_NAMES = {
-		null, "'('", "')'", "':'", "','", "'+'", "'-'", "'~'", "'*'", "'/'", "'\\'", 
-		"'^'", "'<'", "'>'", "'&'", "'|'", "'='", "';'", "'.*'", "'.\\'", "'./'", 
-		"'.^'", "'prev'", "'<='", "'>='", "'=='", "'~='"
+		null, "'('", "')'", "'>'", "'<'", "'='", "':'", "','", "'+'", "'-'", "'~'", 
+		"'*'", "'/'", "'\\'", "'^'", "'&'", "'|'", "';'", "'.*'", "'.\\'", "'./'", 
+		"'.^'", "'prev'", "'dur'", "'<='", "'>='", "'=='", "'~='"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, null, null, null, null, null, null, null, null, null, null, null, 
 		null, null, null, null, null, null, "ARRAYMUL", "ARRAYDIV", "ARRAYRDIV", 
-		"ARRAYPOW", "PREV", "LE_OP", "GE_OP", "EQ_OP", "NE_OP", "IDENTIFIER", 
+		"ARRAYPOW", "PREV", "DUR", "LE_OP", "GE_OP", "EQ_OP", "NE_OP", "IDENTIFIER", 
 		"CONSTANT", "CR", "WS"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
@@ -131,16 +132,16 @@ public class matlabParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(41);
+			setState(43);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__0) | (1L << T__3) | (1L << T__4) | (1L << T__5) | (1L << T__6) | (1L << T__16) | (1L << PREV) | (1L << IDENTIFIER) | (1L << CONSTANT) | (1L << CR))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__0) | (1L << T__6) | (1L << T__7) | (1L << T__8) | (1L << T__9) | (1L << T__16) | (1L << PREV) | (1L << DUR) | (1L << IDENTIFIER) | (1L << CONSTANT) | (1L << CR))) != 0)) {
 				{
-				setState(40);
+				setState(42);
 				statement_list();
 				}
 			}
 
-			setState(43);
+			setState(45);
 			match(EOF);
 			}
 		}
@@ -160,6 +161,9 @@ public class matlabParser extends Parser {
 		public TerminalNode CONSTANT() { return getToken(matlabParser.CONSTANT, 0); }
 		public Prev_expressionContext prev_expression() {
 			return getRuleContext(Prev_expressionContext.class,0);
+		}
+		public Dur_expressionContext dur_expression() {
+			return getRuleContext(Dur_expressionContext.class,0);
 		}
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
@@ -187,37 +191,44 @@ public class matlabParser extends Parser {
 		Primary_expressionContext _localctx = new Primary_expressionContext(_ctx, getState());
 		enterRule(_localctx, 2, RULE_primary_expression);
 		try {
-			setState(52);
+			setState(55);
 			switch (_input.LA(1)) {
 			case IDENTIFIER:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(45);
+				setState(47);
 				match(IDENTIFIER);
 				}
 				break;
 			case CONSTANT:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(46);
+				setState(48);
 				match(CONSTANT);
 				}
 				break;
 			case PREV:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(47);
+				setState(49);
 				prev_expression();
 				}
 				break;
-			case T__0:
+			case DUR:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(48);
-				match(T__0);
-				setState(49);
-				expression(0);
 				setState(50);
+				dur_expression();
+				}
+				break;
+			case T__0:
+				enterOuterAlt(_localctx, 5);
+				{
+				setState(51);
+				match(T__0);
+				setState(52);
+				expression(0);
+				setState(53);
 				match(T__1);
 				}
 				break;
@@ -264,14 +275,78 @@ public class matlabParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(54);
-			match(PREV);
-			setState(55);
-			match(T__0);
-			setState(56);
-			match(IDENTIFIER);
 			setState(57);
+			match(PREV);
+			setState(58);
+			match(T__0);
+			setState(59);
+			match(IDENTIFIER);
+			setState(60);
 			match(T__1);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class Dur_expressionContext extends ParserRuleContext {
+		public TerminalNode DUR() { return getToken(matlabParser.DUR, 0); }
+		public ExpressionContext expression() {
+			return getRuleContext(ExpressionContext.class,0);
+		}
+		public TerminalNode CONSTANT() { return getToken(matlabParser.CONSTANT, 0); }
+		public TerminalNode LE_OP() { return getToken(matlabParser.LE_OP, 0); }
+		public TerminalNode GE_OP() { return getToken(matlabParser.GE_OP, 0); }
+		public Dur_expressionContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_dur_expression; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof matlabListener ) ((matlabListener)listener).enterDur_expression(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof matlabListener ) ((matlabListener)listener).exitDur_expression(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof matlabVisitor ) return ((matlabVisitor<? extends T>)visitor).visitDur_expression(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final Dur_expressionContext dur_expression() throws RecognitionException {
+		Dur_expressionContext _localctx = new Dur_expressionContext(_ctx, getState());
+		enterRule(_localctx, 6, RULE_dur_expression);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(62);
+			match(DUR);
+			setState(63);
+			match(T__0);
+			setState(64);
+			expression(0);
+			setState(65);
+			match(T__1);
+			setState(66);
+			_la = _input.LA(1);
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << T__3) | (1L << T__4) | (1L << LE_OP) | (1L << GE_OP))) != 0)) ) {
+			_errHandler.recoverInline(this);
+			} else {
+				consume();
+			}
+			setState(67);
+			match(CONSTANT);
 			}
 		}
 		catch (RecognitionException re) {
@@ -310,11 +385,11 @@ public class matlabParser extends Parser {
 
 	public final Postfix_expressionContext postfix_expression() throws RecognitionException {
 		Postfix_expressionContext _localctx = new Postfix_expressionContext(_ctx, getState());
-		enterRule(_localctx, 6, RULE_postfix_expression);
+		enterRule(_localctx, 8, RULE_postfix_expression);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(59);
+			setState(69);
 			primary_expression();
 			}
 		}
@@ -354,27 +429,28 @@ public class matlabParser extends Parser {
 
 	public final Index_expressionContext index_expression() throws RecognitionException {
 		Index_expressionContext _localctx = new Index_expressionContext(_ctx, getState());
-		enterRule(_localctx, 8, RULE_index_expression);
+		enterRule(_localctx, 10, RULE_index_expression);
 		try {
-			setState(63);
+			setState(73);
 			switch (_input.LA(1)) {
-			case T__2:
+			case T__5:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(61);
-				match(T__2);
+				setState(71);
+				match(T__5);
 				}
 				break;
 			case T__0:
-			case T__4:
-			case T__5:
-			case T__6:
+			case T__7:
+			case T__8:
+			case T__9:
 			case PREV:
+			case DUR:
 			case IDENTIFIER:
 			case CONSTANT:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(62);
+				setState(72);
 				expression(0);
 				}
 				break;
@@ -428,18 +504,18 @@ public class matlabParser extends Parser {
 		int _parentState = getState();
 		Index_expression_listContext _localctx = new Index_expression_listContext(_ctx, _parentState);
 		Index_expression_listContext _prevctx = _localctx;
-		int _startState = 10;
-		enterRecursionRule(_localctx, 10, RULE_index_expression_list, _p);
+		int _startState = 12;
+		enterRecursionRule(_localctx, 12, RULE_index_expression_list, _p);
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
 			{
-			setState(66);
+			setState(76);
 			index_expression();
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(73);
+			setState(83);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,3,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
@@ -450,16 +526,16 @@ public class matlabParser extends Parser {
 					{
 					_localctx = new Index_expression_listContext(_parentctx, _parentState);
 					pushNewRecursionContext(_localctx, _startState, RULE_index_expression_list);
-					setState(68);
+					setState(78);
 					if (!(precpred(_ctx, 1))) throw new FailedPredicateException(this, "precpred(_ctx, 1)");
-					setState(69);
-					match(T__3);
-					setState(70);
+					setState(79);
+					match(T__6);
+					setState(80);
 					index_expression();
 					}
 					} 
 				}
-				setState(75);
+				setState(85);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,3,_ctx);
 			}
@@ -504,28 +580,29 @@ public class matlabParser extends Parser {
 
 	public final Unary_expressionContext unary_expression() throws RecognitionException {
 		Unary_expressionContext _localctx = new Unary_expressionContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_unary_expression);
+		enterRule(_localctx, 14, RULE_unary_expression);
 		try {
-			setState(80);
+			setState(90);
 			switch (_input.LA(1)) {
 			case T__0:
 			case PREV:
+			case DUR:
 			case IDENTIFIER:
 			case CONSTANT:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(76);
+				setState(86);
 				postfix_expression();
 				}
 				break;
-			case T__4:
-			case T__5:
-			case T__6:
+			case T__7:
+			case T__8:
+			case T__9:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(77);
+				setState(87);
 				unary_operator();
-				setState(78);
+				setState(88);
 				postfix_expression();
 				}
 				break;
@@ -566,14 +643,14 @@ public class matlabParser extends Parser {
 
 	public final Unary_operatorContext unary_operator() throws RecognitionException {
 		Unary_operatorContext _localctx = new Unary_operatorContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_unary_operator);
+		enterRule(_localctx, 16, RULE_unary_operator);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(82);
+			setState(92);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__4) | (1L << T__5) | (1L << T__6))) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__7) | (1L << T__8) | (1L << T__9))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			} else {
 				consume();
@@ -630,18 +707,18 @@ public class matlabParser extends Parser {
 		int _parentState = getState();
 		Multiplicative_expressionContext _localctx = new Multiplicative_expressionContext(_ctx, _parentState);
 		Multiplicative_expressionContext _prevctx = _localctx;
-		int _startState = 16;
-		enterRecursionRule(_localctx, 16, RULE_multiplicative_expression, _p);
+		int _startState = 18;
+		enterRecursionRule(_localctx, 18, RULE_multiplicative_expression, _p);
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
 			{
-			setState(85);
+			setState(95);
 			unary_expression();
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(113);
+			setState(123);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,6,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
@@ -649,17 +726,17 @@ public class matlabParser extends Parser {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(111);
+					setState(121);
 					switch ( getInterpreter().adaptivePredict(_input,5,_ctx) ) {
 					case 1:
 						{
 						_localctx = new Multiplicative_expressionContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_multiplicative_expression);
-						setState(87);
+						setState(97);
 						if (!(precpred(_ctx, 8))) throw new FailedPredicateException(this, "precpred(_ctx, 8)");
-						setState(88);
-						match(T__7);
-						setState(89);
+						setState(98);
+						match(T__10);
+						setState(99);
 						unary_expression();
 						}
 						break;
@@ -667,11 +744,11 @@ public class matlabParser extends Parser {
 						{
 						_localctx = new Multiplicative_expressionContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_multiplicative_expression);
-						setState(90);
+						setState(100);
 						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
-						setState(91);
-						match(T__8);
-						setState(92);
+						setState(101);
+						match(T__11);
+						setState(102);
 						unary_expression();
 						}
 						break;
@@ -679,11 +756,11 @@ public class matlabParser extends Parser {
 						{
 						_localctx = new Multiplicative_expressionContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_multiplicative_expression);
-						setState(93);
+						setState(103);
 						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
-						setState(94);
-						match(T__9);
-						setState(95);
+						setState(104);
+						match(T__12);
+						setState(105);
 						unary_expression();
 						}
 						break;
@@ -691,11 +768,11 @@ public class matlabParser extends Parser {
 						{
 						_localctx = new Multiplicative_expressionContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_multiplicative_expression);
-						setState(96);
+						setState(106);
 						if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
-						setState(97);
-						match(T__10);
-						setState(98);
+						setState(107);
+						match(T__13);
+						setState(108);
 						unary_expression();
 						}
 						break;
@@ -703,11 +780,11 @@ public class matlabParser extends Parser {
 						{
 						_localctx = new Multiplicative_expressionContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_multiplicative_expression);
-						setState(99);
+						setState(109);
 						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
-						setState(100);
+						setState(110);
 						match(ARRAYMUL);
-						setState(101);
+						setState(111);
 						unary_expression();
 						}
 						break;
@@ -715,11 +792,11 @@ public class matlabParser extends Parser {
 						{
 						_localctx = new Multiplicative_expressionContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_multiplicative_expression);
-						setState(102);
+						setState(112);
 						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
-						setState(103);
+						setState(113);
 						match(ARRAYDIV);
-						setState(104);
+						setState(114);
 						unary_expression();
 						}
 						break;
@@ -727,11 +804,11 @@ public class matlabParser extends Parser {
 						{
 						_localctx = new Multiplicative_expressionContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_multiplicative_expression);
-						setState(105);
+						setState(115);
 						if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
-						setState(106);
+						setState(116);
 						match(ARRAYRDIV);
-						setState(107);
+						setState(117);
 						unary_expression();
 						}
 						break;
@@ -739,18 +816,18 @@ public class matlabParser extends Parser {
 						{
 						_localctx = new Multiplicative_expressionContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_multiplicative_expression);
-						setState(108);
+						setState(118);
 						if (!(precpred(_ctx, 1))) throw new FailedPredicateException(this, "precpred(_ctx, 1)");
-						setState(109);
+						setState(119);
 						match(ARRAYPOW);
-						setState(110);
+						setState(120);
 						unary_expression();
 						}
 						break;
 					}
 					} 
 				}
-				setState(115);
+				setState(125);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,6,_ctx);
 			}
@@ -802,18 +879,18 @@ public class matlabParser extends Parser {
 		int _parentState = getState();
 		Additive_expressionContext _localctx = new Additive_expressionContext(_ctx, _parentState);
 		Additive_expressionContext _prevctx = _localctx;
-		int _startState = 18;
-		enterRecursionRule(_localctx, 18, RULE_additive_expression, _p);
+		int _startState = 20;
+		enterRecursionRule(_localctx, 20, RULE_additive_expression, _p);
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
 			{
-			setState(117);
+			setState(127);
 			multiplicative_expression(0);
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(127);
+			setState(137);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,8,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
@@ -821,17 +898,17 @@ public class matlabParser extends Parser {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(125);
+					setState(135);
 					switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
 					case 1:
 						{
 						_localctx = new Additive_expressionContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_additive_expression);
-						setState(119);
+						setState(129);
 						if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
-						setState(120);
-						match(T__4);
-						setState(121);
+						setState(130);
+						match(T__7);
+						setState(131);
 						multiplicative_expression(0);
 						}
 						break;
@@ -839,18 +916,18 @@ public class matlabParser extends Parser {
 						{
 						_localctx = new Additive_expressionContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_additive_expression);
-						setState(122);
+						setState(132);
 						if (!(precpred(_ctx, 1))) throw new FailedPredicateException(this, "precpred(_ctx, 1)");
-						setState(123);
-						match(T__5);
-						setState(124);
+						setState(133);
+						match(T__8);
+						setState(134);
 						multiplicative_expression(0);
 						}
 						break;
 					}
 					} 
 				}
-				setState(129);
+				setState(139);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,8,_ctx);
 			}
@@ -904,18 +981,18 @@ public class matlabParser extends Parser {
 		int _parentState = getState();
 		Relational_expressionContext _localctx = new Relational_expressionContext(_ctx, _parentState);
 		Relational_expressionContext _prevctx = _localctx;
-		int _startState = 20;
-		enterRecursionRule(_localctx, 20, RULE_relational_expression, _p);
+		int _startState = 22;
+		enterRecursionRule(_localctx, 22, RULE_relational_expression, _p);
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
 			{
-			setState(131);
+			setState(141);
 			additive_expression(0);
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(147);
+			setState(157);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,10,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
@@ -923,17 +1000,17 @@ public class matlabParser extends Parser {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(145);
+					setState(155);
 					switch ( getInterpreter().adaptivePredict(_input,9,_ctx) ) {
 					case 1:
 						{
 						_localctx = new Relational_expressionContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_relational_expression);
-						setState(133);
+						setState(143);
 						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
-						setState(134);
-						match(T__11);
-						setState(135);
+						setState(144);
+						match(T__3);
+						setState(145);
 						additive_expression(0);
 						}
 						break;
@@ -941,11 +1018,11 @@ public class matlabParser extends Parser {
 						{
 						_localctx = new Relational_expressionContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_relational_expression);
-						setState(136);
+						setState(146);
 						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
-						setState(137);
-						match(T__12);
-						setState(138);
+						setState(147);
+						match(T__2);
+						setState(148);
 						additive_expression(0);
 						}
 						break;
@@ -953,11 +1030,11 @@ public class matlabParser extends Parser {
 						{
 						_localctx = new Relational_expressionContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_relational_expression);
-						setState(139);
+						setState(149);
 						if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
-						setState(140);
+						setState(150);
 						match(LE_OP);
-						setState(141);
+						setState(151);
 						additive_expression(0);
 						}
 						break;
@@ -965,18 +1042,18 @@ public class matlabParser extends Parser {
 						{
 						_localctx = new Relational_expressionContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_relational_expression);
-						setState(142);
+						setState(152);
 						if (!(precpred(_ctx, 1))) throw new FailedPredicateException(this, "precpred(_ctx, 1)");
-						setState(143);
+						setState(153);
 						match(GE_OP);
-						setState(144);
+						setState(154);
 						additive_expression(0);
 						}
 						break;
 					}
 					} 
 				}
-				setState(149);
+				setState(159);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,10,_ctx);
 			}
@@ -1030,18 +1107,18 @@ public class matlabParser extends Parser {
 		int _parentState = getState();
 		Equality_expressionContext _localctx = new Equality_expressionContext(_ctx, _parentState);
 		Equality_expressionContext _prevctx = _localctx;
-		int _startState = 22;
-		enterRecursionRule(_localctx, 22, RULE_equality_expression, _p);
+		int _startState = 24;
+		enterRecursionRule(_localctx, 24, RULE_equality_expression, _p);
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
 			{
-			setState(151);
+			setState(161);
 			relational_expression(0);
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(161);
+			setState(171);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,12,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
@@ -1049,17 +1126,17 @@ public class matlabParser extends Parser {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(159);
+					setState(169);
 					switch ( getInterpreter().adaptivePredict(_input,11,_ctx) ) {
 					case 1:
 						{
 						_localctx = new Equality_expressionContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_equality_expression);
-						setState(153);
+						setState(163);
 						if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
-						setState(154);
+						setState(164);
 						match(EQ_OP);
-						setState(155);
+						setState(165);
 						relational_expression(0);
 						}
 						break;
@@ -1067,18 +1144,18 @@ public class matlabParser extends Parser {
 						{
 						_localctx = new Equality_expressionContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_equality_expression);
-						setState(156);
+						setState(166);
 						if (!(precpred(_ctx, 1))) throw new FailedPredicateException(this, "precpred(_ctx, 1)");
-						setState(157);
+						setState(167);
 						match(NE_OP);
-						setState(158);
+						setState(168);
 						relational_expression(0);
 						}
 						break;
 					}
 					} 
 				}
-				setState(163);
+				setState(173);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,12,_ctx);
 			}
@@ -1130,18 +1207,18 @@ public class matlabParser extends Parser {
 		int _parentState = getState();
 		And_expressionContext _localctx = new And_expressionContext(_ctx, _parentState);
 		And_expressionContext _prevctx = _localctx;
-		int _startState = 24;
-		enterRecursionRule(_localctx, 24, RULE_and_expression, _p);
+		int _startState = 26;
+		enterRecursionRule(_localctx, 26, RULE_and_expression, _p);
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
 			{
-			setState(165);
+			setState(175);
 			equality_expression(0);
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(172);
+			setState(182);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,13,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
@@ -1152,16 +1229,16 @@ public class matlabParser extends Parser {
 					{
 					_localctx = new And_expressionContext(_parentctx, _parentState);
 					pushNewRecursionContext(_localctx, _startState, RULE_and_expression);
-					setState(167);
+					setState(177);
 					if (!(precpred(_ctx, 1))) throw new FailedPredicateException(this, "precpred(_ctx, 1)");
-					setState(168);
-					match(T__13);
-					setState(169);
+					setState(178);
+					match(T__14);
+					setState(179);
 					equality_expression(0);
 					}
 					} 
 				}
-				setState(174);
+				setState(184);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,13,_ctx);
 			}
@@ -1213,18 +1290,18 @@ public class matlabParser extends Parser {
 		int _parentState = getState();
 		Or_expressionContext _localctx = new Or_expressionContext(_ctx, _parentState);
 		Or_expressionContext _prevctx = _localctx;
-		int _startState = 26;
-		enterRecursionRule(_localctx, 26, RULE_or_expression, _p);
+		int _startState = 28;
+		enterRecursionRule(_localctx, 28, RULE_or_expression, _p);
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
 			{
-			setState(176);
+			setState(186);
 			and_expression(0);
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(183);
+			setState(193);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,14,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
@@ -1235,16 +1312,16 @@ public class matlabParser extends Parser {
 					{
 					_localctx = new Or_expressionContext(_parentctx, _parentState);
 					pushNewRecursionContext(_localctx, _startState, RULE_or_expression);
-					setState(178);
+					setState(188);
 					if (!(precpred(_ctx, 1))) throw new FailedPredicateException(this, "precpred(_ctx, 1)");
-					setState(179);
-					match(T__14);
-					setState(180);
+					setState(189);
+					match(T__15);
+					setState(190);
 					and_expression(0);
 					}
 					} 
 				}
-				setState(185);
+				setState(195);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,14,_ctx);
 			}
@@ -1296,18 +1373,18 @@ public class matlabParser extends Parser {
 		int _parentState = getState();
 		ExpressionContext _localctx = new ExpressionContext(_ctx, _parentState);
 		ExpressionContext _prevctx = _localctx;
-		int _startState = 28;
-		enterRecursionRule(_localctx, 28, RULE_expression, _p);
+		int _startState = 30;
+		enterRecursionRule(_localctx, 30, RULE_expression, _p);
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
 			{
-			setState(187);
+			setState(197);
 			or_expression(0);
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(194);
+			setState(204);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,15,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
@@ -1318,16 +1395,16 @@ public class matlabParser extends Parser {
 					{
 					_localctx = new ExpressionContext(_parentctx, _parentState);
 					pushNewRecursionContext(_localctx, _startState, RULE_expression);
-					setState(189);
+					setState(199);
 					if (!(precpred(_ctx, 1))) throw new FailedPredicateException(this, "precpred(_ctx, 1)");
-					setState(190);
-					match(T__2);
-					setState(191);
+					setState(200);
+					match(T__5);
+					setState(201);
 					or_expression(0);
 					}
 					} 
 				}
-				setState(196);
+				setState(206);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,15,_ctx);
 			}
@@ -1372,15 +1449,15 @@ public class matlabParser extends Parser {
 
 	public final Assignment_expressionContext assignment_expression() throws RecognitionException {
 		Assignment_expressionContext _localctx = new Assignment_expressionContext(_ctx, getState());
-		enterRule(_localctx, 30, RULE_assignment_expression);
+		enterRule(_localctx, 32, RULE_assignment_expression);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(197);
+			setState(207);
 			postfix_expression();
-			setState(198);
-			match(T__15);
-			setState(199);
+			setState(208);
+			match(T__4);
+			setState(209);
 			expression(0);
 			}
 		}
@@ -1418,14 +1495,14 @@ public class matlabParser extends Parser {
 
 	public final EostmtContext eostmt() throws RecognitionException {
 		EostmtContext _localctx = new EostmtContext(_ctx, getState());
-		enterRule(_localctx, 32, RULE_eostmt);
+		enterRule(_localctx, 34, RULE_eostmt);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(201);
+			setState(211);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__3) | (1L << T__16) | (1L << CR))) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__6) | (1L << T__16) | (1L << CR))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			} else {
 				consume();
@@ -1468,11 +1545,11 @@ public class matlabParser extends Parser {
 
 	public final StatementContext statement() throws RecognitionException {
 		StatementContext _localctx = new StatementContext(_ctx, getState());
-		enterRule(_localctx, 34, RULE_statement);
+		enterRule(_localctx, 36, RULE_statement);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(203);
+			setState(213);
 			expression_statement();
 			}
 		}
@@ -1512,11 +1589,11 @@ public class matlabParser extends Parser {
 
 	public final Statement_listContext statement_list() throws RecognitionException {
 		Statement_listContext _localctx = new Statement_listContext(_ctx, getState());
-		enterRule(_localctx, 36, RULE_statement_list);
+		enterRule(_localctx, 38, RULE_statement_list);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(205);
+			setState(215);
 			statement();
 			}
 		}
@@ -1559,31 +1636,32 @@ public class matlabParser extends Parser {
 
 	public final Expression_statementContext expression_statement() throws RecognitionException {
 		Expression_statementContext _localctx = new Expression_statementContext(_ctx, getState());
-		enterRule(_localctx, 38, RULE_expression_statement);
+		enterRule(_localctx, 40, RULE_expression_statement);
 		try {
-			setState(211);
+			setState(221);
 			switch (_input.LA(1)) {
-			case T__3:
+			case T__6:
 			case T__16:
 			case CR:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(207);
+				setState(217);
 				eostmt();
 				}
 				break;
 			case T__0:
-			case T__4:
-			case T__5:
-			case T__6:
+			case T__7:
+			case T__8:
+			case T__9:
 			case PREV:
+			case DUR:
 			case IDENTIFIER:
 			case CONSTANT:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(208);
+				setState(218);
 				expression(0);
-				setState(209);
+				setState(219);
 				eostmt();
 				}
 				break;
@@ -1604,21 +1682,21 @@ public class matlabParser extends Parser {
 
 	public boolean sempred(RuleContext _localctx, int ruleIndex, int predIndex) {
 		switch (ruleIndex) {
-		case 5:
+		case 6:
 			return index_expression_list_sempred((Index_expression_listContext)_localctx, predIndex);
-		case 8:
-			return multiplicative_expression_sempred((Multiplicative_expressionContext)_localctx, predIndex);
 		case 9:
-			return additive_expression_sempred((Additive_expressionContext)_localctx, predIndex);
+			return multiplicative_expression_sempred((Multiplicative_expressionContext)_localctx, predIndex);
 		case 10:
-			return relational_expression_sempred((Relational_expressionContext)_localctx, predIndex);
+			return additive_expression_sempred((Additive_expressionContext)_localctx, predIndex);
 		case 11:
-			return equality_expression_sempred((Equality_expressionContext)_localctx, predIndex);
+			return relational_expression_sempred((Relational_expressionContext)_localctx, predIndex);
 		case 12:
-			return and_expression_sempred((And_expressionContext)_localctx, predIndex);
+			return equality_expression_sempred((Equality_expressionContext)_localctx, predIndex);
 		case 13:
-			return or_expression_sempred((Or_expressionContext)_localctx, predIndex);
+			return and_expression_sempred((And_expressionContext)_localctx, predIndex);
 		case 14:
+			return or_expression_sempred((Or_expressionContext)_localctx, predIndex);
+		case 15:
 			return expression_sempred((ExpressionContext)_localctx, predIndex);
 		}
 		return true;
@@ -1705,73 +1783,77 @@ public class matlabParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3 \u00d8\4\2\t\2\4"+
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3!\u00e2\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
-		"\4\23\t\23\4\24\t\24\4\25\t\25\3\2\5\2,\n\2\3\2\3\2\3\3\3\3\3\3\3\3\3"+
-		"\3\3\3\3\3\5\3\67\n\3\3\4\3\4\3\4\3\4\3\4\3\5\3\5\3\6\3\6\5\6B\n\6\3\7"+
-		"\3\7\3\7\3\7\3\7\3\7\7\7J\n\7\f\7\16\7M\13\7\3\b\3\b\3\b\3\b\5\bS\n\b"+
-		"\3\t\3\t\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3"+
-		"\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\7\nr\n\n\f\n\16\nu\13\n"+
-		"\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\7\13\u0080\n\13\f\13\16"+
-		"\13\u0083\13\13\3\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f\3"+
-		"\f\3\f\7\f\u0094\n\f\f\f\16\f\u0097\13\f\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3"+
-		"\r\3\r\7\r\u00a2\n\r\f\r\16\r\u00a5\13\r\3\16\3\16\3\16\3\16\3\16\3\16"+
-		"\7\16\u00ad\n\16\f\16\16\16\u00b0\13\16\3\17\3\17\3\17\3\17\3\17\3\17"+
-		"\7\17\u00b8\n\17\f\17\16\17\u00bb\13\17\3\20\3\20\3\20\3\20\3\20\3\20"+
-		"\7\20\u00c3\n\20\f\20\16\20\u00c6\13\20\3\21\3\21\3\21\3\21\3\22\3\22"+
-		"\3\23\3\23\3\24\3\24\3\25\3\25\3\25\3\25\5\25\u00d6\n\25\3\25\2\n\f\22"+
-		"\24\26\30\32\34\36\26\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(\2\4"+
-		"\3\2\7\t\5\2\6\6\23\23\37\37\u00de\2+\3\2\2\2\4\66\3\2\2\2\68\3\2\2\2"+
-		"\b=\3\2\2\2\nA\3\2\2\2\fC\3\2\2\2\16R\3\2\2\2\20T\3\2\2\2\22V\3\2\2\2"+
-		"\24v\3\2\2\2\26\u0084\3\2\2\2\30\u0098\3\2\2\2\32\u00a6\3\2\2\2\34\u00b1"+
-		"\3\2\2\2\36\u00bc\3\2\2\2 \u00c7\3\2\2\2\"\u00cb\3\2\2\2$\u00cd\3\2\2"+
-		"\2&\u00cf\3\2\2\2(\u00d5\3\2\2\2*,\5&\24\2+*\3\2\2\2+,\3\2\2\2,-\3\2\2"+
-		"\2-.\7\2\2\3.\3\3\2\2\2/\67\7\35\2\2\60\67\7\36\2\2\61\67\5\6\4\2\62\63"+
-		"\7\3\2\2\63\64\5\36\20\2\64\65\7\4\2\2\65\67\3\2\2\2\66/\3\2\2\2\66\60"+
-		"\3\2\2\2\66\61\3\2\2\2\66\62\3\2\2\2\67\5\3\2\2\289\7\30\2\29:\7\3\2\2"+
-		":;\7\35\2\2;<\7\4\2\2<\7\3\2\2\2=>\5\4\3\2>\t\3\2\2\2?B\7\5\2\2@B\5\36"+
-		"\20\2A?\3\2\2\2A@\3\2\2\2B\13\3\2\2\2CD\b\7\1\2DE\5\n\6\2EK\3\2\2\2FG"+
-		"\f\3\2\2GH\7\6\2\2HJ\5\n\6\2IF\3\2\2\2JM\3\2\2\2KI\3\2\2\2KL\3\2\2\2L"+
-		"\r\3\2\2\2MK\3\2\2\2NS\5\b\5\2OP\5\20\t\2PQ\5\b\5\2QS\3\2\2\2RN\3\2\2"+
-		"\2RO\3\2\2\2S\17\3\2\2\2TU\t\2\2\2U\21\3\2\2\2VW\b\n\1\2WX\5\16\b\2Xs"+
-		"\3\2\2\2YZ\f\n\2\2Z[\7\n\2\2[r\5\16\b\2\\]\f\t\2\2]^\7\13\2\2^r\5\16\b"+
-		"\2_`\f\b\2\2`a\7\f\2\2ar\5\16\b\2bc\f\7\2\2cd\7\r\2\2dr\5\16\b\2ef\f\6"+
-		"\2\2fg\7\24\2\2gr\5\16\b\2hi\f\5\2\2ij\7\25\2\2jr\5\16\b\2kl\f\4\2\2l"+
-		"m\7\26\2\2mr\5\16\b\2no\f\3\2\2op\7\27\2\2pr\5\16\b\2qY\3\2\2\2q\\\3\2"+
-		"\2\2q_\3\2\2\2qb\3\2\2\2qe\3\2\2\2qh\3\2\2\2qk\3\2\2\2qn\3\2\2\2ru\3\2"+
-		"\2\2sq\3\2\2\2st\3\2\2\2t\23\3\2\2\2us\3\2\2\2vw\b\13\1\2wx\5\22\n\2x"+
-		"\u0081\3\2\2\2yz\f\4\2\2z{\7\7\2\2{\u0080\5\22\n\2|}\f\3\2\2}~\7\b\2\2"+
-		"~\u0080\5\22\n\2\177y\3\2\2\2\177|\3\2\2\2\u0080\u0083\3\2\2\2\u0081\177"+
-		"\3\2\2\2\u0081\u0082\3\2\2\2\u0082\25\3\2\2\2\u0083\u0081\3\2\2\2\u0084"+
-		"\u0085\b\f\1\2\u0085\u0086\5\24\13\2\u0086\u0095\3\2\2\2\u0087\u0088\f"+
-		"\6\2\2\u0088\u0089\7\16\2\2\u0089\u0094\5\24\13\2\u008a\u008b\f\5\2\2"+
-		"\u008b\u008c\7\17\2\2\u008c\u0094\5\24\13\2\u008d\u008e\f\4\2\2\u008e"+
-		"\u008f\7\31\2\2\u008f\u0094\5\24\13\2\u0090\u0091\f\3\2\2\u0091\u0092"+
-		"\7\32\2\2\u0092\u0094\5\24\13\2\u0093\u0087\3\2\2\2\u0093\u008a\3\2\2"+
-		"\2\u0093\u008d\3\2\2\2\u0093\u0090\3\2\2\2\u0094\u0097\3\2\2\2\u0095\u0093"+
-		"\3\2\2\2\u0095\u0096\3\2\2\2\u0096\27\3\2\2\2\u0097\u0095\3\2\2\2\u0098"+
-		"\u0099\b\r\1\2\u0099\u009a\5\26\f\2\u009a\u00a3\3\2\2\2\u009b\u009c\f"+
-		"\4\2\2\u009c\u009d\7\33\2\2\u009d\u00a2\5\26\f\2\u009e\u009f\f\3\2\2\u009f"+
-		"\u00a0\7\34\2\2\u00a0\u00a2\5\26\f\2\u00a1\u009b\3\2\2\2\u00a1\u009e\3"+
-		"\2\2\2\u00a2\u00a5\3\2\2\2\u00a3\u00a1\3\2\2\2\u00a3\u00a4\3\2\2\2\u00a4"+
-		"\31\3\2\2\2\u00a5\u00a3\3\2\2\2\u00a6\u00a7\b\16\1\2\u00a7\u00a8\5\30"+
-		"\r\2\u00a8\u00ae\3\2\2\2\u00a9\u00aa\f\3\2\2\u00aa\u00ab\7\20\2\2\u00ab"+
-		"\u00ad\5\30\r\2\u00ac\u00a9\3\2\2\2\u00ad\u00b0\3\2\2\2\u00ae\u00ac\3"+
-		"\2\2\2\u00ae\u00af\3\2\2\2\u00af\33\3\2\2\2\u00b0\u00ae\3\2\2\2\u00b1"+
-		"\u00b2\b\17\1\2\u00b2\u00b3\5\32\16\2\u00b3\u00b9\3\2\2\2\u00b4\u00b5"+
-		"\f\3\2\2\u00b5\u00b6\7\21\2\2\u00b6\u00b8\5\32\16\2\u00b7\u00b4\3\2\2"+
-		"\2\u00b8\u00bb\3\2\2\2\u00b9\u00b7\3\2\2\2\u00b9\u00ba\3\2\2\2\u00ba\35"+
-		"\3\2\2\2\u00bb\u00b9\3\2\2\2\u00bc\u00bd\b\20\1\2\u00bd\u00be\5\34\17"+
-		"\2\u00be\u00c4\3\2\2\2\u00bf\u00c0\f\3\2\2\u00c0\u00c1\7\5\2\2\u00c1\u00c3"+
-		"\5\34\17\2\u00c2\u00bf\3\2\2\2\u00c3\u00c6\3\2\2\2\u00c4\u00c2\3\2\2\2"+
-		"\u00c4\u00c5\3\2\2\2\u00c5\37\3\2\2\2\u00c6\u00c4\3\2\2\2\u00c7\u00c8"+
-		"\5\b\5\2\u00c8\u00c9\7\22\2\2\u00c9\u00ca\5\36\20\2\u00ca!\3\2\2\2\u00cb"+
-		"\u00cc\t\3\2\2\u00cc#\3\2\2\2\u00cd\u00ce\5(\25\2\u00ce%\3\2\2\2\u00cf"+
-		"\u00d0\5$\23\2\u00d0\'\3\2\2\2\u00d1\u00d6\5\"\22\2\u00d2\u00d3\5\36\20"+
-		"\2\u00d3\u00d4\5\"\22\2\u00d4\u00d6\3\2\2\2\u00d5\u00d1\3\2\2\2\u00d5"+
-		"\u00d2\3\2\2\2\u00d6)\3\2\2\2\23+\66AKRqs\177\u0081\u0093\u0095\u00a1"+
-		"\u00a3\u00ae\u00b9\u00c4\u00d5";
+		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\3\2\5\2.\n\2\3\2\3\2\3\3\3\3"+
+		"\3\3\3\3\3\3\3\3\3\3\3\3\5\3:\n\3\3\4\3\4\3\4\3\4\3\4\3\5\3\5\3\5\3\5"+
+		"\3\5\3\5\3\5\3\6\3\6\3\7\3\7\5\7L\n\7\3\b\3\b\3\b\3\b\3\b\3\b\7\bT\n\b"+
+		"\f\b\16\bW\13\b\3\t\3\t\3\t\3\t\5\t]\n\t\3\n\3\n\3\13\3\13\3\13\3\13\3"+
+		"\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3"+
+		"\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\7\13|\n\13\f\13\16\13\177"+
+		"\13\13\3\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f\7\f\u008a\n\f\f\f\16\f\u008d"+
+		"\13\f\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\7\r"+
+		"\u009e\n\r\f\r\16\r\u00a1\13\r\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16"+
+		"\3\16\7\16\u00ac\n\16\f\16\16\16\u00af\13\16\3\17\3\17\3\17\3\17\3\17"+
+		"\3\17\7\17\u00b7\n\17\f\17\16\17\u00ba\13\17\3\20\3\20\3\20\3\20\3\20"+
+		"\3\20\7\20\u00c2\n\20\f\20\16\20\u00c5\13\20\3\21\3\21\3\21\3\21\3\21"+
+		"\3\21\7\21\u00cd\n\21\f\21\16\21\u00d0\13\21\3\22\3\22\3\22\3\22\3\23"+
+		"\3\23\3\24\3\24\3\25\3\25\3\26\3\26\3\26\3\26\5\26\u00e0\n\26\3\26\2\n"+
+		"\16\24\26\30\32\34\36 \27\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&"+
+		"(*\2\5\4\2\5\7\32\33\3\2\n\f\5\2\t\t\23\23  \u00e8\2-\3\2\2\2\49\3\2\2"+
+		"\2\6;\3\2\2\2\b@\3\2\2\2\nG\3\2\2\2\fK\3\2\2\2\16M\3\2\2\2\20\\\3\2\2"+
+		"\2\22^\3\2\2\2\24`\3\2\2\2\26\u0080\3\2\2\2\30\u008e\3\2\2\2\32\u00a2"+
+		"\3\2\2\2\34\u00b0\3\2\2\2\36\u00bb\3\2\2\2 \u00c6\3\2\2\2\"\u00d1\3\2"+
+		"\2\2$\u00d5\3\2\2\2&\u00d7\3\2\2\2(\u00d9\3\2\2\2*\u00df\3\2\2\2,.\5("+
+		"\25\2-,\3\2\2\2-.\3\2\2\2./\3\2\2\2/\60\7\2\2\3\60\3\3\2\2\2\61:\7\36"+
+		"\2\2\62:\7\37\2\2\63:\5\6\4\2\64:\5\b\5\2\65\66\7\3\2\2\66\67\5 \21\2"+
+		"\678\7\4\2\28:\3\2\2\29\61\3\2\2\29\62\3\2\2\29\63\3\2\2\29\64\3\2\2\2"+
+		"9\65\3\2\2\2:\5\3\2\2\2;<\7\30\2\2<=\7\3\2\2=>\7\36\2\2>?\7\4\2\2?\7\3"+
+		"\2\2\2@A\7\31\2\2AB\7\3\2\2BC\5 \21\2CD\7\4\2\2DE\t\2\2\2EF\7\37\2\2F"+
+		"\t\3\2\2\2GH\5\4\3\2H\13\3\2\2\2IL\7\b\2\2JL\5 \21\2KI\3\2\2\2KJ\3\2\2"+
+		"\2L\r\3\2\2\2MN\b\b\1\2NO\5\f\7\2OU\3\2\2\2PQ\f\3\2\2QR\7\t\2\2RT\5\f"+
+		"\7\2SP\3\2\2\2TW\3\2\2\2US\3\2\2\2UV\3\2\2\2V\17\3\2\2\2WU\3\2\2\2X]\5"+
+		"\n\6\2YZ\5\22\n\2Z[\5\n\6\2[]\3\2\2\2\\X\3\2\2\2\\Y\3\2\2\2]\21\3\2\2"+
+		"\2^_\t\3\2\2_\23\3\2\2\2`a\b\13\1\2ab\5\20\t\2b}\3\2\2\2cd\f\n\2\2de\7"+
+		"\r\2\2e|\5\20\t\2fg\f\t\2\2gh\7\16\2\2h|\5\20\t\2ij\f\b\2\2jk\7\17\2\2"+
+		"k|\5\20\t\2lm\f\7\2\2mn\7\20\2\2n|\5\20\t\2op\f\6\2\2pq\7\24\2\2q|\5\20"+
+		"\t\2rs\f\5\2\2st\7\25\2\2t|\5\20\t\2uv\f\4\2\2vw\7\26\2\2w|\5\20\t\2x"+
+		"y\f\3\2\2yz\7\27\2\2z|\5\20\t\2{c\3\2\2\2{f\3\2\2\2{i\3\2\2\2{l\3\2\2"+
+		"\2{o\3\2\2\2{r\3\2\2\2{u\3\2\2\2{x\3\2\2\2|\177\3\2\2\2}{\3\2\2\2}~\3"+
+		"\2\2\2~\25\3\2\2\2\177}\3\2\2\2\u0080\u0081\b\f\1\2\u0081\u0082\5\24\13"+
+		"\2\u0082\u008b\3\2\2\2\u0083\u0084\f\4\2\2\u0084\u0085\7\n\2\2\u0085\u008a"+
+		"\5\24\13\2\u0086\u0087\f\3\2\2\u0087\u0088\7\13\2\2\u0088\u008a\5\24\13"+
+		"\2\u0089\u0083\3\2\2\2\u0089\u0086\3\2\2\2\u008a\u008d\3\2\2\2\u008b\u0089"+
+		"\3\2\2\2\u008b\u008c\3\2\2\2\u008c\27\3\2\2\2\u008d\u008b\3\2\2\2\u008e"+
+		"\u008f\b\r\1\2\u008f\u0090\5\26\f\2\u0090\u009f\3\2\2\2\u0091\u0092\f"+
+		"\6\2\2\u0092\u0093\7\6\2\2\u0093\u009e\5\26\f\2\u0094\u0095\f\5\2\2\u0095"+
+		"\u0096\7\5\2\2\u0096\u009e\5\26\f\2\u0097\u0098\f\4\2\2\u0098\u0099\7"+
+		"\32\2\2\u0099\u009e\5\26\f\2\u009a\u009b\f\3\2\2\u009b\u009c\7\33\2\2"+
+		"\u009c\u009e\5\26\f\2\u009d\u0091\3\2\2\2\u009d\u0094\3\2\2\2\u009d\u0097"+
+		"\3\2\2\2\u009d\u009a\3\2\2\2\u009e\u00a1\3\2\2\2\u009f\u009d\3\2\2\2\u009f"+
+		"\u00a0\3\2\2\2\u00a0\31\3\2\2\2\u00a1\u009f\3\2\2\2\u00a2\u00a3\b\16\1"+
+		"\2\u00a3\u00a4\5\30\r\2\u00a4\u00ad\3\2\2\2\u00a5\u00a6\f\4\2\2\u00a6"+
+		"\u00a7\7\34\2\2\u00a7\u00ac\5\30\r\2\u00a8\u00a9\f\3\2\2\u00a9\u00aa\7"+
+		"\35\2\2\u00aa\u00ac\5\30\r\2\u00ab\u00a5\3\2\2\2\u00ab\u00a8\3\2\2\2\u00ac"+
+		"\u00af\3\2\2\2\u00ad\u00ab\3\2\2\2\u00ad\u00ae\3\2\2\2\u00ae\33\3\2\2"+
+		"\2\u00af\u00ad\3\2\2\2\u00b0\u00b1\b\17\1\2\u00b1\u00b2\5\32\16\2\u00b2"+
+		"\u00b8\3\2\2\2\u00b3\u00b4\f\3\2\2\u00b4\u00b5\7\21\2\2\u00b5\u00b7\5"+
+		"\32\16\2\u00b6\u00b3\3\2\2\2\u00b7\u00ba\3\2\2\2\u00b8\u00b6\3\2\2\2\u00b8"+
+		"\u00b9\3\2\2\2\u00b9\35\3\2\2\2\u00ba\u00b8\3\2\2\2\u00bb\u00bc\b\20\1"+
+		"\2\u00bc\u00bd\5\34\17\2\u00bd\u00c3\3\2\2\2\u00be\u00bf\f\3\2\2\u00bf"+
+		"\u00c0\7\22\2\2\u00c0\u00c2\5\34\17\2\u00c1\u00be\3\2\2\2\u00c2\u00c5"+
+		"\3\2\2\2\u00c3\u00c1\3\2\2\2\u00c3\u00c4\3\2\2\2\u00c4\37\3\2\2\2\u00c5"+
+		"\u00c3\3\2\2\2\u00c6\u00c7\b\21\1\2\u00c7\u00c8\5\36\20\2\u00c8\u00ce"+
+		"\3\2\2\2\u00c9\u00ca\f\3\2\2\u00ca\u00cb\7\b\2\2\u00cb\u00cd\5\36\20\2"+
+		"\u00cc\u00c9\3\2\2\2\u00cd\u00d0\3\2\2\2\u00ce\u00cc\3\2\2\2\u00ce\u00cf"+
+		"\3\2\2\2\u00cf!\3\2\2\2\u00d0\u00ce\3\2\2\2\u00d1\u00d2\5\n\6\2\u00d2"+
+		"\u00d3\7\7\2\2\u00d3\u00d4\5 \21\2\u00d4#\3\2\2\2\u00d5\u00d6\t\4\2\2"+
+		"\u00d6%\3\2\2\2\u00d7\u00d8\5*\26\2\u00d8\'\3\2\2\2\u00d9\u00da\5&\24"+
+		"\2\u00da)\3\2\2\2\u00db\u00e0\5$\23\2\u00dc\u00dd\5 \21\2\u00dd\u00de"+
+		"\5$\23\2\u00de\u00e0\3\2\2\2\u00df\u00db\3\2\2\2\u00df\u00dc\3\2\2\2\u00e0"+
+		"+\3\2\2\2\23-9KU\\{}\u0089\u008b\u009d\u009f\u00ab\u00ad\u00b8\u00c3\u00ce"+
+		"\u00df";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

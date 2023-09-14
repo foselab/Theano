@@ -44,12 +44,18 @@ primary_expression
    : IDENTIFIER
    | CONSTANT
    | prev_expression
+   | dur_expression
    | '(' expression ')'
    ;
 
 prev_expression: 	
 	PREV '(' IDENTIFIER ')'
 	;
+	
+dur_expression: 	
+	DUR '(' expression ')' ('>' | '<' | '=' | LE_OP | GE_OP) CONSTANT
+	;
+	
 postfix_expression
    : primary_expression
    ;
@@ -170,6 +176,9 @@ PREV
 	: 'prev'
 	; 
 	
+DUR
+	: 'dur'
+	; 
 
 
 LE_OP

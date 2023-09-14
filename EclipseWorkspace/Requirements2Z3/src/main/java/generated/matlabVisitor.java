@@ -33,6 +33,12 @@ public interface matlabVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPrev_expression(matlabParser.Prev_expressionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link matlabParser#dur_expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDur_expression(matlabParser.Dur_expressionContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link matlabParser#postfix_expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

@@ -42,6 +42,16 @@ public interface matlabListener extends ParseTreeListener {
 	 */
 	void exitPrev_expression(matlabParser.Prev_expressionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link matlabParser#dur_expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterDur_expression(matlabParser.Dur_expressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link matlabParser#dur_expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitDur_expression(matlabParser.Dur_expressionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link matlabParser#postfix_expression}.
 	 * @param ctx the parse tree
 	 */

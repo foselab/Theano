@@ -10,8 +10,11 @@ import java.util.Map.Entry;
 
 public class UeUfFsCompletenessCheckers extends CompletenessChecker {
 
-	public UeUfFsCompletenessCheckers(String inputFile, String outputFile) throws Exception {
+	private float ts;
+	
+	public UeUfFsCompletenessCheckers(String inputFile, String outputFile, float ts) throws Exception {
 		super(inputFile, outputFile);
+		this.ts=ts;
 	}
 
 	protected void processRequirements(Scanner sc, Writer wt) throws Exception {
@@ -86,59 +89,15 @@ public class UeUfFsCompletenessCheckers extends CompletenessChecker {
 		wt.write("s.add(" + finalConvertedString + ")\n");
 		// wt.write(conversion(sc.nextLine()+";")+"\n");
 
-		wt.write("res=s.check()\n");
+		wt.write("s.add(Ts=="+ts+")\n");
 
 	}
 
 	protected void processVariableDefinitions(Scanner sc, Writer wt) throws IOException, Exception {
-		System.out.println("Processing the variable definitions");
+		super.processVariableDefinitions(sc, wt);
 		
-		// writes the first file in the file to import the Z3 library
-		wt.write("from z3 import *;\n");
-
-		// checks that the first line of the file contains the string ----Input Data --
-		// if not throws an error
-		if (!(sc.nextLine().equals("------- Input Data -----"))) {
-			sc.close();
-			wt.close();
-			throw new Exception("The file does not start with the string \"------- Input Data -----\" ");
-		}
-
-		// reads one line and put it into next line
-		String nextLine = null;
-		if (sc.hasNext()) {
-			nextLine = sc.nextLine();
-		}
-		wt.write("I = IntSort()\n");
-		wt.write("R = RealSort()\n");
-		wt.write("tau = Array('tau', I, R)\n");
-		wt.write("j = Int('j')\n");
-		wt.write("i = Int('i')\n");
-
-		// Executes the instruction within the while loop until the string -------
-		// Requirements ----- is found or nextLine is null
-		while (nextLine != null && !nextLine.equals("------- End of Input Data -----")) {
-
-			// splits the line separated by the character comma ","
-			String[] splitted = nextLine.split(",");
-
-			if (splitted[2].equals("input")) {
-				this.inputVariables.add(splitted[0]);
-			}
-			if (splitted[2].equals("output")) {
-				this.outputVariables.add(splitted[0]);
-			}
-
-			// if the the type is "Real"
-			if (splitted[1].equals("Real")) {
-				wt.write(splitted[0] + "=" + "Array('" + splitted[0] + "', I, R)\n");
-			} else {
-				if (splitted[1].equals("Int")) {
-					wt.write(splitted[0] + "=" + "Array('" + splitted[0] + "', I, R)\n");
-				}
-			}
-			nextLine = sc.nextLine();
-		}
+		wt.write("Ts = Real('Ts')\n");
+		
 	}
 
 }

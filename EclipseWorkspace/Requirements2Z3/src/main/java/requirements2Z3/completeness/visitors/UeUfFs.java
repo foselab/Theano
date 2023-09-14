@@ -9,6 +9,7 @@ import generated.matlabLexer;
 import generated.matlabParser.Additive_expressionContext;
 import generated.matlabParser.And_expressionContext;
 import generated.matlabParser.Assignment_expressionContext;
+import generated.matlabParser.Dur_expressionContext;
 import generated.matlabParser.EostmtContext;
 import generated.matlabParser.Equality_expressionContext;
 import generated.matlabParser.ExpressionContext;
@@ -291,5 +292,18 @@ public class UeUfFs implements matlabVisitor<String> {
 		StringBuilder b = new StringBuilder();
 		b.append("And(Implies((i==0),("+ctx.getChild(2).accept(this)+")),Implies((i>0),("+ctx.getChild(2).getText()+"[i-1]"+")))" );
 		return b.toString();
+	}
+
+	@Override
+	public String visitDur_expression(Dur_expressionContext ctx) {
+		
+		
+		String constant=ctx.getChild(5).getText();
+		
+		String part1="tau[i]>="+constant;
+		String part2=constant+">=Ts";
+		String part3="ForAll(k,Implies(And(i-"+constant+"/Ts<=k,k<=i),"+ctx.getChild(2).accept(this)+"))";
+		
+		return "And("+part1+","+part2+","+part3+")";
 	}
 }
