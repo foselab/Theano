@@ -1,4 +1,4 @@
-package requirements2Z3.completeness;
+package requirements2Z3.completeness.visitors;
 
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.ParseTree;

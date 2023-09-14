@@ -10,3 +10,7 @@ u1 == 2, y2 == 3
 u1 == 3, y1 == 3
 u1 == 4, y2 == 3
 ------- End of Requirements -----
+------- Expected Results -----
+Complete
+Consistent
+------- End of Expected Results -----

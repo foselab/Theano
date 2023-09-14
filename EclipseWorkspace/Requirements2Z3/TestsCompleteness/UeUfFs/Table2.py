@@ -18,3 +18,7 @@ else:
 		 print('Requirements Table InComplete (sat)')
 	 else:
 		 print('unknown')
+if (res.r ==  Z3_L_TRUE):
+	 print('Error! Expecting  Complete, but result is incomplete')
+if (res.r ==  Z3_L_FALSE):
+	 print('Correct! Expecting  Complete, and result is complete')
