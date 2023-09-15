@@ -75,6 +75,26 @@ public abstract class CompletenessChecker {
 		String tm = this.getMonotonicityConstraint();
 
 		String encodingOutpuVariables = "";
+		encodingOutpuVariables = getEncodingOutputVariable(requirements, encodingOutpuVariables);
+
+		String inputVariableStrings = "";
+
+		for (String inputVariable : this.inputVariables) {
+			inputVariableStrings = inputVariableStrings + inputVariable + ", ";
+
+		}
+
+		String finalConvertedString = "Exists([" + inputVariableStrings + "tau, i] ,And(" + tm + ","
+				+ encodingOutpuVariables + "))";
+
+		wt.write("s.add(" + finalConvertedString + ")\n");
+		// wt.write(conversion(sc.nextLine()+";")+"\n");
+
+		
+		
+	}
+
+	protected String getEncodingOutputVariable(Set<Entry<String, String>> requirements, String encodingOutpuVariables) {
 		boolean firstOutputVariables = true;
 
 		for (String outputVariable : this.outputVariables) {
@@ -104,22 +124,7 @@ public abstract class CompletenessChecker {
 			}
 
 		}
-
-		String inputVariableStrings = "";
-
-		for (String inputVariable : this.inputVariables) {
-			inputVariableStrings = inputVariableStrings + inputVariable + ", ";
-
-		}
-
-		String finalConvertedString = "Exists([" + inputVariableStrings + "tau, i] ,And(" + tm + ","
-				+ encodingOutpuVariables + "))";
-
-		wt.write("s.add(" + finalConvertedString + ")\n");
-		// wt.write(conversion(sc.nextLine()+";")+"\n");
-
-		
-		
+		return encodingOutpuVariables;
 	}
 	
 	
