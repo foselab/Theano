@@ -6,11 +6,11 @@ import java.util.Scanner;
 
 import org.antlr.v4.runtime.tree.ParseTree;
 
-import requirements2Z3.completeness.visitors.BeArVs;
+import requirements2Z3.completeness.visitors.BeUfVs;
 
-public class BeArVsCompletenessCheckers extends BoundedCompletenessChecker {
+public class BeUfVsCompletenessCheckers extends BoundedCompletenessChecker {
 
-	public BeArVsCompletenessCheckers(String inputFile, String outputFile, float ts, int bound) throws Exception {
+	public BeUfVsCompletenessCheckers(String inputFile, String outputFile, float ts, int bound) throws Exception {
 		super(inputFile, outputFile, ts, bound);
 	}
 
@@ -21,17 +21,17 @@ public class BeArVsCompletenessCheckers extends BoundedCompletenessChecker {
 
 	@Override
 	protected void defineTau(Scanner sc, Writer wt) throws Exception {
-		wt.write("tau = Array('tau', I, R)\n");
+		wt.write("tau = Function('tau', IntSort(), RealSort())\n");
 	}
 
 	@Override
 	protected String visitTree(ParseTree tree) {
-		return tree.accept(new BeArVs(currentIndexI, this.getTs()));
+		return tree.accept(new BeUfVs(this.getCurrentIndexI(),this.getTs()));
 	}
 
 	@Override
 	protected String getMonotonicityConstraint() {
-		return "ForAll(j,Implies(j>=0,(tau[j]<=tau[j+1])))";
+		return "ForAll(j,Implies(j>=0,(tau(j)<tau(j+1))))";
 	}
 
 	@Override
