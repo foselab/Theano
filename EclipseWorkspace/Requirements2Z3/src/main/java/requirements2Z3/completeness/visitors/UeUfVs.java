@@ -7,7 +7,7 @@ import generated.matlabParser.Dur_expressionContext;
 import generated.matlabParser.Prev_expressionContext;
 import generated.matlabVisitor;
 
-public class UeUfFs extends CompletenessVisitor implements matlabVisitor<String> {
+public class UeUfVs extends CompletenessVisitor implements matlabVisitor<String> {
 
 	@Override
 	public String visitTerminal(TerminalNode node) {
@@ -42,7 +42,6 @@ public class UeUfFs extends CompletenessVisitor implements matlabVisitor<String>
 
 	@Override
 	public String visitDur_expression(Dur_expressionContext ctx) {
-		
 		
 		String constant=ctx.getChild(5).getText();
 		

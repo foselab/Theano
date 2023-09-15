@@ -6,22 +6,18 @@ import java.util.Scanner;
 
 import org.antlr.v4.runtime.tree.ParseTree;
 
-import requirements2Z3.completeness.visitors.UeUfFs;
+import requirements2Z3.completeness.visitors.UeArVs;
 
-public class UeUfFsCompletenessCheckers extends CompletenessChecker {
+public class UeUfVsCompletenessCheckers extends CompletenessChecker {
 
-	private float ts;
-
-	public UeUfFsCompletenessCheckers(String inputFile, String outputFile, float ts) throws Exception {
+	
+	public UeUfVsCompletenessCheckers(String inputFile, String outputFile, float ts) throws Exception {
 		super(inputFile, outputFile);
-		this.ts = ts;
 	}
+
 
 	protected void processVariableDefinitions(Scanner sc, Writer wt) throws IOException, Exception {
 		super.processVariableDefinitions(sc, wt);
-
-		wt.write("Ts = Real('Ts')\n");
-
 	}
 
 	@Override
@@ -29,18 +25,21 @@ public class UeUfFsCompletenessCheckers extends CompletenessChecker {
 		wt.write("tau = Function('tau', IntSort(), RealSort())\n");
 	}
 
+
 	@Override
 	protected String visitTree(ParseTree tree) {
-		return tree.accept(new UeUfFs());
+		return tree.accept(new UeArVs());
 	}
+
 
 	@Override
 	protected String getMonotonicityConstraint() {
-		return "ForAll(j,Implies(j>=0,(tau(j+1)-tau(j)=" + ts + ")))";
+		return "ForAll(j,Implies(j>=0,(tau[j]<tau[j+1])))";
 	}
+
 
 	@Override
 	protected void writeTimestampConstraint(Writer wt) throws IOException {
-		wt.write("s.add(Ts==" + ts + ")\n");
+				
 	}
 }
