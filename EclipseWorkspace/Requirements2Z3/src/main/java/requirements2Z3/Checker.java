@@ -1,14 +1,12 @@
-package requirements2Z3.completeness.checkers;
+package requirements2Z3;
 
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.AbstractMap;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.Map.Entry;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -16,17 +14,34 @@ import org.antlr.v4.runtime.tree.ParseTree;
 
 import generated.matlabLexer;
 import generated.matlabParser;
-import requirements2Z3.completeness.visitors.ContainsVariableVisitor;
 
-public abstract class CompletenessChecker {
-
+public abstract class Checker {
 	protected Set<String> inputVariables;
 
 	protected Set<String> outputVariables;
+	
+	protected RTFunctionality functionality; 
 
-	public CompletenessChecker(String inputFile, String outputFile) throws Exception {
+	public Set<String> getInputVariables() {
+		return inputVariables;
+	}
+
+	public void setInputVariables(Set<String> inputVariables) {
+		this.inputVariables = inputVariables;
+	}
+
+	public Set<String> getOutputVariables() {
+		return outputVariables;
+	}
+
+	public void setOutputVariables(Set<String> outputVariables) {
+		this.outputVariables = outputVariables;
+	}
+
+	public Checker(String inputFile, String outputFile, RTFunctionality functionality) throws Exception {
 		this.inputVariables = new HashSet<>();
 		this.outputVariables = new HashSet<>();
+		this.functionality=functionality;
 		// Creates a scanner that reads the file containing the Requirements Table
 		Scanner sc = new Scanner(new FileReader(inputFile));
 
@@ -43,95 +58,19 @@ public abstract class CompletenessChecker {
 		wt.close();
 	}
 
-	protected abstract String getMonotonicityConstraint();
+	public abstract String getMonotonicityConstraint();
 	
-	protected abstract void writeTimestampConstraint(Writer wt) throws IOException;
+	public abstract void writeTimestampConstraint(Writer wt) throws IOException;
 		
-	protected void processRequirements(Scanner sc, Writer wt) throws Exception{
-		System.out.println("Processing the requirements");
-		// checks that the first line of the file contains the string ----Input Data --
-		// if not throws an error
-		String nextLine = sc.nextLine();
-		if (!(nextLine.equals("------- Requirements -----"))) {
-			sc.close();
-			wt.close();
-			throw new Exception("The file does not start with the string \"------- Input Data -----\" ");
-		}
-		// this set will contain all the preconditions of the Requirements Table
-		Set<Entry<String, String>> requirements = new HashSet<>();
+	public abstract void processRequirements(Scanner sc, Writer wt) throws Exception; 
 
-		nextLine = sc.nextLine();
-		while (sc.hasNextLine() && !nextLine.equals("------- End of Requirements -----")) {
-
-			String[] fields = nextLine.split(",");
-			requirements.add(new AbstractMap.SimpleEntry<String, String>(fields[0] + "\r", fields[1] + "\r"));
-			nextLine = sc.nextLine();
-		}
-
-		// Monotonicity constraint for the timestamp array
-
-		wt.write("s = Solver()\n");
-
-		String tm = this.getMonotonicityConstraint();
-
-		String encodingOutpuVariables = "";
-		encodingOutpuVariables = getEncodingOutputVariable(requirements, encodingOutpuVariables);
-
-		String inputVariableStrings = "";
-
-		for (String inputVariable : this.inputVariables) {
-			inputVariableStrings = inputVariableStrings + inputVariable + ", ";
-
-		}
-
-		String finalConvertedString = "Exists([" + inputVariableStrings + "tau, i] ,And(" + tm + ","
-				+ encodingOutpuVariables + "))";
-
-		wt.write("s.add(" + finalConvertedString + ")\n");
-		// wt.write(conversion(sc.nextLine()+";")+"\n");
-
-		
-		
-	}
-
-	protected String getEncodingOutputVariable(Set<Entry<String, String>> requirements, String encodingOutpuVariables) {
-		boolean firstOutputVariables = true;
-
-		for (String outputVariable : this.outputVariables) {
-
-		
-			Set<String> preconditions = this.getPre(outputVariable, requirements);
-
-			String encodingForAnOutputVariable = "";
-			boolean firstPrecondition = true;
-
-			for (String precondition : preconditions) {
-				if (firstPrecondition) {
-					encodingForAnOutputVariable = "Not(" + conversion(precondition) + ")";
-
-					firstPrecondition = false;
-				} else {
-					encodingForAnOutputVariable = "And(" + encodingForAnOutputVariable + ",Not("
-							+ conversion(precondition) + "))";
-				}
-			}
-
-			if (firstOutputVariables) {
-				encodingOutpuVariables = encodingForAnOutputVariable;
-				firstOutputVariables = false;
-			} else {
-				encodingOutpuVariables = "Or(" + encodingOutpuVariables + "," + encodingForAnOutputVariable + ")";
-			}
-
-		}
-		return encodingOutpuVariables;
-	}
+	
 	
 	
 
-	abstract protected void defineTau(Scanner sc, Writer wt) throws Exception;
+	abstract public void defineTau(Scanner sc, Writer wt) throws Exception;
 	
-	protected void processVariableDefinitions(Scanner sc, Writer wt) throws IOException, Exception {
+	public void processVariableDefinitions(Scanner sc, Writer wt) throws IOException, Exception {
 		System.out.println("Processing the variable definitions");
 
 		// writes the first file in the file to import the Z3 library
@@ -183,7 +122,7 @@ public abstract class CompletenessChecker {
 		}
 	}
 
-	protected void processResult(Scanner sc, Writer wt) throws Exception {
+	public void processResult(Scanner sc, Writer wt) throws Exception {
 
 		System.out.println("Processing the result");
 
@@ -231,26 +170,9 @@ public abstract class CompletenessChecker {
 		}
 	}
 
-	protected Set<String> getPre(String variable, Set<Entry<String, String>> requirements) {
+	
 
-		Set<String> preconditions = new HashSet<>();
-
-		for (Entry<String, String> requirement : requirements) {
-			matlabLexer lexer = new matlabLexer(new ANTLRInputStream(requirement.getValue() + "\r"));
-			CommonTokenStream tokens = new CommonTokenStream(lexer);
-			matlabParser parser = new matlabParser(tokens);
-			parser.setBuildParseTree(true);
-
-			ParseTree tree = parser.statement_list();
-
-			if (tree.accept(new ContainsVariableVisitor(variable))) {
-				preconditions.add(requirement.getKey());
-			}
-		}
-		return preconditions;
-	}
-
-	protected String conversion(String input) {
+	public String conversion(String input) {
 		matlabLexer lexer = new matlabLexer(new ANTLRInputStream(input));
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		matlabParser parser = new matlabParser(tokens);
@@ -262,6 +184,5 @@ public abstract class CompletenessChecker {
 		return result;
 	}
 	
-	abstract protected String visitTree(ParseTree tree);
-
+	abstract public String visitTree(ParseTree tree);
 }

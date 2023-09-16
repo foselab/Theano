@@ -1,4 +1,4 @@
-package requirements2Z3.completeness.visitors;
+package requirements2Z3.visitors;
 
 import org.antlr.v4.runtime.tree.TerminalNode;
 
@@ -7,21 +7,19 @@ import generated.matlabParser.Dur_expressionContext;
 import generated.matlabParser.Prev_expressionContext;
 import generated.matlabVisitor;
 
-public class BeUfFs extends CompletenessVisitor implements matlabVisitor<String> {
+public class BeArVs extends Z3Visitor implements matlabVisitor<String> {
 
 	private int index;
 
-	private float ts;
-
-	public BeUfFs(int index, float ts) {
+	
+	public BeArVs(int index) {
 		this.index = index;
-		this.ts = ts;
 	}
 
 	@Override
 	public String visitTerminal(TerminalNode node) {
 		if (node.getSymbol().getType() == matlabLexer.IDENTIFIER) {
-			return node.getText() + "(" + index + ")";
+			return node.getText() + "[" + index + "]";
 		}
 		if (node.getSymbol().getType() == matlabLexer.CONSTANT) {
 			return node.getText();
@@ -40,9 +38,9 @@ public class BeUfFs extends CompletenessVisitor implements matlabVisitor<String>
 
 		StringBuilder b = new StringBuilder();
 		if (index == 0) {
-			b.append(ctx.getChild(2).getText() + "(" + (index) + ")");
+			b.append(ctx.getChild(2).getText() + "[" + (index) + "]");
 		} else {
-			b.append(ctx.getChild(2).getText() + "(" + (index - 1) + ")");
+			b.append(ctx.getChild(2).getText() + "[" + (index - 1) + "]");
 		}
 		return b.toString();
 	}
@@ -52,21 +50,29 @@ public class BeUfFs extends CompletenessVisitor implements matlabVisitor<String>
 
 		String constant = ctx.getChild(5).getText();
 
-		String part1 = "tau[i]>=" + constant;
-		String part2 = constant + ">=Ts";
-
 		String part3 = "And(";
+		for (int j = 0; j <= index; j++) {
 
-		int lb = (int) (index - Float.parseFloat(constant) / this.ts);
+			String innerAnd = "And(";
 
-		for (int n = lb; n <= index; n++) {
-			part3 = part3 + ctx.getChild(2).accept(new BeUfFs(n, this.ts));
-			if (n != index) {
+			innerAnd = innerAnd + "tau[" + index + "]-tau[" + j + "]>=" + constant + ",";
+			String nAnd = "And(";
+			for (int n = j; n <= index; n++) {
+				nAnd = nAnd + ctx.getChild(2).accept(new BeArVs(n));
+				if (n != index) {
+					nAnd = nAnd + ",";
+				}
+			}
+			nAnd = nAnd + ")";
+
+			innerAnd = nAnd + ")";
+			part3 = part3 + innerAnd;
+			if (j != index) {
 				part3 = part3 + ",";
 			}
 		}
 		part3 = part3 + ")";
 
-		return "And(" + part1 + "," + part2 + "," + part3 + ")";
+		return part3;
 	}
 }

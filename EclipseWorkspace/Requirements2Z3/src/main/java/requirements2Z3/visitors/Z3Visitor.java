@@ -1,4 +1,4 @@
-package requirements2Z3.completeness.visitors;
+package requirements2Z3.visitors;
 
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -28,7 +28,7 @@ import generated.matlabParser.Unary_expressionContext;
 import generated.matlabParser.Unary_operatorContext;
 import generated.matlabVisitor;
 
-public abstract class CompletenessVisitor implements matlabVisitor<String> {
+public abstract class Z3Visitor implements matlabVisitor<String> {
 
 	@Override
 	public String visit(ParseTree tree) {

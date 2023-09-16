@@ -1,4 +1,4 @@
-package requirements2Z3.completeness.visitors;
+package requirements2Z3.visitors;
 
 import org.antlr.v4.runtime.tree.TerminalNode;
 
@@ -7,19 +7,14 @@ import generated.matlabParser.Dur_expressionContext;
 import generated.matlabParser.Prev_expressionContext;
 import generated.matlabVisitor;
 
-public class UeUfVs extends CompletenessVisitor implements matlabVisitor<String> {
+public class UeArFs extends Z3Visitor implements matlabVisitor<String> {
 
+	
 	@Override
 	public String visitTerminal(TerminalNode node) {
-		
-		if(node.getSymbol().getText().equals("tau")) {
-			return node.getText()+"(i)";
-		}
 		if(node.getSymbol().getType()==matlabLexer.IDENTIFIER) {
 			return node.getText()+"[i]";
 		}
-		
-		
 		if(node.getSymbol().getType()==matlabLexer.CONSTANT) {
 			return node.getText();
 		}
@@ -43,9 +38,10 @@ public class UeUfVs extends CompletenessVisitor implements matlabVisitor<String>
 	@Override
 	public String visitDur_expression(Dur_expressionContext ctx) {
 		
+		
 		String constant=ctx.getChild(5).getText();
 		
-		String part1="tau(i)>="+constant;
+		String part1="tau[i]>="+constant;
 		String part2=constant+">=Ts";
 		String part3="ForAll(k,Implies(And(i-"+constant+"/Ts<=k,k<=i),"+ctx.getChild(2).accept(this)+"))";
 		

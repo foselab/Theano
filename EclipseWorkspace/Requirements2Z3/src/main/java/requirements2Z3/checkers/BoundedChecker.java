@@ -1,26 +1,34 @@
-package requirements2Z3.completeness.checkers;
+package requirements2Z3.checkers;
 
 import java.util.Map.Entry;
+
+import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.tree.ParseTree;
+
+import generated.matlabLexer;
+import generated.matlabParser;
+
+import java.util.HashSet;
 import java.util.Set;
 
-public abstract class BoundedCompletenessChecker extends CompletenessChecker {
+import requirements2Z3.Checker;
+import requirements2Z3.RTFunctionality;
+import requirements2Z3.visitors.ContainsVariableVisitor;
 
-	private final float ts;
+public abstract class BoundedChecker extends Checker {
 
 	private final int bound;
 	
 	protected int currentIndexI;
 	
-	public BoundedCompletenessChecker(String inputFile, String outputFile, float ts, int bound) throws Exception {
-		super(inputFile, outputFile);
-		this.ts = ts;
+	public BoundedChecker(String inputFile, String outputFile, RTFunctionality functionality, int bound) throws Exception {
+		super(inputFile, outputFile,functionality);
 		this.bound = bound;
 
 	}
 	
-	public float getTs() {
-		return ts;
-	}
+	
 
 	public int getBound() {
 		return bound;
@@ -71,6 +79,25 @@ public abstract class BoundedCompletenessChecker extends CompletenessChecker {
 
 		}
 		return encodingIndex + ")";
+	}
+	
+	protected Set<String> getPre(String variable, Set<Entry<String, String>> requirements) {
+
+		Set<String> preconditions = new HashSet<>();
+
+		for (Entry<String, String> requirement : requirements) {
+			matlabLexer lexer = new matlabLexer(new ANTLRInputStream(requirement.getValue() + "\r"));
+			CommonTokenStream tokens = new CommonTokenStream(lexer);
+			matlabParser parser = new matlabParser(tokens);
+			parser.setBuildParseTree(true);
+
+			ParseTree tree = parser.statement_list();
+
+			if (tree.accept(new ContainsVariableVisitor(variable))) {
+				preconditions.add(requirement.getKey());
+			}
+		}
+		return preconditions;
 	}
 
 }

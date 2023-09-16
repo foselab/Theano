@@ -1,4 +1,4 @@
-package requirements2Z3.completeness.visitors;
+package requirements2Z3.visitors;
 
 import org.antlr.v4.runtime.tree.TerminalNode;
 
@@ -7,7 +7,7 @@ import generated.matlabParser.Dur_expressionContext;
 import generated.matlabParser.Prev_expressionContext;
 import generated.matlabVisitor;
 
-public class UeArVs extends CompletenessVisitor implements matlabVisitor<String> {
+public class UeArVs extends Z3Visitor implements matlabVisitor<String> {
 
 	@Override
 	public String visitTerminal(TerminalNode node) {

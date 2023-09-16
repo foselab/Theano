@@ -1,4 +1,4 @@
-package requirements2Z3.completeness.visitors;
+package requirements2Z3.visitors;
 
 import org.antlr.v4.runtime.tree.TerminalNode;
 
@@ -7,15 +7,13 @@ import generated.matlabParser.Dur_expressionContext;
 import generated.matlabParser.Prev_expressionContext;
 import generated.matlabVisitor;
 
-public class BeUfVs extends CompletenessVisitor implements matlabVisitor<String> {
+public class BeUfVs extends Z3Visitor implements matlabVisitor<String> {
 
 	private int index;
 
-	private float ts;
 
-	public BeUfVs(int index, float ts) {
+	public BeUfVs(int index) {
 		this.index = index;
-		this.ts = ts;
 	}
 
 	@Override
@@ -60,7 +58,7 @@ public class BeUfVs extends CompletenessVisitor implements matlabVisitor<String>
 			innerAnd = innerAnd + "tau(" + index + ")-tau(" + j + ")>=" + constant + ",";
 			String nAnd = "And(";
 			for (int n = j; n <= index; n++) {
-				nAnd = nAnd + ctx.getChild(2).accept(new BeArVs(n,this.ts));
+				nAnd = nAnd + ctx.getChild(2).accept(new BeUfVs(n));
 				if (n != index) {
 					nAnd = nAnd + ",";
 				}
