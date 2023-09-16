@@ -36,7 +36,7 @@ public class UeUfVs extends Z3Visitor implements matlabVisitor<String> {
 	public String visitPrev_expression(Prev_expressionContext ctx) {
 
 		StringBuilder b = new StringBuilder();
-		b.append("And(Implies((i==0),("+ctx.getChild(2).accept(this)+")),Implies((i>0),("+ctx.getChild(2).getText()+"[i-1]"+")))" );
+		b.append("((i==0)*("+ctx.getChild(2).getText()+"[i])+(i>0)*("+ctx.getChild(2).getText()+"[i-1]"+"))" );
 		return b.toString();
 	}
 

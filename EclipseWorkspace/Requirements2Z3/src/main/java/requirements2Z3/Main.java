@@ -63,7 +63,9 @@ public class Main {
 		String selectedEncoding = cmd.getOptionValue("e") != null ? cmd.getOptionValue("e")
 				: cmd.getOptionValue("encoding");
 
-		System.out.println(selectedEncoding);
+		System.out.println("-----------------------------------------");
+		System.out.println("Processing the file: "+inputFilePath);
+		System.out.println("-----------------------------------------");
 		String typeInput = cmd.getOptionValue("t") != null ? cmd.getOptionValue("t") : cmd.getOptionValue("type");
 
 		switch (typeInput) {
@@ -79,6 +81,11 @@ public class Main {
 			throw new IllegalArgumentException("Type: " + typeInput + " is not supported. ");
 
 		}
+		System.out.println("--------------------------------------------------------------");
+		System.out.println("File: "+outputFilePath+" correctly generated");
+		System.out.println("Run \"python3 "+outputFilePath+"\" to check for "+typeInput);
+		
+		System.out.println("--------------------------------------------------------------");
 
 	}
 
