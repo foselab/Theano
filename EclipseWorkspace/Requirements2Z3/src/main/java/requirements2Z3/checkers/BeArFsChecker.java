@@ -6,14 +6,14 @@ import java.util.Scanner;
 
 import org.antlr.v4.runtime.tree.ParseTree;
 
-import requirements2Z3.RTFunctionality;
+import requirements2Z3.RTBoundedFunctionality;
 import requirements2Z3.visitors.BeArFs;
 
 public class BeArFsChecker extends BoundedChecker {
 
 	private final float ts;
 
-	public BeArFsChecker(String inputFile, String outputFile, RTFunctionality functionality, float ts, int bound)
+	public BeArFsChecker(String inputFile, String outputFile, RTBoundedFunctionality functionality, float ts, int bound)
 			throws Exception {
 		super(inputFile, outputFile, functionality, bound);
 		this.ts = ts;

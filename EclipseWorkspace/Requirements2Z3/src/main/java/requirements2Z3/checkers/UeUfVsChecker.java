@@ -13,7 +13,7 @@ import requirements2Z3.visitors.UeArVs;
 public class UeUfVsChecker extends Checker {
 
 	
-	public UeUfVsChecker(String inputFile, String outputFile, RTFunctionality functionality, float ts) throws Exception {
+	public UeUfVsChecker(String inputFile, String outputFile, RTFunctionality functionality) throws Exception {
 		super(inputFile, outputFile,functionality);
 	}
 

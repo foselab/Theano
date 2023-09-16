@@ -50,8 +50,7 @@ public class CompletenessChecker implements RTFunctionality {
 
 		String tm = ck.getMonotonicityConstraint();
 
-		String encodingOutpuVariables = "";
-		encodingOutpuVariables = getEncodingOutputVariable(requirements, encodingOutpuVariables,ck);
+		String encodingOutpuVariables = getEncodingOutputVariable(requirements,ck);
 
 		String inputVariableStrings = "";
 
@@ -60,16 +59,17 @@ public class CompletenessChecker implements RTFunctionality {
 
 		}
 
-		String finalConvertedString = "Exists([" + inputVariableStrings + "tau, i] ,And(" + tm + ","
-				+ encodingOutpuVariables + "))";
+		String finalConvertedString = "And(" + tm + "," + encodingOutpuVariables + ")";
 
 		wt.write("s.add(" + finalConvertedString + ")\n");
 		// wt.write(conversion(sc.nextLine()+";")+"\n");
 	
 	}
 	
-	protected String getEncodingOutputVariable(Set<Entry<String, String>> requirements, String encodingOutpuVariables,Checker ck) {
+	protected String getEncodingOutputVariable(Set<Entry<String, String>> requirements, Checker ck) {
 		boolean firstOutputVariables = true;
+		
+		String encodingOutpuVariables="";
 
 		for (String outputVariable : ck.getOutputVariables()) {
 

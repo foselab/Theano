@@ -6,12 +6,12 @@ import java.util.Scanner;
 
 import org.antlr.v4.runtime.tree.ParseTree;
 
-import requirements2Z3.RTFunctionality;
+import requirements2Z3.RTBoundedFunctionality;
 import requirements2Z3.visitors.BeUfVs;
 
 public class BeUfVsChecker extends BoundedChecker {
 
-	public BeUfVsChecker(String inputFile, String outputFile, RTFunctionality functionality, int bound) throws Exception {
+	public BeUfVsChecker(String inputFile, String outputFile, RTBoundedFunctionality functionality, int bound) throws Exception {
 		super(inputFile, outputFile, functionality,  bound);
 	}
 

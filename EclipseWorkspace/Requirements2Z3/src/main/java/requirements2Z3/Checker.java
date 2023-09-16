@@ -1,5 +1,6 @@
 package requirements2Z3;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,8 +20,11 @@ public abstract class Checker {
 	protected Set<String> inputVariables;
 
 	protected Set<String> outputVariables;
-	
-	protected RTFunctionality functionality; 
+
+	protected RTFunctionality functionality;
+
+	private String inputFile;
+	private String outputFile;
 
 	public Set<String> getInputVariables() {
 		return inputVariables;
@@ -41,12 +45,18 @@ public abstract class Checker {
 	public Checker(String inputFile, String outputFile, RTFunctionality functionality) throws Exception {
 		this.inputVariables = new HashSet<>();
 		this.outputVariables = new HashSet<>();
-		this.functionality=functionality;
+		this.functionality = functionality;
+		this.inputFile = inputFile;
+		this.outputFile = outputFile;
+
+	}
+
+	public void check() throws Exception {
 		// Creates a scanner that reads the file containing the Requirements Table
-		Scanner sc = new Scanner(new FileReader(inputFile));
+		Scanner sc = new Scanner(new FileReader(this.inputFile));
 
 		// Creates a writer that writes the python file to be executed by Z3
-		Writer wt = new FileWriter(outputFile);
+		Writer wt = new FileWriter(this.outputFile);
 
 		this.processVariableDefinitions(sc, wt);
 
@@ -59,17 +69,13 @@ public abstract class Checker {
 	}
 
 	public abstract String getMonotonicityConstraint();
-	
-	public abstract void writeTimestampConstraint(Writer wt) throws IOException;
-		
-	public abstract void processRequirements(Scanner sc, Writer wt) throws Exception; 
 
-	
-	
-	
+	public abstract void writeTimestampConstraint(Writer wt) throws IOException;
+
+	public abstract void processRequirements(Scanner sc, Writer wt) throws Exception;
 
 	abstract public void defineTau(Scanner sc, Writer wt) throws Exception;
-	
+
 	public void processVariableDefinitions(Scanner sc, Writer wt) throws IOException, Exception {
 		System.out.println("Processing the variable definitions");
 
@@ -170,8 +176,6 @@ public abstract class Checker {
 		}
 	}
 
-	
-
 	public String conversion(String input) {
 		matlabLexer lexer = new matlabLexer(new ANTLRInputStream(input));
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
@@ -183,6 +187,6 @@ public abstract class Checker {
 		String result = this.visitTree(tree);
 		return result;
 	}
-	
+
 	abstract public String visitTree(ParseTree tree);
 }

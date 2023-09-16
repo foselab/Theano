@@ -41,7 +41,7 @@ public class UeArFsChecker extends Checker {
 
 	@Override
 	public String getMonotonicityConstraint() {
-		return "ForAll(j,Implies(j>=0,(tau[j+1]-tau[j]="+ts+")))";
+		return "ForAll(j,Implies(j>=0,(tau[j+1]-tau[j]=="+ts+")))";
 	}
 
 

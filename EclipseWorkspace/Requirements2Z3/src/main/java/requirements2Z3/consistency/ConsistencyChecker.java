@@ -54,8 +54,7 @@ public class ConsistencyChecker implements RTFunctionality {
 			outputVariables = outputVariables + "," + outputVariable;
 		}
 
-		String finalConvertedString = "And(" + tm + "," + "Forall([" + outputVariables + "] , " + "Exists(i," + "And("
-				+ tm + "," + encodingRequirements + "))))";
+		String finalConvertedString = "And(" + tm + "," + "ForAll([" + outputVariables + "] , "  + encodingRequirements + "))";
 
 		wt.write("s.add(" + finalConvertedString + ")\n");
 
@@ -73,14 +72,17 @@ public class ConsistencyChecker implements RTFunctionality {
 
 			if (firstRequirement) {
 				encodingRequirements = encodingRequirements + "Not(Implies(" + ck.conversion(precondition) + ","
-						+ ck.conversion(postcondition) + ")";
+						+ ck.conversion(postcondition) + "))";
 
 				firstRequirement = false;
 			} else {
 				encodingRequirements = encodingRequirements + ",Not(Implies(" + ck.conversion(precondition) + ","
-						+ ck.conversion(postcondition) + ")";
+						+ ck.conversion(postcondition) + "))";
 			}
 		}
+		encodingRequirements=encodingRequirements+")";
+		encodingRequirements="Exists(i,"  + encodingRequirements + ")";
+		
 		return encodingRequirements;
 	}
 

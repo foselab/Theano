@@ -6,13 +6,16 @@ import java.util.Scanner;
 
 import org.antlr.v4.runtime.tree.ParseTree;
 
-import requirements2Z3.RTFunctionality;
+import requirements2Z3.RTBoundedFunctionality;
 import requirements2Z3.visitors.BeArVs;
 
 public class BeArVsChecker extends BoundedChecker {
 
-	public BeArVsChecker(String inputFile, String outputFile, RTFunctionality functionality,  int bound) throws Exception {
+	private RTBoundedFunctionality boundedFunctionality;
+	
+	public BeArVsChecker(String inputFile, String outputFile, RTBoundedFunctionality functionality,  int bound) throws Exception {
 		super(inputFile, outputFile, functionality, bound);
+		this.boundedFunctionality=functionality;
 	}
 
 	public void processVariableDefinitions(Scanner sc, Writer wt) throws IOException, Exception {
@@ -27,7 +30,7 @@ public class BeArVsChecker extends BoundedChecker {
 
 	@Override
 	public String visitTree(ParseTree tree) {
-		return tree.accept(new BeArVs(currentIndexI));
+		return tree.accept(new BeArVs(boundedFunctionality.getCurrentIndexI()));
 	}
 
 	@Override
