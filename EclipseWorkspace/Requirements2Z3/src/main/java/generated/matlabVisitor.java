@@ -6,6 +6,23 @@ package generated;
 import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
+import generated.matlabParser.Additive_expressionContext;
+import generated.matlabParser.And_expressionContext;
+import generated.matlabParser.Function_declareContext;
+import generated.matlabParser.Index_expressionContext;
+import generated.matlabParser.Multiplicative_expressionContext;
+import requirements2Z3.Comparison_expressinContext;
+import requirements2Z3.ExistentialExpressionContext;
+import requirements2Z3.GreaterThanOrEqualExpressionContext;
+import requirements2Z3.Implication_expressionContext;
+import requirements2Z3.Not_expressionContext;
+import requirements2Z3.OtherAndExpression;
+import requirements2Z3.OtherAnd_expressionContext;
+import requirements2Z3.OtherGreaterThanOrEqualExpression;
+import requirements2Z3.OtherImplicationExpressionContext;
+import requirements2Z3.Prev_expressionContext;
+import requirements2Z3.Range_expressionContext;
+
 /**
  * This interface defines a complete generic visitor for a parse tree produced
  * by {@link matlabParser}.
@@ -224,4 +241,21 @@ public interface matlabVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFunction_declare(matlabParser.Function_declareContext ctx);
+	String visitMyFunction(Function_declareContext ctx);
+	String visitIndexExpression(Index_expressionContext ctx);
+	T visitPrevExpression(Prev_expressionContext ctx);
+	String visitNewMultiplicative_expression(Multiplicative_expressionContext ctx);
+	String visitNewAdditive_expression(Additive_expressionContext ctx);
+	T visitNot_expression(Not_expressionContext ctx);
+	T visitRange_expression(Range_expressionContext ctx);
+	T visitImplication_expression(Implication_expressionContext ctx);
+	String visitNewAndExpression(And_expressionContext ctx);
+	T visitComparison_expression(Comparison_expressinContext ctx);
+	T visitOtherAnd_expression(OtherAnd_expressionContext ctx);
+	T visitGreaterThanOrEqualExpression(GreaterThanOrEqualExpressionContext ctx);
+	T visitExistentialExpression(ExistentialExpressionContext ctx);
+	T visitOtherAndExpression(OtherAndExpression ctx);
+	T visitOtherGreaterThanOrEqualExpression(OtherGreaterThanOrEqualExpression ctx);
+	T visitOtherImplicationExpression(OtherImplicationExpressionContext ctx);
+	
 }

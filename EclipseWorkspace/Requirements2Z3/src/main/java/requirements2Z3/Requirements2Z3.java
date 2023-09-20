@@ -90,7 +90,7 @@ public class Requirements2Z3 {
 		ParseTree tree = parser.statement_list();
 		
 		
-		String result=tree.accept(new Matlab2Z3Visitor());
+		String result=tree.accept(new UeUfFs());
 		return result;
 	}
 }

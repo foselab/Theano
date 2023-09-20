@@ -42,7 +42,7 @@ import generated.matlabParser.Unary_expressionContext;
 import generated.matlabParser.Unary_operatorContext;
 import generated.matlabVisitor;
 
-public class Matlab2Z3Visitor implements matlabVisitor<String> {
+public class UeUfFs implements matlabVisitor<String> {
 
 	@Override
 	public String visit(ParseTree tree) {
@@ -460,5 +460,276 @@ public class Matlab2Z3Visitor implements matlabVisitor<String> {
 
 		return b.toString();
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@Override
+	public String visitMyFunction(Function_declareContext ctx) {
+		StringBuilder b = new StringBuilder();
+		
+		for (int i = 0; i < ctx.getChildCount(); i++) {
+			if (i == 0) {
+				b.append(ctx.getChild(i).getText());
+			} else if (i == 2) {
+				b.append("(" + ctx.getChild(i).getText() + ") = ");
+			} else if (i == 4) {
+				b.append(visit(ctx.getChild(i)));
+			}
+		}
+		
+		return b.toString();
+	}
+	
+	
+	
+	
+	
+	@Override
+	public String visitIndexExpression(Index_expressionContext ctx) {
+		StringBuilder b = new StringBuilder();
+		
+		for (int i = 0; i < ctx.getChildCount(); i++) {
+			if (i == 1) {
+				b.append("[" + visit(ctx.getChild(i)) + "]");
+			} 
+		}
+		
+		return b.toString();
+	}
+	
+	
+	
+	
+	public String visitPrevExpression(Prev_expressionContext ctx) {
+		StringBuilder b = new StringBuilder();
+		
+		String u = ctx.getChild(1).accept(this);
+		
+		b.append("prev(" + u + ") = ");
+		
+		String iValue = ctx.getChild(3).accept(this);
+		
+		if(!iValue.equals("0")) {
+			b.append("if (" + iValue + " > 0) u[" + iValue + "-1]");
+		} else {
+			b.append("if (" + iValue + " == 0) u[" + iValue + "] = 0");
+		}
+		
+		return b.toString();
+	}
+	
+	
+	
+	
+	@Override
+	public String visitNewMultiplicative_expression(Multiplicative_expressionContext ctx) {
+		StringBuilder b = new StringBuilder();
+		
+		for (int i = 0; i < ctx.getChildCount(); i++) {
+			if (i == 1) {
+				b.append(" * ");
+			} else
+				b.append(visit(ctx.getChild(i)));
+		}
+		
+		return b.toString();
+	}
+	
+	
+	
+	
+	@Override
+	public String visitNewAdditive_expression(Additive_expressionContext ctx) {
+		StringBuilder b = new StringBuilder();
+		
+		for (int i = 0; i < ctx.getChildCount(); i++) {
+			if (i == 1) {
+				b.append(" + ");
+			} else
+				b.append(visit(ctx.getChild(i)));
+		}
+		
+		return b.toString();
+	}
+	
+	
+	
+	
+	@Override
+	public String visitNot_expression(Not_expressionContext ctx) {
+		StringBuilder b = new StringBuilder();
+		
+		String le = ctx.getChild(1).accept(this);
+		
+		b.append("!(" + le + ")");
+		
+		return b.toString();
+	}
+	
+	
+	
+	
+	@Override
+	public String visitRange_expression(Range_expressionContext ctx) {
+		StringBuilder b = new StringBuilder();
+		
+		String le1 = ctx.getChild(0).accept(this);
+		String le2 = ctx.getChild(2).accept(this);
+		
+		b.append(le1 + ":" + le2);
+		
+		return b.toString();
+	}
+	
+	
+	
+	
+	@Override
+	public String visitImplication_expression(Implication_expressionContext ctx) {
+		StringBuilder b = new StringBuilder();
+		
+		String req = ctx.getChild(1).accept(this);
+		String pre = ctx.getChild(3).accept(this);
+		String post = ctx.getChild(5).accept(this);
+		
+		b.append(req + " = " + pre + " => " + post);
+		
+		return b.toString();
+	}
+	
+	
+	
+	
+	@Override
+	public String visitNewAndExpression(And_expressionContext ctx) {
+		StringBuilder b = new StringBuilder();
+		
+		for(int i = 0; i < ctx.getChildCount(); i++) {
+			if (i == 1) {
+				b.append(" & ");
+			} else {
+				b.append(visit(ctx.getChild(i)));
+			}
+		}
+		
+		return b.toString();
+	}
+	
+	
+	
+	
+	@Override
+	public String visitComparison_expression(Comparison_expressinContext ctx) {
+		StringBuilder b = new StringBuilder();
+		
+		String le = ctx.getChild(1).accept(this);
+		String c = ctx.getChild(3).accept(this);
+		
+		b.append("dur(" + le + ") >= " + c);
+		
+		return b.toString();
+	}
+	
+	
+	
+	
+	@Override
+	public String visitOtherAnd_expression(OtherAnd_expressionContext ctx) {
+		StringBuilder b = new StringBuilder();
+		
+		String durLeExpression = ctx.getChild(0).accept(this);
+		String RiExpression = ctx.getChild(4).accept(this);
+		String c = ctx.getChild(6).accept(this);
+		String Ts = ctx.getChild(10).accept(this);
+		
+		b.append(durLeExpression + " = " + RiExpression + " >= " + c + " & " + c + " >= " + Ts);
 
+		return b.toString();
+	}
+	
+	
+	
+	
+	@Override
+	public String visitGreaterThanOrEqualExpression(GreaterThanOrEqualExpressionContext ctx) {
+		StringBuilder b = new StringBuilder();
+		
+		String leDur = ctx.getChild(0).accept(this);
+		String c = ctx.getChild(2).accept(this);
+		
+		b.append("h(dur(" + leDur + ") >= " + c + ") = ");
+
+		return b.toString();
+	}
+	
+	
+	
+	
+	@Override
+	public String visitExistentialExpression(ExistentialExpressionContext ctx) {
+		StringBuilder b = new StringBuilder();
+		
+		String j = ctx.getChild(1).accept(this);
+		String condition = ctx.getChild(3).accept(this);
+		
+		b.append("exists " + j + ", (" + condition + ")");
+
+		return b.toString();	
+	}
+	
+	
+	
+	
+	@Override
+	public String visitOtherAndExpression(OtherAndExpression ctx) {
+		StringBuilder b = new StringBuilder();
+		
+		String left = ctx.getChild(0).accept(this);
+		String right = ctx.getChild(2).accept(this);
+		
+		b.append(left + " & " + right);
+
+		return b.toString();
+	}
+	
+	
+	
+	
+	@Override 
+	public String visitOtherGreaterThanOrEqualExpression(OtherGreaterThanOrEqualExpression ctx) {
+		StringBuilder b = new StringBuilder();
+		
+		String variable = ctx.getChild(0).accept(this);
+		String constant = ctx.getChild(2).accept(this);
+		
+		b.append(variable + " >= " + constant);
+
+		return b.toString();
+	}
+	
+	
+	
+	
+	@Override
+	public String visitOtherImplicationExpression(OtherImplicationExpressionContext ctx) {
+		StringBuilder b = new StringBuilder();
+		
+		String left = ctx.getChild(0).accept(this);
+		String right = ctx.getChild(2).accept(this);
+		
+		b.append(" for every k, ((" + left + ") => h(" + right + ")))");
+
+		return b.toString();
+	}
+	
+	
 }
