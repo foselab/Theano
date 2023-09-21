@@ -480,7 +480,6 @@ public class UeUfFs implements matlabVisitor<String> {
 			if (i == 0) {
 				b.append(ctx.getChild(i).getText());
 			} else if (i == 2) {
-				b.append("(" + ctx.getChild(i).getText() + ") = ");
 			} else if (i == 4) {
 				b.append(visit(ctx.getChild(i)));
 			}
@@ -508,20 +507,23 @@ public class UeUfFs implements matlabVisitor<String> {
 	
 	
 	
-	
+	@Override
 	public String visitPrevExpression(Prev_expressionContext ctx) {
 		StringBuilder b = new StringBuilder();
 		
-		String u = ctx.getChild(1).accept(this);
-		
-		b.append("prev(" + u + ") = ");
-		
-		String iValue = ctx.getChild(3).accept(this);
-		
-		if(!iValue.equals("0")) {
-			b.append("if (" + iValue + " > 0) u[" + iValue + "-1]");
-		} else {
-			b.append("if (" + iValue + " == 0) u[" + iValue + "] = 0");
+		for (int i = 0; i < ctx.getChildCount(); i++) {
+			if (i == 1) {
+				String u = visit(ctx.getChild(i));
+				b.append("prev(" + u + ") = ");
+			} else if (i == 3) {
+				String iValue = visit(ctx.getChild(i));
+				
+				if(!iValue.equals("0")) {
+					b.append("if (" + iValue + " > 0) u[" + iValue + "-1]");
+				} else {
+					b.append("if (" + iValue + " == 0) u[" + iValue + "] = 0");
+				}
+			}
 		}
 		
 		return b.toString();
@@ -568,9 +570,12 @@ public class UeUfFs implements matlabVisitor<String> {
 	public String visitNot_expression(Not_expressionContext ctx) {
 		StringBuilder b = new StringBuilder();
 		
-		String le = ctx.getChild(1).accept(this);
-		
-		b.append("!(" + le + ")");
+		for (int i = 0; i < ctx.getChildCount(); i++) {
+			if (i == 1) {
+				String le = visit(ctx.getChild(i));
+				b.append("!(" + le + ")");
+			}
+		}
 		
 		return b.toString();
 	}
