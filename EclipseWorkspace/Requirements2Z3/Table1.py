@@ -1,4 +1,5 @@
 from z3 import *;
+
 I = IntSort()
 R = RealSort()
 pi = Array('pi', I, R)
