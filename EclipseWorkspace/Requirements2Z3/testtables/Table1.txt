@@ -1,0 +1,10 @@
+------- Input Data -----
+u2,Real
+y1,Real
+y2,Real
+u1,Real
+------- Requirements -----
+u1 == prev(u1)+1
+y1 == prev(y1)+2
+u2 > 2
+y2 > 5

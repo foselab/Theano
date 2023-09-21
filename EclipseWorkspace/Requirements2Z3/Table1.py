@@ -1,6 +1,16 @@
 from z3 import *;
-u2=Real('u2')
-y1=Real('y1')
-y2=Real('y2')
-u1=Real('u1')
-solve(u2>2)
+
+I = IntSort()
+R = RealSort()
+pi = Array('pi', I, R)
+j = Int('j')
+
+
+u2=Array('pi', I, R)
+y1=Array('pi', I, R)
+y2=Array('pi', I, R)
+u1=Array('pi', I, R)
+
+s = Solver()
+s.add(Exists(pi,Not(Exists(j,And(j>=0,(pi[j]>=pi[j+1]))))))
+print (s.check())
