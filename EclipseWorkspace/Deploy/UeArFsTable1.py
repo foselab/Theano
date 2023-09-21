@@ -11,7 +11,7 @@ y2=Array('y2', I, R)
 u1=Array('u1', I, R)
 Ts = Real('Ts')
 s = Solver()
-s.add(And(ForAll(j,Implies(j>=0,(tau[j+1]>tau[j]))),ForAll([y1,y1,y2] , Exists(i,And(Not(Implies(((i==0)*(u1[i])+(i>0)*(u1[i-1]))!=1,y1[i]!=3)),Not(Implies(u1[i]==1,y1[i]==3)),Not(Implies(u1[i]!=2,y2[i]!=3)),Not(Implies(u1[i]==2,y2[i]==3)))))))
+s.add(And(ForAll(j,Implies(j>=0,(tau[j+1]-tau[j]==2.0))),ForAll([y1,y1,y2] , Exists(i,And(Not(Implies(u1[i]==1,y1[i]==3)),Not(Implies(u1[i]!=2,y2[i]!=3)),Not(Implies(u1[i]!=1,y1[i]!=3)),Not(Implies(u1[i]==2,y2[i]==3)))))))
 res=s.check()
 if (res.r ==  Z3_L_FALSE):
 	 print('Requirements Table Complete (unsat)')

@@ -130,50 +130,19 @@ public abstract class Checker {
 
 	public void processResult(Scanner sc, Writer wt) throws Exception {
 
-		System.out.println("Processing the result");
-
+		System.out.println("Adding the part for processing the result");
 		wt.write("res=s.check()\n");
 		wt.write("if (res.r ==  Z3_L_FALSE):\n");
 		wt.write("\t print('Requirements Table Complete (unsat)')\n");
+		wt.write("\t sys.exit(1)\n");
 		wt.write("else:\n");
 		wt.write("\t if (res.r == Z3_L_TRUE):\n");
 		wt.write("\t\t print('Requirements Table InComplete (sat)')\n");
+		wt.write("\t\t sys.exit(-1)\n");
 		wt.write("\t else:\n");
 		wt.write("\t\t print('unknown')\n");
-		// checks that the first line of the file contains the string ----Input Data --
-		// if not throws an error
+		wt.write("\t\t sys.exit(0)\n");
 
-		if (!(sc.nextLine().equals("------- Expected Results -----"))) {
-			sc.close();
-			wt.close();
-			throw new Exception("The file does not start with the string \"------- Expected Results -----\" ");
-		}
-
-		// reads one line and put it into next line
-		String nextLine = sc.next();
-
-		while (nextLine != null && !nextLine.startsWith("------- End of Expected Results -----")) {
-
-			if (nextLine.startsWith("Complete")) {
-				wt.write("if (res.r ==  Z3_L_FALSE):\n");
-				wt.write("\t print('Correct!')\n");
-				wt.write("else:\n");
-				wt.write("\t if (res.r == Z3_L_TRUE):\n");
-				wt.write("\t\t print('Error')\n");
-				wt.write("\t else:\n");
-				wt.write("\t\t print('MissRes')\n");
-			}
-			if (nextLine.startsWith("Incomplete")) {
-				wt.write("if (res.r ==  Z3_L_FALSE):\n");
-				wt.write("\t print('Error!')\n");
-				wt.write("else:\n");
-				wt.write("\t if (res.r == Z3_L_TRUE):\n");
-				wt.write("\t\t print('Correct')\n");
-				wt.write("\t else:\n");
-				wt.write("\t\t print('MissRes')\n");
-			}
-			nextLine = sc.nextLine();
-		}
 	}
 
 	public String conversion(String input) {

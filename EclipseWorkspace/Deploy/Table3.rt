@@ -5,12 +5,8 @@ y2,Real,output
 u1,Real,input
 ------- End of Input Data -----
 ------- Requirements -----
-prev(u1) ~= 1, y1 ~= 3
+dur(u1==2) >= 1, y1 ~= 3
 u1 == 2, y2 == 3
 u1 == 1, y1 == 3
 u1 ~= 2, y2 ~= 3
 ------- End of Requirements -----
-------- Expected Results -----
-Complete
-Consistent
-------- End of Expected Results -----
