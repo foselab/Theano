@@ -77,7 +77,7 @@ public abstract class Checker {
 	abstract public void defineTau(Scanner sc, Writer wt) throws Exception;
 
 	public void processVariableDefinitions(Scanner sc, Writer wt) throws IOException, Exception {
-		System.out.println("Processing the variable definitions");
+		//System.out.println("Processing the variable definitions");
 
 		// writes the first file in the file to import the Z3 library
 		wt.write("from z3 import *;\n");
@@ -118,33 +118,38 @@ public abstract class Checker {
 
 			// if the the type is "Real"
 			if (splitted[1].equals("Real")) {
-				wt.write(splitted[0] + "=" + "Array('" + splitted[0] + "', I, R)\n");
+				this.defineRealVariable(splitted[0],wt);
 			} else {
 				if (splitted[1].equals("Int")) {
-					wt.write(splitted[0] + "=" + "Array('" + splitted[0] + "', I, R)\n");
+					this.defineIntVariable(splitted[0],wt);
 				}
 			}
 			nextLine = sc.nextLine();
 		}
 	}
+	
+
 
 	public void processResult(Scanner sc, Writer wt) throws Exception {
 
-		System.out.println("Adding the part for processing the result");
+		//System.out.println("Adding the part for processing the result");
 		wt.write("res=s.check()\n");
 		wt.write("if (res.r ==  Z3_L_FALSE):\n");
-		wt.write("\t print('Requirements Table Complete (unsat)')\n");
+		
+		this.functionality.printPositiveResult(sc, wt);
+
 		wt.write("\t sys.exit(1)\n");
 		wt.write("else:\n");
 		wt.write("\t if (res.r == Z3_L_TRUE):\n");
-		wt.write("\t\t print('Requirements Table InComplete (sat)')\n");
+		this.functionality.printNegativeResult(sc, wt);
 		wt.write("\t\t sys.exit(-1)\n");
 		wt.write("\t else:\n");
 		wt.write("\t\t print('unknown')\n");
 		wt.write("\t\t sys.exit(0)\n");
 
 	}
-
+	
+	
 	public String conversion(String input) {
 		matlabLexer lexer = new matlabLexer(new ANTLRInputStream(input));
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
@@ -158,4 +163,12 @@ public abstract class Checker {
 	}
 
 	abstract public String visitTree(ParseTree tree);
+	
+	// it is not possible to quantify over arbitrary function (i.e., write there exists a function such that)
+	public void defineIntVariable(String name,Writer wt) throws IOException {
+		wt.write(name + "=" + "Array('" + name + "', I, I)\n");	
+	}
+	public void defineRealVariable(String name,Writer wt) throws IOException {
+		wt.write(name + "=" + "Array('" + name + "', I, R)\n");
+	}
 }

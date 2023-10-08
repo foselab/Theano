@@ -22,9 +22,12 @@ public class UeUfFsChecker extends Checker {
 	public void processVariableDefinitions(Scanner sc, Writer wt) throws IOException, Exception {
 		super.processVariableDefinitions(sc, wt);
 
+		
 		wt.write("Ts = Real('Ts')\n");
 
 	}
+	
+	
 
 	@Override
 	public void defineTau(Scanner sc, Writer wt) throws Exception {
@@ -38,7 +41,7 @@ public class UeUfFsChecker extends Checker {
 
 	@Override
 	public String getMonotonicityConstraint() {
-		return "ForAll(j,Implies(j>=0,(tau(j+1)-tau(j)=" + ts + ")))";
+		return "And(ForAll(j,Implies(j>=0,(tau(j+1)-tau(j)==" + ts + "))),tau(0)==0)";
 	}
 
 	@Override

@@ -93,6 +93,18 @@ public interface matlabVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitEquality_expression(matlabParser.Equality_expressionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link matlabParser#is_startup}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIs_startup(matlabParser.Is_startupContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link matlabParser#is_not_startup}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIs_not_startup(matlabParser.Is_not_startupContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link matlabParser#and_expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

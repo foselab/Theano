@@ -11,8 +11,10 @@ import requirements2Z3.visitors.BeUfVs;
 
 public class BeUfVsChecker extends BoundedChecker {
 
+	
 	public BeUfVsChecker(String inputFile, String outputFile, RTBoundedFunctionality functionality, int bound) throws Exception {
 		super(inputFile, outputFile, functionality,  bound);
+		
 	}
 
 	public void processVariableDefinitions(Scanner sc, Writer wt) throws IOException, Exception {
@@ -32,7 +34,17 @@ public class BeUfVsChecker extends BoundedChecker {
 
 	@Override
 	public String getMonotonicityConstraint() {
-		return "ForAll(j,Implies(j>=0,(tau(j)<tau(j+1))))";
+		StringBuilder bulder = new StringBuilder();
+		bulder.append("And(");
+		for (int i = 0; i < this.getBound()-1; i++) {
+			if (i != 0) {
+				bulder.append(",");
+			}
+			bulder.append("tau(" + i + ")<tau(" + (i+1) + ")");
+		}
+		bulder.append(")");
+
+		return bulder.toString();
 	}
 
 	@Override

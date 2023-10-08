@@ -4,6 +4,8 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 
 import generated.matlabLexer;
 import generated.matlabParser.Dur_expressionContext;
+import generated.matlabParser.Is_not_startupContext;
+import generated.matlabParser.Is_startupContext;
 import generated.matlabParser.Prev_expressionContext;
 import generated.matlabVisitor;
 
@@ -74,5 +76,24 @@ public class BeArVs extends Z3Visitor implements matlabVisitor<String> {
 		part3 = part3 + ")";
 
 		return part3;
+	}
+	@Override
+	public String visitIs_startup(Is_startupContext ctx) {
+		if(index==0) {
+			return "True";
+		}
+		else {
+			return "False";
+		}
+	}
+
+	@Override
+	public String visitIs_not_startup(Is_not_startupContext ctx) {
+		if(index==0) {
+			return "False";
+		}
+		else {
+			return "True";
+		}
 	}
 }

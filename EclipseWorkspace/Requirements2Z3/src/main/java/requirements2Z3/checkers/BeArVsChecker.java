@@ -12,10 +12,11 @@ import requirements2Z3.visitors.BeArVs;
 public class BeArVsChecker extends BoundedChecker {
 
 	private RTBoundedFunctionality boundedFunctionality;
-	
-	public BeArVsChecker(String inputFile, String outputFile, RTBoundedFunctionality functionality,  int bound) throws Exception {
+
+	public BeArVsChecker(String inputFile, String outputFile, RTBoundedFunctionality functionality, int bound)
+			throws Exception {
 		super(inputFile, outputFile, functionality, bound);
-		this.boundedFunctionality=functionality;
+		this.boundedFunctionality = functionality;
 	}
 
 	public void processVariableDefinitions(Scanner sc, Writer wt) throws IOException, Exception {
@@ -35,7 +36,17 @@ public class BeArVsChecker extends BoundedChecker {
 
 	@Override
 	public String getMonotonicityConstraint() {
-		return "ForAll(j,Implies(j>=0,(tau[j]<=tau[j+1])))";
+		StringBuilder bulder = new StringBuilder();
+		bulder.append("And(");
+		for (int i = 0; i < this.getBound()-1; i++) {
+			if (i != 0) {
+				bulder.append(",");
+			}
+			bulder.append("tau[" + i + "]<tau[" + (i+1) + "]");
+		}
+		bulder.append(")");
+
+		return bulder.toString();
 	}
 
 	@Override

@@ -4,6 +4,8 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 
 import generated.matlabLexer;
 import generated.matlabParser.Dur_expressionContext;
+import generated.matlabParser.Is_not_startupContext;
+import generated.matlabParser.Is_startupContext;
 import generated.matlabParser.Prev_expressionContext;
 import generated.matlabVisitor;
 
@@ -51,5 +53,15 @@ public class UeUfFs extends Z3Visitor implements matlabVisitor<String> {
 		String part3="ForAll(k,Implies(And(i-"+constant+"/Ts<=k,k<=i),"+ctx.getChild(2).accept(this)+"))";
 		
 		return "And("+part1+","+part2+","+part3+")";
+	}
+	
+	@Override
+	public String visitIs_startup(Is_startupContext ctx) {
+		return "tau(i)==0";
+	}
+
+	@Override
+	public String visitIs_not_startup(Is_not_startupContext ctx) {
+		return "tau(i)!=0";
 	}
 }

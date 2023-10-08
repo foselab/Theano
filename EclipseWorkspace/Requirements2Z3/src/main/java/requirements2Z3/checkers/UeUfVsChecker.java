@@ -8,7 +8,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 
 import requirements2Z3.Checker;
 import requirements2Z3.RTFunctionality;
-import requirements2Z3.visitors.UeArVs;
+import requirements2Z3.visitors.UeUfVs;
 
 public class UeUfVsChecker extends Checker {
 
@@ -30,13 +30,13 @@ public class UeUfVsChecker extends Checker {
 
 	@Override
 	public String visitTree(ParseTree tree) {
-		return tree.accept(new UeArVs());
+		return tree.accept(new UeUfVs());
 	}
 
 
 	@Override
 	public String getMonotonicityConstraint() {
-		return "ForAll(j,Implies(j>=0,(tau[j]<tau[j+1])))";
+		return "And(ForAll(j,Implies(j>=0,(tau(j)<tau(j+1)))),tau(0)==0)";
 	}
 
 

@@ -119,4 +119,15 @@ public class CompletenessChecker implements RTFunctionality {
 		}
 		return preconditions;
 	}
+
+	@Override
+	public void printPositiveResult(Scanner sc, Writer wt) throws Exception {
+		wt.write("\t print('Requirements Table Complete (unsat)')\n");
+		
+	}
+
+	@Override
+	public void printNegativeResult(Scanner sc, Writer wt) throws Exception {
+		wt.write("\t\t print('Requirements Table InComplete (sat)')\n");
+	}
 }

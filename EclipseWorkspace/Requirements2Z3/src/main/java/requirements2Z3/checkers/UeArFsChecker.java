@@ -41,7 +41,7 @@ public class UeArFsChecker extends Checker {
 
 	@Override
 	public String getMonotonicityConstraint() {
-		return "ForAll(j,Implies(j>=0,(tau[j+1]-tau[j]=="+ts+")))";
+		return "And(ForAll(j,Implies(j>=0,(tau[j+1]-tau[j]=="+ts+"))),tau[0]==0)";
 	}
 
 
@@ -49,7 +49,6 @@ public class UeArFsChecker extends Checker {
 	public void writeTimestampConstraint(Writer wt) throws IOException {
 		wt.write("s.add(Ts=="+ts+")\n");		
 	}
-
 
 	@Override
 	public void processRequirements(Scanner sc, Writer wt) throws Exception {

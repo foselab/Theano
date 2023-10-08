@@ -142,6 +142,26 @@ public interface matlabListener extends ParseTreeListener {
 	 */
 	void exitEquality_expression(matlabParser.Equality_expressionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link matlabParser#is_startup}.
+	 * @param ctx the parse tree
+	 */
+	void enterIs_startup(matlabParser.Is_startupContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link matlabParser#is_startup}.
+	 * @param ctx the parse tree
+	 */
+	void exitIs_startup(matlabParser.Is_startupContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link matlabParser#is_not_startup}.
+	 * @param ctx the parse tree
+	 */
+	void enterIs_not_startup(matlabParser.Is_not_startupContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link matlabParser#is_not_startup}.
+	 * @param ctx the parse tree
+	 */
+	void exitIs_not_startup(matlabParser.Is_not_startupContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link matlabParser#and_expression}.
 	 * @param ctx the parse tree
 	 */

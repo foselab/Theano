@@ -184,8 +184,21 @@ public abstract class Z3Visitor implements matlabVisitor<String> {
 	public String visitAnd_expression(And_expressionContext ctx) {
 		StringBuilder b = new StringBuilder();
 
-		for (int i = 0; i < ctx.getChildCount(); i++) {
-			b.append(ctx.getChild(i).accept(this) );
+		if(ctx.getChildCount()==1) {
+			b.append(ctx.getChild(0).accept(this) );
+		}
+		else {
+			
+			String part1=ctx.getChild(0).accept(this);
+			String part2=ctx.getChild(2).accept(this);
+			if(part1.equals("True")) {
+				return part2;
+			}
+			if(part1.equals("False")) {
+				return "False";
+			}
+			
+			b.append("And("+part1+","+part2+")");
 		}
 
 		return b.toString();
@@ -195,8 +208,11 @@ public abstract class Z3Visitor implements matlabVisitor<String> {
 	public String visitOr_expression(Or_expressionContext ctx) {
 		StringBuilder b = new StringBuilder();
 
-		for (int i = 0; i < ctx.getChildCount(); i++) {
-			b.append(ctx.getChild(i).accept(this) );
+		if(ctx.getChildCount()==1) {
+			b.append(ctx.getChild(0).accept(this) );
+		}
+		else {
+			b.append("Or("+ctx.getChild(0).accept(this)+","+ctx.getChild(2).accept(this)+")");
 		}
 
 		return b.toString();

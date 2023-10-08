@@ -2,10 +2,10 @@ package requirements2Z3.consistency;
 
 import java.io.Writer;
 import java.util.AbstractMap;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.Scanner;
-import java.util.Set;
 
 import requirements2Z3.Checker;
 import requirements2Z3.RTFunctionality;
@@ -25,7 +25,7 @@ public class ConsistencyChecker implements RTFunctionality {
 			throw new Exception("The file does not start with the string \"------- Input Data -----\" ");
 		}
 		// this set will contain all the preconditions of the Requirements Table
-		Set<Entry<String, String>> requirements = new HashSet<>();
+		List<Entry<String, String>> requirements = new ArrayList<>();
 
 		nextLine = sc.nextLine();
 		while (sc.hasNextLine() && !nextLine.equals("------- End of Requirements -----")) {
@@ -60,7 +60,7 @@ public class ConsistencyChecker implements RTFunctionality {
 
 	}
 
-	protected String getEncodingRequirements(Set<Entry<String, String>> requirements,Checker ck) {
+	protected String getEncodingRequirements(List<Entry<String, String>> requirements,Checker ck) {
 		boolean firstRequirement = true;
 
 		String encodingRequirements = "And(";
@@ -71,19 +71,53 @@ public class ConsistencyChecker implements RTFunctionality {
 			String postcondition = requirement.getValue();
 
 			if (firstRequirement) {
-				encodingRequirements = encodingRequirements + "Not(Implies(" + ck.conversion(precondition) + ","
-						+ ck.conversion(postcondition) + "))";
+				String preconditionString=ck.conversion(precondition);
+				String postconditionString=ck.conversion(postcondition);
+				if(preconditionString.equals("True")) {
+					encodingRequirements = encodingRequirements + postconditionString;
+				}
+				else {
+					if(!preconditionString.equals("False")) {
+						encodingRequirements = encodingRequirements + "Implies(" + preconditionString + ","
+								+postconditionString + ")";
+					}
+				
+				}
+				
+				
 
 				firstRequirement = false;
 			} else {
-				encodingRequirements = encodingRequirements + ",Not(Implies(" + ck.conversion(precondition) + ","
-						+ ck.conversion(postcondition) + "))";
+				String preconditionString=ck.conversion(precondition);
+				String postconditionString=ck.conversion(postcondition);
+				if(preconditionString.equals("True")) {
+					encodingRequirements = encodingRequirements +","+postconditionString;
+				}
+				else {
+					if(!preconditionString.equals("False")) {
+						encodingRequirements = encodingRequirements + ",Implies(" + preconditionString + ","
+								+postconditionString + ")";
+					}
+				
+				}
+				
 			}
 		}
 		encodingRequirements=encodingRequirements+")";
-		encodingRequirements="Exists(i,"  + encodingRequirements + ")";
+		encodingRequirements="Exists(i,Not("  + encodingRequirements + "))";
 		
 		return encodingRequirements;
+	}
+
+	@Override
+	public void printPositiveResult(Scanner sc, Writer wt) throws Exception {
+		wt.write("\t print('Requirements Table Consistent (unsat)')\n");
+		
+	}
+
+	@Override
+	public void printNegativeResult(Scanner sc, Writer wt) throws Exception {
+		wt.write("\t\t print('Requirements Table Inconsistent (sat)')\n");
 	}
 
 }

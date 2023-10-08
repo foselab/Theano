@@ -33,7 +33,7 @@ public class UeArVsChecker extends Checker {
 
 	@Override
 	public String getMonotonicityConstraint() {
-		return "ForAll(j,Implies(j>=0,(tau[j]<tau[j+1])))";
+		return "And(ForAll(j,Implies(j>=0,(tau[j]<tau[j+1]))),tau[0]==0)";
 	}
 
 	@Override

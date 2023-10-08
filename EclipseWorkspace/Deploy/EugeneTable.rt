@@ -1,0 +1,9 @@
+------- Input Data -----
+u,Int,input
+y,Int,output
+------- End of Input Data -----
+------- Requirements -----
+isStartup, y == 0
+! isStartup & u > 0, y == prev(y) + 1
+! isStartup & prev(y) == 1023, y == 23
+------- End of Requirements -----

@@ -17,6 +17,8 @@ import generated.matlabParser.Expression_statementContext;
 import generated.matlabParser.File_Context;
 import generated.matlabParser.Index_expressionContext;
 import generated.matlabParser.Index_expression_listContext;
+import generated.matlabParser.Is_not_startupContext;
+import generated.matlabParser.Is_startupContext;
 import generated.matlabParser.Multiplicative_expressionContext;
 import generated.matlabParser.Or_expressionContext;
 import generated.matlabParser.Postfix_expressionContext;
@@ -303,5 +305,15 @@ public class ContainsVariableVisitor implements matlabVisitor<Boolean> {
 		}
 
 		return result;
+	}
+
+	@Override
+	public Boolean visitIs_startup(Is_startupContext ctx) {
+		return false;
+	}
+
+	@Override
+	public Boolean visitIs_not_startup(Is_not_startupContext ctx) {
+		return false;
 	}
 }

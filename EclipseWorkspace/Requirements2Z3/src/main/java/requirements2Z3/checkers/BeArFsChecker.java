@@ -33,6 +33,7 @@ public class BeArFsChecker extends BoundedChecker {
 		wt.write("tau = Array('tau', I, R)\n");
 	}
 
+
 	@Override
 	public String visitTree(ParseTree tree) {
 		return tree.accept(new BeArFs(this.getCurrentIndexI(), this.getTs()));
@@ -40,7 +41,20 @@ public class BeArFsChecker extends BoundedChecker {
 
 	@Override
 	public String getMonotonicityConstraint() {
-		return "ForAll(j,Implies(j>=0,(tau[j+1]-tau[j]=" + this.getTs() + ")))";
+		StringBuilder bulder=new StringBuilder();
+		
+		float currentTs=0;
+		bulder.append("And(");
+		for(int i=0;i<this.getBound();i++) {
+			if(i!=0) {
+				bulder.append(",");
+			}
+			bulder.append("tau["+i+"]=="+currentTs);
+			currentTs=currentTs+this.getTs();
+		}
+		bulder.append(")");		
+		
+		return bulder.toString();
 	}
 
 	@Override
@@ -52,4 +66,6 @@ public class BeArFsChecker extends BoundedChecker {
 	public void processRequirements(Scanner sc, Writer wt) throws Exception {
 		this.functionality.processRequirements(sc, wt, this);
 	}
+
+	
 }

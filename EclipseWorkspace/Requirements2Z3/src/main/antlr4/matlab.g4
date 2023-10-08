@@ -108,10 +108,18 @@ relational_expression
    ;
 
 equality_expression
-   : relational_expression
+   : is_startup
+   | is_not_startup
+   | relational_expression 
    | equality_expression EQ_OP relational_expression
    | equality_expression NE_OP relational_expression
-   ;
+    ;
+
+is_startup:
+	ISSTARTUP;
+is_not_startup:
+	'!' ISSTARTUP;
+
 
 and_expression
    : equality_expression
@@ -152,6 +160,8 @@ expression_statement
    | expression eostmt
    ;
 
+
+ISSTARTUP: 'isStartup';
 
 ARRAYMUL
    : '.*'
@@ -204,6 +214,7 @@ NE_OP
 IDENTIFIER
    : [a-zA-Z] [a-zA-Z0-9_]*
    ;
+
 
 
 CONSTANT

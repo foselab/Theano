@@ -38,6 +38,10 @@ public class Main {
 		Option type = new Option("t", "type", true, "consistency | completeness");
 		type.setRequired(true);
 		options.addOption(type);
+		
+		Option bound = new Option("b", "bound", true, "the bound");
+		bound.setRequired(false);
+		options.addOption(bound);
 
 		Option encoding = new Option("e", "encoding", true,
 				"encoding one among BeArFs | BeArVs | BeUfFs | BeUfVs | UeArFs | UeArVs | UeUfFs | UeUfVs");
@@ -62,37 +66,40 @@ public class Main {
 				: cmd.getOptionValue("output");
 		String selectedEncoding = cmd.getOptionValue("e") != null ? cmd.getOptionValue("e")
 				: cmd.getOptionValue("encoding");
+		
+		
+		String boundVal = cmd.getOptionValue("b") != null ? cmd.getOptionValue("b")
+				: cmd.getOptionValue("bound");
+		
+		int boundparam = boundVal!=null? Integer.parseInt(boundVal): -1;
 
-		System.out.println("-----------------------------------------");
-		System.out.println("Processing the file: "+inputFilePath);
-		System.out.println("-----------------------------------------");
+		//System.out.println("Processing the file: "+inputFilePath);
 		String typeInput = cmd.getOptionValue("t") != null ? cmd.getOptionValue("t") : cmd.getOptionValue("type");
+		
+		
 
 		switch (typeInput) {
 		case "consistency":
-			manageConsistency(inputFilePath, outputFilePath, selectedEncoding);
+			manageConsistency(inputFilePath, outputFilePath, selectedEncoding, boundparam);
 			break;
 
 		case "completeness":
-			manageCompleteness(inputFilePath, outputFilePath, selectedEncoding);
+			manageCompleteness(inputFilePath, outputFilePath, selectedEncoding, boundparam);
 			break;
 
 		default:
 			throw new IllegalArgumentException("Type: " + typeInput + " is not supported. ");
 
 		}
-		System.out.println("--------------------------------------------------------------");
 		System.out.println("File: "+outputFilePath+" correctly generated");
 		System.out.println("Run \"python3 "+outputFilePath+"\" to check for "+typeInput);
 		
-		System.out.println("--------------------------------------------------------------");
-
+		
 	}
 
-	private static void manageConsistency(String inputFilePath, String outputFilePath, String selectedEncoding)
+	private static void manageConsistency(String inputFilePath, String outputFilePath, String selectedEncoding, int bound)
 			throws Exception {
 		int ts = 2;
-		int bound = 4;
 		int index = 0;
 		switch (selectedEncoding) {
 		// unbounded
@@ -128,10 +135,9 @@ public class Main {
 		}
 	}
 
-	private static void manageCompleteness(String inputFilePath, String outputFilePath, String selectedEncoding)
+	private static void manageCompleteness(String inputFilePath, String outputFilePath, String selectedEncoding, int bound)
 			throws Exception {
 		int ts = 2;
-		int bound = 4;
 		switch (selectedEncoding) {
 		// unbounded
 		case "UeArFs":
