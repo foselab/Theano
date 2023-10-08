@@ -51,7 +51,9 @@ public class ConsistencyChecker implements RTFunctionality {
 				outputVariables = outputVariable;
 				firstVariable = false;
 			}
-			outputVariables = outputVariables + "," + outputVariable;
+			else {
+				outputVariables = outputVariables + "," + outputVariable;
+			}
 		}
 
 		String finalConvertedString = "And(" + tm + "," + "ForAll([" + outputVariables + "] , "  + encodingRequirements + "))";
