@@ -30,7 +30,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *
 * http://www.angelfire.com/ar/CompiladoresUCSE/images/MATLAB.zip
 */
-
 grammar matlab;
 
 @header {
@@ -38,210 +37,324 @@ package generated;
 
 }
 
-file_ : statement_list? EOF;
+primaryExpression
+:
+	variablesdefinitions requirementsdefinitions
+;
+
+variablesdefinitions
+:
+	'vardef' CR variabledefinition* 'endvardef' CR
+;
+
+requirementsdefinitions
+:
+	'reqdef' CR requirement* 'endreqdef'CR
+;
+
+
+requirement
+:
+	precondition ',' postcondition SEMICOLUMN CR
+;
+
+precondition
+:
+	statement_list
+;
+
+postcondition
+:
+	statement_list
+;
 
 primary_expression
-   : IDENTIFIER
-   | CONSTANT
-   | prev_expression
-   | dur_expression
-   | '(' expression ')'
-   ;
+:
+	IDENTIFIER
+	| CONSTANT
+	| prev_expression
+	| dur_expression
+	| '(' expression ')'
+;
 
-prev_expression: 	
+prev_expression
+:
 	PREV '(' IDENTIFIER ')'
-	;
-	
-dur_expression: 	
-	DUR '(' expression ')' ('>' | '<' | '=' | LE_OP | GE_OP) CONSTANT
-	;
-	
+;
+
+dur_expression
+:
+	DUR '(' expression ')'
+	(
+		'>'
+		| '<'
+		| '='
+		| LE_OP
+		| GE_OP
+	) CONSTANT
+;
+
 postfix_expression
-   : primary_expression
-   ;
+:
+	primary_expression
+;
 
 index_expression
-   : ':'
-   | expression
-   ;
-
-index_expression_list
-   : index_expression
-   | index_expression_list ',' index_expression
-   ;
+:
+	':'
+	| expression
+;
 
 unary_expression
-   : postfix_expression
-   | unary_operator postfix_expression
-   ;
+:
+	postfix_expression
+	| unary_operator postfix_expression
+;
 
 unary_operator
-   : '+'
-   | '-'
-   | '~'
-   ;
+:
+	'+'
+	| '-'
+	| '~'
+;
 
 multiplicative_expression
-   : unary_expression
-   | multiplicative_expression '*' unary_expression
-   | multiplicative_expression '/' unary_expression
-   | multiplicative_expression '\\' unary_expression
-   | multiplicative_expression '^' unary_expression
-   | multiplicative_expression ARRAYMUL unary_expression
-   | multiplicative_expression ARRAYDIV unary_expression
-   | multiplicative_expression ARRAYRDIV unary_expression
-   | multiplicative_expression ARRAYPOW unary_expression
-   ;
+:
+	unary_expression
+	| multiplicative_expression '*' unary_expression
+	| multiplicative_expression '/' unary_expression
+	| multiplicative_expression '\\' unary_expression
+	| multiplicative_expression '^' unary_expression
+	| multiplicative_expression ARRAYMUL unary_expression
+	| multiplicative_expression ARRAYDIV unary_expression
+	| multiplicative_expression ARRAYRDIV unary_expression
+	| multiplicative_expression ARRAYPOW unary_expression
+;
 
 additive_expression
-   : multiplicative_expression
-   | additive_expression '+' multiplicative_expression
-   | additive_expression '-' multiplicative_expression
-   ;
+:
+	multiplicative_expression
+	| additive_expression '+' multiplicative_expression
+	| additive_expression '-' multiplicative_expression
+;
 
 relational_expression
-   : additive_expression
-   | relational_expression '<' additive_expression
-   | relational_expression '>' additive_expression
-   | relational_expression LE_OP additive_expression
-   | relational_expression GE_OP additive_expression
-   ;
+:
+	additive_expression
+	| relational_expression '<' additive_expression
+	| relational_expression '>' additive_expression
+	| relational_expression LE_OP additive_expression
+	| relational_expression GE_OP additive_expression
+;
 
 equality_expression
-   : is_startup
-   | is_not_startup
-   | relational_expression 
-   | equality_expression EQ_OP relational_expression
-   | equality_expression NE_OP relational_expression
-    ;
+:
+	is_startup
+	| is_not_startup
+	| relational_expression
+	| equality_expression EQ_OP relational_expression
+	| equality_expression NE_OP relational_expression
+;
 
-is_startup:
-	ISSTARTUP;
-is_not_startup:
-	'!' ISSTARTUP;
+is_startup
+:
+	ISSTARTUP
+;
 
+is_not_startup
+:
+	'!' ISSTARTUP
+;
 
 and_expression
-   : equality_expression
-   | and_expression '&' equality_expression
-   ;
+:
+	equality_expression
+	| and_expression '&' equality_expression
+;
 
 or_expression
-   : and_expression
-   | or_expression '|' and_expression
-   ;
+:
+	and_expression
+	| or_expression '|' and_expression
+;
 
 expression
-   : or_expression
-   | expression ':' or_expression
-   ;
+:
+	or_expression
+	| expression ':' or_expression
+;
 
 assignment_expression
-   : postfix_expression '=' expression
-   ;
-
-eostmt
-   : ','
-   | ';'
-   | CR
-   ;
+:
+	postfix_expression '=' expression
+;
 
 statement
-   : 
-	 expression_statement
-   ;
+:
+	expression
+;
 
 statement_list
-   : statement
-   ;
+:
+	statement
+;
 
-expression_statement
-   : eostmt
-   | expression eostmt
-   ;
+DEFVARIABLES
+:
+	'defVariables'
+;
 
+ENDVARIABLES
+:
+	'endVariables'
+;
 
-ISSTARTUP: 'isStartup';
+ISSTARTUP
+:
+	'isStartup'
+;
 
 ARRAYMUL
-   : '.*'
-   ;
-
+:
+	'.*'
+;
 
 ARRAYDIV
-   : '.\\'
-   ;
-
+:
+	'.\\'
+;
 
 ARRAYRDIV
-   : './'
-   ;
-
+:
+	'./'
+;
 
 ARRAYPOW
-   : '.^'
-   ;
+:
+	'.^'
+;
 
 PREV
-	: 'prev'
-	; 
-	
-DUR
-	: 'dur'
-	; 
+:
+	'prev'
+;
 
+DUR
+:
+	'dur'
+;
 
 LE_OP
-   : '<='
-   ;
-
+:
+	'<='
+;
 
 GE_OP
-   : '>='
-   ;
-
+:
+	'>='
+;
 
 EQ_OP
-   : '=='
-   ;
-
+:
+	'=='
+;
 
 NE_OP
-   : '~='
-   ;
+:
+	'~='
+;
 
 
-IDENTIFIER
-   : [a-zA-Z] [a-zA-Z0-9_]*
-   ;
 
 
 
 CONSTANT
-   : NUMBER (E SIGN? NUMBER)?
-   ;
+:
+	NUMBER
+	(
+		E SIGN? NUMBER
+	)?
+;
+
+fragment
+NUMBER
+:
+	(
+		'0' .. '9'
+	)+
+	(
+		'.'
+		(
+			'0' .. '9'
+		)+
+	)?
+;
+
+fragment
+E
+:
+	'E'
+	| 'e'
+;
+
+fragment
+SIGN
+:
+	(
+		'+'
+		| '-'
+	)
+;
 
 
-fragment NUMBER
-   : ('0' .. '9') + ('.' ('0' .. '9') +)?
-   ;
 
 
-fragment E
-   : 'E' | 'e'
-   ;
+
+variabledefinition
+:
+	variableName COMMA typeSpecifier COMMA io SEMICOLUMN CR
+;
 
 
-fragment SIGN
-   : ('+' | '-')
-   ;
+variableName
+:
+	IDENTIFIER
+;
 
+typeSpecifier
+:
+	'Int'
+	| 'Real'
+;
+
+io
+:
+	'input'
+	| 'output'
+;
 
 CR
-   : [\r\n] +
-   ;
+:
+	[\r\n]+
+;
 
+IDENTIFIER
+:
+	[a-zA-Z] [a-zA-Z0-9_]*
+;
+
+COMMA
+:
+	','
+;
+
+SEMICOLUMN
+:
+	';'
+;
 
 WS
-   : [ \t] + -> skip
-   ;
+:
+	[ \t]+ -> skip
+;
+

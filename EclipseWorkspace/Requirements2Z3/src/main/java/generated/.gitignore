@@ -4,3 +4,5 @@
 /matlabLexer.tokens
 /matlabListener.java
 /matlabParser.java
+/matlabBaseVisitor.java
+/matlabVisitor.java

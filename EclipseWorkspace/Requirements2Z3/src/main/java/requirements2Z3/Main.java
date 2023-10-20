@@ -1,5 +1,8 @@
 package requirements2Z3;
 
+import java.io.FileReader;
+import java.io.FileWriter;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -8,25 +11,28 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-import requirements2Z3.checkers.BeArFsChecker;
-import requirements2Z3.checkers.BeArVsChecker;
-import requirements2Z3.checkers.BeUfFsChecker;
-import requirements2Z3.checkers.BeUfVsChecker;
-import requirements2Z3.checkers.UeArFsChecker;
-import requirements2Z3.checkers.UeArVsChecker;
-import requirements2Z3.checkers.UeUfFsChecker;
-import requirements2Z3.checkers.UeUfVsChecker;
-import requirements2Z3.consistency.BoundedCompletenessChecker;
-import requirements2Z3.consistency.BoundedConsistencyChecker;
-import requirements2Z3.consistency.CompletenessChecker;
-import requirements2Z3.consistency.ConsistencyChecker;
+import requirements2Z3.analysis.Translator;
+import requirements2Z3.consistency.UnboundedCompletenessTranslator;
+import requirements2Z3.consistency.BoundedCompletenessTranslator;
+import requirements2Z3.consistency.BoundedConsistencyTranslator;
+import requirements2Z3.consistency.UnboundedConsistencyTranslator;
+
+import requirements2Z3.consistency.Functionality;
+import requirements2Z3.factory.BeArFsFactory;
+import requirements2Z3.factory.BeArVsFactory;
+import requirements2Z3.factory.BeUfFsFactory;
+import requirements2Z3.factory.BeUfVsFactory;
+import requirements2Z3.factory.UeArFsFactory;
+import requirements2Z3.factory.UeArVsFactory;
+import requirements2Z3.factory.UeUfFsFactory;
+import requirements2Z3.factory.UeUfVsFactory;
+import requirements2Z3.visitors.translators.Table2Z3Visitor;
 
 public class Main {
 
 	public static void main(String[] args) throws Exception {
 		Options options = new Options();
-		String currentPath = new java.io.File(".").getCanonicalPath();
-		
+
 		Option input = new Option("i", "inputFile", true, "input file path");
 		input.setRequired(true);
 		options.addOption(input);
@@ -38,7 +44,7 @@ public class Main {
 		Option type = new Option("t", "type", true, "consistency | completeness");
 		type.setRequired(true);
 		options.addOption(type);
-		
+
 		Option bound = new Option("b", "bound", true, "the bound");
 		bound.setRequired(false);
 		options.addOption(bound);
@@ -66,108 +72,82 @@ public class Main {
 				: cmd.getOptionValue("output");
 		String selectedEncoding = cmd.getOptionValue("e") != null ? cmd.getOptionValue("e")
 				: cmd.getOptionValue("encoding");
-		
-		
-		String boundVal = cmd.getOptionValue("b") != null ? cmd.getOptionValue("b")
-				: cmd.getOptionValue("bound");
-		
-		int boundparam = boundVal!=null? Integer.parseInt(boundVal): -1;
 
-		//System.out.println("Processing the file: "+inputFilePath);
+		String boundVal = cmd.getOptionValue("b") != null ? cmd.getOptionValue("b") : cmd.getOptionValue("bound");
+
+		int boundparam = boundVal != null ? Integer.parseInt(boundVal) : -1;
+
+		// System.out.println("Processing the file: "+inputFilePath);
 		String typeInput = cmd.getOptionValue("t") != null ? cmd.getOptionValue("t") : cmd.getOptionValue("type");
-		
-		
 
 		switch (typeInput) {
 		case "consistency":
-			manageConsistency(inputFilePath, outputFilePath, selectedEncoding, boundparam);
+			if (cmd.getOptionValue("b") != null) {
+				translate(inputFilePath, outputFilePath, selectedEncoding, boundparam,
+						new BoundedConsistencyTranslator());
+			} else {
+				translate(inputFilePath, outputFilePath, selectedEncoding, boundparam,
+						new UnboundedConsistencyTranslator());
+			}
 			break;
 
 		case "completeness":
-			manageCompleteness(inputFilePath, outputFilePath, selectedEncoding, boundparam);
+			if (cmd.getOptionValue("b") != null) {
+				translate(inputFilePath, outputFilePath, selectedEncoding, boundparam,
+						new BoundedCompletenessTranslator());
+			} else {
+				translate(inputFilePath, outputFilePath, selectedEncoding, boundparam,
+						new UnboundedCompletenessTranslator());
+			}
 			break;
 
 		default:
 			throw new IllegalArgumentException("Type: " + typeInput + " is not supported. ");
 
 		}
-		System.out.println("File: "+outputFilePath+" correctly generated");
-		System.out.println("Run \"python3 "+outputFilePath+"\" to check for "+typeInput);
-		
-		
+		System.out.println("File: " + outputFilePath + " correctly generated");
+		System.out.println("Run \"python3 " + outputFilePath + "\" to check for " + typeInput);
+
 	}
 
-	private static void manageConsistency(String inputFilePath, String outputFilePath, String selectedEncoding, int bound)
-			throws Exception {
-		int ts = 2;
-		int index = 0;
+	private static <T extends Table2Z3Visitor> void translate(String inputFilePath, String outputFilePath,
+			String selectedEncoding, int bound, Functionality<T> functionality) throws Exception {
+		float ts = 2;
+
+		System.out.println(selectedEncoding);
+
+		Table2Z3Visitor z3visitor = null;
 		switch (selectedEncoding) {
 		// unbounded
 		case "UeArFs":
-			new UeArFsChecker(inputFilePath, outputFilePath, new ConsistencyChecker(), ts).check();
+			z3visitor = new UeArFsFactory(ts).getVisitor();
 			break;
 		case "UeUfFs":
-			new UeUfFsChecker(inputFilePath, outputFilePath, new ConsistencyChecker(), ts).check();
+			z3visitor = new UeUfFsFactory(ts).getVisitor();
 			break;
 		case "UeArVs":
-			new UeArVsChecker(inputFilePath, outputFilePath, new ConsistencyChecker()).check();
+			z3visitor = new UeArVsFactory().getVisitor();
 			break;
 		case "UeUfVs":
-			new UeUfVsChecker(inputFilePath, outputFilePath, new ConsistencyChecker()).check();
+			z3visitor = new UeUfVsFactory().getVisitor();
 			break;
-			// bounded
+		// bounded
 		case "BeArFs":
-			new BeArFsChecker(inputFilePath, outputFilePath, new BoundedConsistencyChecker(ts, bound, index), ts,
-					bound).check();
+			z3visitor = new BeArFsFactory(bound, ts).getVisitor();
 			break;
 		case "BeUfFs":
-			new BeUfFsChecker(inputFilePath, outputFilePath, new BoundedConsistencyChecker(ts, bound, index), ts,
-					bound).check();
+			z3visitor = new BeUfFsFactory(bound, ts).getVisitor();
 			break;
 		case "BeArVs":
-			new BeArVsChecker(inputFilePath, outputFilePath, new BoundedConsistencyChecker(ts, bound, index), bound).check();
+			z3visitor = new BeArVsFactory(bound).getVisitor();
 			break;
 		case "BeUfVs":
-			new BeUfVsChecker(inputFilePath, outputFilePath, new BoundedConsistencyChecker(ts, bound, index), bound).check();
+			z3visitor = new BeUfVsFactory(bound).getVisitor();
 			break;
 		default:
 			throw new IllegalArgumentException("Encoding: " + selectedEncoding + " is not supported. ");
 		}
+		new Translator(z3visitor, functionality, new FileReader(inputFilePath), new FileWriter(outputFilePath))
+				.translate();
 	}
-
-	private static void manageCompleteness(String inputFilePath, String outputFilePath, String selectedEncoding, int bound)
-			throws Exception {
-		int ts = 2;
-		switch (selectedEncoding) {
-		// unbounded
-		case "UeArFs":
-			new UeArFsChecker(inputFilePath, outputFilePath, new CompletenessChecker(), ts).check();
-			break;
-		case "UeUfFs":
-			new UeUfFsChecker(inputFilePath, outputFilePath, new CompletenessChecker(), ts).check();
-			break;
-		case "UeArVs":
-			new UeArVsChecker(inputFilePath, outputFilePath, new CompletenessChecker()).check();
-			break;
-		case "UeUfVs":
-			new UeUfVsChecker(inputFilePath, outputFilePath, new CompletenessChecker()).check();
-			break;
-			// bounded
-		case "BeArFs":
-			new BeArFsChecker(inputFilePath, outputFilePath, new BoundedCompletenessChecker(ts, bound), ts, bound).check();
-			break;
-		case "BeUfFs":
-			new BeUfFsChecker(inputFilePath, outputFilePath, new BoundedCompletenessChecker(ts, bound), ts, bound).check();
-			break;
-		case "BeArVs":
-			new BeArVsChecker(inputFilePath, outputFilePath, new BoundedCompletenessChecker(ts, bound), bound).check();
-			break;
-		case "BeUfVs":
-			new BeUfVsChecker(inputFilePath, outputFilePath, new BoundedCompletenessChecker(ts, bound), bound).check();
-			break;
-		default:
-			throw new IllegalArgumentException("Encoding: " + selectedEncoding + " is not supported. ");
-		}
-	}
-
 }

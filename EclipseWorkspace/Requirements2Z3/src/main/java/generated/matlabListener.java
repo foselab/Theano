@@ -12,15 +12,65 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface matlabListener extends ParseTreeListener {
 	/**
-	 * Enter a parse tree produced by {@link matlabParser#file_}.
+	 * Enter a parse tree produced by {@link matlabParser#primaryExpression}.
 	 * @param ctx the parse tree
 	 */
-	void enterFile_(matlabParser.File_Context ctx);
+	void enterPrimaryExpression(matlabParser.PrimaryExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link matlabParser#file_}.
+	 * Exit a parse tree produced by {@link matlabParser#primaryExpression}.
 	 * @param ctx the parse tree
 	 */
-	void exitFile_(matlabParser.File_Context ctx);
+	void exitPrimaryExpression(matlabParser.PrimaryExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link matlabParser#variablesdefinitions}.
+	 * @param ctx the parse tree
+	 */
+	void enterVariablesdefinitions(matlabParser.VariablesdefinitionsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link matlabParser#variablesdefinitions}.
+	 * @param ctx the parse tree
+	 */
+	void exitVariablesdefinitions(matlabParser.VariablesdefinitionsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link matlabParser#requirementsdefinitions}.
+	 * @param ctx the parse tree
+	 */
+	void enterRequirementsdefinitions(matlabParser.RequirementsdefinitionsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link matlabParser#requirementsdefinitions}.
+	 * @param ctx the parse tree
+	 */
+	void exitRequirementsdefinitions(matlabParser.RequirementsdefinitionsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link matlabParser#requirement}.
+	 * @param ctx the parse tree
+	 */
+	void enterRequirement(matlabParser.RequirementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link matlabParser#requirement}.
+	 * @param ctx the parse tree
+	 */
+	void exitRequirement(matlabParser.RequirementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link matlabParser#precondition}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrecondition(matlabParser.PreconditionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link matlabParser#precondition}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrecondition(matlabParser.PreconditionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link matlabParser#postcondition}.
+	 * @param ctx the parse tree
+	 */
+	void enterPostcondition(matlabParser.PostconditionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link matlabParser#postcondition}.
+	 * @param ctx the parse tree
+	 */
+	void exitPostcondition(matlabParser.PostconditionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link matlabParser#primary_expression}.
 	 * @param ctx the parse tree
@@ -71,16 +121,6 @@ public interface matlabListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitIndex_expression(matlabParser.Index_expressionContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link matlabParser#index_expression_list}.
-	 * @param ctx the parse tree
-	 */
-	void enterIndex_expression_list(matlabParser.Index_expression_listContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link matlabParser#index_expression_list}.
-	 * @param ctx the parse tree
-	 */
-	void exitIndex_expression_list(matlabParser.Index_expression_listContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link matlabParser#unary_expression}.
 	 * @param ctx the parse tree
@@ -202,16 +242,6 @@ public interface matlabListener extends ParseTreeListener {
 	 */
 	void exitAssignment_expression(matlabParser.Assignment_expressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link matlabParser#eostmt}.
-	 * @param ctx the parse tree
-	 */
-	void enterEostmt(matlabParser.EostmtContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link matlabParser#eostmt}.
-	 * @param ctx the parse tree
-	 */
-	void exitEostmt(matlabParser.EostmtContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link matlabParser#statement}.
 	 * @param ctx the parse tree
 	 */
@@ -232,13 +262,43 @@ public interface matlabListener extends ParseTreeListener {
 	 */
 	void exitStatement_list(matlabParser.Statement_listContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link matlabParser#expression_statement}.
+	 * Enter a parse tree produced by {@link matlabParser#variabledefinition}.
 	 * @param ctx the parse tree
 	 */
-	void enterExpression_statement(matlabParser.Expression_statementContext ctx);
+	void enterVariabledefinition(matlabParser.VariabledefinitionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link matlabParser#expression_statement}.
+	 * Exit a parse tree produced by {@link matlabParser#variabledefinition}.
 	 * @param ctx the parse tree
 	 */
-	void exitExpression_statement(matlabParser.Expression_statementContext ctx);
+	void exitVariabledefinition(matlabParser.VariabledefinitionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link matlabParser#variableName}.
+	 * @param ctx the parse tree
+	 */
+	void enterVariableName(matlabParser.VariableNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link matlabParser#variableName}.
+	 * @param ctx the parse tree
+	 */
+	void exitVariableName(matlabParser.VariableNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link matlabParser#typeSpecifier}.
+	 * @param ctx the parse tree
+	 */
+	void enterTypeSpecifier(matlabParser.TypeSpecifierContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link matlabParser#typeSpecifier}.
+	 * @param ctx the parse tree
+	 */
+	void exitTypeSpecifier(matlabParser.TypeSpecifierContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link matlabParser#io}.
+	 * @param ctx the parse tree
+	 */
+	void enterIo(matlabParser.IoContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link matlabParser#io}.
+	 * @param ctx the parse tree
+	 */
+	void exitIo(matlabParser.IoContext ctx);
 }

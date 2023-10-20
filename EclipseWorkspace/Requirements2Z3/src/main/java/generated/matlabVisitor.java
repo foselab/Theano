@@ -15,11 +15,41 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface matlabVisitor<T> extends ParseTreeVisitor<T> {
 	/**
-	 * Visit a parse tree produced by {@link matlabParser#file_}.
+	 * Visit a parse tree produced by {@link matlabParser#primaryExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFile_(matlabParser.File_Context ctx);
+	T visitPrimaryExpression(matlabParser.PrimaryExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link matlabParser#variablesdefinitions}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVariablesdefinitions(matlabParser.VariablesdefinitionsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link matlabParser#requirementsdefinitions}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRequirementsdefinitions(matlabParser.RequirementsdefinitionsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link matlabParser#requirement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRequirement(matlabParser.RequirementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link matlabParser#precondition}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrecondition(matlabParser.PreconditionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link matlabParser#postcondition}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPostcondition(matlabParser.PostconditionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link matlabParser#primary_expression}.
 	 * @param ctx the parse tree
@@ -50,12 +80,6 @@ public interface matlabVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitIndex_expression(matlabParser.Index_expressionContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link matlabParser#index_expression_list}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIndex_expression_list(matlabParser.Index_expression_listContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link matlabParser#unary_expression}.
 	 * @param ctx the parse tree
@@ -129,12 +153,6 @@ public interface matlabVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAssignment_expression(matlabParser.Assignment_expressionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link matlabParser#eostmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitEostmt(matlabParser.EostmtContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link matlabParser#statement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -147,9 +165,27 @@ public interface matlabVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStatement_list(matlabParser.Statement_listContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link matlabParser#expression_statement}.
+	 * Visit a parse tree produced by {@link matlabParser#variabledefinition}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExpression_statement(matlabParser.Expression_statementContext ctx);
+	T visitVariabledefinition(matlabParser.VariabledefinitionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link matlabParser#variableName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVariableName(matlabParser.VariableNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link matlabParser#typeSpecifier}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTypeSpecifier(matlabParser.TypeSpecifierContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link matlabParser#io}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIo(matlabParser.IoContext ctx);
 }
