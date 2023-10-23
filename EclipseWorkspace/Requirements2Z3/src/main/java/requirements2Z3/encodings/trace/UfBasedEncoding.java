@@ -18,7 +18,11 @@ public class UfBasedEncoding implements TraceEncoder {
 	 */
 	@Override
 	public String getTracePosition(String signalname, String position) {
-		return signalname + "(" + position + ")";
+		if (signalname.equals("tau")) {
+			return signalname + "(" + position + ")";
+		} else {
+			return signalname + "[" + position + "]";
+		}
 	}
 
 }

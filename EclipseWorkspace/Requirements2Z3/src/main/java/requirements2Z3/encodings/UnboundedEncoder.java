@@ -23,7 +23,7 @@ public class UnboundedEncoder extends Encoder {
 		return "And("
 					+ "ForAll(j,Implies(j>=0,("+this.getStepEncoder().getTracePositionMonotonicConstraint("tau", String.valueOf("j"))+"))"
 							+ "),"
-					+ "tau[0]==0"
+					+ this.getTracePosition("tau","0")+"==0"
 				+ ")";
 	}
 }

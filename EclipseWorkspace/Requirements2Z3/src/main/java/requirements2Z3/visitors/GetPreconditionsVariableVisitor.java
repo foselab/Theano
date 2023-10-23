@@ -8,6 +8,7 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 
 import generated.matlabBaseVisitor;
 import generated.matlabParser.PreconditionContext;
+import generated.matlabParser.RequirementContext;
 import generated.matlabParser.RequirementsdefinitionsContext;
 
 /**
@@ -54,16 +55,22 @@ public class GetPreconditionsVariableVisitor extends matlabBaseVisitor<Set<Preco
 	}
 
 	@Override
-	public Set<PreconditionContext> visitPrecondition(PreconditionContext ctx) {
-		Set<PreconditionContext> ret = new HashSet<>();
-
+	public Set<PreconditionContext> visitRequirement(RequirementContext ctx) {
+		
 		Set<String> variables = new HashSet<>();
 		variables.add(this.variable);
 
-		if (ctx.accept(new PreconditionContainsVariableVisitor(variables))) {
-			ret.add(ctx);
+		Set<PreconditionContext> ret = new HashSet<>();
+
+		if (ctx.getChild(2).accept(new PostconditionContainsVariableVisitor(variables))) {
+			ret.add((PreconditionContext) ctx.getChild(0));
+
 		}
+		
+		
 		return ret;
 	}
+
+
 
 }

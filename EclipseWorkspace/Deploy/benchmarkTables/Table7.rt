@@ -1,0 +1,17 @@
+vardef
+  u1,Real,input;
+  y1,Real,output;
+  u2,Real,input;
+  y2,Real,output;
+  u3,Real,input;
+  y3,Real,output;
+  u4,Real,input;
+  y4,Real,output;
+endvardef
+reqdef
+  u1 < 1, y1 < 0;
+  u2 > 5 ,y2 > 5;
+  u3 < 100,	y3 == 100;
+  u4 > 0  ,		y4 > 0	&		y3 > 10;
+  prev(u4) > 2,	prev(y4) > 20;
+endreqdef

@@ -13,46 +13,49 @@ public class BoundedCompletenessTranslator implements Functionality<BoundedVisit
 
 	public String getEncodingActivity(BoundedVisitor z3visitor, ParseTree tree) {
 		boolean firstOutputVariables = true;
-		String encodingOutpuVariables = "";
-
-		String encodingIndex = "Or(";
-
+		String encodingOutpuVariables = "Or(";
+		
 		Set<String> outputVariables = tree.accept(new GetOutputVariablesVisitor());
 
 		for (int currentIndexI = 0; currentIndexI <= z3visitor.getBound(); currentIndexI++) {
 			for (String outputVariable : outputVariables) {
 
-				String encodingForAnOutputVariable = "";
+				String encodingForAnOutputVariable = "And(";
 				boolean firstPrecondition = true;
 
 				for (PreconditionContext precondition : tree
 						.accept(new GetPreconditionsVariableVisitor(outputVariable))) {
 					if (firstPrecondition) {
-						encodingForAnOutputVariable = "Not(" + precondition.accept(z3visitor) + ")";
-
+						encodingForAnOutputVariable = encodingForAnOutputVariable+"Not(" + precondition.accept(z3visitor) + ")";
 						firstPrecondition = false;
 					} else {
-						encodingForAnOutputVariable = "And(" + encodingForAnOutputVariable + ",Not("
-								+ precondition.accept(z3visitor) + "))";
+						encodingForAnOutputVariable = encodingForAnOutputVariable + ",Not("
+								+ precondition.accept(z3visitor) + ")";
 					}
 				}
-
-				if (firstOutputVariables) {
-					encodingOutpuVariables = encodingForAnOutputVariable;
-					firstOutputVariables = false;
-				} else {
-					encodingOutpuVariables = "Or(" + encodingOutpuVariables + "," + encodingForAnOutputVariable + ")";
+				if(firstPrecondition) {
+					encodingForAnOutputVariable=encodingForAnOutputVariable+"True";
 				}
-				if (currentIndexI < z3visitor.getBound()) {
-					encodingOutpuVariables = encodingOutpuVariables + ",";
+				encodingForAnOutputVariable=encodingForAnOutputVariable+")";
+				
+				// if a precondition related to that output variable is found
+				if (!firstPrecondition) {
+					if (firstOutputVariables) {
+						encodingOutpuVariables = encodingOutpuVariables+encodingForAnOutputVariable;
+						firstOutputVariables = false;
+					} else {
+						encodingOutpuVariables = encodingOutpuVariables + "," + encodingForAnOutputVariable;
+					}
 				}
 
 			}
 			z3visitor.increaseIndex();
-			encodingIndex = encodingIndex + encodingOutpuVariables;
-
 		}
-		return encodingIndex + ")";
+		// if no constraint it found for any output variable
+		if (firstOutputVariables) {
+			return "True";
+		}
+		return encodingOutpuVariables + ")";
 	}
 
 	@Override
@@ -62,6 +65,6 @@ public class BoundedCompletenessTranslator implements Functionality<BoundedVisit
 
 	@Override
 	public String printNegativeResult() {
-		return "\t\t print('Requirements Table InComplete (sat)')\n";
+		return "\t\t print('Requirements Table Incomplete (sat)')\n";
 	}
 }

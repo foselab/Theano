@@ -44,11 +44,10 @@ public class DefineVariablesVisitor extends matlabBaseVisitor<String> {
 	public String visitVariabledefinition(matlabParser.VariabledefinitionContext ctx) {
 
 		String id = ctx.getChild(0).getText();
-		String type = "R";
 		if (ctx.getChild(2).getText().equals("Int")) {
-			return "I";
+			return id + "=Array('" + id + "',I,I)\n";
 		}
-		return id + "=Array('" + id + "',I," + type + ")\n";
+		return id + "=Array('" + id + "',I,R)\n";
 
 	}
 

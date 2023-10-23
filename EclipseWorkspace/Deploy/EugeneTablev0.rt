@@ -1,8 +1,0 @@
-------- Input Data -----
-u,Real,input
-y,Real,output
-------- End of Input Data -----
-------- Requirements -----
-isStartup, y == 0
-! isStartup & u > 0, y == prev(y) + 1
-------- End of Requirements -----

@@ -38,7 +38,7 @@ public class UnboundedConsistencyTranslator implements Functionality<UnboundedVi
 			}
 		}
 
-		return "ForAll([" + outputVariables + "] , " + encodingRequirements + "))";
+		return "ForAll([" + outputVariables + "] , " + encodingRequirements + ")";
 
 	}
 

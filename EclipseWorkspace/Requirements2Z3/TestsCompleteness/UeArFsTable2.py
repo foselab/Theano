@@ -5,24 +5,34 @@ s = Solver()
 I = IntSort()
 R = RealSort()
 # Signal variables definition
-u=Array('u',I,R)
-y=Array('y',I,R)
+u1=Array('u1',I,R)
+y1=Array('y1',I,R)
+u2=Array('u2',I,R)
+y2=Array('y2',I,R)
+u3=Array('u3',I,R)
+y3=Array('y3',I,R)
+u4=Array('u4',I,R)
+y4=Array('y4',I,R)
+u5=Array('u5',I,R)
+y5=Array('y5',I,R)
 
 # Quantification variables
 j = Int('j')
 i = Int('i')
 k = Int('k')
 # Timestamp structure
-tau = Array('tau', I, R)
+tau = Function('tau', IntSort(), RealSort())
 # Timestamp structure monotonicity
-s.add(And(ForAll(j,Implies(j>=0,(tau[j + 1]-tau[j]==2.0))),tau[0]==0))
+s.add(And(tau(0)<tau(0 + 1)))
 # Requirements Table
-# Requirement: 0
-s.add(Implies(tau[i]==0,y[i]==0))
-# Requirement: 1
-s.add(Implies(And(!(tau[i]==0),u[i]>0),y[i]==((i==0)*(y[i])+(i>0)*(y[i-1]))+1))
-# Requirement: 2
-s.add(Implies(And(!(tau[i]==0),((i==0)*(y[i])+(i>0)*(y[i-1]))==1023),y[i]==23))
+s.add(ForAll([y1,y2,y3,y4,y5] ,
+Or(Or(True),
+Or(Not(Implies(u4[0]<10,y4[0]<20)),
+Not(Implies(u4[0]<10,y4[1]<20))),
+Or(Not(Implies(u1[0]>5,y5[0]==5)),
+Not(Implies(u5[0]<50,y5[0]==30)),
+Not(Implies(u1[1]>5,y5[1]==5)),
+Not(Implies(u5[1]<50,y5[1]==30))))))
 # Processing the result
 res=s.check()
 if (res.r ==  Z3_L_FALSE):

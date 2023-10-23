@@ -1,39 +1,36 @@
-
-
-#gets only the user time
+#!/bin/bash
 TIMEFORMAT=%U
 
-exec(){
-  python3 "${pythonfile}";
-  retval=$?;
-  echo $retval
-}
 
-tablenames=("Table0")
+tables=( $(tail -n +2 benchmarkTables/input.csv | cut -d ',' -f1) )
+analysis=( $(tail -n +2 benchmarkTables/input.csv | cut -d ',' -f2) )
+expectedResults=( $(tail -n +2 benchmarkTables/input.csv | cut -d ',' -f3) )
+duration=( $(tail -n +2 benchmarkTables/input.csv | cut -d ',' -f4) )
+prev=( $(tail -n +2 benchmarkTables/input.csv | cut -d ',' -f5) )
 
-expectedResults=("Inconsistent")
+echo "tables  : ${tables[@]}"
+echo "analysis   : ${analysis[@]}"
+echo "expectedResult : ${expectedResult[@]}"
+echo "duration : ${duration[@]}"
+echo "prev : ${prev[@]}"
+
 
 #defines an array containing all the unbounded encodings
 unboundedencodings=("UeArFs" "UeArVs" "UeUfFs" "UeUfVs")
 
 boundedencodings=("BeArFs" "BeArVs" "BeUfFs" "BeUfVs")
 
-#boundedencodings=("BeUfVs")
-#boundedencodings=("BeUfFs" "BeUfVs")
+#bounds=$(seq 100 100 1200)
 
-#boundedencodings=("BeArFs")
-
-## get length of $distro array
-
+bounds=$(seq 2 2 6)
 
 len=${#unboundedencodings[@]}
 
+echo "inputfile,encoding,result,expectedResult,time" > unboundedResults.cls
 
-echo "Inputfile,Result,encoding,expectedResult" > unboundedResults.cls
-
-for ((tableindex=0; tableindex<${#tablenames[@]}; tableindex++))
+for ((tableindex=0; tableindex<${#tables[@]}; tableindex++))
 do
-  tablename=${tablenames[$tableindex]}
+  tablename=${tables[$tableindex]}
 
   ## checking the unbounded encodings
   for (( i=0; i<$len; i++ ));
@@ -42,43 +39,25 @@ do
     echo "Running the encoding: ${unboundedencodings[$i]}"
     echo "**************************************************"
     #creates a string containing the name of the python file
-    pythonfile="scripts/${unboundedencodings[$i]}$tablename.py"
     inputfile="./benchmarkTables/$tablename.rt"
+    pythonfile="scripts/${unboundedencodings[$i]}$tablename${analysis[$tableindex]}.py"
 
-    #START=$(date -r)
-    #echo $START
-    java -jar Theano.jar -i $inputfile -o "${pythonfile}" -e ${unboundedencodings[$i]} -t consistency
-    python3 "${pythonfile}"
+    (time ./execUnbounded.sh $inputfile $pythonfile ${unboundedencodings[$i]}  ${expectedResults[$tableindex]} ${analysis[$tableindex]} ) 2>> unboundedResults.cls
 
-    #END=$(date -r)
-    #DIFF=$(echo "$END - $START" | bc)
-    #echo $DIFF
 
-    retval=$?
-    if [ "$retval" == 1 ]
-      then
-        echo "$inputfile,Consistent,${unboundedencodings[$i]},${expectedResults[$tableindex]}" >>unboundedResults.cls
-      else
-        if [ "$retval" == 255 ]
-          then
-            echo "$inputfile,Inconsistent,${unboundedencodings[$i]},${expectedResults[$tableindex]}" >>unboundedResults.cls
-          else
-            echo "$inputfile,Unknown,${unboundedencodings[$i]},${expectedResults[$tableindex]}" >>unboundedResults.cls
-        fi
-    fi
    done
 done
 
 
-echo "Inputfile,Result,encoding,bound,time,expectedResult" > boundedResults.cls
+echo "inputfile,encoding,bound,result,expectedResult,time" > boundedResults.cls
 ## checking the bounded encodings
 ## get length of $distro array
 len=${#boundedencodings[@]}
 
 ## checking the bounded encodings
-for ((tableindex=0; tableindex<${#tablenames[@]}; tableindex++))
+for ((tableindex=0; tableindex<${#tables[@]}; tableindex++))
 do
-  tablename=${tablenames[$tableindex]}
+  tablename=${tables[$tableindex]}
   for (( i=0; i<$len; i++ ));
   do
     echo "**************************************************"
@@ -87,31 +66,13 @@ do
     #creates a string containing the name of the python file
     inputfile="./benchmarkTables/$tablename.rt"
 
-  for (( bound=100; bound<=1200; bound=bound+100 ));
+    for bound in $bounds
   #  for (( bound=5; bound<=10; bound=bound+2 ));
     do
-      pythonfile="scripts/${boundedencodings[$i]}$tablename-$bound.py"
+      pythonfile="scripts/${boundedencodings[$i]}$tablename${analysis[$tableindex]}-$bound.py"
 
+      (time ./execBounded.sh $inputfile $pythonfile ${boundedencodings[$i]}  ${expectedResults[$tableindex]} $bound ${analysis[$tableindex]} ) 2>> boundedResults.cls
 
-      #t1=$(date +%s%3N);
-      java -jar Theano.jar -i $inputfile -o "${pythonfile}" -e ${boundedencodings[$i]} -t consistency -b $bound
-      executionTime="$(time (exec()) 2>&1 1>null)"
-
-      #t2=$(date +%s%3N);
-      #runtime="$((t2-t1)) ms"
-
-
-      if [ "$retval" == 1 ]
-        then
-          echo "$inputfile,Consistent,${boundedencodings[$i]},${bound},${executionTime},${expectedResults[$tableindex]}" >>boundedResults.cls
-        else
-          if [ "$retval" == 255 ]
-            then
-              echo "$inputfile,Inconsistent,${boundedencodings[$i]},${bound},${expectedResults[$tableindex]}" >>boundedResults.cls
-            else
-              echo "$inputfile,Unknown,${boundedencodings[$i]},${bound},${expectedResults[$tableindex]}" >>boundedResults.cls
-          fi
-      fi
     done
   done
 done

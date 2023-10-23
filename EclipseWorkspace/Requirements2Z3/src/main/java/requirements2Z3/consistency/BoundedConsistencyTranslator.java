@@ -25,13 +25,14 @@ public class BoundedConsistencyTranslator implements Functionality<BoundedVisito
 
 		Set<String> outputVariables = tree.accept(new GetOutputVariablesVisitor());
 
-		String encodingRequirements = "And(";
+		String encodingRequirements = "Or(";
 
 		boolean firstVariable = true;
 		for (String outputVariable : outputVariables) {
 			if (firstVariable == true) {
 				encodingRequirements = encodingRequirements
 						+ getEncodingOutputVariable(z3visitor, tree, outputVariable);
+				firstVariable=false;
 			} else {
 				encodingRequirements = encodingRequirements + ","
 						+ getEncodingOutputVariable(z3visitor, tree, outputVariable);
@@ -39,6 +40,7 @@ public class BoundedConsistencyTranslator implements Functionality<BoundedVisito
 		}
 		encodingRequirements = encodingRequirements + ")";
 
+		
 		String outputVariablesString = "";
 
 		firstVariable = true;
@@ -65,7 +67,7 @@ public class BoundedConsistencyTranslator implements Functionality<BoundedVisito
 
 				if (firstRequirement) {
 
-					encodingRequirements = "Not(" + requirement.accept(z3visitor) + ")";
+					encodingRequirements = encodingRequirements+"Not(" + requirement.accept(z3visitor) + ")";
 					firstRequirement = false;
 				} else {
 					encodingRequirements = encodingRequirements + ",Not(" + requirement.accept(z3visitor) + ")";
@@ -74,6 +76,9 @@ public class BoundedConsistencyTranslator implements Functionality<BoundedVisito
 			}
 			z3visitor.increaseIndex();
 
+		}
+		if(firstRequirement) {
+			encodingRequirements=encodingRequirements+"True";
 		}
 		z3visitor.resetIndex();
 		return encodingRequirements + ")";

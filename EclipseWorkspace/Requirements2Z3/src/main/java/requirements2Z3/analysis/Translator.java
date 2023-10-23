@@ -77,7 +77,7 @@ public class Translator<T extends Table2Z3Visitor> {
 		
 		// add the encoding of the requirements table
 		wt.write("# Requirements Table\n");
-		wt.write(this.functionality.getEncodingActivity(z3visitor, tree));
+		wt.write("s.add(" +this.functionality.getEncodingActivity(z3visitor, tree)+")\n");
 
 		// System.out.println("Adding the part for processing the result");
 		wt.write("# Processing the result\n");

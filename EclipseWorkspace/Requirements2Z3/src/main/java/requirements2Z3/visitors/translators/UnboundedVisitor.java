@@ -34,6 +34,6 @@ public abstract class UnboundedVisitor extends Table2Z3Visitor {
 
 	@Override
 	public String visitIs_not_startup(Is_not_startupContext ctx) {
-		return "!(" + this.getEncoder().getIsStartup("tau", "i") + ")";
+		return "Not(" + this.getEncoder().getIsStartup("tau", "i") + ")";
 	}
 }

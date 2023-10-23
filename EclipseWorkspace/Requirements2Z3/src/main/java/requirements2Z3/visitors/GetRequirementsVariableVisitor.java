@@ -1,6 +1,8 @@
 package requirements2Z3.visitors;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.antlr.v4.runtime.tree.RuleNode;
@@ -14,7 +16,7 @@ import generated.matlabParser.RequirementsdefinitionsContext;
  * This visitor is used to define the variables of the Z3 files based on the
  * variables used in the Requirements Table
  */
-public class GetRequirementsVariableVisitor extends matlabBaseVisitor<Set<RequirementContext>> {
+public class GetRequirementsVariableVisitor extends matlabBaseVisitor<List<RequirementContext>> {
 
 	private String variable;
 
@@ -23,18 +25,18 @@ public class GetRequirementsVariableVisitor extends matlabBaseVisitor<Set<Requir
 	}
 
 	@Override
-	public Set<RequirementContext> visitRequirementsdefinitions(RequirementsdefinitionsContext ctx) {
+	public List<RequirementContext> visitRequirementsdefinitions(RequirementsdefinitionsContext ctx) {
 		return this.visitChildren(ctx);
 	}
 
 	@Override
-	public Set<RequirementContext> visitTerminal(TerminalNode node) {
-		return new HashSet<>();
+	public List<RequirementContext> visitTerminal(TerminalNode node) {
+		return new ArrayList<>();
 	}
 
 	@Override
-	public Set<RequirementContext> visitChildren(RuleNode node) {
-		Set<RequirementContext> ret = new HashSet<>();
+	public List<RequirementContext> visitChildren(RuleNode node) {
+		List<RequirementContext> ret = new ArrayList<>();
 
 		for (int i = 0; i < node.getChildCount(); i++) {
 
@@ -44,18 +46,20 @@ public class GetRequirementsVariableVisitor extends matlabBaseVisitor<Set<Requir
 		return ret;
 	}
 
-	protected Set<RequirementContext> aggregateResult(Set<RequirementContext> aggregate,
-			Set<RequirementContext> nextResult) {
+	protected List<RequirementContext> aggregateResult(List<RequirementContext> aggregate,
+			List<RequirementContext> nextResult) {
 
-		Set<RequirementContext> ret = new HashSet<>();
+		List<RequirementContext> ret = new ArrayList<>();
 		ret.addAll(aggregate);
 		ret.addAll(nextResult);
 		return ret;
 	}
+	
+	
 
 	@Override
-	public Set<RequirementContext>  visitRequirement(RequirementContext ctx)  {
-		Set<RequirementContext> ret = new HashSet<>();
+	public List<RequirementContext>  visitRequirement(RequirementContext ctx)  {
+		List<RequirementContext> ret = new ArrayList<>();
 
 		Set<String> variables = new HashSet<>();
 		variables.add(this.variable);

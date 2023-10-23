@@ -12,49 +12,48 @@ import requirements2Z3.encodings.Encoder;
 public abstract class BoundedVisitor extends Table2Z3Visitor implements matlabVisitor<String> {
 
 	private final int bound;
-	
+
 	private int index;
-	
+
 	public BoundedVisitor(Encoder encoder, int bound) {
 		super(encoder);
-		this.bound=bound;
-		this.index=0;
+		this.bound = bound;
+		this.index = 0;
 	}
 
-	
-	
 	public int getIndex() {
 		return index;
 	}
-	
+
 	public void increaseIndex() {
-		this.index=index++;
+		this.index = this.index+1;
 	}
-	
+
 	public void resetIndex() {
-		this.index=0;
+		this.index = 0;
 	}
-	
+
 	@Override
 	public String visitTerminal(TerminalNode node) {
 		if (node.getSymbol().getType() == matlabLexer.IDENTIFIER) {
-			return this.getEncoder().getTracePosition(node.getText(), String.valueOf(this.getIndex())); 
+			return this.getEncoder().getTracePosition(node.getText(), String.valueOf(this.getIndex()));
 		}
 		return super.visitTerminal(node);
 	}
-	
+
 	@Override
 	public String visitPrev_expression(Prev_expressionContext ctx) {
 
 		StringBuilder b = new StringBuilder();
-		if (index == 0) {
-			this.getEncoder().getTracePosition(ctx.getChild(2).getText(), String.valueOf(this.getIndex()));
+		if (this.index == 0) {
+			b.append(this.getEncoder().getTracePosition(ctx.getChild(2).getText(), String.valueOf(this.getIndex())));
 		} else {
-			this.getEncoder().getTracePosition(ctx.getChild(2).getText(), String.valueOf(this.getIndex()-1));
+			b.append(
+					this.getEncoder().getTracePosition(ctx.getChild(2).getText(), String.valueOf(this.getIndex() - 1)));
 		}
 		return b.toString();
 	}
-	
+
 	@Override
 	public String visitIs_startup(Is_startupContext ctx) {
 		return this.getEncoder().getIsStartup("tau", String.valueOf(this.getIndex()));
@@ -62,15 +61,11 @@ public abstract class BoundedVisitor extends Table2Z3Visitor implements matlabVi
 
 	@Override
 	public String visitIs_not_startup(Is_not_startupContext ctx) {
-		return "!(" + this.getEncoder().getIsStartup("tau", String.valueOf(this.getIndex())) + ")";
+		return "Not(" + this.getEncoder().getIsStartup("tau", String.valueOf(this.getIndex())) + ")";
 	}
-
-
 
 	public int getBound() {
 		return bound;
 	}
-
-	
 
 }

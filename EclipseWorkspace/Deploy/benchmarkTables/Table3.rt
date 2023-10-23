@@ -1,0 +1,12 @@
+vardef
+  u2,Real,input;
+  y1,Real,output;
+  y2,Real,output;
+  u1,Real,input;
+endvardef
+reqdef
+  u1>= 1, y1 ~= 3;
+  u1 == 2, y2 == 3;
+  u1 == 1, y1 == 3;
+  u1 ~= 2, y2 ~= 3;
+endreqdef
