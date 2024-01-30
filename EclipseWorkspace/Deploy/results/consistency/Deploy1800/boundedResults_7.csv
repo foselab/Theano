@@ -1,0 +1,17 @@
+inputfile,table,encoding,bound,check,result,expectedResult,time
+./benchmarkTables/Table1_1800.rt,Table1,BeArFs,1800,consistency,Inconsistent,Inconsistent,112.244
+./benchmarkTables/Table1_1800.rt,Table1,BeArVs,1800,consistency,Inconsistent,Inconsistent,107.896
+  File "/scratch/menghic/Deploy1800/.evalscripts/BeUfFsTable1_1800.rtconsistency-1800.py", line 18
+    6)==2.0,tau(1688)-tau(1687)==2.0,tau(1689)-tau(1688)==2.0,tau(1690)-tau(1689)==2.0,tau(1691)-tau(1690)==2.0,tau(1692)-tau(1691)==2.0,tau(1693)-tau(1692)==2.0,tau(1694)-tau(1693)==2.0,tau(1695)-tau(1694)==2.0,tau(1696)-tau(1695)==2.0,tau(1697)-tau(1696)==2.0,tau(1698)-tau(1697)==2.0,tau(1699)-tau(1698)==2.0,tau(1700)-tau(1699)==2.0,tau(1701)-tau(1700)==2.0,tau(1702)-tau(1701)==2.0,tau(1703)-tau(1702)==2.0,tau(1704)-tau(1703)==2.0,tau(1705)-tau(1704)==2.0,tau(1706)-tau(1705)==2.0,tau(1707)-tau(1706)==2.0,tau(1708)-tau(1707)==2.0,tau(1709)-tau(1708)==2.0,tau(1710)-tau(1709)==2.0,tau(1711)-tau(1710)==2.0,tau(1712)-tau(1711)==2.0,tau(1713)-tau(1712)==2.0,tau(1714
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ^
+SyntaxError: '(' was never closed
+./benchmarkTables/Table1_1800.rt,Table1,BeUfFs,1800,consistency,Consistent,Inconsistent,1.839
+./benchmarkTables/Table1_1800.rt,Table1,BeUfVs,1800,consistency,Inconsistent,Inconsistent,12.582
+./benchmarkTables/Table2_1800.rt,Table2,BeArFs,1800,consistency,Inconsistent,Inconsistent,109.966
+./benchmarkTables/Table2_1800.rt,Table2,BeArVs,1800,consistency,Inconsistent,Inconsistent,109.934
+./benchmarkTables/Table2_1800.rt,Table2,BeUfFs,1800,consistency,Inconsistent,Inconsistent,12.895
+./benchmarkTables/Table2_1800.rt,Table2,BeUfVs,1800,consistency,Inconsistent,Inconsistent,11.937
+./benchmarkTables/Table3_1800.rt,Table3,BeArFs,1800,consistency,Unknown,Consistent,7134.761
+./benchmarkTables/Table3_1800.rt,Table3,BeArVs,1800,consistency,Unknown,Consistent,7134.861
+./benchmarkTables/Table3_1800.rt,Table3,BeUfFs,1800,consistency,Unknown,Consistent,7137.198
+./benchmarkTables/Table3_1800.rt,Table3,BeUfVs,1800,consistency,Unknown,Consistent,7133.732

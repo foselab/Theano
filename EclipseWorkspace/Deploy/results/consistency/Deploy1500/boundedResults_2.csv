@@ -1,0 +1,17 @@
+inputfile,table,encoding,bound,check,result,expectedResult,time
+./benchmarkTables/Table1_1500.rt,Table1,BeArFs,1500,consistency,Inconsistent,Inconsistent,43.149
+  File "/scratch/menghic/Deploy1500/.evalscripts/BeArVsTable1_1500.rtconsistency-1500.py", line 0
+    
+    ^
+SyntaxError: unknown parsing error
+./benchmarkTables/Table1_1500.rt,Table1,BeArVs,1500,consistency,Consistent,Inconsistent,1.151
+./benchmarkTables/Table1_1500.rt,Table1,BeUfFs,1500,consistency,Inconsistent,Inconsistent,7.288
+./benchmarkTables/Table1_1500.rt,Table1,BeUfVs,1500,consistency,Inconsistent,Inconsistent,7.123
+./benchmarkTables/Table2_1500.rt,Table2,BeArFs,1500,consistency,Inconsistent,Inconsistent,41.951
+./benchmarkTables/Table2_1500.rt,Table2,BeArVs,1500,consistency,Inconsistent,Inconsistent,41.413
+./benchmarkTables/Table2_1500.rt,Table2,BeUfFs,1500,consistency,Inconsistent,Inconsistent,7.122
+./benchmarkTables/Table2_1500.rt,Table2,BeUfVs,1500,consistency,Inconsistent,Inconsistent,6.809
+./benchmarkTables/Table3_1500.rt,Table3,BeArFs,1500,consistency,Unknown,Consistent,7137.450
+./benchmarkTables/Table3_1500.rt,Table3,BeArVs,1500,consistency,Unknown,Consistent,7138.560
+./benchmarkTables/Table3_1500.rt,Table3,BeUfFs,1500,consistency,Unknown,Consistent,7137.045
+./benchmarkTables/Table3_1500.rt,Table3,BeUfVs,1500,consistency,Unknown,Consistent,7137.710

@@ -3,42 +3,34 @@ package requirements2Z3.visitors.translators;
 import generated.matlabParser.Dur_expressionContext;
 import generated.matlabVisitor;
 import requirements2Z3.encodings.Encoder;
+import requirements2Z3.z3formulae.Z3Expression;
+import requirements2Z3.z3formulae.Z3Formula;
 
-public class BeUfVs extends BoundedVisitor implements matlabVisitor<String> {
+public class BeUfVs extends BoundedVisitor implements matlabVisitor<Z3Formula> {
 
 	public BeUfVs(Encoder encoder, int index) {
 		super(encoder, index);
 	}
 
 	@Override
-	public String visitDur_expression(Dur_expressionContext ctx) {
+	public Z3Formula visitDur_expression(Dur_expressionContext ctx) {
 
-		String constant = ctx.getChild(5).getText();
+		Z3Expression constant = Z3Formula.getConstant(ctx.getChild(5).getText());
 
-		String part3 = "And(";
+		Z3Formula part3 = Z3Formula.getTrue();
 		for (int j = 0; j <= this.getIndex(); j++) {
 
-			String innerAnd = "And(";
-
-			innerAnd = innerAnd + "tau(" + this.getIndex() + ")-tau(" + j + ")>=" + constant + ",";
-			String nAnd = "And(";
+			Z3Formula innerAnd = 
+					Z3Formula.getPredicate(
+							Z3Formula.getVariable("tau(" + this.getIndex() + ")-tau(" + j + ")"), 
+							Z3Formula.getRelationalOperator(">="), 
+							constant);
 			for (int n = j; n <= this.getIndex(); n++) {
-				nAnd = nAnd + ctx.getChild(2).accept(new BeUfVs(this.getEncoder(), n));
-				if (n != this.getIndex()) {
-					nAnd = nAnd + ",";
-				}
+				innerAnd = Z3Formula.getAnd(innerAnd, ctx.getChild(2).accept(new BeUfVs(this.getEncoder(), n)));
+				
 			}
-			nAnd = nAnd + ")";
-
-			innerAnd = nAnd + ")";
-			part3 = part3 + innerAnd;
-			if (j != this.getIndex()) {
-				part3 = part3 + ",";
-			}
+			part3 = Z3Formula.getAnd(part3, innerAnd);
 		}
-		part3 = part3 + ")";
-
 		return part3;
 	}
-
 }

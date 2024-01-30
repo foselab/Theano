@@ -1,0 +1,17 @@
+inputfile,table,encoding,bound,check,result,expectedResult,time
+./benchmarkTables/Table1_800.rt,Table1,BeArFs,800,consistency,Unknown,Inconsistent,0.786
+  File "/scratch/menghic/Deploy800/.evalscripts/BeArVsTable1_800.rtconsistency-800.py", line 20
+    
+    ^
+SyntaxError: '[' was never closed
+./benchmarkTables/Table1_800.rt,Table1,BeArVs,800,consistency,Consistent,Inconsistent,0.768
+./benchmarkTables/Table1_800.rt,Table1,BeUfFs,800,consistency,Inconsistent,Inconsistent,2.656
+./benchmarkTables/Table1_800.rt,Table1,BeUfVs,800,consistency,Inconsistent,Inconsistent,2.545
+./benchmarkTables/Table2_800.rt,Table2,BeArFs,800,consistency,Inconsistent,Inconsistent,7.656
+./benchmarkTables/Table2_800.rt,Table2,BeArVs,800,consistency,Inconsistent,Inconsistent,7.677
+./benchmarkTables/Table2_800.rt,Table2,BeUfFs,800,consistency,Inconsistent,Inconsistent,2.495
+./benchmarkTables/Table2_800.rt,Table2,BeUfVs,800,consistency,Inconsistent,Inconsistent,2.404
+./benchmarkTables/Table3_800.rt,Table3,BeArFs,800,consistency,Unknown,Consistent,7163.530
+./benchmarkTables/Table3_800.rt,Table3,BeArVs,800,consistency,Unknown,Consistent,7163.731
+./benchmarkTables/Table3_800.rt,Table3,BeUfFs,800,consistency,Unknown,Consistent,7164.342
+./benchmarkTables/Table3_800.rt,Table3,BeUfVs,800,consistency,Unknown,Consistent,7164.248

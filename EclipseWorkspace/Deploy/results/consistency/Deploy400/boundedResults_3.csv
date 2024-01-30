@@ -1,0 +1,23 @@
+inputfile,table,encoding,bound,check,result,expectedResult,time
+  File "/scratch/menghic/Deploy400/.evalscripts/BeArFsTable1_400.rtconsistency-400.py", line 1
+    
+    ^
+SyntaxError: invalid syntax
+./benchmarkTables/Table1_400.rt,Table1,BeArFs,400,consistency,Consistent,Inconsistent,0.893
+./benchmarkTables/Table1_400.rt,Table1,BeArVs,400,consistency,Inconsistent,Inconsistent,2.226
+  File "/scratch/menghic/Deploy400/.evalscripts/BeUfFsTable1_400.rtconsistency-400.py", line 1
+    
+    ^
+SyntaxError: invalid syntax
+./benchmarkTables/Table1_400.rt,Table1,BeUfFs,400,consistency,Consistent,Inconsistent,0.633
+./benchmarkTables/Table1_400.rt,Table1,BeUfVs,400,consistency,Inconsistent,Inconsistent,1.449
+./benchmarkTables/Table2_400.rt,Table2,BeArFs,400,consistency,Inconsistent,Inconsistent,2.208
+./benchmarkTables/Table2_400.rt,Table2,BeArVs,400,consistency,Inconsistent,Inconsistent,2.131
+./benchmarkTables/Table2_400.rt,Table2,BeUfFs,400,consistency,Inconsistent,Inconsistent,1.452
+./benchmarkTables/Table2_400.rt,Table2,BeUfVs,400,consistency,Inconsistent,Inconsistent,1.347
+./benchmarkTables/Table3_400.rt,Table3,BeArFs,400,consistency,Unknown,Consistent,7161.523
+./benchmarkTables/Table3_400.rt,Table3,BeArVs,400,consistency,Unknown,Consistent,7159.575
+./benchmarkTables/Table3_400.rt,Table3,BeUfFs,400,consistency,Unknown,Consistent,7157.281
+./benchmarkTables/Table3_400.rt,Table3,BeUfVs,400,consistency,Unknown,Consistent,7159.331
+./execBounded.sh: line 15: 30269 Killed                  timeout $timeoutvalue python3 "${pythonfile}"
+./benchmarkTables/Table4_400.rt,Table4,BeArFs,400,consistency,Unknown,Consistent,5248.484

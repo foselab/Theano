@@ -1,0 +1,21 @@
+inputfile,table,encoding,bound,check,result,expectedResult,time
+./benchmarkTables/Table1_500.rt,Table1,BeArFs,500,consistency,Inconsistent,Inconsistent,3.398
+./benchmarkTables/Table1_500.rt,Table1,BeArVs,500,consistency,Inconsistent,Inconsistent,3.253
+./benchmarkTables/Table1_500.rt,Table1,BeUfFs,500,consistency,Inconsistent,Inconsistent,1.863
+./benchmarkTables/Table1_500.rt,Table1,BeUfVs,500,consistency,Inconsistent,Inconsistent,1.774
+./benchmarkTables/Table2_500.rt,Table2,BeArFs,500,consistency,Inconsistent,Inconsistent,3.200
+./benchmarkTables/Table2_500.rt,Table2,BeArVs,500,consistency,Inconsistent,Inconsistent,3.130
+./benchmarkTables/Table2_500.rt,Table2,BeUfFs,500,consistency,Unknown,Inconsistent,0.639
+./benchmarkTables/Table2_500.rt,Table2,BeUfVs,500,consistency,Inconsistent,Inconsistent,1.755
+  File "/scratch/menghic/Deploy500/.evalscripts/BeArFsTable3_500.rtconsistency-500.py", line 1
+    
+    ^
+SyntaxError: invalid syntax
+./benchmarkTables/Table3_500.rt,Table3,BeArFs,500,consistency,Consistent,Consistent,0.744
+./benchmarkTables/Table3_500.rt,Table3,BeArVs,500,consistency,Unknown,Consistent,7156.877
+./benchmarkTables/Table3_500.rt,Table3,BeUfFs,500,consistency,Unknown,Consistent,7156.016
+./benchmarkTables/Table3_500.rt,Table3,BeUfVs,500,consistency,Unknown,Consistent,7157.300
+./execBounded.sh: line 15: 170363 Killed                  timeout $timeoutvalue python3 "${pythonfile}"
+./benchmarkTables/Table4_500.rt,Table4,BeArFs,500,consistency,Unknown,Consistent,5537.750
+./execBounded.sh: line 15: 207837 Killed                  timeout $timeoutvalue python3 "${pythonfile}"
+./benchmarkTables/Table4_500.rt,Table4,BeArVs,500,consistency,Unknown,Consistent,5688.677

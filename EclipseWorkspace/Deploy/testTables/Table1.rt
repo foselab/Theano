@@ -1,8 +1,0 @@
-vardef
-  u,Int,input;
-  y,Int,input;
-endvardef
-reqdef
-  isStartup, y == 0;
-  !isStartup & u > 0, y == prev(y) + 1;
-endreqdef

@@ -1,0 +1,13 @@
+inputfile,table,encoding,bound,check,result,expectedResult,time
+./benchmarkTables/Table1_1200.rt,Table1,BeArFs,1200,consistency,Inconsistent,Inconsistent,26.252
+./benchmarkTables/Table1_1200.rt,Table1,BeArVs,1200,consistency,Inconsistent,Inconsistent,25.344
+./benchmarkTables/Table1_1200.rt,Table1,BeUfFs,1200,consistency,Inconsistent,Inconsistent,5.697
+./benchmarkTables/Table1_1200.rt,Table1,BeUfVs,1200,consistency,Inconsistent,Inconsistent,5.455
+./benchmarkTables/Table2_1200.rt,Table2,BeArFs,1200,consistency,Inconsistent,Inconsistent,26.400
+./benchmarkTables/Table2_1200.rt,Table2,BeArVs,1200,consistency,Inconsistent,Inconsistent,26.648
+./benchmarkTables/Table2_1200.rt,Table2,BeUfFs,1200,consistency,Inconsistent,Inconsistent,6.300
+./benchmarkTables/Table2_1200.rt,Table2,BeUfVs,1200,consistency,Inconsistent,Inconsistent,6.210
+./benchmarkTables/Table3_1200.rt,Table3,BeArFs,1200,consistency,Unknown,Consistent,7129.186
+./benchmarkTables/Table3_1200.rt,Table3,BeArVs,1200,consistency,Unknown,Consistent,7130.985
+./benchmarkTables/Table3_1200.rt,Table3,BeUfFs,1200,consistency,Unknown,Consistent,7129.512
+./benchmarkTables/Table3_1200.rt,Table3,BeUfVs,1200,consistency,Unknown,Consistent,7131.413

@@ -3,6 +3,8 @@ package requirements2Z3.encodings.step;
 import org.apache.commons.lang3.StringUtils;
 
 import requirements2Z3.encodings.trace.TraceEncoder;
+import requirements2Z3.z3formulae.Z3Expression;
+import requirements2Z3.z3formulae.Z3Formula;
 
 public abstract class StepEncoder {
 
@@ -29,7 +31,7 @@ public abstract class StepEncoder {
 	 *         position.
 	 * @throws IllegalArgumentException if the signal name of the position is null
 	 */
-	public abstract String getTracePositionMonotonicConstraint(String signalname, String position);
+	public abstract Z3Formula getTracePositionMonotonicConstraint(String signalname, String position);
 
 	/**
 	 * Returns a string representing a condition that is true if a specific position
@@ -40,16 +42,17 @@ public abstract class StepEncoder {
 	 * @return a String that represents the Z3 encoding accessing the trace in that
 	 *         position.
 	 */
-	public String getIsStartup(String signalname, String position) {
+	public Z3Formula getIsStartup(String signalname, String position) {
 		if (StringUtils.isNumeric(position)) {
 			int index = Integer.parseInt(position);
 			if (index == 0) {
-				return "True";
+				return Z3Formula.getTrue();
 			} else {
-				return "False";
+				return Z3Formula.getFalse();
 			}
 		} else {
-			return this.getTraceEncoder().getTracePosition("tau", position) + "==0";
+			return Z3Formula.getPredicate(this.getTraceEncoder().getTracePosition("tau", position),
+					Z3Formula.getRelationalOperator("=="), Z3Formula.getConstant("0"));
 		}
 	}
 
@@ -64,24 +67,21 @@ public abstract class StepEncoder {
 	 *         a string given a position (i.e., a generic index such as 'i' or an
 	 *         actual index such as '0')
 	 */
-	public String getPrevValue(String signalname, String position) {
+	public Z3Expression getPrevValue(String signalname, String position) {
 		if (StringUtils.isNumeric(position)) {
 			int index = Integer.parseInt(position);
 			if (index == 0) {
 				return this.getTraceEncoder().getTracePosition(signalname, position);
 			} else {
-				return this.getTraceEncoder().getTracePosition(signalname, position+"-1");
-			}		
+				return this.getTraceEncoder().getTracePosition(signalname, position + "-1");
+			}
 		} else {
-			StringBuilder b = new StringBuilder();
-
-			b.append("((" + position + "==0)*(" + this.getTraceEncoder().getTracePosition(signalname, position) + ")+("
-					+ position + ">0)*(" + this.getTraceEncoder().getTracePosition(signalname, position + "-1") + "))");
-			return b.toString();
-
+			return Z3Formula.getConstant("((" + position + "==0)*("
+					+ this.getTraceEncoder().getTracePosition(signalname, position) + ")+(" + position + ">0)*("
+					+ this.getTraceEncoder().getTracePosition(signalname, position + "-1") + "))");
 		}
 	}
-	
+
 	/**
 	 * Given a signal name and the position of the trace to be considered, returns a
 	 * string accessing the signal name at that position
@@ -92,11 +92,9 @@ public abstract class StepEncoder {
 	 *         position.
 	 * @throws IllegalArgumentException if the signal name of the position is null
 	 */
-	public String getTracePosition(String signalname, String position) {
+	public Z3Expression getTracePosition(String signalname, String position) {
 		return this.traceEncoder.getTracePosition(signalname, position);
 	}
-
-	
 
 	/**
 	 * returns the trace encoder

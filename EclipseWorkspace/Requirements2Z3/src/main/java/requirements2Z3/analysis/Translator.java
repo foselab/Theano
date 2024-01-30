@@ -13,6 +13,7 @@ import requirements2Z3.consistency.Functionality;
 import requirements2Z3.encodings.Encoder;
 import requirements2Z3.visitors.DefineVariablesVisitor;
 import requirements2Z3.visitors.translators.Table2Z3Visitor;
+import requirements2Z3.z3formulae.Z3Formula;
 
 public class Translator<T extends Table2Z3Visitor> {
 
@@ -79,7 +80,6 @@ public class Translator<T extends Table2Z3Visitor> {
 		wt.write("# Requirements Table\n");
 		wt.write("s.add(" +this.functionality.getEncodingActivity(z3visitor, tree)+")\n");
 
-		// System.out.println("Adding the part for processing the result");
 		wt.write("# Processing the result\n");
 		wt.write(this.processResult());
 
@@ -118,7 +118,7 @@ public class Translator<T extends Table2Z3Visitor> {
 		return b.toString();
 	}
 
-	public String visitTree(ParseTree tree) {
+	public Z3Formula visitTree(ParseTree tree) {
 		return tree.accept(z3visitor);
 	}
 }

@@ -1,0 +1,18 @@
+inputfile,table,encoding,bound,check,result,expectedResult,time
+./benchmarkTables/Table1_1000.rt,Table1,BeArFs,1000,consistency,Inconsistent,Inconsistent,15.557
+./benchmarkTables/Table1_1000.rt,Table1,BeArVs,1000,consistency,Inconsistent,Inconsistent,15.197
+./benchmarkTables/Table1_1000.rt,Table1,BeUfFs,1000,consistency,Inconsistent,Inconsistent,3.859
+  File "/scratch/menghic/Deploy1000/.evalscripts/BeUfVsTable1_1000.rtconsistency-1000.py", line 0
+    
+    ^
+SyntaxError: unknown parsing error
+./benchmarkTables/Table1_1000.rt,Table1,BeUfVs,1000,consistency,Consistent,Inconsistent,0.891
+./benchmarkTables/Table2_1000.rt,Table2,BeArFs,1000,consistency,Inconsistent,Inconsistent,15.431
+./benchmarkTables/Table2_1000.rt,Table2,BeArVs,1000,consistency,Inconsistent,Inconsistent,15.048
+./benchmarkTables/Table2_1000.rt,Table2,BeUfFs,1000,consistency,Inconsistent,Inconsistent,3.571
+./benchmarkTables/Table2_1000.rt,Table2,BeUfVs,1000,consistency,Inconsistent,Inconsistent,3.444
+./benchmarkTables/Table3_1000.rt,Table3,BeArFs,1000,consistency,Unknown,Consistent,7135.457
+./benchmarkTables/Table3_1000.rt,Table3,BeArVs,1000,consistency,Unknown,Consistent,1.082
+./benchmarkTables/Table3_1000.rt,Table3,BeUfFs,1000,consistency,Unknown,Consistent,7133.531
+./benchmarkTables/Table3_1000.rt,Table3,BeUfVs,1000,consistency,Unknown,Consistent,7134.142
+./benchmarkTables/Table4_1000.rt,Table4,BeArFs,1000,consistency,Unknown,Consistent,7094.720

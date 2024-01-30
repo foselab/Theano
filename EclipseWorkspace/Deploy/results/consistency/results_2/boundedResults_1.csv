@@ -1,0 +1,262 @@
+inputfile,table,encoding,bound,check,result,expectedResult,time
+./benchmarkTables/Table1_50.rt,Table1,BeArFs,50,consistency,Inconsistent,Inconsistent,0.639
+./benchmarkTables/Table1_50.rt,Table1,BeArVs,50,consistency,Inconsistent,Inconsistent,0.606
+./benchmarkTables/Table1_50.rt,Table1,BeUfFs,50,consistency,Inconsistent,Inconsistent,0.631
+./benchmarkTables/Table1_50.rt,Table1,BeUfVs,50,consistency,Inconsistent,Inconsistent,0.613
+./benchmarkTables/Table2_50.rt,Table2,BeArFs,50,consistency,Inconsistent,Inconsistent,0.588
+./benchmarkTables/Table2_50.rt,Table2,BeArVs,50,consistency,Inconsistent,Inconsistent,0.596
+./benchmarkTables/Table2_50.rt,Table2,BeUfFs,50,consistency,Inconsistent,Inconsistent,0.588
+./benchmarkTables/Table2_50.rt,Table2,BeUfVs,50,consistency,Inconsistent,Inconsistent,0.588
+./benchmarkTables/Table3_50.rt,Table3,BeArFs,50,consistency,Consistent,Consistent,6265.866
+./benchmarkTables/Table3_50.rt,Table3,BeArVs,50,consistency,Unknown,Consistent,7170.185
+./benchmarkTables/Table3_50.rt,Table3,BeUfFs,50,consistency,Unknown,Consistent,7172.553
+./benchmarkTables/Table3_50.rt,Table3,BeUfVs,50,consistency,Unknown,Consistent,7170.809
+./benchmarkTables/Table4_50.rt,Table4,BeArFs,50,consistency,Unknown,Consistent,7156.472
+./benchmarkTables/Table4_50.rt,Table4,BeArVs,50,consistency,Unknown,Consistent,7150.631
+./benchmarkTables/Table4_50.rt,Table4,BeUfFs,50,consistency,Unknown,Consistent,7153.514
+./benchmarkTables/Table4_50.rt,Table4,BeUfVs,50,consistency,Unknown,Consistent,7150.307
+./benchmarkTables/Table1_100.rt,Table1,BeArFs,100,consistency,Inconsistent,Inconsistent,0.767
+./benchmarkTables/Table1_100.rt,Table1,BeArVs,100,consistency,Inconsistent,Inconsistent,0.743
+./benchmarkTables/Table1_100.rt,Table1,BeUfFs,100,consistency,Inconsistent,Inconsistent,0.706
+./benchmarkTables/Table1_100.rt,Table1,BeUfVs,100,consistency,Inconsistent,Inconsistent,0.709
+./benchmarkTables/Table2_100.rt,Table2,BeArFs,100,consistency,Inconsistent,Inconsistent,0.737
+./benchmarkTables/Table2_100.rt,Table2,BeArVs,100,consistency,Inconsistent,Inconsistent,0.691
+./benchmarkTables/Table2_100.rt,Table2,BeUfFs,100,consistency,Inconsistent,Inconsistent,0.753
+./benchmarkTables/Table2_100.rt,Table2,BeUfVs,100,consistency,Inconsistent,Inconsistent,0.787
+./benchmarkTables/Table3_100.rt,Table3,BeArFs,100,consistency,Unknown,Consistent,7169.077
+./benchmarkTables/Table3_100.rt,Table3,BeArVs,100,consistency,Unknown,Consistent,7167.223
+./benchmarkTables/Table3_100.rt,Table3,BeUfFs,100,consistency,Unknown,Consistent,7170.177
+./benchmarkTables/Table3_100.rt,Table3,BeUfVs,100,consistency,Unknown,Consistent,7169.245
+./benchmarkTables/Table4_100.rt,Table4,BeArFs,100,consistency,Unknown,Consistent,7158.051
+./benchmarkTables/Table4_100.rt,Table4,BeArVs,100,consistency,Unknown,Consistent,7156.665
+./benchmarkTables/Table4_100.rt,Table4,BeUfFs,100,consistency,Unknown,Consistent,7148.216
+./benchmarkTables/Table4_100.rt,Table4,BeUfVs,100,consistency,Unknown,Consistent,7160.533
+./benchmarkTables/Table1_150.rt,Table1,BeArFs,150,consistency,Inconsistent,Inconsistent,1.099
+./benchmarkTables/Table1_150.rt,Table1,BeArVs,150,consistency,Inconsistent,Inconsistent,1.119
+./benchmarkTables/Table1_150.rt,Table1,BeUfFs,150,consistency,Inconsistent,Inconsistent,0.829
+./benchmarkTables/Table1_150.rt,Table1,BeUfVs,150,consistency,Inconsistent,Inconsistent,1.066
+./benchmarkTables/Table2_150.rt,Table2,BeArFs,150,consistency,Inconsistent,Inconsistent,0.833
+./benchmarkTables/Table2_150.rt,Table2,BeArVs,150,consistency,Inconsistent,Inconsistent,0.825
+./benchmarkTables/Table2_150.rt,Table2,BeUfFs,150,consistency,Inconsistent,Inconsistent,0.790
+./benchmarkTables/Table2_150.rt,Table2,BeUfVs,150,consistency,Inconsistent,Inconsistent,0.768
+./benchmarkTables/Table3_150.rt,Table3,BeArFs,150,consistency,Unknown,Consistent,7169.082
+./benchmarkTables/Table3_150.rt,Table3,BeArVs,150,consistency,Unknown,Consistent,7170.395
+./benchmarkTables/Table3_150.rt,Table3,BeUfFs,150,consistency,Unknown,Consistent,7169.282
+./benchmarkTables/Table3_150.rt,Table3,BeUfVs,150,consistency,Unknown,Consistent,7169.993
+./benchmarkTables/Table4_150.rt,Table4,BeArFs,150,consistency,Unknown,Consistent,7154.427
+./benchmarkTables/Table4_150.rt,Table4,BeArVs,150,consistency,Unknown,Consistent,7150.812
+./benchmarkTables/Table4_150.rt,Table4,BeUfFs,150,consistency,Unknown,Consistent,7151.575
+./benchmarkTables/Table4_150.rt,Table4,BeUfVs,150,consistency,Unknown,Consistent,7155.046
+./benchmarkTables/Table1_200.rt,Table1,BeArFs,200,consistency,Inconsistent,Inconsistent,1.064
+./benchmarkTables/Table1_200.rt,Table1,BeArVs,200,consistency,Inconsistent,Inconsistent,1.016
+./benchmarkTables/Table1_200.rt,Table1,BeUfFs,200,consistency,Inconsistent,Inconsistent,1.281
+./benchmarkTables/Table1_200.rt,Table1,BeUfVs,200,consistency,Inconsistent,Inconsistent,0.900
+./benchmarkTables/Table2_200.rt,Table2,BeArFs,200,consistency,Inconsistent,Inconsistent,1.000
+./benchmarkTables/Table2_200.rt,Table2,BeArVs,200,consistency,Inconsistent,Inconsistent,0.963
+./benchmarkTables/Table2_200.rt,Table2,BeUfFs,200,consistency,Inconsistent,Inconsistent,0.890
+./benchmarkTables/Table2_200.rt,Table2,BeUfVs,200,consistency,Inconsistent,Inconsistent,0.875
+./benchmarkTables/Table3_200.rt,Table3,BeArFs,200,consistency,Unknown,Consistent,7166.704
+./benchmarkTables/Table3_200.rt,Table3,BeArVs,200,consistency,Unknown,Consistent,7166.693
+./benchmarkTables/Table3_200.rt,Table3,BeUfFs,200,consistency,Unknown,Consistent,7166.008
+./benchmarkTables/Table3_200.rt,Table3,BeUfVs,200,consistency,Unknown,Consistent,7166.577
+./benchmarkTables/Table4_200.rt,Table4,BeArFs,200,consistency,Unknown,Consistent,7148.937
+./benchmarkTables/Table4_200.rt,Table4,BeArVs,200,consistency,Unknown,Consistent,7147.191
+./benchmarkTables/Table4_200.rt,Table4,BeUfFs,200,consistency,Unknown,Consistent,7152.074
+./benchmarkTables/Table4_200.rt,Table4,BeUfVs,200,consistency,Unknown,Consistent,7149.992
+./benchmarkTables/Table1_250.rt,Table1,BeArFs,250,consistency,Inconsistent,Inconsistent,1.411
+  File "/scratch/menghic/Deploy/.evalscripts/BeArVsTable1_250.rtconsistency-250.py", line 1
+    (Implies(u[160]>0,y[160]==y[159]+1)),Not(Implies(y[159]==250,y[160]<250)),Not(Implies(u[161]>0,y[161]==y[160]+1)),Not(Implies(y[160]==250,y[161]<250)),Not(Implies(u[162]>0,y[162]==y[161]+1)),Not(Implies(y[161]==250,y[162]<250)),Not(Implies(u[163]>0,y[163]==y[162]+1)),Not(Implies(y[162]==250,y[163]<250)),Not(Implies(u[164]>0,y[164]==y[163]+1)),Not(Implies(y[163]==250,y[164]<250)),Not(Implies(u[165]>0,y[165]==y[164]+1)),Not(Implies(y[164]==250,y[165]<250)),Not(Implies(u[166]>0,y[166]==y[165]+1)),Not(Implies(y[165]==250,y[166]<250)),Not(Implies(u[167]>0,y[167]==y[166]+1)),Not(Implies(y[166]==250,y[167]<250)),Not(Implies(u[168]>0,y[168]==y[167]+1)),Not(Implies(y[167]==250,y[168]<250)),Not(Implies(u[169]>0,y[169]==y[168]+1)),Not(Implies(y[168]==250,y[169]<250)),Not(Implies(u[170]>0,y[170]==y[169]+1)),Not(Implies(y[169]==250,y[170]<250)),Not(Implies(u[171]>0,y[171]==y[170]+1)),Not(Implies(y[170]==250,y[171]<250)),Not(Implies(u[172]>0,y[172]==y[171]+1)),Not(Implies(y[171]==250,y[172]<250)),Not(Implies(u[173]>0,y[173]==y[172]+1)),Not(Implies(y[172]==250,y[173]<250)),Not(Implies(u[174]>0,y[174]==y[173]+1)),Not(Implies(y[173]==250,y[174]<250)),Not(Implies(u[175]>0,y[175]==y[174]+1)),Not(Implies(y[174]==250,y[175]<250)),Not(Implies(u[176]>0,y[176]==y[175]+1)),Not(Implies(y[175]==250,y[176]<250)),Not(Implies(u[177]>0,y[177]==y[176]+1)),Not(Implies(y[176]==250,y[177]<250)),Not(Implies(u[178]>0,y[178]==y[177]+1)),Not(Implies(y[177]==250,y[178]<250)),Not(Implies(u[179]>0,y[179]==y[178]+1)),Not(Implies(y[178]==250,y[179]<250)),Not(Implies(u[180]>0,y[180]==y[179]+1)),Not(Implies(y[179]==250,y[180]<250)),Not(Implies(u[181]>0,y[181]==y[180]+1)),Not(Implies(y[180]==250,y[181]<250)),Not(Implies(u[182]>0,y[182]==y[181]+1)),Not(Implies(y[181]==250,y[182]<250)),Not(Implies(u[183]>0,y[183]==y[182]+1)),Not(Implies(y[182]==250,y[183]<250)),Not(Implies(u[184]>0,y[184]==y[183]+1)),Not(Implies(y[183]==250,y[184]<250)),Not(Implies(u[185]>0,y[185]==y[184]+1)),Not(Implies(y[184]==250,y[185]<250)),Not(Implies(u[186]>0,y[186]==y[185]+1)),Not(Implies(y[185]==250,y[186]<250)),Not(Implies(u[187]>0,y[187]==y[186]+1)),Not(Implies(y[186]==250,y[187]<250)),Not(Implies(u[188]>0,y[188]==y[187]+1)),Not(Implies(y[187]==250,y[188]<250)),Not(Implies(u[189]>0,y[189]==y[188]+1)),Not(Implies(y[188]==250,y[189]<250)),Not(Implies(u[190]>0,y[190]==y[189]+1)),Not(Implies(y[189]==250,y[190]<250)),Not(Implies(u[191]>0,y[191]==y[190]+1)),Not(Implies(y[190]==250,y[191]<250)),Not(Implies(u[192]>0,y[192]==y[191]+1)),Not(Implies(y[191]==250,y[192]<250)),Not(Implies(u[193]>0,y[193]==y[192]+1)),Not(Implies(y[192]==250,y[193]<250)),Not(Implies(u[194]>0,y[194]==y[193]+1)),Not(Implies(y[193]==250,y[194]<250)),Not(Implies(u[195]>0,y[195]==y[194]+1)),Not(Implies(y[194]==250,y[195]<250)),Not(Implies(u[196]>0,y[196]==y[195]+1)),Not(Implies(y[195]==250,y[196]<250)),Not(Implies(u[197]>0,y[197]==y[196]+1)),Not(Implies(y[196]==250,y[197]<250)),Not(Implies(u[198]>0,y[198]==y[197]+1)),Not(Implies(y[197]==250,y[198]<250)),Not(Implies(u[199]>0,y[199]==y[198]+1)),Not(Implies(y[198]==250,y[199]<250)),Not(Implies(u[200]>0,y[200]==y[199]+1)),Not(Implies(y[199]==250,y[200]<250)),Not(Implies(u[201]>0,y[201]==y[200]+1)),Not(Implies(y[200]==250,y[201]<250)),Not(Implies(u[202]>0,y[202]==y[201]+1)),Not(Implies(y[201]==250,y[202]<250)),Not(Implies(u[203]>0,y[203]==y[202]+1)),Not(Implies(y[202]==250,y[203]<250)),Not(Implies(u[204]>0,y[204]==y[203]+1)),Not(Implies(y[203]==250,y[204]<250)),Not(Implies(u[205]>0,y[205]==y[204]+1)),Not(Implies(y[204]==250,y[205]<250)),Not(Implies(u[206]>0,y[206]==y[205]+1)),Not(Implies(y[205]==250,y[206]<250)),Not(Implies(u[207]>0,y[207]==y[206]+1)),Not(Implies(y[206]==250,y[207]<250)),Not(Implies(u[208]>0,y[208]==y[207]+1)),Not(Implies(y[207]==250,y[208]<250)),Not(Implies(u[209]>0,y[209]==y[208]+1)),Not(Implies(y[208]==250,y[209]<250)),Not(Implies(u[210]>0,y[210]==y[209]+1)),Not(Implies(y[209]==250,y[210]<250)),Not(Implies(u[211]>0,y[211]==y[210]+1)),Not(Implies(y[210]==250,y[211]<250)),Not(Implies(u[212]>0,y[212]==y[211]+1)),Not(Implies(y[211]==250,y[212]<250)),Not(Implies(u[213]>0,y[213]==y[212]+1)),Not(Implies(y[212]==250,y[213]<250)),Not(Implies(u[214]>0,y[214]==y[213]+1)),Not(Implies(y[213]==250,y[214]<250)),Not(Implies(u[215]>0,y[215]==y[214]+1)),Not(Implies(y[214]==250,y[215]<250)),Not(Implies(u[216]>0,y[216]==y[215]+1)),Not(Implies(y[215]==250,y[216]<250)),Not(Implies(u[217]>0,y[217]==y[216]+1)),Not(Implies(y[216]==250,y[217]<250)),Not(Implies(u[218]>0,y[218]==y[217]+1)),Not(Implies(y[217]==250,y[218]<250)),Not(Implies(u[219]>0,y[219]==y[218]+1)),Not(Implies(y[218]==250,y[219]<250)),Not(Implies(u[220]>0,y[220]==y[219]+1)),Not(Implies(y[219]==250,y[220]<250)),Not(Implies(u[221]>0,y[221]==y[220]+1)),Not(Implies(y[220]==250,y[221]<250)),Not(Implies(u[222]>0,y[222]==y[221]+1)),Not(Implies(y[221]==250,y[222]<250)),Not(Implies(u[223]>0,y[223]==y[222]+1)),Not(Implies(y[222]==250,y[223]<250)),Not(Implies(u[224]>0,y[224]==y[223]+1)),Not(Implies(y[223]==250,y[224]<250)),Not(Implies(u[225]>0,y[225]==y[224]+1)),Not(Implies(y[224]==250,y[225]<250)),Not(Implies(u[226]>0,y[226]==y[225]+1)),Not(Implies(y[225]==250,y[226]<250)),Not(Implies(u[227]>0,y[227]==y[226]+1)),Not(Implies(y[226]==250,y[227]<250)),Not(Implies(u[228]>0,y[228]==y[227]+1)),Not(Implies(y[227]==250,y[228]<250)),Not(Implies(u[229]>0,y[229]==y[228]+1)),Not(Implies(y[228]==250,y[229]<250)),Not(Implies(u[230]>0,y[230]==y[229]+1)),Not(Implies(y[229]==250,y[230]<250)),Not(Implies(u[231]>0,y[231]==y[230]+1)),Not(Implies(y[230]==250,y[231]<250)),Not(Implies(u[232]>0,y[232]==y[231]+1)),Not(Implies(y[231]==250,y[232]<250)),Not(Implies(u[233]>0,y[233]==y[232]+1)),Not(Implies(y[232]==250,y[233]<250)),Not(Implies(u[234]>0,y[234]==y[233]+1)),Not(Implies(y[233]==250,y[234]<250)),Not(Implies(u[235]>0,y[235]==y[234]+1)),Not(Implies(y[234]==250,y[235]<250)),Not(Implies(u[236]>0,y[236]==y[235]+1)),Not(Implies(y[235]==250,y[236]<250)),Not(Implies(u[237]>0,y[237]==y[236]+1)),Not(Implies(y[236]==250,y[237]<250)),Not(Implies(u[238]>0,y[238]==y[237]+1)),Not(Implies(y[237]==250,y[238]<250)),Not(Implies(u[239]>0,y[239]==y[238]+1)),Not(Implies(y[238]==250,y[239]<250)),Not(Implies(u[240]>0,y[240]==y[239]+1)),Not(Implies(y[239]==250,y[240]<250)),Not(Implies(u[241]>0,y[241]==y[240]+1)),Not(Implies(y[240]==250,y[241]<250)),Not(Implies(u[242]>0,y[242]==y[241]+1)),Not(Implies(y[241]==250,y[242]<250)),Not(Implies(u[243]>0,y[243]==y[242]+1)),Not(Implies(y[242]==250,y[243]<250)),Not(Implies(u[244]>0,y[244]==y[243]+1)),Not(Implies(y[243]==250,y[244]<250)),Not(Implies(u[245]>0,y[245]==y[244]+1)),Not(Implies(y[244]==250,y[245]<250)),Not(Implies(u[246]>0,y[246]==y[245]+1)),Not(Implies(y[245]==250,y[246]<250)),Not(Implies(u[247]>0,y[247]==y[246]+1)),Not(Implies(y[246]==250,y[247]<250)),Not(Implies(u[248]>0,y[248]==y[247]+1)),Not(Implies(y[247]==250,y[248]<250)),Not(Implies(u[249]>0,y[249]==y[248]+1)),Not(Implies(y[248]==250,y[249]<250)),Not(Implies(u[250]>0,y[250]==y[249]+1)),Not(Implies(y[249]==250,y[250]<250)),Not(Implies(u[251]>0,y[251]==y[250]+1)),Not(Implies(y[250]==250,y[251]<250)))))
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ^
+SyntaxError: unmatched ')'
+./benchmarkTables/Table1_250.rt,Table1,BeArVs,250,consistency,Consistent,Inconsistent,0.720
+./benchmarkTables/Table1_250.rt,Table1,BeUfFs,250,consistency,Inconsistent,Inconsistent,1.033
+./benchmarkTables/Table1_250.rt,Table1,BeUfVs,250,consistency,Inconsistent,Inconsistent,0.997
+./benchmarkTables/Table2_250.rt,Table2,BeArFs,250,consistency,Inconsistent,Inconsistent,1.366
+./benchmarkTables/Table2_250.rt,Table2,BeArVs,250,consistency,Inconsistent,Inconsistent,1.143
+./benchmarkTables/Table2_250.rt,Table2,BeUfFs,250,consistency,Inconsistent,Inconsistent,0.949
+./benchmarkTables/Table2_250.rt,Table2,BeUfVs,250,consistency,Inconsistent,Inconsistent,0.928
+./benchmarkTables/Table3_250.rt,Table3,BeArFs,250,consistency,Unknown,Consistent,7171.737
+./benchmarkTables/Table3_250.rt,Table3,BeArVs,250,consistency,Unknown,Consistent,7168.308
+./benchmarkTables/Table3_250.rt,Table3,BeUfFs,250,consistency,Unknown,Consistent,7167.368
+./benchmarkTables/Table3_250.rt,Table3,BeUfVs,250,consistency,Unknown,Consistent,7167.756
+./benchmarkTables/Table4_250.rt,Table4,BeArFs,250,consistency,Unknown,Consistent,7149.126
+./benchmarkTables/Table4_250.rt,Table4,BeArVs,250,consistency,Unknown,Consistent,7149.994
+./benchmarkTables/Table4_250.rt,Table4,BeUfFs,250,consistency,Unknown,Consistent,7149.333
+./benchmarkTables/Table4_250.rt,Table4,BeUfVs,250,consistency,Unknown,Consistent,7148.665
+./benchmarkTables/Table1_300.rt,Table1,BeArFs,300,consistency,Inconsistent,Inconsistent,1.477
+./benchmarkTables/Table1_300.rt,Table1,BeArVs,300,consistency,Inconsistent,Inconsistent,1.397
+./benchmarkTables/Table1_300.rt,Table1,BeUfFs,300,consistency,Inconsistent,Inconsistent,1.156
+./benchmarkTables/Table1_300.rt,Table1,BeUfVs,300,consistency,Inconsistent,Inconsistent,1.102
+./benchmarkTables/Table2_300.rt,Table2,BeArFs,300,consistency,Inconsistent,Inconsistent,1.392
+./benchmarkTables/Table2_300.rt,Table2,BeArVs,300,consistency,Inconsistent,Inconsistent,1.358
+./benchmarkTables/Table2_300.rt,Table2,BeUfFs,300,consistency,Inconsistent,Inconsistent,1.089
+./benchmarkTables/Table2_300.rt,Table2,BeUfVs,300,consistency,Inconsistent,Inconsistent,1.046
+./benchmarkTables/Table3_300.rt,Table3,BeArFs,300,consistency,Unknown,Consistent,7162.686
+./benchmarkTables/Table3_300.rt,Table3,BeArVs,300,consistency,Unknown,Consistent,7162.505
+./benchmarkTables/Table3_300.rt,Table3,BeUfFs,300,consistency,Unknown,Consistent,7164.323
+./benchmarkTables/Table3_300.rt,Table3,BeUfVs,300,consistency,Unknown,Consistent,7165.456
+./execBounded.sh: line 15: 268169 Killed                  timeout $timeoutvalue python3 "${pythonfile}"
+./benchmarkTables/Table4_300.rt,Table4,BeArFs,300,consistency,Unknown,Consistent,6303.941
+./benchmarkTables/Table4_300.rt,Table4,BeArVs,300,consistency,Unknown,Consistent,7141.645
+./benchmarkTables/Table4_300.rt,Table4,BeUfFs,300,consistency,Unknown,Consistent,7135.650
+./benchmarkTables/Table4_300.rt,Table4,BeUfVs,300,consistency,Unknown,Consistent,7140.957
+./benchmarkTables/Table1_350.rt,Table1,BeArFs,350,consistency,Inconsistent,Inconsistent,1.800
+./benchmarkTables/Table1_350.rt,Table1,BeArVs,350,consistency,Inconsistent,Inconsistent,1.674
+./benchmarkTables/Table1_350.rt,Table1,BeUfFs,350,consistency,Inconsistent,Inconsistent,1.256
+./benchmarkTables/Table1_350.rt,Table1,BeUfVs,350,consistency,Inconsistent,Inconsistent,1.181
+./benchmarkTables/Table2_350.rt,Table2,BeArFs,350,consistency,Inconsistent,Inconsistent,1.655
+./benchmarkTables/Table2_350.rt,Table2,BeArVs,350,consistency,Inconsistent,Inconsistent,1.607
+./benchmarkTables/Table2_350.rt,Table2,BeUfFs,350,consistency,Inconsistent,Inconsistent,1.169
+./benchmarkTables/Table2_350.rt,Table2,BeUfVs,350,consistency,Inconsistent,Inconsistent,1.296
+./benchmarkTables/Table3_350.rt,Table3,BeArFs,350,consistency,Unknown,Consistent,7161.252
+./benchmarkTables/Table3_350.rt,Table3,BeArVs,350,consistency,Unknown,Consistent,7160.813
+./benchmarkTables/Table3_350.rt,Table3,BeUfFs,350,consistency,Unknown,Consistent,7158.029
+./benchmarkTables/Table3_350.rt,Table3,BeUfVs,350,consistency,Unknown,Consistent,7161.377
+./execBounded.sh: line 15: 88777 Killed                  timeout $timeoutvalue python3 "${pythonfile}"
+./benchmarkTables/Table4_350.rt,Table4,BeArFs,350,consistency,Unknown,Consistent,5151.001
+./execBounded.sh: line 15: 97483 Killed                  timeout $timeoutvalue python3 "${pythonfile}"
+./benchmarkTables/Table4_350.rt,Table4,BeArVs,350,consistency,Unknown,Consistent,4675.031
+./execBounded.sh: line 15: 105508 Killed                  timeout $timeoutvalue python3 "${pythonfile}"
+./benchmarkTables/Table4_350.rt,Table4,BeUfFs,350,consistency,Unknown,Consistent,4066.268
+./execBounded.sh: line 15: 113129 Killed                  timeout $timeoutvalue python3 "${pythonfile}"
+./benchmarkTables/Table4_350.rt,Table4,BeUfVs,350,consistency,Unknown,Consistent,4019.866
+./benchmarkTables/Table1_400.rt,Table1,BeArFs,400,consistency,Inconsistent,Inconsistent,2.053
+./benchmarkTables/Table1_400.rt,Table1,BeArVs,400,consistency,Inconsistent,Inconsistent,1.950
+./benchmarkTables/Table1_400.rt,Table1,BeUfFs,400,consistency,Inconsistent,Inconsistent,1.349
+./benchmarkTables/Table1_400.rt,Table1,BeUfVs,400,consistency,Inconsistent,Inconsistent,1.549
+./benchmarkTables/Table2_400.rt,Table2,BeArFs,400,consistency,Inconsistent,Inconsistent,1.967
+./benchmarkTables/Table2_400.rt,Table2,BeArVs,400,consistency,Inconsistent,Inconsistent,1.900
+./benchmarkTables/Table2_400.rt,Table2,BeUfFs,400,consistency,Inconsistent,Inconsistent,1.250
+./benchmarkTables/Table2_400.rt,Table2,BeUfVs,400,consistency,Inconsistent,Inconsistent,1.197
+./benchmarkTables/Table3_400.rt,Table3,BeArFs,400,consistency,Unknown,Consistent,7157.601
+./benchmarkTables/Table3_400.rt,Table3,BeArVs,400,consistency,Unknown,Consistent,7156.328
+./benchmarkTables/Table3_400.rt,Table3,BeUfFs,400,consistency,Unknown,Consistent,7152.137
+./benchmarkTables/Table3_400.rt,Table3,BeUfVs,400,consistency,Unknown,Consistent,7157.845
+./execBounded.sh: line 15: 173731 Killed                  timeout $timeoutvalue python3 "${pythonfile}"
+./benchmarkTables/Table4_400.rt,Table4,BeArFs,400,consistency,Unknown,Consistent,4788.150
+./benchmarkTables/Table4_400.rt,Table4,BeArVs,400,consistency,Unknown,Consistent,7142.199
+./execBounded.sh: line 15: 194889 Killed                  timeout $timeoutvalue python3 "${pythonfile}"
+./benchmarkTables/Table4_400.rt,Table4,BeUfFs,400,consistency,Unknown,Consistent,4776.230
+./execBounded.sh: line 15: 203415 Killed                  timeout $timeoutvalue python3 "${pythonfile}"
+./benchmarkTables/Table4_400.rt,Table4,BeUfVs,400,consistency,Unknown,Consistent,6779.242
+./benchmarkTables/Table1_450.rt,Table1,BeArFs,450,consistency,Inconsistent,Inconsistent,2.461
+./benchmarkTables/Table1_450.rt,Table1,BeArVs,450,consistency,Inconsistent,Inconsistent,2.372
+./benchmarkTables/Table1_450.rt,Table1,BeUfFs,450,consistency,Inconsistent,Inconsistent,1.486
+./benchmarkTables/Table1_450.rt,Table1,BeUfVs,450,consistency,Inconsistent,Inconsistent,1.404
+./benchmarkTables/Table2_450.rt,Table2,BeArFs,450,consistency,Inconsistent,Inconsistent,2.342
+./benchmarkTables/Table2_450.rt,Table2,BeArVs,450,consistency,Inconsistent,Inconsistent,2.285
+./benchmarkTables/Table2_450.rt,Table2,BeUfFs,450,consistency,Inconsistent,Inconsistent,1.372
+./benchmarkTables/Table2_450.rt,Table2,BeUfVs,450,consistency,Inconsistent,Inconsistent,1.307
+./benchmarkTables/Table3_450.rt,Table3,BeArFs,450,consistency,Unknown,Consistent,7154.531
+./benchmarkTables/Table3_450.rt,Table3,BeArVs,450,consistency,Unknown,Consistent,7153.449
+./benchmarkTables/Table3_450.rt,Table3,BeUfFs,450,consistency,Unknown,Consistent,7155.996
+./benchmarkTables/Table3_450.rt,Table3,BeUfVs,450,consistency,Unknown,Consistent,7155.289
+./execBounded.sh: line 15: 244469 Killed                  timeout $timeoutvalue python3 "${pythonfile}"
+./benchmarkTables/Table4_450.rt,Table4,BeArFs,450,consistency,Unknown,Consistent,5379.840
+./execBounded.sh: line 15: 249652 Killed                  timeout $timeoutvalue python3 "${pythonfile}"
+./benchmarkTables/Table4_450.rt,Table4,BeArVs,450,consistency,Unknown,Consistent,5939.802
+./execBounded.sh: line 15: 255384 Killed                  timeout $timeoutvalue python3 "${pythonfile}"
+./benchmarkTables/Table4_450.rt,Table4,BeUfFs,450,consistency,Unknown,Consistent,5329.159
+./execBounded.sh: line 15: 260696 Killed                  timeout $timeoutvalue python3 "${pythonfile}"
+./benchmarkTables/Table4_450.rt,Table4,BeUfVs,450,consistency,Unknown,Consistent,5173.289
+./benchmarkTables/Table1_500.rt,Table1,BeArFs,500,consistency,Inconsistent,Inconsistent,2.938
+./benchmarkTables/Table1_500.rt,Table1,BeArVs,500,consistency,Inconsistent,Inconsistent,2.792
+./benchmarkTables/Table1_500.rt,Table1,BeUfFs,500,consistency,Inconsistent,Inconsistent,1.617
+./benchmarkTables/Table1_500.rt,Table1,BeUfVs,500,consistency,Inconsistent,Inconsistent,1.523
+./benchmarkTables/Table2_500.rt,Table2,BeArFs,500,consistency,Inconsistent,Inconsistent,2.797
+./benchmarkTables/Table2_500.rt,Table2,BeArVs,500,consistency,Inconsistent,Inconsistent,2.739
+./benchmarkTables/Table2_500.rt,Table2,BeUfFs,500,consistency,Inconsistent,Inconsistent,1.522
+./benchmarkTables/Table2_500.rt,Table2,BeUfVs,500,consistency,Inconsistent,Inconsistent,1.449
+./benchmarkTables/Table3_500.rt,Table3,BeArFs,500,consistency,Unknown,Consistent,7151.770
+./benchmarkTables/Table3_500.rt,Table3,BeArVs,500,consistency,Unknown,Consistent,7151.844
+./benchmarkTables/Table3_500.rt,Table3,BeUfFs,500,consistency,Unknown,Consistent,7150.700
+./benchmarkTables/Table3_500.rt,Table3,BeUfVs,500,consistency,Unknown,Consistent,7151.654
+./execBounded.sh: line 15: 15525 Killed                  timeout $timeoutvalue python3 "${pythonfile}"
+./benchmarkTables/Table4_500.rt,Table4,BeArFs,500,consistency,Unknown,Consistent,4973.445
+./execBounded.sh: line 15: 20495 Killed                  timeout $timeoutvalue python3 "${pythonfile}"
+./benchmarkTables/Table4_500.rt,Table4,BeArVs,500,consistency,Unknown,Consistent,5058.420
+./execBounded.sh: line 15: 25399 Killed                  timeout $timeoutvalue python3 "${pythonfile}"
+./benchmarkTables/Table4_500.rt,Table4,BeUfFs,500,consistency,Unknown,Consistent,4863.339
+./execBounded.sh: line 15: 29923 Killed                  timeout $timeoutvalue python3 "${pythonfile}"
+./benchmarkTables/Table4_500.rt,Table4,BeUfVs,500,consistency,Unknown,Consistent,4818.426
+./benchmarkTables/Table1_550.rt,Table1,BeArFs,550,consistency,Inconsistent,Inconsistent,3.496
+./benchmarkTables/Table1_550.rt,Table1,BeArVs,550,consistency,Inconsistent,Inconsistent,3.429
+./benchmarkTables/Table1_550.rt,Table1,BeUfFs,550,consistency,Inconsistent,Inconsistent,1.778
+./benchmarkTables/Table1_550.rt,Table1,BeUfVs,550,consistency,Inconsistent,Inconsistent,1.679
+./benchmarkTables/Table2_550.rt,Table2,BeArFs,550,consistency,Inconsistent,Inconsistent,3.378
+./benchmarkTables/Table2_550.rt,Table2,BeArVs,550,consistency,Inconsistent,Inconsistent,3.312
+./benchmarkTables/Table2_550.rt,Table2,BeUfFs,550,consistency,Inconsistent,Inconsistent,1.682
+./benchmarkTables/Table2_550.rt,Table2,BeUfVs,550,consistency,Inconsistent,Inconsistent,1.567
+./benchmarkTables/Table3_550.rt,Table3,BeArFs,550,consistency,Unknown,Consistent,7150.135
+./benchmarkTables/Table3_550.rt,Table3,BeArVs,550,consistency,Unknown,Consistent,7150.123
+./benchmarkTables/Table3_550.rt,Table3,BeUfFs,550,consistency,Unknown,Consistent,7150.076
+./benchmarkTables/Table3_550.rt,Table3,BeUfVs,550,consistency,Unknown,Consistent,7147.854
+./execBounded.sh: line 15: 62477 Killed                  timeout $timeoutvalue python3 "${pythonfile}"
+./benchmarkTables/Table4_550.rt,Table4,BeArFs,550,consistency,Unknown,Consistent,6097.149
+./execBounded.sh: line 15: 69398 Killed                  timeout $timeoutvalue python3 "${pythonfile}"
+./benchmarkTables/Table4_550.rt,Table4,BeArVs,550,consistency,Unknown,Consistent,6886.929
+./execBounded.sh: line 15: 76193 Killed                  timeout $timeoutvalue python3 "${pythonfile}"
+./benchmarkTables/Table4_550.rt,Table4,BeUfFs,550,consistency,Unknown,Consistent,5631.654
+./execBounded.sh: line 15: 81790 Killed                  timeout $timeoutvalue python3 "${pythonfile}"
+./benchmarkTables/Table4_550.rt,Table4,BeUfVs,550,consistency,Unknown,Consistent,5537.648
+./benchmarkTables/Table1_600.rt,Table1,BeArFs,600,consistency,Inconsistent,Inconsistent,4.152
+./benchmarkTables/Table1_600.rt,Table1,BeArVs,600,consistency,Inconsistent,Inconsistent,4.040
+./benchmarkTables/Table1_600.rt,Table1,BeUfFs,600,consistency,Inconsistent,Inconsistent,1.932
+./benchmarkTables/Table1_600.rt,Table1,BeUfVs,600,consistency,Inconsistent,Inconsistent,1.806
+./benchmarkTables/Table2_600.rt,Table2,BeArFs,600,consistency,Inconsistent,Inconsistent,4.023
+./benchmarkTables/Table2_600.rt,Table2,BeArVs,600,consistency,Inconsistent,Inconsistent,3.851
+./benchmarkTables/Table2_600.rt,Table2,BeUfFs,600,consistency,Inconsistent,Inconsistent,1.813
+./benchmarkTables/Table2_600.rt,Table2,BeUfVs,600,consistency,Inconsistent,Inconsistent,1.669
+./benchmarkTables/Table3_600.rt,Table3,BeArFs,600,consistency,Unknown,Consistent,7157.845
+./benchmarkTables/Table3_600.rt,Table3,BeArVs,600,consistency,Unknown,Consistent,7158.638
+./benchmarkTables/Table3_600.rt,Table3,BeUfFs,600,consistency,Unknown,Consistent,7155.352
+./benchmarkTables/Table3_600.rt,Table3,BeUfVs,600,consistency,Unknown,Consistent,7154.824
+./execBounded.sh: line 15: 115908 Killed                  timeout $timeoutvalue python3 "${pythonfile}"
+./benchmarkTables/Table4_600.rt,Table4,BeArFs,600,consistency,Unknown,Consistent,7062.947
+./benchmarkTables/Table4_600.rt,Table4,BeArVs,600,consistency,Unknown,Consistent,7131.717
+./benchmarkTables/Table4_600.rt,Table4,BeUfFs,600,consistency,Unknown,Consistent,7131.882
+./benchmarkTables/Table4_600.rt,Table4,BeUfVs,600,consistency,Unknown,Consistent,7129.770
+./benchmarkTables/Table1_650.rt,Table1,BeArFs,650,consistency,Inconsistent,Inconsistent,4.927
+./benchmarkTables/Table1_650.rt,Table1,BeArVs,650,consistency,Inconsistent,Inconsistent,4.763
+./benchmarkTables/Table1_650.rt,Table1,BeUfFs,650,consistency,Inconsistent,Inconsistent,2.065
+./benchmarkTables/Table1_650.rt,Table1,BeUfVs,650,consistency,Inconsistent,Inconsistent,1.972
+./benchmarkTables/Table2_650.rt,Table2,BeArFs,650,consistency,Inconsistent,Inconsistent,4.681
+./benchmarkTables/Table2_650.rt,Table2,BeArVs,650,consistency,Inconsistent,Inconsistent,4.676
+./benchmarkTables/Table2_650.rt,Table2,BeUfFs,650,consistency,Inconsistent,Inconsistent,1.953
+./benchmarkTables/Table2_650.rt,Table2,BeUfVs,650,consistency,Inconsistent,Inconsistent,1.893
+./benchmarkTables/Table3_650.rt,Table3,BeArFs,650,consistency,Unknown,Consistent,7151.453
+./benchmarkTables/Table3_650.rt,Table3,BeArVs,650,consistency,Unknown,Consistent,7149.915
+./benchmarkTables/Table3_650.rt,Table3,BeUfFs,650,consistency,Unknown,Consistent,7149.518
+./benchmarkTables/Table3_650.rt,Table3,BeUfVs,650,consistency,Unknown,Consistent,7148.884
+./benchmarkTables/Table4_650.rt,Table4,BeArFs,650,consistency,Unknown,Consistent,7127.968
+./benchmarkTables/Table4_650.rt,Table4,BeArVs,650,consistency,Unknown,Consistent,7124.739
+./benchmarkTables/Table4_650.rt,Table4,BeUfFs,650,consistency,Unknown,Consistent,7126.436
+./benchmarkTables/Table4_650.rt,Table4,BeUfVs,650,consistency,Unknown,Consistent,7125.685
+./benchmarkTables/Table1_700.rt,Table1,BeArFs,700,consistency,Inconsistent,Inconsistent,5.756
+./benchmarkTables/Table1_700.rt,Table1,BeArVs,700,consistency,Inconsistent,Inconsistent,5.616
+./benchmarkTables/Table1_700.rt,Table1,BeUfFs,700,consistency,Inconsistent,Inconsistent,2.268
+./benchmarkTables/Table1_700.rt,Table1,BeUfVs,700,consistency,Inconsistent,Inconsistent,2.151
+./benchmarkTables/Table2_700.rt,Table2,BeArFs,700,consistency,Inconsistent,Inconsistent,5.555
+./benchmarkTables/Table2_700.rt,Table2,BeArVs,700,consistency,Inconsistent,Inconsistent,5.458
+./benchmarkTables/Table2_700.rt,Table2,BeUfFs,700,consistency,Inconsistent,Inconsistent,2.078
+./benchmarkTables/Table2_700.rt,Table2,BeUfVs,700,consistency,Inconsistent,Inconsistent,1.971
+./benchmarkTables/Table3_700.rt,Table3,BeArFs,700,consistency,Unknown,Consistent,7149.097
+./benchmarkTables/Table3_700.rt,Table3,BeArVs,700,consistency,Unknown,Consistent,7150.977
+./benchmarkTables/Table3_700.rt,Table3,BeUfFs,700,consistency,Unknown,Consistent,7150.694
+./benchmarkTables/Table3_700.rt,Table3,BeUfVs,700,consistency,Unknown,Consistent,7148.978
+./benchmarkTables/Table4_700.rt,Table4,BeArFs,700,consistency,Unknown,Consistent,7122.478
+./benchmarkTables/Table4_700.rt,Table4,BeArVs,700,consistency,Unknown,Consistent,7125.259
+./benchmarkTables/Table4_700.rt,Table4,BeUfFs,700,consistency,Unknown,Consistent,7121.167
+./benchmarkTables/Table4_700.rt,Table4,BeUfVs,700,consistency,Unknown,Consistent,7126.641
+./benchmarkTables/Table1_750.rt,Table1,BeArFs,750,consistency,Inconsistent,Inconsistent,6.775
+./benchmarkTables/Table1_750.rt,Table1,BeArVs,750,consistency,Inconsistent,Inconsistent,6.575
+./benchmarkTables/Table1_750.rt,Table1,BeUfFs,750,consistency,Inconsistent,Inconsistent,2.438
+./benchmarkTables/Table1_750.rt,Table1,BeUfVs,750,consistency,Inconsistent,Inconsistent,2.336
+./benchmarkTables/Table2_750.rt,Table2,BeArFs,750,consistency,Inconsistent,Inconsistent,6.527
+./benchmarkTables/Table2_750.rt,Table2,BeArVs,750,consistency,Inconsistent,Inconsistent,6.404
+./benchmarkTables/Table2_750.rt,Table2,BeUfFs,750,consistency,Inconsistent,Inconsistent,2.261
+./benchmarkTables/Table2_750.rt,Table2,BeUfVs,750,consistency,Inconsistent,Inconsistent,2.175
+./benchmarkTables/Table3_750.rt,Table3,BeArFs,750,consistency,Unknown,Consistent,7147.983
+./benchmarkTables/Table3_750.rt,Table3,BeArVs,750,consistency,Unknown,Consistent,7146.893
+./benchmarkTables/Table3_750.rt,Table3,BeUfFs,750,consistency,Unknown,Consistent,7147.724
+./benchmarkTables/Table3_750.rt,Table3,BeUfVs,750,consistency,Unknown,Consistent,7146.430

@@ -1,6 +1,8 @@
 package requirements2Z3.encodings;
 
 import requirements2Z3.encodings.step.StepEncoder;
+import requirements2Z3.z3formulae.Z3Expression;
+import requirements2Z3.z3formulae.Z3Formula;
 
 /**
  * Returns the encoding for a trace. The encoder is implemented using a
@@ -47,7 +49,7 @@ public abstract class Encoder {
 	 *         position.
 	 * @throws IllegalArgumentException if the signal name of the position is null
 	 */
-	public String getTracePosition(String signalname, String position) {
+	public Z3Expression getTracePosition(String signalname, String position) {
 		return this.stepEncoder.getTracePosition(signalname, position);
 	}
 
@@ -60,7 +62,7 @@ public abstract class Encoder {
 	 * @return a String that represents the Z3 encoding accessing the trace in that
 	 *         position.
 	 */
-	public String getIsStartup(String signalname, String position) {
+	public Z3Formula getIsStartup(String signalname, String position) {
 		return this.stepEncoder.getIsStartup(signalname, position);
 	}
 
@@ -75,7 +77,7 @@ public abstract class Encoder {
 	 *         a string given a position (i.e., a generic index such as 'i' or an
 	 *         actual index such as '0')
 	 */
-	public String getPrevValue(String signalname, String position) {
+	public Z3Expression getPrevValue(String signalname, String position) {
 		return this.stepEncoder.getPrevValue(signalname, position);
 	}
 

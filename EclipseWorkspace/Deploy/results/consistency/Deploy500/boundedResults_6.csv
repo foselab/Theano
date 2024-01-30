@@ -1,0 +1,16 @@
+inputfile,table,encoding,bound,check,result,expectedResult,time
+./benchmarkTables/Table1_500.rt,Table1,BeArFs,500,consistency,Inconsistent,Inconsistent,3.265
+./benchmarkTables/Table1_500.rt,Table1,BeArVs,500,consistency,Inconsistent,Inconsistent,3.355
+./benchmarkTables/Table1_500.rt,Table1,BeUfFs,500,consistency,Inconsistent,Inconsistent,1.796
+./benchmarkTables/Table1_500.rt,Table1,BeUfVs,500,consistency,Inconsistent,Inconsistent,1.729
+./benchmarkTables/Table2_500.rt,Table2,BeArFs,500,consistency,Inconsistent,Inconsistent,3.167
+./benchmarkTables/Table2_500.rt,Table2,BeArVs,500,consistency,Inconsistent,Inconsistent,3.109
+./benchmarkTables/Table2_500.rt,Table2,BeUfFs,500,consistency,Inconsistent,Inconsistent,1.696
+./benchmarkTables/Table2_500.rt,Table2,BeUfVs,500,consistency,Inconsistent,Inconsistent,1.636
+./benchmarkTables/Table3_500.rt,Table3,BeArFs,500,consistency,Unknown,Consistent,7141.515
+./benchmarkTables/Table3_500.rt,Table3,BeArVs,500,consistency,Unknown,Consistent,7146.185
+./benchmarkTables/Table3_500.rt,Table3,BeUfFs,500,consistency,Unknown,Consistent,7142.889
+./benchmarkTables/Table3_500.rt,Table3,BeUfVs,500,consistency,Unknown,Consistent,7147.275
+./benchmarkTables/Table4_500.rt,Table4,BeArFs,500,consistency,Unknown,Consistent,0.708
+./execBounded.sh: line 15:  6591 Killed                  timeout $timeoutvalue python3 "${pythonfile}"
+./benchmarkTables/Table4_500.rt,Table4,BeArVs,500,consistency,Unknown,Consistent,5649.565

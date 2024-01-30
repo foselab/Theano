@@ -1,0 +1,17 @@
+inputfile,table,encoding,bound,check,result,expectedResult,time
+./benchmarkTables/Table1_1600.rt,Table1,BeArFs,1600,consistency,Inconsistent,Inconsistent,51.914
+./benchmarkTables/Table1_1600.rt,Table1,BeArVs,1600,consistency,Inconsistent,Inconsistent,50.173
+./benchmarkTables/Table1_1600.rt,Table1,BeUfFs,1600,consistency,Inconsistent,Inconsistent,8.423
+./benchmarkTables/Table1_1600.rt,Table1,BeUfVs,1600,consistency,Inconsistent,Inconsistent,8.041
+  File "/scratch/menghic/Deploy1600/.evalscripts/BeArFsTable2_1600.rtconsistency-1600.py", line 20
+    
+    ^
+SyntaxError: '(' was never closed
+./benchmarkTables/Table2_1600.rt,Table2,BeArFs,1600,consistency,Consistent,Inconsistent,1.148
+./benchmarkTables/Table2_1600.rt,Table2,BeArVs,1600,consistency,Inconsistent,Inconsistent,50.080
+./benchmarkTables/Table2_1600.rt,Table2,BeUfFs,1600,consistency,Inconsistent,Inconsistent,8.338
+./benchmarkTables/Table2_1600.rt,Table2,BeUfVs,1600,consistency,Inconsistent,Inconsistent,7.796
+./benchmarkTables/Table3_1600.rt,Table3,BeArFs,1600,consistency,Unknown,Consistent,7138.125
+./benchmarkTables/Table3_1600.rt,Table3,BeArVs,1600,consistency,Unknown,Consistent,7137.429
+./benchmarkTables/Table3_1600.rt,Table3,BeUfFs,1600,consistency,Unknown,Consistent,7138.135
+./benchmarkTables/Table3_1600.rt,Table3,BeUfVs,1600,consistency,Unknown,Consistent,7138.034

@@ -1,0 +1,18 @@
+inputfile,table,encoding,bound,check,result,expectedResult,time
+./benchmarkTables/Table1_900.rt,Table1,BeArFs,900,consistency,Inconsistent,Inconsistent,12.233
+./benchmarkTables/Table1_900.rt,Table1,BeArVs,900,consistency,Inconsistent,Inconsistent,11.620
+./benchmarkTables/Table1_900.rt,Table1,BeUfFs,900,consistency,Inconsistent,Inconsistent,3.522
+./benchmarkTables/Table1_900.rt,Table1,BeUfVs,900,consistency,Inconsistent,Inconsistent,3.323
+./benchmarkTables/Table2_900.rt,Table2,BeArFs,900,consistency,Inconsistent,Inconsistent,11.849
+./benchmarkTables/Table2_900.rt,Table2,BeArVs,900,consistency,Inconsistent,Inconsistent,11.716
+./benchmarkTables/Table2_900.rt,Table2,BeUfFs,900,consistency,Inconsistent,Inconsistent,3.343
+./benchmarkTables/Table2_900.rt,Table2,BeUfVs,900,consistency,Inconsistent,Inconsistent,3.184
+./benchmarkTables/Table3_900.rt,Table3,BeArFs,900,consistency,Unknown,Consistent,7134.991
+./benchmarkTables/Table3_900.rt,Table3,BeArVs,900,consistency,Unknown,Consistent,7136.187
+./benchmarkTables/Table3_900.rt,Table3,BeUfFs,900,consistency,Unknown,Consistent,7134.069
+./benchmarkTables/Table3_900.rt,Table3,BeUfVs,900,consistency,Unknown,Consistent,7136.182
+  File "/scratch/menghic/Deploy900/.evalscripts/BeArFsTable4_900.rtconsistency-900.py", line 0
+    
+    ^
+SyntaxError: unknown parsing error
+./benchmarkTables/Table4_900.rt,Table4,BeArFs,900,consistency,Consistent,Consistent,1.099

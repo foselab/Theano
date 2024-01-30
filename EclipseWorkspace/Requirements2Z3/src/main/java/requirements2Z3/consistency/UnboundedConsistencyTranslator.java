@@ -6,6 +6,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 
 import requirements2Z3.visitors.GetOutputVariablesVisitor;
 import requirements2Z3.visitors.translators.UnboundedVisitor;
+import requirements2Z3.z3formulae.Z3Formula;
 
 public class UnboundedConsistencyTranslator implements Functionality<UnboundedVisitor>  {
 
@@ -20,9 +21,9 @@ public class UnboundedConsistencyTranslator implements Functionality<UnboundedVi
 	}
 
 	@Override
-	public String getEncodingActivity(UnboundedVisitor z3visitor, ParseTree tree) {
+	public Z3Formula getEncodingActivity(UnboundedVisitor z3visitor, ParseTree tree) {
 
-		String encodingRequirements = getEncodingRequirements(z3visitor, tree);
+		Z3Formula encodingRequirements = getEncodingRequirements(z3visitor, tree);
 
 		String outputVariables = "";
 
@@ -37,14 +38,14 @@ public class UnboundedConsistencyTranslator implements Functionality<UnboundedVi
 				outputVariables = outputVariables + "," + outputVariable;
 			}
 		}
-
-		return "ForAll([" + outputVariables + "] , " + encodingRequirements + ")";
-
+		return Z3Formula.getForAll("[" + outputVariables + "]", encodingRequirements);
 	}
 
-	private String getEncodingRequirements(UnboundedVisitor z3visitor, ParseTree tree) {
-		String encodingRequirements = tree.accept(z3visitor);
-		encodingRequirements = "Exists(i,Not(" + encodingRequirements + "))";
+	private Z3Formula getEncodingRequirements(UnboundedVisitor z3visitor, ParseTree tree) {
+		Z3Formula encodingRequirements = tree.accept(z3visitor);
+		encodingRequirements = Z3Formula.getExists("i", 
+				Z3Formula.getNot(encodingRequirements));
+				
 		return encodingRequirements;
 	}
 }

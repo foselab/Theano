@@ -1,0 +1,71 @@
+inputfile,table,encoding,bound,check,result,expectedResult,time
+./benchmarkTables/Table1_1450.rt,Table1,BeArFs,1450,consistency,Inconsistent,Inconsistent,58.799
+./benchmarkTables/Table1_1450.rt,Table1,BeArVs,1450,consistency,Inconsistent,Inconsistent,55.834
+./benchmarkTables/Table1_1450.rt,Table1,BeUfFs,1450,consistency,Inconsistent,Inconsistent,9.345
+./benchmarkTables/Table1_1450.rt,Table1,BeUfVs,1450,consistency,Inconsistent,Inconsistent,8.432
+./benchmarkTables/Table2_1450.rt,Table2,BeArFs,1450,consistency,Inconsistent,Inconsistent,57.352
+./benchmarkTables/Table2_1450.rt,Table2,BeArVs,1450,consistency,Inconsistent,Inconsistent,56.299
+./benchmarkTables/Table2_1450.rt,Table2,BeUfFs,1450,consistency,Inconsistent,Inconsistent,8.880
+./benchmarkTables/Table2_1450.rt,Table2,BeUfVs,1450,consistency,Inconsistent,Inconsistent,8.169
+./benchmarkTables/Table3_1450.rt,Table3,BeArFs,1450,consistency,Unknown,Consistent,7147.673
+./benchmarkTables/Table3_1450.rt,Table3,BeArVs,1450,consistency,Unknown,Consistent,7152.680
+./benchmarkTables/Table3_1450.rt,Table3,BeUfFs,1450,consistency,Unknown,Consistent,7153.913
+./benchmarkTables/Table3_1450.rt,Table3,BeUfVs,1450,consistency,Unknown,Consistent,7154.088
+  File "/scratch/menghic/Deploy3/.evalscripts/BeArFsTable4_1450.rtconsistency-1450.py", line 0
+    
+    ^
+SyntaxError: unknown parsing error
+./benchmarkTables/Table4_1450.rt,Table4,BeArFs,1450,consistency,Consistent,Consistent,1.739
+./benchmarkTables/Table4_1450.rt,Table4,BeArVs,1450,consistency,Unknown,Consistent,7106.467
+./benchmarkTables/Table4_1450.rt,Table4,BeUfFs,1450,consistency,Unknown,Consistent,7115.492
+./benchmarkTables/Table4_1450.rt,Table4,BeUfVs,1450,consistency,Unknown,Consistent,7131.470
+./benchmarkTables/Table1_1500.rt,Table1,BeArFs,1500,consistency,Inconsistent,Inconsistent,60.919
+./benchmarkTables/Table1_1500.rt,Table1,BeArVs,1500,consistency,Inconsistent,Inconsistent,63.972
+  File "/scratch/menghic/Deploy3/.evalscripts/BeUfFsTable1_1500.rtconsistency-1500.py", line 0
+    
+    ^
+SyntaxError: unknown parsing error
+./benchmarkTables/Table1_1500.rt,Table1,BeUfFs,1500,consistency,Consistent,Inconsistent,1.452
+./benchmarkTables/Table1_1500.rt,Table1,BeUfVs,1500,consistency,Inconsistent,Inconsistent,8.420
+./benchmarkTables/Table2_1500.rt,Table2,BeArFs,1500,consistency,Inconsistent,Inconsistent,60.292
+./benchmarkTables/Table2_1500.rt,Table2,BeArVs,1500,consistency,Inconsistent,Inconsistent,64.184
+./benchmarkTables/Table2_1500.rt,Table2,BeUfFs,1500,consistency,Inconsistent,Inconsistent,8.398
+./benchmarkTables/Table2_1500.rt,Table2,BeUfVs,1500,consistency,Inconsistent,Inconsistent,8.237
+./benchmarkTables/Table3_1500.rt,Table3,BeArFs,1500,consistency,Unknown,Consistent,7146.385
+./benchmarkTables/Table3_1500.rt,Table3,BeArVs,1500,consistency,Unknown,Consistent,7153.025
+./benchmarkTables/Table3_1500.rt,Table3,BeUfFs,1500,consistency,Unknown,Consistent,7156.636
+./benchmarkTables/Table3_1500.rt,Table3,BeUfVs,1500,consistency,Unknown,Consistent,7156.997
+./benchmarkTables/Table4_1500.rt,Table4,BeArFs,1500,consistency,Unknown,Consistent,7110.378
+./benchmarkTables/Table4_1500.rt,Table4,BeArVs,1500,consistency,Unknown,Consistent,7109.817
+./benchmarkTables/Table4_1500.rt,Table4,BeUfFs,1500,consistency,Unknown,Consistent,7106.487
+./benchmarkTables/Table4_1500.rt,Table4,BeUfVs,1500,consistency,Unknown,Consistent,7103.360
+./benchmarkTables/Table1_1550.rt,Table1,BeArFs,1550,consistency,Inconsistent,Inconsistent,66.672
+./benchmarkTables/Table1_1550.rt,Table1,BeArVs,1550,consistency,Inconsistent,Inconsistent,70.087
+./benchmarkTables/Table1_1550.rt,Table1,BeUfFs,1550,consistency,Inconsistent,Inconsistent,9.627
+./benchmarkTables/Table1_1550.rt,Table1,BeUfVs,1550,consistency,Inconsistent,Inconsistent,8.623
+./benchmarkTables/Table2_1550.rt,Table2,BeArFs,1550,consistency,Inconsistent,Inconsistent,71.397
+./benchmarkTables/Table2_1550.rt,Table2,BeArVs,1550,consistency,Inconsistent,Inconsistent,69.631
+./benchmarkTables/Table2_1550.rt,Table2,BeUfFs,1550,consistency,Inconsistent,Inconsistent,9.320
+./benchmarkTables/Table2_1550.rt,Table2,BeUfVs,1550,consistency,Inconsistent,Inconsistent,8.727
+./benchmarkTables/Table3_1550.rt,Table3,BeArFs,1550,consistency,Unknown,Consistent,7146.977
+./benchmarkTables/Table3_1550.rt,Table3,BeArVs,1550,consistency,Unknown,Consistent,7153.122
+./benchmarkTables/Table3_1550.rt,Table3,BeUfFs,1550,consistency,Unknown,Consistent,7147.523
+./benchmarkTables/Table3_1550.rt,Table3,BeUfVs,1550,consistency,Unknown,Consistent,7150.559
+./benchmarkTables/Table4_1550.rt,Table4,BeArFs,1550,consistency,Unknown,Consistent,7105.133
+./benchmarkTables/Table4_1550.rt,Table4,BeArVs,1550,consistency,Unknown,Consistent,7105.445
+./benchmarkTables/Table4_1550.rt,Table4,BeUfFs,1550,consistency,Unknown,Consistent,7104.716
+./benchmarkTables/Table4_1550.rt,Table4,BeUfVs,1550,consistency,Unknown,Consistent,7107.639
+./benchmarkTables/Table1_1600.rt,Table1,BeArFs,1600,consistency,Inconsistent,Inconsistent,79.824
+./benchmarkTables/Table1_1600.rt,Table1,BeArVs,1600,consistency,Inconsistent,Inconsistent,78.022
+./benchmarkTables/Table1_1600.rt,Table1,BeUfFs,1600,consistency,Inconsistent,Inconsistent,10.574
+./benchmarkTables/Table1_1600.rt,Table1,BeUfVs,1600,consistency,Inconsistent,Inconsistent,9.450
+./benchmarkTables/Table2_1600.rt,Table2,BeArFs,1600,consistency,Inconsistent,Inconsistent,78.720
+./benchmarkTables/Table2_1600.rt,Table2,BeArVs,1600,consistency,Inconsistent,Inconsistent,79.195
+./benchmarkTables/Table2_1600.rt,Table2,BeUfFs,1600,consistency,Inconsistent,Inconsistent,10.093
+./benchmarkTables/Table2_1600.rt,Table2,BeUfVs,1600,consistency,Inconsistent,Inconsistent,9.252
+./benchmarkTables/Table3_1600.rt,Table3,BeArFs,1600,consistency,Unknown,Consistent,7144.224
+./benchmarkTables/Table3_1600.rt,Table3,BeArVs,1600,consistency,Unknown,Consistent,7151.395
+./benchmarkTables/Table3_1600.rt,Table3,BeUfFs,1600,consistency,Unknown,Consistent,7148.224
+./benchmarkTables/Table3_1600.rt,Table3,BeUfVs,1600,consistency,Unknown,Consistent,7155.421
+./benchmarkTables/Table4_1600.rt,Table4,BeArFs,1600,consistency,Unknown,Consistent,7100.899
+./benchmarkTables/Table4_1600.rt,Table4,BeArVs,1600,consistency,Unknown,Consistent,7101.680

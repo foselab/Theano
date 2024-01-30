@@ -1,6 +1,7 @@
 package requirements2Z3.encodings.step;
 
 import requirements2Z3.encodings.trace.TraceEncoder;
+import requirements2Z3.z3formulae.Z3Formula;
 
 public class VariableStepEncoder extends StepEncoder {
 
@@ -12,9 +13,17 @@ public class VariableStepEncoder extends StepEncoder {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getTracePositionMonotonicConstraint(String signalname, String position) {
-		return this.getTraceEncoder().getTracePosition(signalname, position) + "<"
-				+ this.getTraceEncoder().getTracePosition(signalname, position + " + 1");
+	public Z3Formula getTracePositionMonotonicConstraint(String signalname, String position) {
+		String nextPosition;
+		try {
+			nextPosition = String.valueOf(Integer.parseInt(position) + 1);
+		} catch (NumberFormatException e) {
+			nextPosition = position + " + 1";
+		}
+
+		return Z3Formula.getPredicate(this.getTraceEncoder().getTracePosition(signalname, position),
+				Z3Formula.getRelationalOperator("<"),
+				this.getTraceEncoder().getTracePosition(signalname, nextPosition));
 	}
 
 }

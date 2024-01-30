@@ -35,8 +35,10 @@ import generated.matlabParser.VariabledefinitionContext;
 import generated.matlabParser.VariablesdefinitionsContext;
 import generated.matlabVisitor;
 import requirements2Z3.encodings.Encoder;
+import requirements2Z3.z3formulae.Z3Expression;
+import requirements2Z3.z3formulae.Z3Formula;
 
-public abstract class Table2Z3Visitor implements matlabVisitor<String> {
+public abstract class Table2Z3Visitor implements matlabVisitor<Z3Formula> {
 
 	private final Encoder encoder;
 
@@ -45,307 +47,417 @@ public abstract class Table2Z3Visitor implements matlabVisitor<String> {
 	}
 
 	@Override
-	public String visitTerminal(TerminalNode node) {
+	public Z3Expression visitTerminal(TerminalNode node) {
 		if (node.getSymbol().getType() == matlabLexer.CONSTANT) {
-			return node.getText();
+			return Z3Formula.getConstant(node.getText());
 		}
-		if (node.getSymbol().getType() == matlabLexer.NE_OP) {
-			return "!=";
-		}
+//		if (node.getSymbol().getType() == matlabLexer.NE_OP) {
+//			return "!=";
+//		}
 		if (node.getSymbol().getType() == matlabLexer.CR) {
-			return "";
+			return Z3Formula.getEmpty();
 		}
-		return node.getText();
+		return Z3Formula.getVariable(node.getText());
 	}
 
 	@Override
-	public String visitPrimaryExpression(PrimaryExpressionContext ctx) {
-		StringBuilder b = new StringBuilder();
-
-		b.append(ctx.getChild(1).accept(this));
-
-		return b.toString();
+	public Z3Formula visitPrimaryExpression(PrimaryExpressionContext ctx) {
+		return ctx.getChild(1).accept(this);
 	}
 
 	@Override
-	public String visitVariablesdefinitions(VariablesdefinitionsContext ctx) {
-		return "";
+	public Z3Formula visitVariablesdefinitions(VariablesdefinitionsContext ctx) {
+		return Z3Formula.getEmpty();
 	}
 
 	@Override
-	public String visitRequirementsdefinitions(RequirementsdefinitionsContext ctx) {
-		StringBuilder b = new StringBuilder();
+	public Z3Formula visitRequirementsdefinitions(RequirementsdefinitionsContext ctx) {
 
-		b.append("And(");
+		Z3Formula f = Z3Formula.getTrue();
 
-		b.append(ctx.getChild(2).accept(this));
+		f = Z3Formula.getAnd(f, ctx.getChild(2).accept(this));
 		for (int i = 3; i < ctx.getChildCount() - 2; i++) {
-			b.append("," + ctx.getChild(i).accept(this));
+			f = Z3Formula.getAnd(f, ctx.getChild(i).accept(this));
 		}
-		b.append(")");
-
-		return b.toString();
+		return f;
 	}
 
 	@Override
-	public String visitTypeSpecifier(TypeSpecifierContext ctx) {
-		return "";
+	public Z3Formula visitTypeSpecifier(TypeSpecifierContext ctx) {
+		return null;
 	}
 
 	@Override
-	public String visit(ParseTree tree) {
-		StringBuilder b = new StringBuilder();
+	public Z3Formula visit(ParseTree tree) {
+		Z3Formula b = Z3Formula.getEmpty();
 
 		for (int i = 0; i < tree.getChildCount(); i++) {
-			b.append(tree.getChild(i).accept(this));
-		}
 
-		return b.toString();
+			Z3Formula f = tree.getChild(i).accept(this);
+
+			if (!f.equals(Z3Formula.getEmpty())) {
+				if (b.equals(Z3Formula.getEmpty())) {
+					b = f;
+				} else {
+					throw new IllegalArgumentException("Can not change " + b);
+				}
+			}
+		}
+		return b;
 	}
 
 	@Override
-	public String visitChildren(RuleNode node) {
-		StringBuilder b = new StringBuilder();
+	public Z3Formula visitChildren(RuleNode node) {
+		Z3Formula b = Z3Formula.getEmpty();
 
 		for (int i = 0; i < node.getChildCount(); i++) {
-			b.append(node.getChild(i).accept(this));
-		}
 
-		return b.toString();
-	}
+			Z3Formula f = node.getChild(i).accept(this);
 
-	@Override
-	public String visitErrorNode(ErrorNode node) {
-		return node.getText();
-	}
-
-	@Override
-	public String visitPrimary_expression(Primary_expressionContext ctx) {
-		StringBuilder b = new StringBuilder();
-
-		for (int i = 0; i < ctx.getChildCount(); i++) {
-			b.append(ctx.getChild(i).accept(this));
-		}
-
-		return b.toString();
-	}
-
-	@Override
-	public String visitPostfix_expression(Postfix_expressionContext ctx) {
-		StringBuilder b = new StringBuilder();
-
-		for (int i = 0; i < ctx.getChildCount(); i++) {
-			b.append(ctx.getChild(i).accept(this));
-		}
-
-		return b.toString();
-	}
-
-	@Override
-	public String visitIndex_expression(Index_expressionContext ctx) {
-		StringBuilder b = new StringBuilder();
-
-		for (int i = 0; i < ctx.getChildCount(); i++) {
-			b.append(ctx.getChild(i).accept(this));
-		}
-
-		return b.toString();
-	}
-
-	@Override
-	public String visitUnary_expression(Unary_expressionContext ctx) {
-		StringBuilder b = new StringBuilder();
-
-		for (int i = 0; i < ctx.getChildCount(); i++) {
-			b.append(ctx.getChild(i).accept(this));
-		}
-
-		return b.toString();
-	}
-
-	@Override
-	public String visitUnary_operator(Unary_operatorContext ctx) {
-		StringBuilder b = new StringBuilder();
-
-		for (int i = 0; i < ctx.getChildCount(); i++) {
-			b.append(ctx.getChild(i).accept(this));
-		}
-
-		return b.toString();
-	}
-
-	@Override
-	public String visitMultiplicative_expression(Multiplicative_expressionContext ctx) {
-		StringBuilder b = new StringBuilder();
-
-		for (int i = 0; i < ctx.getChildCount(); i++) {
-			b.append(ctx.getChild(i).accept(this));
-		}
-
-		return b.toString();
-	}
-
-	@Override
-	public String visitAdditive_expression(Additive_expressionContext ctx) {
-		StringBuilder b = new StringBuilder();
-
-		for (int i = 0; i < ctx.getChildCount(); i++) {
-			b.append(ctx.getChild(i).accept(this));
-		}
-
-		return b.toString();
-	}
-
-	@Override
-	public String visitRelational_expression(Relational_expressionContext ctx) {
-		StringBuilder b = new StringBuilder();
-
-		for (int i = 0; i < ctx.getChildCount(); i++) {
-			b.append(ctx.getChild(i).accept(this));
-		}
-
-		return b.toString();
-	}
-
-	@Override
-	public String visitEquality_expression(Equality_expressionContext ctx) {
-		StringBuilder b = new StringBuilder();
-
-		for (int i = 0; i < ctx.getChildCount(); i++) {
-			b.append(ctx.getChild(i).accept(this));
-		}
-
-		return b.toString();
-	}
-
-	@Override
-	public String visitAnd_expression(And_expressionContext ctx) {
-		StringBuilder b = new StringBuilder();
-
-		if (ctx.getChildCount() == 1) {
-			b.append(ctx.getChild(0).accept(this));
-		} else {
-
-			String part1 = ctx.getChild(0).accept(this);
-			String part2 = ctx.getChild(2).accept(this);
-			if (part1.equals("True")) {
-				return part2;
+			if (!f.equals(Z3Formula.getEmpty())) {
+				if (b.equals(Z3Formula.getEmpty())) {
+					b = f;
+				} else {
+					throw new IllegalArgumentException("Can not change " + b);
+				}
 			}
-			if (part1.equals("False")) {
-				return "False";
+		}
+		return b;
+	}
+
+	@Override
+	public Z3Formula visitErrorNode(ErrorNode node) {
+		return Z3Formula.getVariable(node.getText());
+	}
+
+	@Override
+	public Z3Formula visitPrimary_expression(Primary_expressionContext ctx) {
+		Z3Formula b = Z3Formula.getEmpty();
+
+		for (int i = 0; i < ctx.getChildCount(); i++) {
+
+			Z3Formula f = ctx.getChild(i).accept(this);
+
+			if (!f.equals(Z3Formula.getEmpty())) {
+				if (b.equals(Z3Formula.getEmpty())) {
+					b = f;
+				} else {
+					throw new IllegalArgumentException("Can not change " + b);
+				}
 			}
-
-			b.append("And(" + part1 + "," + part2 + ")");
 		}
-
-		return b.toString();
+		return b;
 	}
 
 	@Override
-	public String visitOr_expression(Or_expressionContext ctx) {
-		StringBuilder b = new StringBuilder();
+	public Z3Formula visitPostfix_expression(Postfix_expressionContext ctx) {
+		Z3Formula b = Z3Formula.getEmpty();
 
+		for (int i = 0; i < ctx.getChildCount(); i++) {
+
+			Z3Formula f = ctx.getChild(i).accept(this);
+
+			if (!f.equals(Z3Formula.getEmpty())) {
+				if (b.equals(Z3Formula.getEmpty())) {
+					b = f;
+				} else {
+					throw new IllegalArgumentException("Can not change " + b);
+				}
+			}
+		}
+		return b;
+	}
+
+	@Override
+	public Z3Formula visitIndex_expression(Index_expressionContext ctx) {
+		Z3Formula b = Z3Formula.getEmpty();
+
+		for (int i = 0; i < ctx.getChildCount(); i++) {
+
+			Z3Formula f = ctx.getChild(i).accept(this);
+
+			if (!f.equals(Z3Formula.getEmpty())) {
+				if (b.equals(Z3Formula.getEmpty())) {
+					b = f;
+				} else {
+					throw new IllegalArgumentException("Can not change " + b);
+				}
+			}
+		}
+		return b;
+	}
+
+	@Override
+	public Z3Formula visitUnary_expression(Unary_expressionContext ctx) {
+		Z3Formula b = Z3Formula.getEmpty();
+
+		for (int i = 0; i < ctx.getChildCount(); i++) {
+
+			Z3Formula f = ctx.getChild(i).accept(this);
+
+			if (!f.equals(Z3Formula.getEmpty())) {
+				if (b.equals(Z3Formula.getEmpty())) {
+					b = f;
+				} else {
+					throw new IllegalArgumentException("Can not change " + b);
+				}
+			}
+		}
+		return b;
+	}
+
+	@Override
+	public Z3Formula visitUnary_operator(Unary_operatorContext ctx) {
+		Z3Formula b = Z3Formula.getEmpty();
+
+		for (int i = 0; i < ctx.getChildCount(); i++) {
+
+			Z3Formula f = ctx.getChild(i).accept(this);
+
+			if (!f.equals(Z3Formula.getEmpty())) {
+				if (b.equals(Z3Formula.getEmpty())) {
+					b = f;
+				} else {
+					throw new IllegalArgumentException("Can not change " + b);
+				}
+			}
+		}
+		return b;
+	}
+
+	@Override
+	public Z3Formula visitMultiplicative_expression(Multiplicative_expressionContext ctx) {
+		Z3Formula b = Z3Formula.getEmpty();
+
+		for (int i = 0; i < ctx.getChildCount(); i++) {
+
+			Z3Formula f = ctx.getChild(i).accept(this);
+
+			if (!f.equals(Z3Formula.getEmpty())) {
+				if (b.equals(Z3Formula.getEmpty())) {
+					b = f;
+				} else {
+					throw new IllegalArgumentException("Can not change " + b);
+				}
+			}
+		}
+		return b;
+	}
+
+	@Override
+	public Z3Expression visitAdditive_expression(Additive_expressionContext ctx) {
+
+		if(ctx.getChildCount()==1) {
+			return (Z3Expression) ctx.getChild(0).accept(this); 
+		}
+		
+		if(ctx.getChildCount()==3) {
+			return Z3Formula.getExpression( 
+					(Z3Expression) ctx.getChild(0).accept(this), 
+					ctx.getChild(1).getText(), 
+					(Z3Expression) ctx.getChild(2).accept(this));
+			
+		}
+		throw new IllegalArgumentException("No option available ");
+	}
+
+	@Override
+	public Z3Formula visitRelational_expression(Relational_expressionContext ctx) {
+		
+		if(ctx.getChildCount()==1) {
+			return ctx.getChild(0).accept(this);
+		}
+		if(ctx.getChildCount()==3) {
+			return Z3Formula.getPredicate(
+					(Z3Expression) ctx.getChild(0).accept(this), 
+					Z3Formula.getRelationalOperator(ctx.getChild(1).getText()), 
+					(Z3Expression) ctx.getChild(2).accept(this));
+		}
+		
+		throw new IllegalArgumentException("No option available ");
+	}
+
+	@Override
+	public Z3Formula visitEquality_expression(Equality_expressionContext ctx) {
+		
+		if(ctx.getChildCount()==1) {
+			return ctx.getChild(0).accept(this); 
+		}
+
+		Z3Formula b = Z3Formula.getEmpty();
+		ctx.getChild(2).accept(this);
+		
+		if(ctx.getChildCount()==3) {
+			return Z3Formula.getPredicate(
+					(Z3Expression) ctx.getChild(0).accept(this), 
+					Z3Formula.getRelationalOperator(ctx.getChild(1).getText()), 
+					(Z3Expression) ctx.getChild(2).accept(this));
+			
+		}
+
+		throw new IllegalArgumentException("No option avalilable");
+	}
+
+	@Override
+	public Z3Formula visitAnd_expression(And_expressionContext ctx) {
 		if (ctx.getChildCount() == 1) {
-			b.append(ctx.getChild(0).accept(this));
+			return ctx.getChild(0).accept(this);
 		} else {
-			b.append("Or(" + ctx.getChild(0).accept(this) + "," + ctx.getChild(2).accept(this) + ")");
+			Z3Formula part1 = ctx.getChild(0).accept(this);
+			Z3Formula part2 = ctx.getChild(2).accept(this);
+			return Z3Formula.getAnd(part1, part2);
 		}
-
-		return b.toString();
 	}
 
 	@Override
-	public String visitExpression(ExpressionContext ctx) {
-		StringBuilder b = new StringBuilder();
+	public Z3Formula visitOr_expression(Or_expressionContext ctx) {
+		if (ctx.getChildCount() == 1) {
+			return ctx.getChild(0).accept(this);
+		} else {
+			return Z3Formula.getOr(ctx.getChild(0).accept(this), ctx.getChild(2).accept(this));
+		}
+	}
+
+	@Override
+	public Z3Formula visitExpression(ExpressionContext ctx) {
+		Z3Formula b = Z3Formula.getEmpty();
 
 		for (int i = 0; i < ctx.getChildCount(); i++) {
-			b.append(ctx.getChild(i).accept(this));
-		}
+			if (ctx.getChild(i).accept(this) != null) {
+				Z3Formula f = ctx.getChild(i).accept(this);
 
-		return b.toString();
+				if (!f.equals(Z3Formula.getEmpty())) {
+					if (b.equals(Z3Formula.getEmpty())) {
+						b = f;
+					} else {
+						throw new IllegalArgumentException("Can not change " + b);
+					}
+				}
+			}
+		}
+		return b;
 	}
 
 	@Override
-	public String visitAssignment_expression(Assignment_expressionContext ctx) {
-		StringBuilder b = new StringBuilder();
+	public Z3Formula visitAssignment_expression(Assignment_expressionContext ctx) {
+		Z3Formula b = Z3Formula.getEmpty();
 
 		for (int i = 0; i < ctx.getChildCount(); i++) {
-			b.append(ctx.getChild(i).accept(this));
-		}
 
-		return b.toString();
+			Z3Formula f = ctx.getChild(i).accept(this);
+
+			if (!f.equals(Z3Formula.getEmpty())) {
+				if (b.equals(Z3Formula.getEmpty())) {
+					b = f;
+				} else {
+					throw new IllegalArgumentException("Can not change " + b);
+				}
+			}
+		}
+		return b;
 	}
 
 	@Override
-	public String visitStatement(StatementContext ctx) {
-		StringBuilder b = new StringBuilder();
+	public Z3Formula visitStatement(StatementContext ctx) {
+		Z3Formula b = Z3Formula.getEmpty();
 
 		for (int i = 0; i < ctx.getChildCount(); i++) {
-			b.append(ctx.getChild(i).accept(this));
-		}
 
-		return b.toString();
+			Z3Formula f = ctx.getChild(i).accept(this);
+
+			if (!f.equals(Z3Formula.getEmpty())) {
+				if (b.equals(Z3Formula.getEmpty())) {
+					b = f;
+				} else {
+					throw new IllegalArgumentException("Can not change " + b);
+				}
+			}
+		}
+		return b;
 	}
 
 	@Override
-	public String visitStatement_list(Statement_listContext ctx) {
-		StringBuilder b = new StringBuilder();
+	public Z3Formula visitStatement_list(Statement_listContext ctx) {
+		Z3Formula b = Z3Formula.getEmpty();
 
 		for (int i = 0; i < ctx.getChildCount(); i++) {
-			b.append(ctx.getChild(i).accept(this));
+
+			Z3Formula f = ctx.getChild(i).accept(this);
+
+			if (!f.equals(Z3Formula.getEmpty())) {
+				if (b.equals(Z3Formula.getEmpty())) {
+					b = f;
+				} else {
+					throw new IllegalArgumentException("Can not change " + b);
+				}
+			}
 		}
-
-		return b.toString();
+		return b;
 	}
 
-	public abstract String visitPrev_expression(Prev_expressionContext ctx);
+	public abstract Z3Expression visitPrev_expression(Prev_expressionContext ctx);
 
-	public abstract String visitDur_expression(Dur_expressionContext ctx);
-
-	@Override
-	public String visitVariabledefinition(VariabledefinitionContext ctx) {
-		return "";
-	}
+	public abstract Z3Formula visitDur_expression(Dur_expressionContext ctx);
 
 	@Override
-	public String visitVariableName(VariableNameContext ctx) {
-		return ctx.getText();
+	public Z3Formula visitVariabledefinition(VariabledefinitionContext ctx) {
+		return Z3Formula.getEmpty();
 	}
 
 	@Override
-	public String visitIo(IoContext ctx) {
-		return ctx.getText();
+	public Z3Expression visitVariableName(VariableNameContext ctx) {
+		return Z3Formula.getVariable(ctx.getText());
 	}
 
 	@Override
-	public String visitRequirement(RequirementContext ctx) {
-		StringBuilder b = new StringBuilder();
-
-		b.append("Implies(" + ctx.getChild(0).accept(this) + "," + ctx.getChild(2).accept(this) + ")");
-
-		return b.toString();
+	public Z3Expression visitIo(IoContext ctx) {
+		return Z3Formula.getVariable(ctx.getText());
 	}
 
 	@Override
-	public String visitPrecondition(PreconditionContext ctx) {
-		StringBuilder b = new StringBuilder();
+	public Z3Formula visitRequirement(RequirementContext ctx) {
+		Z3Formula b = Z3Formula.getImplies(ctx.getChild(0).accept(this), ctx.getChild(2).accept(this));
+
+		return b;
+	}
+
+	@Override
+	public Z3Formula visitPrecondition(PreconditionContext ctx) {
+		Z3Formula b = Z3Formula.getEmpty();
 
 		for (int i = 0; i < ctx.getChildCount(); i++) {
-			b.append(ctx.getChild(i).accept(this));
-		}
 
-		return b.toString();
+			Z3Formula f = ctx.getChild(i).accept(this);
+			
+
+			if (!f.equals(Z3Formula.getEmpty())) {
+				if (b.equals(Z3Formula.getEmpty())) {
+					b = f;
+				} else {
+					throw new IllegalArgumentException("Can not change " + b);
+				}
+			}
+		}
+		return b;
 	}
 
 	@Override
-	public String visitPostcondition(PostconditionContext ctx) {
-		StringBuilder b = new StringBuilder();
+	public Z3Formula visitPostcondition(PostconditionContext ctx) {
+		Z3Formula b = Z3Formula.getEmpty();
 
 		for (int i = 0; i < ctx.getChildCount(); i++) {
-			b.append(ctx.getChild(i).accept(this));
-		}
 
-		return b.toString();
+			Z3Formula f = ctx.getChild(i).accept(this);
+
+			if (!f.equals(Z3Formula.getEmpty())) {
+				if (b.equals(Z3Formula.getEmpty())) {
+					b = f;
+				} else {
+					throw new IllegalArgumentException("Can not change " + b);
+				}
+			}
+		}
+		return b;
 	}
 
 	public Encoder getEncoder() {

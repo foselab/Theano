@@ -75,7 +75,7 @@ public class Main {
 
 		String boundVal = cmd.getOptionValue("b") != null ? cmd.getOptionValue("b") : cmd.getOptionValue("bound");
 
-		int boundparam = boundVal != null ? Integer.parseInt(boundVal) : -1;
+		int boundparam = boundVal != null ? Integer.parseInt(boundVal)+2 : -1;
 
 		// System.out.println("Processing the file: "+inputFilePath);
 		String typeInput = cmd.getOptionValue("t") != null ? cmd.getOptionValue("t") : cmd.getOptionValue("type");
@@ -112,42 +112,6 @@ public class Main {
 
 	private static <T extends Table2Z3Visitor> void translate(String inputFilePath, String outputFilePath,
 			String selectedEncoding, int bound, Functionality<T> functionality) throws Exception {
-		float ts = 2;
-
-		System.out.println(selectedEncoding);
-
-		Table2Z3Visitor z3visitor = null;
-		switch (selectedEncoding) {
-		// unbounded
-		case "UeArFs":
-			z3visitor = new UeArFsFactory(ts).getVisitor();
-			break;
-		case "UeUfFs":
-			z3visitor = new UeUfFsFactory(ts).getVisitor();
-			break;
-		case "UeArVs":
-			z3visitor = new UeArVsFactory().getVisitor();
-			break;
-		case "UeUfVs":
-			z3visitor = new UeUfVsFactory().getVisitor();
-			break;
-		// bounded
-		case "BeArFs":
-			z3visitor = new BeArFsFactory(bound, ts).getVisitor();
-			break;
-		case "BeUfFs":
-			z3visitor = new BeUfFsFactory(bound, ts).getVisitor();
-			break;
-		case "BeArVs":
-			z3visitor = new BeArVsFactory(bound).getVisitor();
-			break;
-		case "BeUfVs":
-			z3visitor = new BeUfVsFactory(bound).getVisitor();
-			break;
-		default:
-			throw new IllegalArgumentException("Encoding: " + selectedEncoding + " is not supported. ");
-		}
-		new Translator(z3visitor, functionality, new FileReader(inputFilePath), new FileWriter(outputFilePath))
-				.translate();
+		Encodings.translate(inputFilePath, outputFilePath, selectedEncoding, bound, functionality).translate();
 	}
 }

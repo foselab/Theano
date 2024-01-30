@@ -3,6 +3,7 @@ package requirements2Z3.encodings.step;
 import org.apache.commons.lang3.StringUtils;
 
 import requirements2Z3.encodings.trace.TraceEncoder;
+import requirements2Z3.z3formulae.Z3Formula;
 
 public class FixedStepEncoder extends StepEncoder {
 
@@ -23,17 +24,19 @@ public class FixedStepEncoder extends StepEncoder {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getTracePositionMonotonicConstraint(String signalname, String position) {
+	public Z3Formula getTracePositionMonotonicConstraint(String signalname, String position) {
 
 		String nextPosition;
-		if (StringUtils.isNumeric(position)) {
+		try {
 			nextPosition = String.valueOf(Integer.parseInt(position) + 1);
-		} else {
+		} catch (NumberFormatException e) {
 			nextPosition = position + " + 1";
 		}
 
-		return this.getTraceEncoder().getTracePosition(signalname, nextPosition) + "-"
-				+ this.getTraceEncoder().getTracePosition(signalname, position) + "==" + ts;
+		return Z3Formula.getPredicate(
+				Z3Formula.getExpression(this.getTraceEncoder().getTracePosition(signalname, nextPosition), "-",
+						this.getTraceEncoder().getTracePosition(signalname, position)),
+				Z3Formula.getRelationalOperator("=="), Z3Formula.getVariable(Float.toString(ts)));
 
 	}
 

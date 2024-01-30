@@ -3,13 +3,14 @@ package requirements2Z3.visitors.translators;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 import generated.matlabLexer;
-import generated.matlabVisitor;
 import generated.matlabParser.Is_not_startupContext;
 import generated.matlabParser.Is_startupContext;
 import generated.matlabParser.Prev_expressionContext;
 import requirements2Z3.encodings.Encoder;
+import requirements2Z3.z3formulae.Z3Expression;
+import requirements2Z3.z3formulae.Z3Formula;
 
-public abstract class BoundedVisitor extends Table2Z3Visitor implements matlabVisitor<String> {
+public abstract class BoundedVisitor extends Table2Z3Visitor  {
 
 	private final int bound;
 
@@ -34,7 +35,7 @@ public abstract class BoundedVisitor extends Table2Z3Visitor implements matlabVi
 	}
 
 	@Override
-	public String visitTerminal(TerminalNode node) {
+	public Z3Expression visitTerminal(TerminalNode node) {
 		if (node.getSymbol().getType() == matlabLexer.IDENTIFIER) {
 			return this.getEncoder().getTracePosition(node.getText(), String.valueOf(this.getIndex()));
 		}
@@ -42,26 +43,22 @@ public abstract class BoundedVisitor extends Table2Z3Visitor implements matlabVi
 	}
 
 	@Override
-	public String visitPrev_expression(Prev_expressionContext ctx) {
-
-		StringBuilder b = new StringBuilder();
+	public Z3Expression visitPrev_expression(Prev_expressionContext ctx) {
 		if (this.index == 0) {
-			b.append(this.getEncoder().getTracePosition(ctx.getChild(2).getText(), String.valueOf(this.getIndex())));
+			return this.getEncoder().getTracePosition(ctx.getChild(2).getText(), String.valueOf(this.getIndex()));
 		} else {
-			b.append(
-					this.getEncoder().getTracePosition(ctx.getChild(2).getText(), String.valueOf(this.getIndex() - 1)));
+			return this.getEncoder().getTracePosition(ctx.getChild(2).getText(), String.valueOf(this.getIndex() - 1));
 		}
-		return b.toString();
 	}
 
 	@Override
-	public String visitIs_startup(Is_startupContext ctx) {
+	public Z3Formula visitIs_startup(Is_startupContext ctx) {
 		return this.getEncoder().getIsStartup("tau", String.valueOf(this.getIndex()));
 	}
 
 	@Override
-	public String visitIs_not_startup(Is_not_startupContext ctx) {
-		return "Not(" + this.getEncoder().getIsStartup("tau", String.valueOf(this.getIndex())) + ")";
+	public Z3Formula visitIs_not_startup(Is_not_startupContext ctx) {
+		return Z3Formula.getNot(this.getEncoder().getIsStartup("tau", String.valueOf(this.getIndex())));
 	}
 
 	public int getBound() {

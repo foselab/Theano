@@ -3,6 +3,8 @@ package requirements2Z3.visitors.translators;
 import generated.matlabParser.Dur_expressionContext;
 import generated.matlabVisitor;
 import requirements2Z3.encodings.Encoder;
+import requirements2Z3.z3formulae.Z3Expression;
+import requirements2Z3.z3formulae.Z3Formula;
 
 
 /**
@@ -12,9 +14,7 @@ import requirements2Z3.encodings.Encoder;
 * @version 1.0
 * @since   2023-10-03
 */
-public class BeArFs extends BoundedVisitor implements matlabVisitor<String> {
-
-	
+public class BeArFs extends BoundedVisitor implements matlabVisitor<Z3Formula> {
 
 	private float ts;
 
@@ -27,32 +27,22 @@ public class BeArFs extends BoundedVisitor implements matlabVisitor<String> {
 	}
 
 	
-
 	@Override
-	public String visitDur_expression(Dur_expressionContext ctx) {
+	public Z3Formula visitDur_expression(Dur_expressionContext ctx) {
 
-		String constant = ctx.getChild(5).getText();
+		Z3Expression constant = Z3Formula.getConstant(ctx.getChild(5).getText());
 
-		String part1 = "tau[i]>=" + constant;
-		String part2 = constant + ">=Ts";
+		Z3Formula part1 = Z3Formula.getPredicate(Z3Formula.getVariable("tau[i]"),Z3Formula.getRelationalOperator(">="),constant);
+		Z3Formula part2 = Z3Formula.getPredicate(constant,Z3Formula.getRelationalOperator(">="),Z3Formula.getVariable("Ts"));
 
-		String part3 = "And(";
+		Z3Formula part3 = Z3Formula.getTrue();
 
-		int lb = (int) (this.getIndex() - Float.parseFloat(constant) / this.ts);
+		int lb = (int) (this.getIndex() - Float.parseFloat(constant.toString()) / this.ts);
 
 		for (int n = lb; n <= this.getIndex(); n++) {
-			part3 = part3 + ctx.getChild(2).accept(new BeArFs(this.getEncoder(),n, this.ts));
-			if (n != this.getIndex()) {
-				part3 = part3 + ",";
-			}
+			part3 = Z3Formula.getAnd(part3,ctx.getChild(2).accept(new BeArFs(this.getEncoder(),n, this.ts)));
 		}
-		part3 = part3 + ")";
 
-		return "And(" + part1 + "," + part2 + "," + part3 + ")";
+		return Z3Formula.getAnd(part1,part2,part3);
 	}
-
-	
-
-
-	
 }
