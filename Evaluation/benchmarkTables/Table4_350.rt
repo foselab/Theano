@@ -1,9 +1,0 @@
-vardef
-  u,Int,input;
-  y,Int,output;
-endvardef
-reqdef
-  isStartup, y == 0;
-  !isStartup & u == prev(u) + 1, y == prev(y) + 1;
-  !isStartup & u ~= prev(u) + 1, y < 23;
-endreqdef
