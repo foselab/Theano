@@ -630,3 +630,12 @@ inputfile,table,encoding,bound,check,result,expectedResult,time
 ./benchmarkTables/Table4_2000.rt,Table4,BeArFs,2000,completeness,Complete,Complete,3.031100
 ./benchmarkTables/Table4_2000.rt,Table4,BeArVs,2000,completeness,Complete,Complete,2.822600
 ./benchmarkTables/Table4_2000.rt,Table4,BeUfFs,2000,completeness,Complete,Complete,3.016000
+./benchmarkTables/Table4_2000.rt,Table4,BeUfVs,2000,completeness,Complete,Complete,2.793500
+./benchmarkTables/Table1_300.rt,Table1,BeUfVs,300,completeness,Incomplete,Incomplete,0.863000
+./benchmarkTables/Table2_350.rt,Table2,BeUfFs,350,completeness,Complete,Complete,0.711444
+./benchmarkTables/Table3_350.rt,Table3,BeUfFs,350,completeness,Incomplete,Incomplete,1.165444
+./benchmarkTables/Table2_400.rt,Table2,BeUfFs,400,completeness,Complete,Complete,0.730333
+./benchmarkTables/Table3_400.rt,Table3,BeUfFs,400,completeness,Incomplete,Incomplete,1.266556
+./benchmarkTables/Table4_450.rt,Table4,BeArVs,450,completeness,Complete,Complete,1.064000
+./benchmarkTables/Table3_500.rt,Table3,BeArVs,500,completeness,Incomplete,Incomplete,1.443889
+./benchmarkTables/Table3_550.rt,Table3,BeArVs,550,completeness,Incomplete,Incomplete,1.560111

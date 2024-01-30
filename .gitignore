@@ -5,4 +5,6 @@ Evaluation/*.pdf
 Evaluation/scripts/*
 benchmarkTables/*
 Evaluation/benchmarkTables/*
-Evaluation/results/
+Evaluation/results/*.pdf
+.resultsAverage_consistency.csv
+Evaluation/results/.resultsAverage_consistency.csv
