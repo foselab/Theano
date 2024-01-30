@@ -1,19 +1,7 @@
-This project provides a framework that enable the verification of the consistency and completeness of Requirements Tables.
+Theano is a framework that enables the verification of the consistency and completeness of Requirements Tables.
 
-The project is made by three parts:
+The content of each folder is detailed in the following:
 
-(i) The requirementExtractor: it extracts from a model the requirements associated with a given Requirement Tables. The requirementExtractor is a matlab function. It can be executed as follows:
-requirementsTable2requirements("Model", "DestinationFile");
-
-For example, the command
-
-requirementsTable2requirements("ProjectExamples/Example1.slx","ProjectExamples/Example1.txt");
-
-writes the requirements of the Requirements Tables contained in the Simulink model Example1 in the file requirementsExample1.txt
-
-(ii)
-
-
-The project is structured as follows 
-
-- ProjectExamples: contains a set of projects that are used to test the application
+- Workspace: contains the Eclipse workspace containing the implementation Theano. This folder is useful for developers that amy want to work and improve the implementation of Theano
+- Deploy: contains a jar file that contains an instance of Theano that can be used to process existing Requirements Tables. This folder is useful for users of Theano that may want to download an instance of Theano and use it to analyze existing project
+- Evaluation: contains the files that are useful to replicate the experiments presented in our paper.
