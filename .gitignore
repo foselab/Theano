@@ -2,3 +2,5 @@
 slprj/*
 Evaluation/.evalscripts/*
 Evaluation/*.pdf
+Evaluation/scripts/*
+benchmarkTables/*

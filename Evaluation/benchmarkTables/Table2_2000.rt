@@ -1,0 +1,9 @@
+vardef
+  u,Int,input;
+  y,Int,output;
+endvardef
+reqdef
+  isStartup, y == 0;
+  !isStartup, y == prev(y) + 1;
+  !isStartup & prev(y) == 2000, y < 23;
+endreqdef
