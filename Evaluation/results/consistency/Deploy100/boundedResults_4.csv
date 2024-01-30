@@ -1,2 +1,0 @@
-inputfile,table,encoding,bound,check,result,expectedResult,time
-./benchmarkTables/Table4_50.rt,Table4,BeArFs,50,consistency,Unknown,Consistent,7170.191
