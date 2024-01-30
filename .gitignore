@@ -4,3 +4,4 @@ Evaluation/.evalscripts/*
 Evaluation/*.pdf
 Evaluation/scripts/*
 benchmarkTables/*
+Evaluation/benchmarkTables/*
