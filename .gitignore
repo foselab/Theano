@@ -5,3 +5,4 @@ Evaluation/*.pdf
 Evaluation/scripts/*
 benchmarkTables/*
 Evaluation/benchmarkTables/*
+Evaluation/results/
