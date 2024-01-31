@@ -9,3 +9,4 @@ Evaluation/results/*.pdf
 .resultsAverage_consistency.csv
 Evaluation/results/.resultsAverage_consistency.csv
 Evaluation/results/.results_completeness_bounded.csv
+Evaluation/results/.boundedResults_completeness.csv
