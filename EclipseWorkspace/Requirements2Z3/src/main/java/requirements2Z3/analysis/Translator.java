@@ -113,6 +113,7 @@ public class Translator<T extends Table2Z3Visitor> {
 		b.append("\t\t sys.exit(-1)\n");
 		b.append("\t else:\n");
 		b.append("\t\t print('unknown')\n");
+		b.append("#\t\t print(s.reason_unknown())\n");
 		b.append("\t\t sys.exit(0)\n");
 
 		return b.toString();
