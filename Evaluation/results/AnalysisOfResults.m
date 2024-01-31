@@ -15,7 +15,7 @@ if val==1
 elseif val==2 
     check="consistency";
     filePath='./boundedResults_consistency.csv';
-    averageTablePath='./resultsAverage_consistency.csv';
+    averageTablePath='./.resultsAverage_consistency.csv';
 else
     disp("intput not valid")
 end
@@ -32,26 +32,11 @@ end
 
 AverageTable = readtable(averageTablePath); 
 
-
 index=0;
 
 for table = tables
     index=index+1;
-    f = figure('Name',check);
-    orient landscape;
-    set(gcf, 'Color', 'white');
-    set(f, 'Color', 'white');
-       
-    for filter = filters
-        plotter(AverageTable,filter,table,check,index);
-    end
-    legend('Location', 'north', 'Orientation', 'horizontal');
-    legend(filters);
-    set(gca, 'FontSize', 20); % Set font size for axes labels
-    titleFontSize = 20; % Set font size for title
-    set(gcf, 'PaperUnits', 'normalized')
-    set(gcf, 'PaperPosition', [0 0 1 1])
-    saveas(f, strcat(check,table,'.pdf'));
+    plotter(AverageTable,filters,table,check);
 end
 
 
@@ -122,7 +107,10 @@ function [] = checkStatistics(Table,check,tables,filters)
           end
           disp(strcat("check: ",check, "  encoding: ", filter, "  correct verdicts: ", num2str(filterfinalcorrect/filterfinalcount*100), '%'))
        end
-      disp(strcat("Total Time Min: ",num2str(sum(Table.time)/60)));
+       idx = isnan(Table.time);
+       not_nan_time = sum(Table.time(~idx))/60;
+       is_nan_time=sum(idx)*2*60;
+      disp(strcat("Total Time (min): ",num2str(not_nan_time+is_nan_time)));
 end
 
 function [] = computeAverageTable(filePath,averageTablePath)
@@ -166,4 +154,49 @@ function [] = computeAverageTable(filePath,averageTablePath)
        tline = fgetl(fid);
     end
     fclose(fid);
+end
+
+function [] = plotter(Table,filters,table,check)
+
+    rf=rowfilter(Table);
+    FTable=Table(rf.table==table & rf.check==check,:);
+
+    if ~isempty(FTable)
+        f = figure('Name',strcat(check,' ',table));
+        orient landscape;
+        set(gcf, 'Color', 'white');
+        set(f, 'Color', 'white');
+        
+        
+        for filter = filters
+            FilteredTable=Table(rf.encoding==filter & rf.table==table & rf.check==check,:);
+        
+            Time=FilteredTable(:,"time");
+            timeValues=Time{:,1};
+            Bound=FilteredTable(:,"bound");
+            boundValues=Bound{:,1};
+        
+        
+            [sortBoundValues, sortidx] = sort(boundValues);
+            sortTimeValues = timeValues(sortidx);
+            hold on;
+            plot(sortBoundValues,sortTimeValues,'-o');        
+        end
+        
+        grid on;
+        %disp(strcat("mean: ", num2str(mean(timeValues)),"      max: ", num2str(max(timeValues)), "      min: ", num2str(min(timeValues)), "      std: ", num2str(std(timeValues))));
+       % title(strcat(table,": ",FilteredTable{1,7}{1}))
+        ylabel('Time [s]');
+        xlabel('Threshold');
+        set(gcf, 'Color', 'white');
+        legend('Location', 'north', 'Orientation', 'horizontal');
+        legend(filters);
+        set(gca, 'FontSize', 20); % Set font size for axes labels
+        titleFontSize = 20; % Set font size for title
+        set(gcf, 'PaperUnits', 'normalized')
+        set(gcf, 'PaperPosition', [0 0 1 1])
+        saveas(f, strcat(check,table,'.pdf'));
+    else
+       disp(strcat("No results to plot for table: ", table));
+    end
 end
