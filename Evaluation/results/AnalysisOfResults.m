@@ -9,8 +9,8 @@ val=input("Which results do you want to analyze? Type \n 1 - for completeness\n 
 
 if val==1
     check="completeness";
-    filePath='./results_completeness_bounded.csv';
-    averageTablePath='./.results_completeness_bounded.csv';
+    filePath='./boundedResults_completeness.csv';
+    averageTablePath='./.boundedResults_completeness.csv';
 
 elseif val==2 
     check="consistency";
