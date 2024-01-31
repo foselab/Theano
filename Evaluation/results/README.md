@@ -6,6 +6,6 @@
 
 - boundedResults_consistency_smaller.csv: contains the additional experiments executed with smaller models and the bounded technique for the consistency check
 
-- AnalysisOfResults: enables to process the results and generate the plots and the statistics that are part of our paper. After running the script select 1 for the completeness analysis, and 2 for the consistency analysis
+- AnalysisOfBoundResults: enables to process the results and generate the plots and the statistics that are part of our paper. After running the script select 1 for the completeness analysis, and 2 for the consistency analysis
 
-- AnalysisOfResultsSmaller: enable to process the results concerning the additional experiments executed to evaluate the consistency check
+- AnalysisOfBoundResultsSmaller: enable to process the results concerning the additional experiments executed to evaluate the consistency check
