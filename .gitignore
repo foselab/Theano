@@ -15,3 +15,4 @@ Evaluation/results/.unboundedResults_completeness.csv
 Evaluation/results/.unresultsAverage_consistency.csv
 Evaluation/results/.unboundedResults_consistency.csv
 EclipseWorkspace/Requirements2Z3/testtables/*
+EclipseWorkspace/Requirements2Z3/Tests/*
