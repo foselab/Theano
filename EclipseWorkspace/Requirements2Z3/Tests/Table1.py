@@ -17,7 +17,7 @@ tau = Array('tau', I, R)
 # Timestamp structure monotonicity
 s.add(And(ForAll(j,Implies(j>=0,(tau[j + 1]-tau[j]==2.0))),tau[0]==0))
 # Requirements Table
-s.add(And(Not(And(Not(tau[i]==0),u[i]==((i==0)*(u[i])+(i>0)*(u[i-1]))+1)),Not(And(Not(tau[i]==0),u[i]!=((i==0)*(u[i])+(i>0)*(u[i-1]))+1,y[i]<100)),Not(tau[i]==0)))
+s.add(And(Not(And(Not(tau[i]==0),u[i]>0)),Not(And(Not(tau[i]==0),((i==0)*(y[i])+(i>0)*(y[i-1]))==10)),Not(tau[i]==0)))
 # Processing the result
 res=s.check()
 if (res.r ==  Z3_L_FALSE):
@@ -29,4 +29,5 @@ else:
 		 sys.exit(-1)
 	 else:
 		 print('unknown')
+		 print(s.reason_unknown())
 		 sys.exit(0)
