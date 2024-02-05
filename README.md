@@ -11,7 +11,9 @@ This folder is organized as follows:
 
 <h1> Running Theano </h1>
 
-- To run Theano, copy the file Theano.jar in this folder. Then run
+- To run Theano, copy the file Theano.jar from [<a href="[https://github.com/foselab/Theano/releases/tag/v1.0.0](https://github.com/foselab/Theano/releases)">https://github.com/foselab/Theano/releases/tag/v1.0.0</a>](https://github.com/foselab/Theano/releases) in this folder.
+
+- Then run
 
 <code>java -jar Theano.jar -i Table1_5.rt -o Table1_5.py -e BeUfVs -t completeness -b 6</code>
 
