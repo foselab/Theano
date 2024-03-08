@@ -9,11 +9,11 @@
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+		<src.dir>src/main/java</src.dir>
 	</properties>
 
 	<build>
-		<sourceDirectory>../src/main/java</sourceDirectory>
-
+		<sourceDirectory>${src.dir}</sourceDirectory>
 		<plugins>
 			<plugin>
 				<groupId>org.antlr</groupId>
@@ -23,8 +23,8 @@
 				<configuration>
 					<listener>true</listener>
 					<visitor>true</visitor>
-
-					<outputDirectory>src/main/java/generated</outputDirectory>
+					<sourceDirectory>${src.dir}</sourceDirectory>
+					<outputDirectory>src/main/java</outputDirectory>
 				</configuration>
 				<executions>
 					<execution>
