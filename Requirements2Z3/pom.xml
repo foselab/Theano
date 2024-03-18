@@ -23,8 +23,8 @@
 				<configuration>
 					<listener>true</listener>
 					<visitor>true</visitor>
-					<sourceDirectory>${src.dir}</sourceDirectory>
-					<outputDirectory>src/main/java</outputDirectory>
+					<sourceDirectory>src/main/antlr4</sourceDirectory>
+					<outputDirectory>${src.dir}/generated</outputDirectory>
 				</configuration>
 				<executions>
 					<execution>
