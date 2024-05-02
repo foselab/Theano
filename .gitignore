@@ -23,3 +23,5 @@ Theano.jar
 SimulinkExamples/slprj/*
 Table1.rt
 Table1.py
+.venv
+.vs
