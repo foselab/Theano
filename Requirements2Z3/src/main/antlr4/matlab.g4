@@ -37,6 +37,13 @@ package generated;
 
 }
 
+g: primaryExpression | composedExpression;
+
+composedExpression
+:
+	'table' CR primaryExpression 'endtable' CR 'table' CR primaryExpression 'endtable'
+;
+
 primaryExpression
 :
 	variablesdefinitions requirementsdefinitions

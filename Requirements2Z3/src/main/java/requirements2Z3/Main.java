@@ -106,7 +106,7 @@ public class Main {
 
 		}
 		System.out.println("File: " + outputFilePath + " correctly generated");
-		System.out.println("Run \"python3 " + outputFilePath + "\" to check for " + typeInput);
+		System.out.println("Run \"python " + outputFilePath + "\" to check for " + typeInput);
 
 	}
 

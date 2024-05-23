@@ -1,0 +1,22 @@
+table
+vardef
+  u,Int,input;
+  y,Int,output;
+endvardef
+reqdef
+  isStartup, y == 0;
+  !isStartup & u > 0, y == prev(y) + 1;
+  !isStartup & prev(y) == 5, y < 5;
+endreqdef
+endtable
+table
+vardef
+  s,Int,input;
+  t,Int,output;
+endvardef
+reqdef
+  isStartup, t == 0;
+  !isStartup & s > 0, y == prev(t) + 1;
+  !isStartup & prev(t) == 5, t < 5;
+endreqdef
+endtable

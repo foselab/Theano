@@ -18,10 +18,11 @@ EclipseWorkspace/Requirements2Z3/testtables/*
 EclipseWorkspace/Requirements2Z3/Tests/*
 benchmarkTables/*
 Evaluation/replicationPackage/benchmarkTables/*
-Table1_5.py
+Requirements2Z3/src/main/resources/*.py
 Theano.jar
 SimulinkExamples/slprj/*
 Table1.rt
 Table1.py
 .venv
 .vs
+.idea

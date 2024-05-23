@@ -22,6 +22,8 @@ import generated.matlabParser.PreconditionContext;
 import generated.matlabParser.Prev_expressionContext;
 import generated.matlabParser.PrimaryExpressionContext;
 import generated.matlabParser.Primary_expressionContext;
+import generated.matlabParser.GContext;
+import generated.matlabParser.ComposedExpressionContext;
 import generated.matlabParser.Relational_expressionContext;
 import generated.matlabParser.RequirementContext;
 import generated.matlabParser.RequirementsdefinitionsContext;
@@ -62,6 +64,14 @@ public abstract class Table2Z3Visitor implements matlabVisitor<Z3Formula> {
 
 	@Override
 	public Z3Formula visitPrimaryExpression(PrimaryExpressionContext ctx) {
+		return ctx.getChild(1).accept(this);
+	}
+	
+	public Z3Formula visitG(GContext ctx) {
+		return ctx.getChild(1).accept(this);
+	}
+	
+	public Z3Formula visitComposedExpression(ComposedExpressionContext ctx) {
 		return ctx.getChild(1).accept(this);
 	}
 

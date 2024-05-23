@@ -42,13 +42,15 @@ public class Translator<T extends Table2Z3Visitor> {
 		matlabParser parser = new matlabParser(tokens);
 		parser.setBuildParseTree(true);
 
-		ParseTree tree = parser.primaryExpression();
-
+		// ParseTree tree = parser.primaryExpression();
+		ParseTree tree = parser.g();
+		
+		
 		// creates the Z3 solver
 		wt.write("from z3 import *;\n");
 
 		wt.write("# Defines the Z3 solver\n");
-		wt.write("s = Solver()\n");
+		wt.write("solver = Solver()\n");
 
 		// Define the types I and R that are used to define variables
 		wt.write("# Define I and R\n");
@@ -74,11 +76,11 @@ public class Translator<T extends Table2Z3Visitor> {
 
 		// add the monotonicity constraint to the timestamp structure
 		wt.write("# Timestamp structure monotonicity\n");
-		wt.write("s.add(" + this.encoder.getMonotonicityConstraint() + ")\n");
+		wt.write("solver.add(" + this.encoder.getMonotonicityConstraint() + ")\n");
 		
 		// add the encoding of the requirements table
 		wt.write("# Requirements Table\n");
-		wt.write("s.add(" +this.functionality.getEncodingActivity(z3visitor, tree)+")\n");
+		wt.write("solver.add(" +this.functionality.getEncodingActivity(z3visitor, tree)+")\n");
 
 		wt.write("# Processing the result\n");
 		wt.write(this.processResult());
@@ -100,7 +102,7 @@ public class Translator<T extends Table2Z3Visitor> {
 
 		StringBuilder b = new StringBuilder();
 
-		b.append("res=s.check()\n");
+		b.append("res=solver.check()\n");
 		b.append("if (res.r ==  Z3_L_FALSE):\n");
 
 		b.append(this.functionality.printPositiveResult());
@@ -113,7 +115,7 @@ public class Translator<T extends Table2Z3Visitor> {
 		b.append("\t\t sys.exit(-1)\n");
 		b.append("\t else:\n");
 		b.append("\t\t print('unknown')\n");
-		b.append("#\t\t print(s.reason_unknown())\n");
+		b.append("#\t\t print(solver.reason_unknown())\n");
 		b.append("\t\t sys.exit(0)\n");
 
 		return b.toString();
