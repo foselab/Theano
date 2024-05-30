@@ -12,7 +12,7 @@ public class ArBasedEncoding implements TraceEncoder {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String defineTraceVariable() {
+	public String defTimestamp() {
 		return "tau = Array('tau', I, R)\n";
 	}
 
@@ -20,9 +20,9 @@ public class ArBasedEncoding implements TraceEncoder {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Z3Expression getTracePosition(String signalname, String position) {
+	public Z3Expression getSignalValue(String signalname, String index) {
 		return Z3Formula.getVariable(
-				signalname + "[" + position + "]");
+				signalname + "[" + index + "]");
 	}
 
 }

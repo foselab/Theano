@@ -1,6 +1,10 @@
 package requirements2Z3.encodings;
 
+import org.apache.commons.lang3.StringUtils;
+
 import requirements2Z3.encodings.step.StepEncoder;
+import requirements2Z3.z3formulae.Z3Expression;
+import requirements2Z3.z3formulae.Z3Formula;
 
 /**
  * Returns the encoding of a Variable Step trace
@@ -22,6 +26,23 @@ public class BoundedEncoder extends Encoder {
 		}
 		this.bound = bound;
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public Z3Formula getIsStartup(String signalname, String position) {
+		if (StringUtils.isNumeric(position)) {
+			int index = Integer.parseInt(position);
+			if (index == 0) {
+				return Z3Formula.getTrue();
+			} else {
+				return Z3Formula.getFalse();
+			}
+		} else {
+			throw new IllegalArgumentException("The position to be considered by the bounded encoding should be numeric");
+		}
+	}
+	
 
 	/**
 	 * {@inheritDoc}
@@ -42,5 +63,20 @@ public class BoundedEncoder extends Encoder {
 		return bulder.toString();
 	}
 	
-	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Z3Expression getPrevValue(String signalname, String position) {
+		if (StringUtils.isNumeric(position)) {
+			int index = Integer.parseInt(position);
+			if (index == 0) {
+				return this.getTracePosition(signalname, position);
+			} else {
+				return this.getTracePosition(signalname, position + "-1");
+			}
+		} else {
+			throw new IllegalArgumentException("The position for the bounded encoding must be numeric");
+		}
+	}
 }

@@ -12,7 +12,7 @@ public class UfBasedEncoding implements TraceEncoder {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String defineTraceVariable() {
+	public String defTimestamp() {
 		return "tau = Function('tau', IntSort(), RealSort())\n";
 	}
 
@@ -20,11 +20,11 @@ public class UfBasedEncoding implements TraceEncoder {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Z3Expression getTracePosition(String signalname, String position) {
+	public Z3Expression getSignalValue(String signalname, String index) {
 		if (signalname.equals("tau")) {
-			return Z3Formula.getVariable(signalname + "(" + position + ")");
+			return Z3Formula.getVariable(signalname + "(" + index + ")");
 		} else {
-			return Z3Formula.getVariable(signalname + "[" + position + "]");
+			return Z3Formula.getVariable(signalname + "[" + index + "]");
 		}
 	}
 

@@ -26,6 +26,18 @@ public abstract class Encoder {
 	 */
 	public abstract String getMonotonicityConstraint();
 
+	
+	/**
+	 * Returns a string representing a condition that is true if a specific position
+	 * of the trace is the first position of the trace, false otherwise
+	 * 
+	 * @param signalname the name of the signal
+	 * @param position   the position to be considered
+	 * @return a String that represents the Z3 encoding accessing the trace in that
+	 *         position.
+	 */
+	public abstract Z3Formula getIsStartup(String signalname, String position);
+	
 	/**
 	 * Defines the variables used to encode the trace
 	 * 
@@ -53,18 +65,6 @@ public abstract class Encoder {
 		return this.stepEncoder.getTracePosition(signalname, position);
 	}
 
-	/**
-	 * Returns a string representing a condition that is true if a specific position
-	 * of the trace is the first position of the trace, false otherwise
-	 * 
-	 * @param signalname the name of the signal
-	 * @param position   the position to be considered
-	 * @return a String that represents the Z3 encoding accessing the trace in that
-	 *         position.
-	 */
-	public Z3Formula getIsStartup(String signalname, String position) {
-		return this.stepEncoder.getIsStartup(signalname, position);
-	}
 
 	/**
 	 * Returns a string representing a condition that returns the provious value of
@@ -77,8 +77,5 @@ public abstract class Encoder {
 	 *         a string given a position (i.e., a generic index such as 'i' or an
 	 *         actual index such as '0')
 	 */
-	public Z3Expression getPrevValue(String signalname, String position) {
-		return this.stepEncoder.getPrevValue(signalname, position);
-	}
-
+	public abstract Z3Expression getPrevValue(String signalname, String position);
 }

@@ -3,6 +3,7 @@ package requirements2Z3.encodings.step;
 import org.apache.commons.lang3.StringUtils;
 
 import requirements2Z3.encodings.trace.TraceEncoder;
+import requirements2Z3.z3formulae.Z3Expression;
 import requirements2Z3.z3formulae.Z3Formula;
 
 public class FixedStepEncoder extends StepEncoder {
@@ -19,7 +20,10 @@ public class FixedStepEncoder extends StepEncoder {
 		super(traceEncoder);
 		this.ts = ts;
 	}
+	
 
+	
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -34,8 +38,8 @@ public class FixedStepEncoder extends StepEncoder {
 		}
 
 		return Z3Formula.getPredicate(
-				Z3Formula.getExpression(this.getTraceEncoder().getTracePosition(signalname, nextPosition), "-",
-						this.getTraceEncoder().getTracePosition(signalname, position)),
+				Z3Formula.getExpression(this.getTraceEncoder().getSignalValue(signalname, nextPosition), "-",
+						this.getTraceEncoder().getSignalValue(signalname, position)),
 				Z3Formula.getRelationalOperator("=="), Z3Formula.getVariable(Float.toString(ts)));
 
 	}
