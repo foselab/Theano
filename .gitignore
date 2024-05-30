@@ -1,3 +1,4 @@
+
 ./slprj/*
 slprj/*
 Evaluation/.evalscripts/*
@@ -16,3 +17,13 @@ Evaluation/results/.unresultsAverage_consistency.csv
 Evaluation/results/.unboundedResults_consistency.csv
 EclipseWorkspace/Requirements2Z3/testtables/*
 EclipseWorkspace/Requirements2Z3/Tests/*
+benchmarkTables/*
+Evaluation/replicationPackage/benchmarkTables/*
+Table1_5.py
+Theano.jar
+SimulinkExamples/slprj/*
+Table1.rt
+Table1.py
+.venv
+.vs
+

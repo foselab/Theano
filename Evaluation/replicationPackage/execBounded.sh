@@ -9,13 +9,11 @@ outputFile=$7
 timeoutvalue=$8
 table=$9
 
-
-java -jar Theano.jar -i $inputfile -o "${pythonfile}" -e $encoding -t $analysis -b $bound
-
-source ~/my_z3venv/bin/activate
+export JAVA_TOOL_OPTIONS='-Xmx2G' 2>> /dev/null
+java -Xms256m -Xmx4g -jar Theano.jar -i $inputfile -o "${pythonfile}" -e $encoding -t $analysis -b $bound 2>> /dev/null
+#source ~/my_z3venv/bin/activate
 timeout $timeoutvalue python3 "${pythonfile}"
-deactivate
-
+#deactivate
 retval=$?
 
 if [ "$analysis" = "consistency" ];

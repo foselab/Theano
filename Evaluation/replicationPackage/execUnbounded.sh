@@ -9,11 +9,12 @@ timeoutvalue=$7
 table=$8
 
 #echo "java -jar Theano.jar -i $inputfile -o "${pythonfile}" -e $encoding -t $analysis"
-java -jar Theano.jar -i $inputfile -o "${pythonfile}" -e $encoding -t $analysis
+export JAVA_TOOL_OPTIONS='-Xmx2G'
+java -jar -Xms256m -Xmx4g Theano.jar -i $inputfile -o "${pythonfile}" -e $encoding -t $analysis > /dev/null
 
-source ~/my_z3venv/bin/activate
+#source ~/my_z3venv/bin/activate
 timeout $timeoutvalue python3 "${pythonfile}"
-deactivate
+#deactivate
 
 retval=$?
 
