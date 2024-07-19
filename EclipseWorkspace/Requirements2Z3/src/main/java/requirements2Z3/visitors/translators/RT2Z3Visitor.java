@@ -38,11 +38,11 @@ import requirements2Z3.encodings.Encoder;
 import requirements2Z3.z3formulae.Z3Expression;
 import requirements2Z3.z3formulae.Z3Formula;
 
-public abstract class Table2Z3Visitor implements matlabVisitor<Z3Formula> {
+public abstract class RT2Z3Visitor implements matlabVisitor<Z3Formula> {
 
 	private final Encoder encoder;
 
-	public Table2Z3Visitor(Encoder encoder) {
+	public RT2Z3Visitor(Encoder encoder) {
 		this.encoder = encoder;
 	}
 

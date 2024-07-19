@@ -8,6 +8,6 @@ import requirements2Z3.visitors.translators.BeArVs;
 public class BeArVsFactory extends EncoderFactory  {
 
 	public BeArVsFactory(int bound) {
-		super(new BeArVs(new BoundedEncoder(new VariableStepEncoder(new ArBasedEncoding()), bound), bound));
+		super(new BeArVs(new BoundedEncoder(new VariableStepEncoder(new ArEncoder()), bound), bound));
 	}
 }

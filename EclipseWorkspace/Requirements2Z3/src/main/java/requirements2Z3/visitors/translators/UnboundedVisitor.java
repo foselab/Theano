@@ -10,7 +10,7 @@ import requirements2Z3.encodings.Encoder;
 import requirements2Z3.z3formulae.Z3Expression;
 import requirements2Z3.z3formulae.Z3Formula;
 
-public abstract class UnboundedVisitor extends Table2Z3Visitor {
+public abstract class UnboundedVisitor extends RT2Z3Visitor {
 
 	public UnboundedVisitor(Encoder encoder) {
 		super(encoder);

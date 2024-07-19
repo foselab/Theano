@@ -8,6 +8,6 @@ import requirements2Z3.visitors.translators.UeArVs;
 public class UeArVsFactory extends EncoderFactory {
 
 	public UeArVsFactory() {
-		super(new UeArVs(new UnboundedEncoder(new VariableStepEncoder(new ArBasedEncoding()))));
+		super(new UeArVs(new UnboundedEncoder(new VariableStepEncoder(new ArEncoder()))));
 	}
 }

@@ -8,6 +8,6 @@ import requirements2Z3.visitors.translators.UeUfVs;
 public class UeUfVsFactory extends EncoderFactory {
 
 	public UeUfVsFactory() {
-		super(new UeUfVs(new UnboundedEncoder(new VariableStepEncoder(new UfBasedEncoding()))));
+		super(new UeUfVs(new UnboundedEncoder(new VariableStepEncoder(new UfEncoder()))));
 	}
 }

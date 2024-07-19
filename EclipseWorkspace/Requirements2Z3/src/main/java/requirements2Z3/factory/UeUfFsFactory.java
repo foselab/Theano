@@ -8,6 +8,6 @@ import requirements2Z3.visitors.translators.UeUfFs;
 public class UeUfFsFactory extends EncoderFactory {
 
 	public UeUfFsFactory(float timestamp) {
-		super(new UeUfFs(new UnboundedEncoder(new FixedStepEncoder(new UfBasedEncoding(), timestamp))));
+		super(new UeUfFs(new UnboundedEncoder(new FixedStepEncoder(new UfEncoder(), timestamp))));
 	}
 }

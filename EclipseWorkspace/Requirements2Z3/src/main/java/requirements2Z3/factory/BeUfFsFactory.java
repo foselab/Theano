@@ -9,6 +9,6 @@ import requirements2Z3.visitors.translators.BeUfFs;
 public class BeUfFsFactory extends EncoderFactory {
 
 	public BeUfFsFactory(int bound, float timestamp) {
-		super(new BeUfFs(new BoundedEncoder(new FixedStepEncoder(new UfBasedEncoding(), timestamp), bound), bound, timestamp));
+		super(new BeUfFs(new BoundedEncoder(new FixedStepEncoder(new UfEncoder(), timestamp), bound), bound, timestamp));
 	}
 }
