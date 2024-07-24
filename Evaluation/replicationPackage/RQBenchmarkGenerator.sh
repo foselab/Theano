@@ -1,5 +1,5 @@
 #!/bin/sh
-rm -r benchmarkTables
+rm -rf benchmarkTables
 mkdir benchmarkTables
 
 
