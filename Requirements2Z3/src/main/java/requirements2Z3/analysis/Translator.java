@@ -11,6 +11,7 @@ import generated.matlabLexer;
 import generated.matlabParser;
 import requirements2Z3.consistency.Functionality;
 import requirements2Z3.encodings.Encoder;
+import requirements2Z3.rqt.RQTable;
 import requirements2Z3.visitors.DefineVariablesVisitor;
 import requirements2Z3.visitors.translators.Table2Z3Visitor;
 import requirements2Z3.z3formulae.Z3Formula;
@@ -42,8 +43,8 @@ public class Translator<T extends Table2Z3Visitor> {
 		matlabParser parser = new matlabParser(tokens);
 		parser.setBuildParseTree(true);
 
-		ParseTree tree = parser.primaryExpression();
-
+		RQTable tree=parser.primaryExpression().rqt;
+		
 		// creates the Z3 solver
 		wt.write("from z3 import *;\n");
 
@@ -119,7 +120,7 @@ public class Translator<T extends Table2Z3Visitor> {
 		return b.toString();
 	}
 
-	public Z3Formula visitTree(ParseTree tree) {
+	public Z3Formula visitTree(RQTable tree) {
 		return tree.accept(z3visitor);
 	}
 }

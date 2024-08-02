@@ -5,6 +5,9 @@ import java.util.Set;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import generated.matlabParser.RequirementContext;
+import requirements2Z3.rqt.RQTable;
+import requirements2Z3.rqt.Requirement;
+import requirements2Z3.rqt.Variable;
 import requirements2Z3.visitors.GetOutputVariablesVisitor;
 import requirements2Z3.visitors.GetRequirementsVariableVisitor;
 import requirements2Z3.visitors.translators.BoundedVisitor;
@@ -22,13 +25,13 @@ public class BoundedConsistencyTranslator implements Functionality<BoundedVisito
 		return "\t\t print('Requirements Table Not Consistent (sat)')\n";
 	}
 
-	public Z3Formula getEncodingActivity(BoundedVisitor z3visitor, ParseTree tree) {
+	public Z3Formula getEncodingActivity(BoundedVisitor z3visitor, RQTable tree) {
 
-		Set<String> outputVariables = tree.accept(new GetOutputVariablesVisitor());
+		Set<Variable> outputVariables = tree.accept(new GetOutputVariablesVisitor());
 
 		Z3Formula encodingRequirements = Z3Formula.getFalse();
 
-		for (String outputVariable : outputVariables) {
+		for (Variable outputVariable : outputVariables) {
 			encodingRequirements = Z3Formula.getOr(encodingRequirements,
 					getEncodingOutputVariable(z3visitor, tree, outputVariable));
 
@@ -36,12 +39,12 @@ public class BoundedConsistencyTranslator implements Functionality<BoundedVisito
 
 		String outputVariablesString = "";
 		boolean firstVariable = true;
-		for (String outputVariable : outputVariables) {
+		for (Variable outputVariable : outputVariables) {
 			if (firstVariable == true) {
-				outputVariablesString = outputVariable;
+				outputVariablesString = outputVariable.getName();
 				firstVariable = false;
 			} else {
-				outputVariablesString = outputVariablesString + "," + outputVariable;
+				outputVariablesString = outputVariablesString + "," + outputVariable.getName();
 			}
 		}
 
@@ -49,13 +52,13 @@ public class BoundedConsistencyTranslator implements Functionality<BoundedVisito
 
 	}
 
-	protected Z3Formula getEncodingOutputVariable(BoundedVisitor z3visitor, ParseTree tree, String outputVariable) {
+	protected Z3Formula getEncodingOutputVariable(BoundedVisitor z3visitor, RQTable tree, Variable outputVariable) {
 		Z3Formula encodingRequirements = Z3Formula.getFalse();
 
 		for (int currentIndexI = 0; currentIndexI < z3visitor.getBound(); currentIndexI++) {
 
 			System.out.println("Index: "+currentIndexI);
-			for (RequirementContext requirement : tree.accept(new GetRequirementsVariableVisitor(outputVariable))) {
+			for (Requirement requirement : tree.accept(new GetRequirementsVariableVisitor(outputVariable))) {
 
 				System.out.println(Z3Formula.getNot(requirement.accept(z3visitor)));
 				encodingRequirements = Z3Formula.getOr(encodingRequirements,

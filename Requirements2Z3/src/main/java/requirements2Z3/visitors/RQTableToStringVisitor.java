@@ -19,110 +19,107 @@ import requirements2Z3.rqt.UnaryExpression;
 import requirements2Z3.rqt.Variable;
 import requirements2Z3.rqt.Variables;
 
-/**
- * This visitor is used to define the variables of the Z3 files based on the
- * variables used in the Requirements Table
- */
-public class DefineVariablesVisitor implements RQTableVisitor<String> {
-
-	@Override
-	public String visit(AndFormula andFormula) {
-		throw new UnsupportedOperationException();
-	}
+public class RQTableToStringVisitor implements RQTableVisitor<String>{
 
 	@Override
 	public String visit(ArithmeticExpression arithmeticExpression) {
-		throw new UnsupportedOperationException();
+		return arithmeticExpression.getLeft().accept(this)+arithmeticExpression.getOp()+arithmeticExpression.getRight().accept(this);
 	}
 
 	@Override
 	public String visit(Constant constant) {
-		throw new UnsupportedOperationException();
+		return Double.toString(constant.getConstant());
 	}
 
 	@Override
 	public String visit(DurFormula durFormula) {
-		throw new UnsupportedOperationException();
+		return "dur"+"("+durFormula.getF()+")"+durFormula.getOp()+durFormula.getConstant();
 	}
 
 	@Override
 	public String visit(Identifier identifier) {
-		throw new UnsupportedOperationException();
+		return identifier.getId();
 	}
 
 	@Override
 	public String visit(IsNotStartup isNotStartup) {
-		throw new UnsupportedOperationException();
+		return isNotStartup.toString();
 	}
 
 	@Override
 	public String visit(IsStartup isStartup) {
-		throw new UnsupportedOperationException();
+		return isStartup.toString();
 	}
 
 	@Override
 	public String visit(NegationFormula negationFormula) {
-		throw new UnsupportedOperationException();
+		return "!("+negationFormula.getF().accept(this)+")";
 	}
 
 	@Override
 	public String visit(OrFormula orFormula) {
-		throw new UnsupportedOperationException();
+		return orFormula.getLeft().accept(this)+"|"+orFormula.getRight().accept(this);
+	}
+	
+	@Override
+	public String visit(AndFormula andFormula) {
+		return andFormula.getLeft().accept(this)+"&"+andFormula.getRight().accept(this);
 	}
 
 	@Override
 	public String visit(PrevExpression prevExpression) {
-		throw new UnsupportedOperationException();
+		return "prev("+prevExpression.getId()+")";
 	}
 
 	@Override
 	public String visit(RelationalExpression relationalExpression) {
-		throw new UnsupportedOperationException();
+		return relationalExpression.getExp1().accept(this)+relationalExpression.getOp().toString()+relationalExpression.getExp2().accept(this);
 	}
 
 	@Override
 	public String visit(Requirement requirement) {
-		throw new UnsupportedOperationException();
+		return "\t"+requirement.getPrecondition().accept(this)+","+requirement.getPostcondition().accept(this);
 	}
 
 	@Override
 	public String visit(True true1) {
-		throw new UnsupportedOperationException();
+		return "true";
 	}
 
 	@Override
 	public String visit(UnaryExpression unaryExpression) {
-		throw new UnsupportedOperationException();
+		return unaryExpression.getOp().toString()+unaryExpression.getOp().toString();
 	}
 
 	@Override
 	public String visit(Variable variable) {
-		String id = variable.getName();
-
-		if (variable.getType().equals("Int")) {
-			return id + "=Array('" + id + "',I,I)\n";
-		}
-		return id + "=Array('" + id + "',I,R)\n";
-
+		return "\t"+variable.getName()+","+variable.getType()+","+variable.getInputOutput();
 	}
 
 	@Override
 	public String visit(Variables variables) {
-		StringBuilder b=new StringBuilder();
-		
+		StringBuilder builder=new StringBuilder();
 		for(Variable v: variables.getVariables()) {
-			b.append(v.accept(this));
+			builder.append(v.accept(this)+"\n");
 		}
-		return b.toString();
+		return builder.toString();
 	}
 
 	@Override
 	public String visit(RQTable rqTable) {
-		return rqTable.getVariables().accept(this);
+		StringBuilder builder=new StringBuilder();
+		builder.append("vardef\n"+rqTable.getVariables().accept(this)+"endvardef\n");
+		builder.append("reqdef\n"+rqTable.getRequirements().accept(this)+"endreqdef\n");
+		
+		return builder.toString();
 	}
 
 	@Override
 	public String visit(Requirements requirements) {
-		throw new UnsupportedOperationException();
+		StringBuilder builder=new StringBuilder();
+		for(Requirement v: requirements.getRequirements()) {
+			builder.append(v.accept(this)+"\n");
+		}
+		return builder.toString();
 	}
 }

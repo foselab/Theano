@@ -1,13 +1,10 @@
 package requirements2Z3.visitors.translators;
 
-import org.antlr.v4.runtime.tree.TerminalNode;
-
-import generated.matlabLexer;
-import generated.matlabParser.Is_not_startupContext;
-import generated.matlabParser.Is_startupContext;
-import generated.matlabParser.Prev_expressionContext;
 import requirements2Z3.encodings.Encoder;
-import requirements2Z3.z3formulae.Z3Expression;
+import requirements2Z3.rqt.IsNotStartup;
+import requirements2Z3.rqt.IsStartup;
+import requirements2Z3.rqt.PrevExpression;
+import requirements2Z3.rqt.Variable;
 import requirements2Z3.z3formulae.Z3Formula;
 
 public abstract class UnboundedVisitor extends Table2Z3Visitor {
@@ -17,25 +14,22 @@ public abstract class UnboundedVisitor extends Table2Z3Visitor {
 	}
 
 	@Override
-	public Z3Expression visitTerminal(TerminalNode node) {
-		if (node.getSymbol().getType() == matlabLexer.IDENTIFIER) {
-			return this.getEncoder().getTracePosition(node.getText(), "i"); 
-		}
-		return super.visitTerminal(node);
+	public Z3Formula visit(Variable variable) {
+		return this.getEncoder().getTracePosition(variable.getName(), "i"); 
 	}
 	
 	@Override
-	public Z3Expression visitPrev_expression(Prev_expressionContext ctx) {
-		return this.getEncoder().getPrevValue(ctx.getChild(2).getText(), "i");
+	public Z3Formula visit(PrevExpression prevExpression) {
+		return this.getEncoder().getPrevValue(prevExpression.getId().getId(), "i");
 	}
 
 	@Override
-	public Z3Formula visitIs_startup(Is_startupContext ctx) {
+	public Z3Formula visit(IsStartup isStartup) {
 		return this.getEncoder().getIsStartup("tau", "i");
 	}
 
 	@Override
-	public Z3Formula visitIs_not_startup(Is_not_startupContext ctx) {
+	public Z3Formula visit(IsNotStartup isNotStartup) {
 		return Z3Formula.getNot(this.getEncoder().getIsStartup("tau", "i"));
 	}
 }

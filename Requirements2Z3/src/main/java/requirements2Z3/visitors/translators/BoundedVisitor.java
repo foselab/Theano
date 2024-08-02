@@ -1,13 +1,10 @@
 package requirements2Z3.visitors.translators;
 
-import org.antlr.v4.runtime.tree.TerminalNode;
-
-import generated.matlabLexer;
-import generated.matlabParser.Is_not_startupContext;
-import generated.matlabParser.Is_startupContext;
-import generated.matlabParser.Prev_expressionContext;
 import requirements2Z3.encodings.Encoder;
-import requirements2Z3.z3formulae.Z3Expression;
+import requirements2Z3.rqt.IsNotStartup;
+import requirements2Z3.rqt.IsStartup;
+import requirements2Z3.rqt.PrevExpression;
+import requirements2Z3.rqt.Variable;
 import requirements2Z3.z3formulae.Z3Formula;
 
 public abstract class BoundedVisitor extends Table2Z3Visitor  {
@@ -35,29 +32,27 @@ public abstract class BoundedVisitor extends Table2Z3Visitor  {
 	}
 
 	@Override
-	public Z3Expression visitTerminal(TerminalNode node) {
-		if (node.getSymbol().getType() == matlabLexer.IDENTIFIER) {
-			return this.getEncoder().getTracePosition(node.getText(), String.valueOf(this.getIndex()));
-		}
-		return super.visitTerminal(node);
+	public Z3Formula visit(Variable variable) {
+		return this.getEncoder().getTracePosition(variable.getName(), String.valueOf(this.getIndex()));
 	}
 
 	@Override
-	public Z3Expression visitPrev_expression(Prev_expressionContext ctx) {
+	public Z3Formula visit(PrevExpression prevExpression)
+	{
 		if (this.index == 0) {
-			return this.getEncoder().getTracePosition(ctx.getChild(2).getText(), String.valueOf(this.getIndex()));
+			return this.getEncoder().getTracePosition(prevExpression.getId().getId(), String.valueOf(this.getIndex()));
 		} else {
-			return this.getEncoder().getTracePosition(ctx.getChild(2).getText(), String.valueOf(this.getIndex() - 1));
+			return this.getEncoder().getTracePosition(prevExpression.getId().getId(), String.valueOf(this.getIndex() - 1));
 		}
 	}
 
 	@Override
-	public Z3Formula visitIs_startup(Is_startupContext ctx) {
+	public Z3Formula visit(IsStartup isStartup) {
 		return this.getEncoder().getIsStartup("tau", String.valueOf(this.getIndex()));
 	}
-
+	
 	@Override
-	public Z3Formula visitIs_not_startup(Is_not_startupContext ctx) {
+	public Z3Formula visit(IsNotStartup isNotStartup) {
 		return Z3Formula.getNot(this.getEncoder().getIsStartup("tau", String.valueOf(this.getIndex())));
 	}
 

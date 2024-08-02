@@ -1,204 +1,192 @@
-/*
-BSD License
-Copyright (c) 2013, Tom Everett
-All rights reserved.
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions
-are met:
-1. Redistributions of source code must retain the above copyright
-   notice, this list of conditions and the following disclaimer.
-2. Redistributions in binary form must reproduce the above copyright
-   notice, this list of conditions and the following disclaimer in the
-   documentation and/or other materials provided with the distribution.
-3. Neither the name of Tom Everett nor the names of its contributors
-   may be used to endorse or promote products derived from this software
-   without specific prior written permission.
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
-/*
-* Grammar based on yacc-keable for matlab by Danny Luk 12/1995
-*
-* http://www.angelfire.com/ar/CompiladoresUCSE/images/MATLAB.zip
-*/
 grammar matlab;
 
 @header {
 package generated;
 
+import requirements2Z3.rqt.*;
+
 }
 
-primaryExpression
+primaryExpression returns [RQTable rqt]
 :
-	variablesdefinitions requirementsdefinitions
+	vsdefs=variablesdefinitions rqdefs=requirementsdefinitions
+	{$rqt=new RQTable($vsdefs.vs,$rqdefs.rqs);}
 ;
 
-variablesdefinitions
+variablesdefinitions returns [Variables vs]
 :
-	'vardef' CR variabledefinition* 'endvardef' CR
-;
-
-requirementsdefinitions
-:
-	'reqdef' CR requirement* 'endreqdef'CR
+	{$vs=new Variables();}
+	'vardef' CR (variabledefinition {$vs.add($variabledefinition.v);})* 'endvardef' CR
 ;
 
 
-requirement
+variabledefinition returns [Variable v]
 :
-	precondition ',' postcondition SEMICOLUMN CR
+	i=IDENTIFIER COMMA spec=typeSpecifier COMMA type=io  SEMICOLUMN CR
+	{$v=new Variable($i.text,$spec.tipo,$type.tipo);}
 ;
 
-precondition
+
+requirementsdefinitions returns [Requirements rqs]
 :
-	statement_list
+	{$rqs=new Requirements();}
+	'reqdef' CR (requirement {$rqs.add($requirement.rq);})* 'endreqdef'
 ;
 
-postcondition
+requirement returns [Requirement rq]
 :
-	statement_list
+	pre=precondition ',' post=postcondition SEMICOLUMN CR
+	{$rq=new Requirement($pre.f,$post.f);}	
 ;
 
-primary_expression
+precondition returns [PFormula f]
 :
-	IDENTIFIER
-	| CONSTANT
-	| prev_expression
-	| dur_expression
-	| '(' expression ')'
+	or_expression {$f=$or_expression.f;}
 ;
 
-prev_expression
+postcondition returns [PFormula f]
 :
-	PREV '(' IDENTIFIER ')'
+	or_expression {$f=$or_expression.f;}
 ;
 
-dur_expression
+or_expression returns [PFormula f]
 :
-	DUR '(' expression ')'
-	(
-		'>'
-		| '<'
-		| '='
-		| LE_OP
-		| GE_OP
-	) CONSTANT
+	and_expression {$f=$and_expression.f;}
+	| 	 LPAR l=or_expression RPAR '|' LPAR r=and_expression  RPAR
+		 {  $f=new OrFormula($l.f,$r.f); } 
 ;
 
-postfix_expression
+and_expression returns [PFormula f]
 :
-	primary_expression
+	negation_expression {$f=$negation_expression.f;}
+	|	 LPAR l=or_expression  RPAR '&' LPAR r=and_expression RPAR 
+		 {  $f=new AndFormula($l.f,$r.f); } 
 ;
 
-index_expression
+negation_expression returns [PFormula f]
 :
-	':'
-	| expression
+	atomic_expression {$f=$atomic_expression.f;}
+	| NOT or_expression {$f=new NegationFormula($or_expression.f);}
 ;
 
-unary_expression
+atomic_expression returns [PFormula f]
 :
-	postfix_expression
-	| unary_operator postfix_expression
+	TRUE 						{$f=new True();}
+	|	is_startup 				{$f=$is_startup.f;}
+	|	is_not_startup  		{$f=$is_not_startup.f;}
+	|	dur_expression			{$f=$dur_expression.f;}
+	|	relational_expression 	{$f=$relational_expression.f;}
 ;
 
-unary_operator
+dur_expression returns [PFormula f]
 :
-	'+'
-	| '-'
-	| '~'
+	DUR LPAR or_exp=or_expression RPAR durop=(GE_OP | LE_OP | EQ_OP | LEQ_OP | GEQ_OP) c=CONSTANT
+	{$f=new DurFormula($or_exp.f,RelationalOperator.toRelationalOperator($durop.text),Double.parseDouble($c.text));}
 ;
 
-multiplicative_expression
+relational_expression returns [PFormula f]
 :
-	unary_expression
-	| multiplicative_expression '*' unary_expression
-	| multiplicative_expression '/' unary_expression
-	| multiplicative_expression '\\' unary_expression
-	| multiplicative_expression '^' unary_expression
-	| multiplicative_expression ARRAYMUL unary_expression
-	| multiplicative_expression ARRAYDIV unary_expression
-	| multiplicative_expression ARRAYRDIV unary_expression
-	| multiplicative_expression ARRAYPOW unary_expression
+	l=arithmetic_expression rop=(GE_OP | LE_OP | EQ_OP | LEQ_OP | GEQ_OP) r=arithmetic_expression
+	{$f=new RelationalExpression($l.exp,RelationalOperator.toRelationalOperator($rop.text),$r.exp);}
+
 ;
 
-additive_expression
+arithmetic_expression returns [Expression exp]
 :
-	multiplicative_expression
-	| additive_expression '+' multiplicative_expression
-	| additive_expression '-' multiplicative_expression
+	multiplicative_expression {$exp=$multiplicative_expression.exp;}
+	| l=arithmetic_expression aop=(PLUS | MINUS) r=multiplicative_expression
+	  {$exp=new ArithmeticExpression($l.exp,ArithmeticOperator.toArithmeticOperator($aop.text),$r.exp);}
 ;
 
-relational_expression
+
+
+primary_expression returns [Expression exp]
 :
-	additive_expression
-	| relational_expression '<' additive_expression
-	| relational_expression '>' additive_expression
-	| relational_expression LE_OP additive_expression
-	| relational_expression GE_OP additive_expression
+	i=IDENTIFIER {$exp=new Identifier($i.text);}
+	| c=CONSTANT {$exp=new Constant(Double.parseDouble($c.text));}
+	| p=prev_expression {$exp=$p.exp;}
 ;
 
-equality_expression
+prev_expression returns [Expression exp]
 :
-	is_startup
-	| is_not_startup
-	| relational_expression
-	| equality_expression EQ_OP relational_expression
-	| equality_expression NE_OP relational_expression
+	PREV LPAR i=IDENTIFIER {$exp=new PrevExpression(new Identifier($i.text));} RPAR
 ;
 
-is_startup
+
+postfix_expression returns [Expression exp]
 :
-	ISSTARTUP
+	p=primary_expression {$exp=$p.exp;}
 ;
 
-is_not_startup
+unary_expression returns [Expression exp]
 :
-	'!' ISSTARTUP
+	p=postfix_expression {$exp=$p.exp;}
+	| op=(PLUS | MINUS) p=postfix_expression {$exp=new UnaryExpression(ArithmeticOperator.toArithmeticOperator($op.text),$p.exp);}
 ;
 
-and_expression
+
+multiplicative_expression returns [Expression exp]
 :
-	equality_expression
-	| and_expression '&' equality_expression
+	u=unary_expression {$exp=$u.exp;}
+	| l=multiplicative_expression op=(MULT | DIV | EXP) r=unary_expression
+	{$exp=new ArithmeticExpression($l.exp,ArithmeticOperator.toArithmeticOperator($op.text),$r.exp); }
 ;
 
-or_expression
+is_startup returns [PFormula f]
 :
-	and_expression
-	| or_expression '|' and_expression
+	ISSTARTUP {$f=new IsStartup();}
 ;
 
-expression
+is_not_startup returns [PFormula f]
 :
-	or_expression
-	| expression ':' or_expression
+	NOT ISSTARTUP {$f=new IsStartup();}
 ;
 
-assignment_expression
+
+typeSpecifier returns [String tipo]
 :
-	postfix_expression '=' expression
+	INT  {$tipo="Int";} | 
+	REAL {$tipo="Real";}
 ;
 
-statement
+io returns [String tipo]
 :
-	expression
+	INPUT {$tipo="input";}
+	| OUTPUT {$tipo="output";}
 ;
 
-statement_list
-:
-	statement
+INPUT: 'input';
+OUTPUT: 'output';
+
+
+INT:
+'Int'
 ;
 
+REAL:
+ 'Real'
+;
+
+
+NOT
+:
+	'!'
+;
+
+MULT
+: 
+	'*' 
+;
+
+DIV
+:  
+	'/'
+; 
+EXP
+: 	
+	'^'
+;	
+	
 DEFVARIABLES
 :
 	'defVariables'
@@ -212,6 +200,16 @@ ENDVARIABLES
 ISSTARTUP
 :
 	'isStartup'
+;
+
+PLUS
+:
+	'+'
+;
+
+MINUS
+:
+	'-'
 ;
 
 ARRAYMUL
@@ -234,6 +232,21 @@ ARRAYPOW
 	'.^'
 ;
 
+LPAR
+:
+	'('
+;
+
+RPAR
+:
+	')'
+;
+
+TRUE
+:
+	'true'
+;
+
 PREV
 :
 	'prev'
@@ -244,12 +257,24 @@ DUR
 	'dur'
 ;
 
+
+
 LE_OP
+:
+	'<'
+;
+
+GE_OP
+:
+	'>'
+;
+
+LEQ_OP
 :
 	'<='
 ;
 
-GE_OP
+GEQ_OP
 :
 	'>='
 ;
@@ -263,10 +288,6 @@ NE_OP
 :
 	'~='
 ;
-
-
-
-
 
 CONSTANT
 :
@@ -307,31 +328,6 @@ SIGN
 ;
 
 
-
-
-
-variabledefinition
-:
-	variableName COMMA typeSpecifier COMMA io SEMICOLUMN CR
-;
-
-
-variableName
-:
-	IDENTIFIER
-;
-
-typeSpecifier
-:
-	'Int'
-	| 'Real'
-;
-
-io
-:
-	'input'
-	| 'output'
-;
 
 CR
 :

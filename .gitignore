@@ -24,4 +24,5 @@ SimulinkExamples/slprj/*
 Table1.rt
 Table1.py
 .venv
-.vs
+.vsWorkspace/
+Workspace/*

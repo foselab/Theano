@@ -3,3 +3,7 @@
 .classpath
 .classpath/*
 .settings/*
+../Workspace/*
+.metadata/*
+../Workspace/
+../Workspace/

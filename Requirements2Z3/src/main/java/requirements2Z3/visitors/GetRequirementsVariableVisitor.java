@@ -11,63 +11,138 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 import generated.matlabBaseVisitor;
 import generated.matlabParser.RequirementContext;
 import generated.matlabParser.RequirementsdefinitionsContext;
+import requirements2Z3.rqt.AndFormula;
+import requirements2Z3.rqt.ArithmeticExpression;
+import requirements2Z3.rqt.Constant;
+import requirements2Z3.rqt.DurFormula;
+import requirements2Z3.rqt.Identifier;
+import requirements2Z3.rqt.IsNotStartup;
+import requirements2Z3.rqt.IsStartup;
+import requirements2Z3.rqt.NegationFormula;
+import requirements2Z3.rqt.OrFormula;
+import requirements2Z3.rqt.PrevExpression;
+import requirements2Z3.rqt.RQTable;
+import requirements2Z3.rqt.RelationalExpression;
+import requirements2Z3.rqt.Requirement;
+import requirements2Z3.rqt.Requirements;
+import requirements2Z3.rqt.True;
+import requirements2Z3.rqt.UnaryExpression;
+import requirements2Z3.rqt.Variable;
+import requirements2Z3.rqt.Variables;
 
 /**
  * This visitor is used to define the variables of the Z3 files based on the
  * variables used in the Requirements Table
+ * 
+ * Returns the Requirement whose precondition uses that variable
  */
-public class GetRequirementsVariableVisitor extends matlabBaseVisitor<List<RequirementContext>> {
+public class GetRequirementsVariableVisitor implements RQTableVisitor<List<Requirement>> {
 
-	private String variable;
+	private Variable variable;
 
-	public GetRequirementsVariableVisitor(String variable) {
+	public GetRequirementsVariableVisitor(Variable variable) {
 		this.variable = variable;
 	}
 
+
 	@Override
-	public List<RequirementContext> visitRequirementsdefinitions(RequirementsdefinitionsContext ctx) {
-		return this.visitChildren(ctx);
+	public List<Requirement> visit(AndFormula andFormula) {
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public List<RequirementContext> visitTerminal(TerminalNode node) {
-		return new ArrayList<>();
+	public List<Requirement> visit(ArithmeticExpression arithmeticExpression) {
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public List<RequirementContext> visitChildren(RuleNode node) {
-		List<RequirementContext> ret = new ArrayList<>();
-
-		for (int i = 0; i < node.getChildCount(); i++) {
-
-			ret.addAll(node.getChild(i).accept(this));
-		}
-
-		return ret;
+	public List<Requirement> visit(Constant constant) {
+		throw new UnsupportedOperationException();
 	}
-
-	protected List<RequirementContext> aggregateResult(List<RequirementContext> aggregate,
-			List<RequirementContext> nextResult) {
-
-		List<RequirementContext> ret = new ArrayList<>();
-		ret.addAll(aggregate);
-		ret.addAll(nextResult);
-		return ret;
-	}
-	
-	
 
 	@Override
-	public List<RequirementContext>  visitRequirement(RequirementContext ctx)  {
-		List<RequirementContext> ret = new ArrayList<>();
+	public List<Requirement> visit(DurFormula durFormula) {
+		throw new UnsupportedOperationException();
+	}
 
-		Set<String> variables = new HashSet<>();
+	@Override
+	public List<Requirement> visit(Identifier identifier) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public List<Requirement> visit(IsNotStartup isNotStartup) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public List<Requirement> visit(IsStartup isStartup) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public List<Requirement> visit(NegationFormula negationFormula) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public List<Requirement> visit(OrFormula orFormula) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public List<Requirement> visit(PrevExpression prevExpression) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public List<Requirement> visit(RelationalExpression relationalExpression) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public List<Requirement> visit(Requirement requirement) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public List<Requirement> visit(True true1) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public List<Requirement> visit(UnaryExpression unaryExpression) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public List<Requirement> visit(Variable variable) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public List<Requirement> visit(Variables variables) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public List<Requirement> visit(RQTable rqTable) {
+		return rqTable.getRequirements().accept(this);
+	}
+
+	@Override
+	public List<Requirement> visit(Requirements requirements) {
+		
+		List<Requirement> retRequirements=new ArrayList<Requirement>();
+		
+		Set<Variable> variables = new HashSet<>();
 		variables.add(this.variable);
-
-		if (ctx.accept(new PreconditionContainsVariableVisitor(variables))) {
-			ret.add(ctx);
+		
+		for(Requirement r: requirements.getRequirements()) {
+			if(r.accept(new PreconditionContainsVariableVisitor(variables))) {
+				retRequirements.add(r);
+			}
 		}
-		return ret;
+		return retRequirements;
 	}
-
 }

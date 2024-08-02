@@ -1,8 +1,10 @@
 package requirements2Z3;
 
 import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.Reader;
 
+import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.CommonTokenStream;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -11,21 +13,15 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-import requirements2Z3.analysis.Translator;
-import requirements2Z3.consistency.UnboundedCompletenessTranslator;
+import generated.matlabLexer;
+import generated.matlabParser;
 import requirements2Z3.consistency.BoundedCompletenessTranslator;
 import requirements2Z3.consistency.BoundedConsistencyTranslator;
-import requirements2Z3.consistency.UnboundedConsistencyTranslator;
-
 import requirements2Z3.consistency.Functionality;
-import requirements2Z3.factory.BeArFsFactory;
-import requirements2Z3.factory.BeArVsFactory;
-import requirements2Z3.factory.BeUfFsFactory;
-import requirements2Z3.factory.BeUfVsFactory;
-import requirements2Z3.factory.UeArFsFactory;
-import requirements2Z3.factory.UeArVsFactory;
-import requirements2Z3.factory.UeUfFsFactory;
-import requirements2Z3.factory.UeUfVsFactory;
+import requirements2Z3.consistency.UnboundedCompletenessTranslator;
+import requirements2Z3.consistency.UnboundedConsistencyTranslator;
+import requirements2Z3.rqt.RQTable;
+import requirements2Z3.visitors.RQTableToStringVisitor;
 import requirements2Z3.visitors.translators.Table2Z3Visitor;
 
 public class Main {
@@ -80,6 +76,17 @@ public class Main {
 		// System.out.println("Processing the file: "+inputFilePath);
 		String typeInput = cmd.getOptionValue("t") != null ? cmd.getOptionValue("t") : cmd.getOptionValue("type");
 
+		
+		Reader sc=new FileReader(inputFilePath);
+		matlabLexer lexer = new matlabLexer(new ANTLRInputStream(sc));
+		CommonTokenStream tokens = new CommonTokenStream(lexer);
+		matlabParser rqParser = new matlabParser(tokens);
+		rqParser.setBuildParseTree(true);
+
+
+		RQTable rqTable = rqParser.primaryExpression().rqt;
+		
+		System.out.println(rqTable.accept(new RQTableToStringVisitor()));
 		switch (typeInput) {
 		case "consistency":
 			if (cmd.getOptionValue("b") != null) {
