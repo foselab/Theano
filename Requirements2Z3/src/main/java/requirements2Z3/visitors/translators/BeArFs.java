@@ -2,6 +2,7 @@ package requirements2Z3.visitors.translators;
 
 import requirements2Z3.encodings.Encoder;
 import requirements2Z3.rqt.DurFormula;
+import requirements2Z3.rqt.Identifier;
 import requirements2Z3.z3formulae.Z3Expression;
 import requirements2Z3.z3formulae.Z3Formula;
 
@@ -25,6 +26,7 @@ public class BeArFs extends BoundedVisitor  {
 		this.ts = ts;
 	}
 
+	
 	
 	@Override
 	public Z3Formula visit(DurFormula durFormula) {

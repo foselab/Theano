@@ -4,7 +4,6 @@ import requirements2Z3.encodings.Encoder;
 import requirements2Z3.rqt.AndFormula;
 import requirements2Z3.rqt.ArithmeticExpression;
 import requirements2Z3.rqt.Constant;
-import requirements2Z3.rqt.Identifier;
 import requirements2Z3.rqt.NegationFormula;
 import requirements2Z3.rqt.OrFormula;
 import requirements2Z3.rqt.RQTable;
@@ -37,10 +36,7 @@ public abstract class Table2Z3Visitor implements RQTableVisitor<Z3Formula> {
 		return Z3Formula.getConstant(Double.toString(constant.getConstant()));
 	}
 
-	@Override
-	public Z3Formula visit(Identifier identifier) {
-		return Z3Formula.getVariable(identifier.getId());
-	}
+
 
 	@Override
 	public Z3Formula visit(AndFormula andFormula) {

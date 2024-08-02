@@ -1,6 +1,7 @@
 package requirements2Z3.visitors.translators;
 
 import requirements2Z3.encodings.Encoder;
+import requirements2Z3.rqt.Identifier;
 import requirements2Z3.rqt.IsNotStartup;
 import requirements2Z3.rqt.IsStartup;
 import requirements2Z3.rqt.PrevExpression;
@@ -31,6 +32,11 @@ public abstract class BoundedVisitor extends Table2Z3Visitor  {
 		this.index = 0;
 	}
 
+	@Override
+	public Z3Formula visit(Identifier identifier) {
+		return this.getEncoder().getTracePosition(identifier.getId(), String.valueOf(this.getIndex()));
+	}
+	
 	@Override
 	public Z3Formula visit(Variable variable) {
 		return this.getEncoder().getTracePosition(variable.getName(), String.valueOf(this.getIndex()));
