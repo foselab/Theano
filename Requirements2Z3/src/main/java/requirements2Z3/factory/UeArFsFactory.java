@@ -7,7 +7,7 @@ import requirements2Z3.visitors.translators.UeArFs;
 
 public class UeArFsFactory extends EncoderFactory {
 
-	public UeArFsFactory(float timestamp) {
+	public UeArFsFactory(double timestamp) {
 		super(new UeArFs(new UnboundedEncoder(new FixedStepEncoder(new ArBasedEncoding(), timestamp))));
 	}
 }

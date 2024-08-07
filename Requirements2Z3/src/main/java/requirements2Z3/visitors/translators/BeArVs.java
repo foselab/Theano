@@ -2,6 +2,7 @@ package requirements2Z3.visitors.translators;
 
 import requirements2Z3.encodings.Encoder;
 import requirements2Z3.rqt.DurFormula;
+import requirements2Z3.rqt.TimestampDefinition;
 import requirements2Z3.z3formulae.Z3Expression;
 import requirements2Z3.z3formulae.Z3Formula;
 
@@ -32,5 +33,9 @@ public class BeArVs extends BoundedVisitor {
 			part3 = Z3Formula.getAnd(part3, innerAnd);
 		}
 		return part3;
+	}
+	@Override
+	public Z3Formula visit(TimestampDefinition timestampDefinition) {
+		throw new UnsupportedOperationException();
 	}
 }

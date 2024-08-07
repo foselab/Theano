@@ -2,6 +2,8 @@ package requirements2Z3.visitors.translators;
 
 import requirements2Z3.encodings.Encoder;
 import requirements2Z3.rqt.DurFormula;
+import requirements2Z3.rqt.Identifier;
+import requirements2Z3.rqt.TimestampDefinition;
 import requirements2Z3.z3formulae.Z3Expression;
 import requirements2Z3.z3formulae.Z3Formula;
 
@@ -10,6 +12,17 @@ public class BeUfVs extends BoundedVisitor  {
 	public BeUfVs(Encoder encoder, int index) {
 		super(encoder, index);
 	}
+	
+	@Override
+	public Z3Formula visit(Identifier identifier) {
+		if (identifier.equals("tau")) {
+			return Z3Formula.getVariable("tau("+this.getIndex()+")");
+		} else {
+			return super.visit(identifier); 		
+		}
+
+	}
+	
 
 	@Override
 	public Z3Formula visit(DurFormula durFormula) {
@@ -31,5 +44,9 @@ public class BeUfVs extends BoundedVisitor  {
 			part3 = Z3Formula.getAnd(part3, innerAnd);
 		}
 		return part3;
+	}
+	@Override
+	public Z3Formula visit(TimestampDefinition timestampDefinition) {
+		throw new UnsupportedOperationException();
 	}
 }

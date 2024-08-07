@@ -7,7 +7,7 @@ import requirements2Z3.visitors.translators.BeArFs;
 
 public class BeArFsFactory extends EncoderFactory {
 
-	public BeArFsFactory(int bound, float timestamp) {
+	public BeArFsFactory(int bound, double timestamp) {
 		super(new BeArFs(new BoundedEncoder(new FixedStepEncoder(new ArBasedEncoding(), timestamp), bound), bound,
 				timestamp));
 	}

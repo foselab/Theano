@@ -2,7 +2,7 @@ package requirements2Z3.rqt;
 
 public enum RelationalOperator {
 	
-	GE_OP(">"), LE_OP("<"), EQ_OP("="), LEQ_OP("<="), GEQ_OP(">=");
+	GE_OP(">"), LE_OP("<"), EQ_OP("=="), LEQ_OP("<="), GEQ_OP(">="), NEQ_OP("!=");
 	
 	private final String operator;
 	
@@ -24,12 +24,14 @@ public enum RelationalOperator {
 				return RelationalOperator.GE_OP;
 			case "<": 
 				return RelationalOperator.LE_OP;
-			case "=":
+			case "==":
 				return RelationalOperator.EQ_OP;
 			case "<=":
 				return RelationalOperator.LEQ_OP;
 			case ">=":
 				return RelationalOperator.GEQ_OP;
+			case "!=":
+				return RelationalOperator.NEQ_OP;
 			default:
 				throw new IllegalArgumentException("No alternative is present for the operator: "+arg0);
 		}

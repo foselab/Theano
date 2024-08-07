@@ -57,10 +57,9 @@ public class BoundedConsistencyTranslator implements Functionality<BoundedVisito
 
 		for (int currentIndexI = 0; currentIndexI < z3visitor.getBound(); currentIndexI++) {
 
-			System.out.println("Index: "+currentIndexI);
 			for (Requirement requirement : tree.accept(new GetRequirementsVariableVisitor(outputVariable))) {
 
-				System.out.println(Z3Formula.getNot(requirement.accept(z3visitor)));
+				//System.out.println(Z3Formula.getNot(requirement.accept(z3visitor)));
 				encodingRequirements = Z3Formula.getOr(encodingRequirements,
 						Z3Formula.getNot(requirement.accept(z3visitor)));
 			}

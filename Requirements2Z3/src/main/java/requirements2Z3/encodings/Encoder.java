@@ -25,6 +25,7 @@ public abstract class Encoder {
 	 *         trace
 	 */
 	public abstract String getMonotonicityConstraint();
+	
 
 	/**
 	 * Defines the variables used to encode the trace

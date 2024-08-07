@@ -1,5 +1,7 @@
 package requirements2Z3.visitors;
 
+import java.util.Set;
+
 import requirements2Z3.rqt.AndFormula;
 import requirements2Z3.rqt.ArithmeticExpression;
 import requirements2Z3.rqt.Constant;
@@ -14,6 +16,7 @@ import requirements2Z3.rqt.RQTable;
 import requirements2Z3.rqt.RelationalExpression;
 import requirements2Z3.rqt.Requirement;
 import requirements2Z3.rqt.Requirements;
+import requirements2Z3.rqt.TimestampDefinition;
 import requirements2Z3.rqt.True;
 import requirements2Z3.rqt.UnaryExpression;
 import requirements2Z3.rqt.Variable;
@@ -99,8 +102,10 @@ public class DefineVariablesVisitor implements RQTableVisitor<String> {
 	public String visit(Variable variable) {
 		String id = variable.getName();
 
-		if (variable.getType().equals("Int")) {
-			return id + "=Array('" + id + "',I,I)\n";
+		if (!id.equals("tau")) {
+			if (variable.getType().equals("Int")) {
+				return id + "=Array('" + id + "',I,I)\n";
+			}
 		}
 		return id + "=Array('" + id + "',I,R)\n";
 
@@ -108,9 +113,9 @@ public class DefineVariablesVisitor implements RQTableVisitor<String> {
 
 	@Override
 	public String visit(Variables variables) {
-		StringBuilder b=new StringBuilder();
-		
-		for(Variable v: variables.getVariables()) {
+		StringBuilder b = new StringBuilder();
+
+		for (Variable v : variables.getVariables()) {
 			b.append(v.accept(this));
 		}
 		return b.toString();
@@ -118,11 +123,19 @@ public class DefineVariablesVisitor implements RQTableVisitor<String> {
 
 	@Override
 	public String visit(RQTable rqTable) {
-		return rqTable.getVariables().accept(this);
+		if (rqTable.getTd() != null)
+			return rqTable.getTd().accept(this) + rqTable.getVariables().accept(this);
+		else
+			return rqTable.getVariables().accept(this);
 	}
 
 	@Override
 	public String visit(Requirements requirements) {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public String visit(TimestampDefinition timestampDefinition) {
+		return "Ts = Real('Ts')\n";
 	}
 }

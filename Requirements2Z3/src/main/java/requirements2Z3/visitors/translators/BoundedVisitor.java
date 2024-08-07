@@ -32,9 +32,10 @@ public abstract class BoundedVisitor extends Table2Z3Visitor  {
 		this.index = 0;
 	}
 
+	
 	@Override
 	public Z3Formula visit(Identifier identifier) {
-		return this.getEncoder().getTracePosition(identifier.getId(), String.valueOf(this.getIndex()));
+			return this.getEncoder().getTracePosition(identifier.getId(), String.valueOf(this.getIndex()));
 	}
 	
 	@Override
@@ -45,11 +46,11 @@ public abstract class BoundedVisitor extends Table2Z3Visitor  {
 	@Override
 	public Z3Formula visit(PrevExpression prevExpression)
 	{
-		if (this.index == 0) {
-			return this.getEncoder().getTracePosition(prevExpression.getId().getId(), String.valueOf(this.getIndex()));
-		} else {
+		//if (this.index == 0) {
+		//	return this.getEncoder().getTracePosition(prevExpression.getId().getId(), String.valueOf(this.getIndex()));
+		//} else {
 			return this.getEncoder().getTracePosition(prevExpression.getId().getId(), String.valueOf(this.getIndex() - 1));
-		}
+		//}
 	}
 
 	@Override

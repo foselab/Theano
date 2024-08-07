@@ -14,6 +14,7 @@ import requirements2Z3.rqt.RQTable;
 import requirements2Z3.rqt.RelationalExpression;
 import requirements2Z3.rqt.Requirement;
 import requirements2Z3.rqt.Requirements;
+import requirements2Z3.rqt.TimestampDefinition;
 import requirements2Z3.rqt.True;
 import requirements2Z3.rqt.UnaryExpression;
 import requirements2Z3.rqt.Variable;
@@ -23,7 +24,7 @@ public class RQTableToStringVisitor implements RQTableVisitor<String>{
 
 	@Override
 	public String visit(ArithmeticExpression arithmeticExpression) {
-		return arithmeticExpression.getLeft().accept(this)+arithmeticExpression.getOp()+arithmeticExpression.getRight().accept(this);
+		return arithmeticExpression.getLeft().accept(this)+arithmeticExpression.getOp().getOperator()+arithmeticExpression.getRight().accept(this);
 	}
 
 	@Override
@@ -33,7 +34,7 @@ public class RQTableToStringVisitor implements RQTableVisitor<String>{
 
 	@Override
 	public String visit(DurFormula durFormula) {
-		return "dur"+"("+durFormula.getF()+")"+durFormula.getOp()+durFormula.getConstant();
+		return "dur"+"("+durFormula.getF().accept(this)+")"+durFormula.getOp()+durFormula.getConstant();
 	}
 
 	@Override
@@ -68,7 +69,7 @@ public class RQTableToStringVisitor implements RQTableVisitor<String>{
 
 	@Override
 	public String visit(PrevExpression prevExpression) {
-		return "prev("+prevExpression.getId()+")";
+		return "prev("+prevExpression.getId().accept(this)+")";
 	}
 
 	@Override
@@ -108,6 +109,7 @@ public class RQTableToStringVisitor implements RQTableVisitor<String>{
 	@Override
 	public String visit(RQTable rqTable) {
 		StringBuilder builder=new StringBuilder();
+		builder.append(rqTable.getTd().accept(this));
 		builder.append("vardef\n"+rqTable.getVariables().accept(this)+"endvardef\n");
 		builder.append("reqdef\n"+rqTable.getRequirements().accept(this)+"endreqdef\n");
 		
@@ -121,5 +123,10 @@ public class RQTableToStringVisitor implements RQTableVisitor<String>{
 			builder.append(v.accept(this)+"\n");
 		}
 		return builder.toString();
+	}
+
+	@Override
+	public String visit(TimestampDefinition timestampDefinition) {
+		return "Ts="+timestampDefinition.getConstant()+"\n";
 	}
 }

@@ -14,6 +14,7 @@ import requirements2Z3.rqt.RQTable;
 import requirements2Z3.rqt.RelationalExpression;
 import requirements2Z3.rqt.Requirement;
 import requirements2Z3.rqt.Requirements;
+import requirements2Z3.rqt.TimestampDefinition;
 import requirements2Z3.rqt.True;
 import requirements2Z3.rqt.UnaryExpression;
 import requirements2Z3.rqt.Variable;
@@ -56,4 +57,6 @@ public interface RQTableVisitor<T> {
 	public  T visit(RQTable rqTable);
 
 	public  T visit(Requirements requirements);
+
+	public T visit(TimestampDefinition timestampDefinition);
 }

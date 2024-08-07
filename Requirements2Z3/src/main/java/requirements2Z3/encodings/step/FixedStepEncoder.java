@@ -7,7 +7,7 @@ import requirements2Z3.z3formulae.Z3Formula;
 
 public class FixedStepEncoder extends StepEncoder {
 
-	private float ts;
+	private double ts;
 
 	/**
 	 * {@inheritDoc}
@@ -15,7 +15,7 @@ public class FixedStepEncoder extends StepEncoder {
 	 * @param traceEncoder the trace encoding to be considered
 	 * @param ts           the timestep to be considered by the finite step encoding
 	 */
-	public FixedStepEncoder(TraceEncoder traceEncoder, float ts) {
+	public FixedStepEncoder(TraceEncoder traceEncoder, double ts) {
 		super(traceEncoder);
 		this.ts = ts;
 	}
@@ -36,7 +36,7 @@ public class FixedStepEncoder extends StepEncoder {
 		return Z3Formula.getPredicate(
 				Z3Formula.getExpression(this.getTraceEncoder().getTracePosition(signalname, nextPosition), "-",
 						this.getTraceEncoder().getTracePosition(signalname, position)),
-				Z3Formula.getRelationalOperator("=="), Z3Formula.getVariable(Float.toString(ts)));
+				Z3Formula.getRelationalOperator("=="), Z3Formula.getVariable(Double.toString(ts)));
 
 	}
 

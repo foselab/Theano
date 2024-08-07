@@ -16,6 +16,7 @@ import requirements2Z3.rqt.RQTable;
 import requirements2Z3.rqt.RelationalExpression;
 import requirements2Z3.rqt.Requirement;
 import requirements2Z3.rqt.Requirements;
+import requirements2Z3.rqt.TimestampDefinition;
 import requirements2Z3.rqt.True;
 import requirements2Z3.rqt.UnaryExpression;
 import requirements2Z3.rqt.Variable;
@@ -131,5 +132,10 @@ public class PostconditionContainsVariableVisitor implements RQTableVisitor<Bool
 			result=result || rq.accept(this);
 		}
 		return result;
+	}
+	
+	@Override
+	public Boolean visit(TimestampDefinition timestampDefinition) {
+		throw new UnsupportedOperationException();
 	}
 }

@@ -86,25 +86,28 @@ public class Main {
 
 		RQTable rqTable = rqParser.primaryExpression().rqt;
 		
+		
+		double ts=(rqTable.getTd()!=null) ? rqTable.getTd().getConstant() :-1;
+		
 		System.out.println(rqTable.accept(new RQTableToStringVisitor()));
 		switch (typeInput) {
 		case "consistency":
 			if (cmd.getOptionValue("b") != null) {
 				translate(inputFilePath, outputFilePath, selectedEncoding, boundparam,
-						new BoundedConsistencyTranslator());
+						new BoundedConsistencyTranslator(),ts);
 			} else {
 				translate(inputFilePath, outputFilePath, selectedEncoding, boundparam,
-						new UnboundedConsistencyTranslator());
+						new UnboundedConsistencyTranslator(),ts);
 			}
 			break;
 
 		case "completeness":
 			if (cmd.getOptionValue("b") != null) {
 				translate(inputFilePath, outputFilePath, selectedEncoding, boundparam,
-						new BoundedCompletenessTranslator());
+						new BoundedCompletenessTranslator(),ts);
 			} else {
 				translate(inputFilePath, outputFilePath, selectedEncoding, boundparam,
-						new UnboundedCompletenessTranslator());
+						new UnboundedCompletenessTranslator(),ts);
 			}
 			break;
 
@@ -118,7 +121,8 @@ public class Main {
 	}
 
 	private static <T extends Table2Z3Visitor> void translate(String inputFilePath, String outputFilePath,
-			String selectedEncoding, int bound, Functionality<T> functionality) throws Exception {
-		Encodings.translate(inputFilePath, outputFilePath, selectedEncoding, bound, functionality).translate();
+			String selectedEncoding, int bound, Functionality<T> functionality, double ts) throws Exception {
+		
+		Encodings.translate(inputFilePath, outputFilePath, selectedEncoding, bound, functionality,ts).translate();
 	}
 }

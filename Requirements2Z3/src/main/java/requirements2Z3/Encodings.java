@@ -25,9 +25,21 @@ public enum Encodings {
 	BeArVs,
 	BeUfVs;
 	
+	/**
+	 * 
+	 * @param <T>
+	 * @param inputFilePath
+	 * @param outputFilePath
+	 * @param selectedEncoding
+	 * @param bound
+	 * @param functionality
+	 * @param ts set ts to zero if the encoding does not require a fixed timestamp.
+	 * @return
+	 * @throws Exception
+	 */
 	public static <T extends Table2Z3Visitor> Translator<? extends Table2Z3Visitor> translate(String inputFilePath, String outputFilePath,
-			String selectedEncoding, int bound, Functionality<T> functionality) throws Exception {
-		float ts = 2;
+			String selectedEncoding, int bound, Functionality<T> functionality, double ts) throws Exception {
+
 
 		
 		Translator<? extends Table2Z3Visitor> translator;

@@ -4,10 +4,12 @@ import requirements2Z3.visitors.RQTableVisitor;
 
 public class RQTable {
 
+	private final TimestampDefinition td;
 	private final Requirements requirements;
 	private final Variables variables;
 	
-	public RQTable(Variables variables, Requirements requirements) {
+	public RQTable(TimestampDefinition td, Variables variables, Requirements requirements) {
+		this.td=td;
 		this.requirements=requirements;
 		this.variables=variables;
 	}
@@ -22,5 +24,9 @@ public class RQTable {
 
 	public Variables getVariables() {
 		return variables;
+	}
+
+	public TimestampDefinition getTd() {
+		return td;
 	}
 }

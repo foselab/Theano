@@ -61,6 +61,11 @@ public class Translator<T extends Table2Z3Visitor> {
 		wt.write("# Signal variables definition\n");
 
 		wt.write(new DefineVariablesVisitor().visit(tree) + "\n");
+		
+		if (tree.getTd()!=null) {
+			 wt.write(tree.getTd().accept(z3visitor).toString());
+		}
+
 
 		// defines the quantification variables
 		wt.write("# Quantification variables\n");

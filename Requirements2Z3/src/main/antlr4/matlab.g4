@@ -9,8 +9,15 @@ import requirements2Z3.rqt.*;
 
 primaryExpression returns [RQTable rqt]
 :
-	vsdefs=variablesdefinitions rqdefs=requirementsdefinitions
-	{$rqt=new RQTable($vsdefs.vs,$rqdefs.rqs);}
+	ts=timestampdefinition vsdefs=variablesdefinitions rqdefs=requirementsdefinitions
+	{$rqt=new RQTable($ts.td,$vsdefs.vs,$rqdefs.rqs);}|
+ vsdefs=variablesdefinitions rqdefs=requirementsdefinitions
+	{$rqt=new RQTable(null,$vsdefs.vs,$rqdefs.rqs);}
+;
+
+timestampdefinition returns [TimestampDefinition td]
+:
+	'Ts=' c=CONSTANT SEMICOLUMN CR {$td=new TimestampDefinition(Double.parseDouble($c.text));}
 ;
 
 variablesdefinitions returns [Variables vs]
@@ -66,7 +73,7 @@ and_expression returns [PFormula f]
 negation_expression returns [PFormula f]
 :
 	atomic_expression {$f=$atomic_expression.f;}
-	| NOT or_expression {$f=new NegationFormula($or_expression.f);}
+	| NOT LPAR or_expression RPAR {$f=new NegationFormula($or_expression.f);}
 ;
 
 atomic_expression returns [PFormula f]
@@ -80,13 +87,13 @@ atomic_expression returns [PFormula f]
 
 dur_expression returns [PFormula f]
 :
-	DUR LPAR or_exp=or_expression RPAR durop=(GE_OP | LE_OP | EQ_OP | LEQ_OP | GEQ_OP) c=CONSTANT
+	DUR LPAR or_exp=or_expression RPAR durop=(GE_OP | LE_OP | EQ_OP | LEQ_OP | GEQ_OP | NE_OP) c=CONSTANT
 	{$f=new DurFormula($or_exp.f,RelationalOperator.toRelationalOperator($durop.text),Double.parseDouble($c.text));}
 ;
 
 relational_expression returns [PFormula f]
 :
-	l=arithmetic_expression rop=(GE_OP | LE_OP | EQ_OP | LEQ_OP | GEQ_OP) r=arithmetic_expression
+	l=arithmetic_expression rop=(GE_OP | LE_OP | EQ_OP | LEQ_OP | GEQ_OP | NE_OP) r=arithmetic_expression
 	{$f=new RelationalExpression($l.exp,RelationalOperator.toRelationalOperator($rop.text),$r.exp);}
 
 ;
@@ -286,7 +293,7 @@ EQ_OP
 
 NE_OP
 :
-	'~='
+	'!='
 ;
 
 CONSTANT

@@ -1,6 +1,7 @@
 package requirements2Z3.visitors;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import requirements2Z3.rqt.AndFormula;
@@ -18,6 +19,7 @@ import requirements2Z3.rqt.RQTable;
 import requirements2Z3.rqt.RelationalExpression;
 import requirements2Z3.rqt.Requirement;
 import requirements2Z3.rqt.Requirements;
+import requirements2Z3.rqt.TimestampDefinition;
 import requirements2Z3.rqt.True;
 import requirements2Z3.rqt.UnaryExpression;
 import requirements2Z3.rqt.Variable;
@@ -135,5 +137,10 @@ public class GetPreconditionsVariableVisitor implements RQTableVisitor<Set<PForm
 			}
 		}
 		return preconditions;
+	}
+	
+	@Override
+	public Set<PFormula> visit(TimestampDefinition timestampDefinition) {
+		throw new UnsupportedOperationException();
 	}
 }

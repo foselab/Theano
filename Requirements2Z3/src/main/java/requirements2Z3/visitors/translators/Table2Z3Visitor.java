@@ -36,8 +36,6 @@ public abstract class Table2Z3Visitor implements RQTableVisitor<Z3Formula> {
 		return Z3Formula.getConstant(Double.toString(constant.getConstant()));
 	}
 
-
-
 	@Override
 	public Z3Formula visit(AndFormula andFormula) {
 		return Z3Formula.getAnd(andFormula.getLeft().accept(this),andFormula.getRight().accept(this));
@@ -47,7 +45,7 @@ public abstract class Table2Z3Visitor implements RQTableVisitor<Z3Formula> {
 	public Z3Expression visit(ArithmeticExpression arithmeticExpression) {
 		return  Z3Formula.getExpression(
 				(Z3Expression) arithmeticExpression.getLeft().accept(this), 
-				arithmeticExpression.getOp().toString(), 
+				arithmeticExpression.getOp().getOperator(), 
 				(Z3Expression) arithmeticExpression.getRight().accept(this));
 	}
 	

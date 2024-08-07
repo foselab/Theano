@@ -25,6 +25,7 @@ import requirements2Z3.rqt.RQTable;
 import requirements2Z3.rqt.RelationalExpression;
 import requirements2Z3.rqt.Requirement;
 import requirements2Z3.rqt.Requirements;
+import requirements2Z3.rqt.TimestampDefinition;
 import requirements2Z3.rqt.True;
 import requirements2Z3.rqt.UnaryExpression;
 import requirements2Z3.rqt.Variable;
@@ -139,10 +140,18 @@ public class GetRequirementsVariableVisitor implements RQTableVisitor<List<Requi
 		variables.add(this.variable);
 		
 		for(Requirement r: requirements.getRequirements()) {
-			if(r.accept(new PreconditionContainsVariableVisitor(variables))) {
+			if(
+					r.accept(new PreconditionContainsVariableVisitor(variables)) ||
+					r.accept(new PostconditionContainsVariableVisitor(variables))
+					) {
 				retRequirements.add(r);
 			}
 		}
 		return retRequirements;
+	}
+	
+	@Override
+	public List<Requirement> visit(TimestampDefinition timestampDefinition) {
+		throw new UnsupportedOperationException();
 	}
 }

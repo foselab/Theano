@@ -14,6 +14,8 @@ public enum ArithmeticOperator {
 		return operator;
 	}
 	
+	
+	
 	public static ArithmeticOperator toArithmeticOperator(String arg0) {
 		switch(arg0) {
 			case "+":

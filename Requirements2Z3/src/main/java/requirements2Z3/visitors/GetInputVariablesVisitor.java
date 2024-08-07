@@ -17,6 +17,7 @@ import requirements2Z3.rqt.RQTable;
 import requirements2Z3.rqt.RelationalExpression;
 import requirements2Z3.rqt.Requirement;
 import requirements2Z3.rqt.Requirements;
+import requirements2Z3.rqt.TimestampDefinition;
 import requirements2Z3.rqt.True;
 import requirements2Z3.rqt.UnaryExpression;
 import requirements2Z3.rqt.Variable;
@@ -126,4 +127,8 @@ public class GetInputVariablesVisitor implements RQTableVisitor<Set<Variable>> {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public Set<Variable> visit(TimestampDefinition timestampDefinition) {
+		throw new UnsupportedOperationException();
+	}
 }
