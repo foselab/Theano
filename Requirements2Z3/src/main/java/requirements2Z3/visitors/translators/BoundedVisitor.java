@@ -20,6 +20,9 @@ public abstract class BoundedVisitor extends Table2Z3Visitor  {
 		this.index = 0;
 	}
 
+	public void setIndex(int index) {
+		this.index=index;
+	}
 	public int getIndex() {
 		return index;
 	}

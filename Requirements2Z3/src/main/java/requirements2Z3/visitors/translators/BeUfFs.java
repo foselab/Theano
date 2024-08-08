@@ -11,8 +11,8 @@ public class BeUfFs extends BoundedVisitor {
 
 	private double ts;
 
-	public BeUfFs(Encoder encoder, int index, double ts) {
-		super(encoder, index);
+	public BeUfFs(Encoder encoder, int bound, double ts) {
+		super(encoder, bound);
 		this.ts = ts;
 	}
 	
@@ -38,10 +38,18 @@ public class BeUfFs extends BoundedVisitor {
 
 		int lb = (int) (this.getIndex() - Float.parseFloat(constant.toString()) / this.ts);
 
-		for (int n = lb; n <= this.getIndex(); n++) {
-			part3 = Z3Formula.getAnd(part3,durFormula.getF().accept(new BeUfFs(this.getEncoder(), n, this.ts)));
-		}
-		return Z3Formula.getAnd(part1,part2, part3);
+		int index=this.getIndex();
+		//if(lb>=0) {
+			for (int n = lb; n <= this.getIndex(); n++) {
+				
+				BeUfFs visitor=new BeUfFs(this.getEncoder(), n, this.ts);
+				visitor.setIndex(n);
+				part3 = Z3Formula.getAnd(part3,durFormula.getF().accept(visitor));
+			}
+		//}else {
+		//	part3 =Z3Formula.getFalse();
+		//}
+		return part3;//Z3Formula.getAnd(part1,part2, part3);
 	}
 
 	@Override

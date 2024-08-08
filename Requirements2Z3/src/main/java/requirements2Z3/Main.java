@@ -89,7 +89,7 @@ public class Main {
 		
 		double ts=(rqTable.getTd()!=null) ? rqTable.getTd().getConstant() :-1;
 		
-		System.out.println(rqTable.accept(new RQTableToStringVisitor()));
+		//System.out.println(rqTable.accept(new RQTableToStringVisitor()));
 		switch (typeInput) {
 		case "consistency":
 			if (cmd.getOptionValue("b") != null) {

@@ -43,6 +43,10 @@ public abstract class Z3Formula {
 		if (f instanceof False) {
 			return getTrue();
 		}
+		if (f instanceof Not) {
+			Not f1=((Not) f);
+			return f1.getSubformula();
+		}
 		return new Not(f);
 	}
 
@@ -131,6 +135,9 @@ public abstract class Z3Formula {
 		}
 		if (f1 instanceof True) {
 			return f2;
+		}
+		if (f2 instanceof False) {
+			return Z3Formula.getNot(f1);
 		}
 		return new Implies(f1, f2);
 	}
@@ -275,6 +282,10 @@ class Not extends Z3Formula {
 		this.subformula = subformula;
 	}
 
+	public Z3Formula getSubformula() {
+		return this.subformula;
+	}
+	
 	@Override
 	public String toString() {
 		return "Not(" + subformula.toString() + ")";
