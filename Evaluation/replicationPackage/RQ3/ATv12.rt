@@ -1,0 +1,27 @@
+Ts=1;
+vardef
+  throttle,Real,input;
+  brake,Real,input;
+  win,Real,input;
+  gin,Real,input;
+  v,Real,output;
+  w,Real,output;
+  gout,Int,output;
+endvardef
+reqdef
+(tau>=0)&(tau<=20), v<120;
+(tau<0)|(tau>20), (v<120)|(v>=120);
+(tau>=0)&(tau<=10), w<4750;
+(tau<0)|(tau>10), (w<4750)|(w>=4750);
+(tau>=0)&((tau<=30)&((dur(gin==1)==2.5)&(!(dur(gin==1)>2.5)))), dur(gout==1)>2.5;
+!((tau>=0)&((tau<=30)&((dur(gin==1)==2.5)&(!(dur(gin==1)>2.5))))), (gout==1)|(gout!=1);
+(tau>=0)&((tau<=30)&((dur(gin==2)==2.5)&(!(dur(gin==2)>2.5)))), dur(gout==2)>2.5;
+!((tau>=0)&((tau<=30)&((dur(gin==2)==2.5)&(!(dur(gin==2)>2.5))))), (gout==2)|(gout!=2);
+(tau>=0)&((tau<=30)&((dur(gin==3)==2.5)&(!(dur(gin==3)>2.5)))), dur(gout==3)>2.5;
+!((tau>=0)&((tau<=30)&((dur(gin==3)==2.5)&(!(dur(gin==3)>2.5))))), (gout==3)|(gout!=3);
+(tau>=0)&((tau<=30)&((dur(gin==4)==2.5)&(!(dur(gin==4)>2.5)))), dur(gout==4)>2.5;
+!((tau>=0)&((tau<=30)&((dur(gin==4)==2.5)&(!(dur(gin==4)>2.5))))), (gout==4)|(gout!=4);
+  (!(tau==30))|(dur(win<3000)>=30),(!(tau==4))|(dur(w<35)>4);
+  (!(tau==30))|(dur(win<3000)>=30),(!(tau==4))|(dur(w<50)>8);
+  (!(tau==30))|(dur(win<3000)>=30),(!(tau==4))|(dur(w<65)>20);
+endreqdef

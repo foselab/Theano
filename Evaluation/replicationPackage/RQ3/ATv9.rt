@@ -1,0 +1,23 @@
+Ts=1;
+vardef
+  throttle,Real,input;
+  brake,Real,input;
+  gin,Real,input;
+  v,Real,output;
+  w,Real,output;
+  gout,Int,output;
+endvardef
+reqdef
+(tau>=0)&(tau<=20), v<120;
+(tau<0)|(tau>20), (v<120)|(v>=120);
+(tau>=0)&(tau<=10), w<4750;
+(tau<0)|(tau>10), (w<4750)|(w>=4750);
+  (tau>=0)&((tau<=30)&((gin==1)&(prev(gin)!=1))), dur(gout==1)>2.5;
+  !((tau>=0)&((tau<=30)&((gin==1)&(prev(gin)!=1)))), (gout==1)|(gout!=1);
+  (tau>=0)&((tau<=30)&((gin==2)&(prev(gin)!=2))), dur(gout==2)>2.5;
+  !((tau>=0)&((tau<=30)&((gin==2)&(prev(gin)!=2)))), (gout==2)|(gout!=2);
+  (tau>=0)&((tau<=30)&((gin==2)&(prev(gin)!=3))), dur(gout==3)>2.5;
+  !((tau>=0)&((tau<=30)&((gin==3)&(prev(gin)!=3)))), (gout==3)|(gout!=3);
+  (tau>=0)&((tau<=30)&((gin==4)&(prev(gin)!=4))), dur(gout==4)>2.5;
+  !((tau>=0)&((tau<=30)&((gin==4)&(prev(gin)!=4)))), (gout==4)|(gout!=4);
+endreqdef

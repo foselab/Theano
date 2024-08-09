@@ -1,0 +1,10 @@
+Ts=1;
+vardef
+  throttle,Real,input;
+  brake,Real,input;
+  g,Int,output;
+  w,Real,output;
+  v,Real,output;
+endvardef
+reqdef
+endreqdef

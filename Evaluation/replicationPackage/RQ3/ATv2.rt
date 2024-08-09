@@ -1,0 +1,11 @@
+Ts=1;
+vardef
+  throttle,Real,input;
+  brake,Real,input;
+  rpm,Real,output;
+  w,Real,output;
+  v,Real,output;
+endvardef
+reqdef
+  (tau>=0)&(tau<=20), v<120;
+endreqdef
