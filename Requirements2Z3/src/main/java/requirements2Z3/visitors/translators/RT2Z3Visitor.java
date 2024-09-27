@@ -65,8 +65,8 @@ public abstract class RT2Z3Visitor implements RTVisitor<Z3Formula> {
 	}
 		
 	@Override
-	public Z3Formula visit(Requirement requirement) {
-		return Z3Formula.getImplies(requirement.getPrecondition().accept(this),requirement.getPostcondition().accept(this));
+	public Z3Formula visit(Requirement rq) {
+		return Z3Formula.getImplies(rq.getPrecondition().accept(this),rq.getPostcondition().accept(this));
 	}
 	
 	@Override
@@ -85,8 +85,8 @@ public abstract class RT2Z3Visitor implements RTVisitor<Z3Formula> {
 	}
 
 	@Override
-	public Z3Formula visit(RT rqTable) {
-		return rqTable.getRequirements().accept(this);	
+	public Z3Formula visit(RT rt) {
+		return rt.getRequirements().accept(this);	
 	}
 
 	@Override

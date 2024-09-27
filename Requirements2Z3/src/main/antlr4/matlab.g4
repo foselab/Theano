@@ -7,12 +7,12 @@ import requirements2Z3.rqt.*;
 
 }
 
-primaryExpression returns [RQTable rqt]
+primaryExpression returns [RT rqt]
 :
 	ts=timestampdefinition vsdefs=variablesdefinitions rqdefs=requirementsdefinitions
-	{$rqt=new RQTable($ts.td,$vsdefs.vs,$rqdefs.rqs);}|
+	{$rqt=new RT($ts.td,$vsdefs.vs,$rqdefs.rqs);}|
  vsdefs=variablesdefinitions rqdefs=requirementsdefinitions
-	{$rqt=new RQTable(null,$vsdefs.vs,$rqdefs.rqs);}
+	{$rqt=new RT(null,$vsdefs.vs,$rqdefs.rqs);}
 ;
 
 timestampdefinition returns [TimestampDefinition td]

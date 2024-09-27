@@ -44,7 +44,7 @@ public interface RTVisitor<T> {
 
 	public  T visit(RelationalExpression relationalExpression);
 
-	public  T visit(Requirement requirement);
+	public  T visit(Requirement rq);
 
 	public  T visit(True true1);
 
@@ -54,7 +54,7 @@ public interface RTVisitor<T> {
 
 	public  T visit(Variables variables);
 
-	public  T visit(RT rqTable);
+	public  T visit(RT rt);
 
 	public  T visit(Requirements requirements);
 
