@@ -13,7 +13,7 @@ import requirements2Z3.rqt.IsStartup;
 import requirements2Z3.rqt.NegationFormula;
 import requirements2Z3.rqt.OrFormula;
 import requirements2Z3.rqt.PrevExpression;
-import requirements2Z3.rqt.RQTable;
+import requirements2Z3.rqt.RT;
 import requirements2Z3.rqt.RelationalExpression;
 import requirements2Z3.rqt.Requirement;
 import requirements2Z3.rqt.Requirements;
@@ -118,7 +118,7 @@ public class GetInputVariablesVisitor implements RTVisitor<Set<Variable>> {
 	}
 
 	@Override
-	public Set<Variable> visit(RQTable rqTable) {
+	public Set<Variable> visit(RT rqTable) {
 		return rqTable.getVariables().accept(this);
 	}
 

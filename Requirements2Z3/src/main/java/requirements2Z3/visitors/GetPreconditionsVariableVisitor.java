@@ -15,7 +15,7 @@ import requirements2Z3.rqt.NegationFormula;
 import requirements2Z3.rqt.OrFormula;
 import requirements2Z3.rqt.PFormula;
 import requirements2Z3.rqt.PrevExpression;
-import requirements2Z3.rqt.RQTable;
+import requirements2Z3.rqt.RT;
 import requirements2Z3.rqt.RelationalExpression;
 import requirements2Z3.rqt.Requirement;
 import requirements2Z3.rqt.Requirements;
@@ -120,7 +120,7 @@ public class GetPreconditionsVariableVisitor implements RTVisitor<Set<PFormula>>
 	}
 
 	@Override
-	public Set<PFormula> visit(RQTable rqTable) {
+	public Set<PFormula> visit(RT rqTable) {
 		return rqTable.getRequirements().accept(this);
 	}
 

@@ -3,7 +3,7 @@ package requirements2Z3.consistency;
 import java.util.Set;
 
 import requirements2Z3.rqt.PFormula;
-import requirements2Z3.rqt.RQTable;
+import requirements2Z3.rqt.RT;
 import requirements2Z3.rqt.Variable;
 import requirements2Z3.visitors.GetOutputVariablesVisitor;
 import requirements2Z3.visitors.GetPreconditionsVariableVisitor;
@@ -12,7 +12,7 @@ import requirements2Z3.z3formulae.Z3Formula;
 
 public class BoundedCompletenessTranslator implements Functionality<BoundedVisitor> {
 
-	public Z3Formula getEncodingActivity(BoundedVisitor z3visitor, RQTable tree) {
+	public Z3Formula getEncodingActivity(BoundedVisitor z3visitor, RT tree) {
 		Z3Formula encodingOutpuVariables = Z3Formula.getFalse();
 
 		Set<Variable> outputVariables = tree.accept(new GetOutputVariablesVisitor());

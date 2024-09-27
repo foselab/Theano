@@ -10,7 +10,7 @@ import requirements2Z3.rqt.IsStartup;
 import requirements2Z3.rqt.NegationFormula;
 import requirements2Z3.rqt.OrFormula;
 import requirements2Z3.rqt.PrevExpression;
-import requirements2Z3.rqt.RQTable;
+import requirements2Z3.rqt.RT;
 import requirements2Z3.rqt.RelationalExpression;
 import requirements2Z3.rqt.Requirement;
 import requirements2Z3.rqt.Requirements;
@@ -107,7 +107,7 @@ public class RQTableToStringVisitor implements RTVisitor<String>{
 	}
 
 	@Override
-	public String visit(RQTable rqTable) {
+	public String visit(RT rqTable) {
 		StringBuilder builder=new StringBuilder();
 		builder.append(rqTable.getTd().accept(this));
 		builder.append("vardef\n"+rqTable.getVariables().accept(this)+"endvardef\n");

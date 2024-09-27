@@ -2,7 +2,7 @@ package requirements2Z3.consistency;
 
 import java.util.Set;
 
-import requirements2Z3.rqt.RQTable;
+import requirements2Z3.rqt.RT;
 import requirements2Z3.rqt.Variable;
 import requirements2Z3.visitors.GetOutputVariablesVisitor;
 import requirements2Z3.visitors.translators.UnboundedVisitor;
@@ -21,7 +21,7 @@ public class UnboundedConsistencyTranslator implements Functionality<UnboundedVi
 	}
 
 	@Override
-	public Z3Formula getEncodingActivity(UnboundedVisitor z3visitor, RQTable tree) {
+	public Z3Formula getEncodingActivity(UnboundedVisitor z3visitor, RT tree) {
 
 		Z3Formula encodingRequirements = getEncodingRequirements(z3visitor, tree);
 
@@ -41,7 +41,7 @@ public class UnboundedConsistencyTranslator implements Functionality<UnboundedVi
 		return Z3Formula.getForAll("[" + outputVariables + "]", encodingRequirements);
 	}
 
-	private Z3Formula getEncodingRequirements(UnboundedVisitor z3visitor, RQTable tree) {
+	private Z3Formula getEncodingRequirements(UnboundedVisitor z3visitor, RT tree) {
 		Z3Formula encodingRequirements = tree.accept(z3visitor);
 		encodingRequirements = Z3Formula.getExists("i", 
 				Z3Formula.getNot(encodingRequirements));

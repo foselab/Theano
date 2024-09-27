@@ -12,7 +12,7 @@ import requirements2Z3.rqt.IsStartup;
 import requirements2Z3.rqt.NegationFormula;
 import requirements2Z3.rqt.OrFormula;
 import requirements2Z3.rqt.PrevExpression;
-import requirements2Z3.rqt.RQTable;
+import requirements2Z3.rqt.RT;
 import requirements2Z3.rqt.RelationalExpression;
 import requirements2Z3.rqt.Requirement;
 import requirements2Z3.rqt.Requirements;
@@ -120,7 +120,7 @@ public class PreconditionContainsVariableVisitor implements RTVisitor<Boolean>  
 	}
 
 	@Override
-	public Boolean visit(RQTable rqTable) {
+	public Boolean visit(RT rqTable) {
 		return rqTable.getRequirements().accept(this);
 	}
 

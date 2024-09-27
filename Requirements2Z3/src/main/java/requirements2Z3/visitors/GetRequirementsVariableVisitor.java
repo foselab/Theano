@@ -21,7 +21,7 @@ import requirements2Z3.rqt.IsStartup;
 import requirements2Z3.rqt.NegationFormula;
 import requirements2Z3.rqt.OrFormula;
 import requirements2Z3.rqt.PrevExpression;
-import requirements2Z3.rqt.RQTable;
+import requirements2Z3.rqt.RT;
 import requirements2Z3.rqt.RelationalExpression;
 import requirements2Z3.rqt.Requirement;
 import requirements2Z3.rqt.Requirements;
@@ -127,7 +127,7 @@ public class GetRequirementsVariableVisitor implements RTVisitor<List<Requiremen
 	}
 
 	@Override
-	public List<Requirement> visit(RQTable rqTable) {
+	public List<Requirement> visit(RT rqTable) {
 		return rqTable.getRequirements().accept(this);
 	}
 

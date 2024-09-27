@@ -5,7 +5,7 @@ import java.util.Set;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import generated.matlabParser.RequirementContext;
-import requirements2Z3.rqt.RQTable;
+import requirements2Z3.rqt.RT;
 import requirements2Z3.rqt.Requirement;
 import requirements2Z3.rqt.Variable;
 import requirements2Z3.visitors.GetOutputVariablesVisitor;
@@ -25,7 +25,7 @@ public class BoundedConsistencyTranslator implements Functionality<BoundedVisito
 		return "\t\t print('Requirements Table Not Consistent (sat)')\n";
 	}
 
-	public Z3Formula getEncodingActivity(BoundedVisitor z3visitor, RQTable tree) {
+	public Z3Formula getEncodingActivity(BoundedVisitor z3visitor, RT tree) {
 
 		Set<Variable> outputVariables = tree.accept(new GetOutputVariablesVisitor());
 
@@ -52,7 +52,7 @@ public class BoundedConsistencyTranslator implements Functionality<BoundedVisito
 
 	}
 
-	protected Z3Formula getEncodingOutputVariable(BoundedVisitor z3visitor, RQTable tree, Variable outputVariable) {
+	protected Z3Formula getEncodingOutputVariable(BoundedVisitor z3visitor, RT tree, Variable outputVariable) {
 		Z3Formula encodingRequirements = Z3Formula.getFalse();
 
 		for (int currentIndexI = 0; currentIndexI < z3visitor.getBound(); currentIndexI++) {

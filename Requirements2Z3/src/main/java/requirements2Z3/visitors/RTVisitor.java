@@ -10,7 +10,7 @@ import requirements2Z3.rqt.IsStartup;
 import requirements2Z3.rqt.NegationFormula;
 import requirements2Z3.rqt.OrFormula;
 import requirements2Z3.rqt.PrevExpression;
-import requirements2Z3.rqt.RQTable;
+import requirements2Z3.rqt.RT;
 import requirements2Z3.rqt.RelationalExpression;
 import requirements2Z3.rqt.Requirement;
 import requirements2Z3.rqt.Requirements;
@@ -54,7 +54,7 @@ public interface RTVisitor<T> {
 
 	public  T visit(Variables variables);
 
-	public  T visit(RQTable rqTable);
+	public  T visit(RT rqTable);
 
 	public  T visit(Requirements requirements);
 

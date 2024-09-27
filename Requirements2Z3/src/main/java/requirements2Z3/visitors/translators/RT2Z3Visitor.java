@@ -6,7 +6,7 @@ import requirements2Z3.rqt.ArithmeticExpression;
 import requirements2Z3.rqt.Constant;
 import requirements2Z3.rqt.NegationFormula;
 import requirements2Z3.rqt.OrFormula;
-import requirements2Z3.rqt.RQTable;
+import requirements2Z3.rqt.RT;
 import requirements2Z3.rqt.RelationalExpression;
 import requirements2Z3.rqt.Requirement;
 import requirements2Z3.rqt.Requirements;
@@ -85,7 +85,7 @@ public abstract class RT2Z3Visitor implements RTVisitor<Z3Formula> {
 	}
 
 	@Override
-	public Z3Formula visit(RQTable rqTable) {
+	public Z3Formula visit(RT rqTable) {
 		return rqTable.getRequirements().accept(this);	
 	}
 

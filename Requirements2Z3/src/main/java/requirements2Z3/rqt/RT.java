@@ -2,13 +2,13 @@ package requirements2Z3.rqt;
 
 import requirements2Z3.visitors.RTVisitor;
 
-public class RQTable {
+public class RT {
 
 	private final TimestampDefinition td;
 	private final Requirements requirements;
 	private final Variables variables;
 	
-	public RQTable(TimestampDefinition td, Variables variables, Requirements requirements) {
+	public RT(TimestampDefinition td, Variables variables, Requirements requirements) {
 		this.td=td;
 		this.requirements=requirements;
 		this.variables=variables;
