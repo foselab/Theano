@@ -1,6 +1,6 @@
 package requirements2Z3.rqt;
 
-import requirements2Z3.visitors.RQTableVisitor;
+import requirements2Z3.visitors.RTVisitor;
 
 public class Identifier extends Expression {
 
@@ -14,7 +14,7 @@ public class Identifier extends Expression {
 		return id;
 	}
 	
-	public <T> T accept(RQTableVisitor<T> visitor) {
+	public <T> T accept(RTVisitor<T> visitor) {
 		return visitor.visit(this);
 	}
 }

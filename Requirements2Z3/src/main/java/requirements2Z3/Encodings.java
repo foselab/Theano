@@ -13,7 +13,7 @@ import requirements2Z3.factory.UeArFsFactory;
 import requirements2Z3.factory.UeArVsFactory;
 import requirements2Z3.factory.UeUfFsFactory;
 import requirements2Z3.factory.UeUfVsFactory;
-import requirements2Z3.visitors.translators.Table2Z3Visitor;
+import requirements2Z3.visitors.translators.RT2Z3Visitor;
 
 public enum Encodings {
 	UeArFs, 
@@ -37,13 +37,13 @@ public enum Encodings {
 	 * @return
 	 * @throws Exception
 	 */
-	public static <T extends Table2Z3Visitor> Translator<? extends Table2Z3Visitor> translate(String inputFilePath, String outputFilePath,
+	public static <T extends RT2Z3Visitor> Translator<? extends RT2Z3Visitor> translate(String inputFilePath, String outputFilePath,
 			String selectedEncoding, int bound, Functionality<T> functionality, double ts) throws Exception {
 
 
 		
-		Translator<? extends Table2Z3Visitor> translator;
-		Table2Z3Visitor z3visitor = null;
+		Translator<? extends RT2Z3Visitor> translator;
+		RT2Z3Visitor z3visitor = null;
 		
 		switch (Encodings.valueOf(selectedEncoding)) {
 		// unbounded

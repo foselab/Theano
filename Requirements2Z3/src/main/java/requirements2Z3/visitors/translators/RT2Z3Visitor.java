@@ -13,16 +13,16 @@ import requirements2Z3.rqt.Requirements;
 import requirements2Z3.rqt.True;
 import requirements2Z3.rqt.UnaryExpression;
 import requirements2Z3.rqt.Variables;
-import requirements2Z3.visitors.RQTableVisitor;
+import requirements2Z3.visitors.RTVisitor;
 import requirements2Z3.z3formulae.Z3Expression;
 import requirements2Z3.z3formulae.Z3Formula;
 
-public abstract class Table2Z3Visitor implements RQTableVisitor<Z3Formula> {
+public abstract class RT2Z3Visitor implements RTVisitor<Z3Formula> {
 
 	
 	private final Encoder encoder;
 
-	public Table2Z3Visitor(Encoder encoder) {
+	public RT2Z3Visitor(Encoder encoder) {
 		this.encoder = encoder;
 	}
 

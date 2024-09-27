@@ -22,7 +22,7 @@ import requirements2Z3.consistency.UnboundedCompletenessTranslator;
 import requirements2Z3.consistency.UnboundedConsistencyTranslator;
 import requirements2Z3.rqt.RQTable;
 import requirements2Z3.visitors.RQTableToStringVisitor;
-import requirements2Z3.visitors.translators.Table2Z3Visitor;
+import requirements2Z3.visitors.translators.RT2Z3Visitor;
 
 public class Main {
 
@@ -120,7 +120,7 @@ public class Main {
 
 	}
 
-	private static <T extends Table2Z3Visitor> void translate(String inputFilePath, String outputFilePath,
+	private static <T extends RT2Z3Visitor> void translate(String inputFilePath, String outputFilePath,
 			String selectedEncoding, int bound, Functionality<T> functionality, double ts) throws Exception {
 		
 		Encodings.translate(inputFilePath, outputFilePath, selectedEncoding, bound, functionality,ts).translate();

@@ -31,7 +31,7 @@ import requirements2Z3.rqt.Variables;
  * 
  * Returns the preconditions associated with a postcondition that contain that variable
  */
-public class GetPreconditionsVariableVisitor implements RQTableVisitor<Set<PFormula>> {
+public class GetPreconditionsVariableVisitor implements RTVisitor<Set<PFormula>> {
 
 	private Variable variable;
 

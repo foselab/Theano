@@ -8,7 +8,7 @@ import requirements2Z3.rqt.PrevExpression;
 import requirements2Z3.rqt.Variable;
 import requirements2Z3.z3formulae.Z3Formula;
 
-public abstract class BoundedVisitor extends Table2Z3Visitor  {
+public abstract class BoundedVisitor extends RT2Z3Visitor  {
 
 	private final int bound;
 

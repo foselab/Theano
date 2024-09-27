@@ -13,10 +13,10 @@ import requirements2Z3.consistency.Functionality;
 import requirements2Z3.encodings.Encoder;
 import requirements2Z3.rqt.RQTable;
 import requirements2Z3.visitors.DefineVariablesVisitor;
-import requirements2Z3.visitors.translators.Table2Z3Visitor;
+import requirements2Z3.visitors.translators.RT2Z3Visitor;
 import requirements2Z3.z3formulae.Z3Formula;
 
-public class Translator<T extends Table2Z3Visitor> {
+public class Translator<T extends RT2Z3Visitor> {
 
 	private Encoder encoder;
 	private T z3visitor;

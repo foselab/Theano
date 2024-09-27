@@ -20,7 +20,7 @@ import requirements2Z3.rqt.UnaryExpression;
 import requirements2Z3.rqt.Variable;
 import requirements2Z3.rqt.Variables;
 
-public class RQTableToStringVisitor implements RQTableVisitor<String>{
+public class RQTableToStringVisitor implements RTVisitor<String>{
 
 	@Override
 	public String visit(ArithmeticExpression arithmeticExpression) {

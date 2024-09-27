@@ -1,6 +1,6 @@
 package requirements2Z3.rqt;
 
-import requirements2Z3.visitors.RQTableVisitor;
+import requirements2Z3.visitors.RTVisitor;
 
 public class RelationalExpression extends PFormula {
 
@@ -26,7 +26,7 @@ public class RelationalExpression extends PFormula {
 		return exp2;
 	}
 	
-	public <T> T accept(RQTableVisitor<T> visitor) {
+	public <T> T accept(RTVisitor<T> visitor) {
 		return visitor.visit(this);
 	}
 	

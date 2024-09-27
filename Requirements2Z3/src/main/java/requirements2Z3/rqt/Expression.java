@@ -1,8 +1,8 @@
 package requirements2Z3.rqt;
 
-import requirements2Z3.visitors.RQTableVisitor;
+import requirements2Z3.visitors.RTVisitor;
 
 public abstract class Expression {
 
-	public abstract <T> T accept(RQTableVisitor<T> visitor);
+	public abstract <T> T accept(RTVisitor<T> visitor);
 }

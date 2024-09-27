@@ -3,7 +3,7 @@ package requirements2Z3.rqt;
 import java.util.HashSet;
 import java.util.Set;
 
-import requirements2Z3.visitors.RQTableVisitor;
+import requirements2Z3.visitors.RTVisitor;
 
 public class Requirements {
 	
@@ -21,7 +21,7 @@ public class Requirements {
 		return this.requirements;
 	}
 	
-	public <T> T accept(RQTableVisitor<T> visitor) {
+	public <T> T accept(RTVisitor<T> visitor) {
 		return visitor.visit(this);
 	}
 }

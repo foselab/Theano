@@ -37,7 +37,7 @@ import requirements2Z3.rqt.Variables;
  * 
  * Returns the Requirement whose precondition uses that variable
  */
-public class GetRequirementsVariableVisitor implements RQTableVisitor<List<Requirement>> {
+public class GetRequirementsVariableVisitor implements RTVisitor<List<Requirement>> {
 
 	private Variable variable;
 

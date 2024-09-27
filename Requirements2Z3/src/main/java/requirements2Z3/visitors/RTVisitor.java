@@ -20,7 +20,7 @@ import requirements2Z3.rqt.UnaryExpression;
 import requirements2Z3.rqt.Variable;
 import requirements2Z3.rqt.Variables;
 
-public interface RQTableVisitor<T> {
+public interface RTVisitor<T> {
 
 	public  T visit(AndFormula andFormula);
 

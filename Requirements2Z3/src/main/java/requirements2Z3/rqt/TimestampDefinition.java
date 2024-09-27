@@ -1,6 +1,6 @@
 package requirements2Z3.rqt;
 
-import requirements2Z3.visitors.RQTableVisitor;
+import requirements2Z3.visitors.RTVisitor;
 
 public class TimestampDefinition {
 
@@ -14,7 +14,7 @@ public class TimestampDefinition {
 		return constant;
 	}
 
-	public <T> T accept(RQTableVisitor<T> visitor) {
+	public <T> T accept(RTVisitor<T> visitor) {
 		return visitor.visit(this);
 	}
 

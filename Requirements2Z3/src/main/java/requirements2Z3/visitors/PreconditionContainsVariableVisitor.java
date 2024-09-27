@@ -26,7 +26,7 @@ import requirements2Z3.rqt.Variables;
  * This visitor is used to define the variables of the Z3 files based on the
  * variables used in the Requirements Table
  */
-public class PreconditionContainsVariableVisitor implements RQTableVisitor<Boolean>  {
+public class PreconditionContainsVariableVisitor implements RTVisitor<Boolean>  {
 
 	private Set<Variable> variables;
 

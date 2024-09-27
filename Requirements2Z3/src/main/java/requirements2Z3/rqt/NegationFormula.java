@@ -1,6 +1,6 @@
 package requirements2Z3.rqt;
 
-import requirements2Z3.visitors.RQTableVisitor;
+import requirements2Z3.visitors.RTVisitor;
 
 public class NegationFormula extends PFormula {
 
@@ -14,7 +14,7 @@ public class NegationFormula extends PFormula {
 		return f;
 	}
 	
-	public <T> T accept(RQTableVisitor<T> visitor) {
+	public <T> T accept(RTVisitor<T> visitor) {
 		return visitor.visit(this);
 	}
 }

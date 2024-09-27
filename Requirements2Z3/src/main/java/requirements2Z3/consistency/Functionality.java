@@ -1,10 +1,10 @@
 package requirements2Z3.consistency;
 
 import requirements2Z3.rqt.RQTable;
-import requirements2Z3.visitors.translators.Table2Z3Visitor;
+import requirements2Z3.visitors.translators.RT2Z3Visitor;
 import requirements2Z3.z3formulae.Z3Formula;
 
-public interface Functionality<V extends Table2Z3Visitor> {
+public interface Functionality<V extends RT2Z3Visitor> {
 
 	public abstract String printPositiveResult();
 	

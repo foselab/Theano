@@ -1,4 +1,4 @@
-clear
+aclear
 close all;
 
 %filters=["UeArFs" "UeArVs" "UeUfFs" "UeUfVs" "BeArFs" "BeArVs" "BeUfFs" "BeUfVs"];

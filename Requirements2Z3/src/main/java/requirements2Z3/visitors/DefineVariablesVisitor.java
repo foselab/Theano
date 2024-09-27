@@ -26,7 +26,7 @@ import requirements2Z3.rqt.Variables;
  * This visitor is used to define the variables of the Z3 files based on the
  * variables used in the Requirements Table
  */
-public class DefineVariablesVisitor implements RQTableVisitor<String> {
+public class DefineVariablesVisitor implements RTVisitor<String> {
 
 	@Override
 	public String visit(AndFormula andFormula) {
