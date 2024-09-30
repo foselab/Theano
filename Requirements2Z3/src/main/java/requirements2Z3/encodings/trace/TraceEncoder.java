@@ -1,6 +1,6 @@
 package requirements2Z3.encodings.trace;
 
-import requirements2Z3.z3formulae.Z3Expression;
+import requirements2Z3.z3formulae.Z3Exp;
 
 public interface TraceEncoder {
 	
@@ -21,6 +21,6 @@ public interface TraceEncoder {
 	 *         position.
 	 * @throws IllegalArgumentException if the signal name of the position is null
 	 */
-	public abstract Z3Expression getTracePosition(String signalname, String position);
+	public abstract Z3Exp getTracePosition(String signalname, String position);
 
 }

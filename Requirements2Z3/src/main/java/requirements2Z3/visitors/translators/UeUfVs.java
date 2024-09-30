@@ -4,7 +4,7 @@ import requirements2Z3.encodings.Encoder;
 import requirements2Z3.rqt.DurFormula;
 import requirements2Z3.rqt.Identifier;
 import requirements2Z3.rqt.TimestampDefinition;
-import requirements2Z3.z3formulae.Z3Expression;
+import requirements2Z3.z3formulae.Z3Exp;
 import requirements2Z3.z3formulae.Z3Formula;
 
 public class UeUfVs extends UnboundedVisitor  {
@@ -26,7 +26,7 @@ public class UeUfVs extends UnboundedVisitor  {
 	@Override
 	public Z3Formula visit(DurFormula dr) {
 		
-		Z3Expression constant = Z3Formula.getConstant(Double.toString(dr.getConstant()));
+		Z3Exp constant = Z3Formula.getConstant(Double.toString(dr.getConstant()));
 		return Z3Formula.getExists("j", Z3Formula.getAnd(
 				Z3Formula.getPredicate(Z3Formula.getVariable("j"), Z3Formula.getRelationalOperator("<="),
 						Z3Formula.getVariable("i")),

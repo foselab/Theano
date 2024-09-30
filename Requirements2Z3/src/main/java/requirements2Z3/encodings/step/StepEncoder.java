@@ -3,7 +3,7 @@ package requirements2Z3.encodings.step;
 import org.apache.commons.lang3.StringUtils;
 
 import requirements2Z3.encodings.trace.TraceEncoder;
-import requirements2Z3.z3formulae.Z3Expression;
+import requirements2Z3.z3formulae.Z3Exp;
 import requirements2Z3.z3formulae.Z3Formula;
 
 public abstract class StepEncoder {
@@ -67,7 +67,7 @@ public abstract class StepEncoder {
 	 *         a string given a position (i.e., a generic index such as 'i' or an
 	 *         actual index such as '0')
 	 */
-	public Z3Expression getPrevValue(String signalname, String position) {
+	public Z3Exp getPrevValue(String signalname, String position) {
 		if (StringUtils.isNumeric(position)) {
 			int index = Integer.parseInt(position);
 			if (index == 0) {
@@ -92,7 +92,7 @@ public abstract class StepEncoder {
 	 *         position.
 	 * @throws IllegalArgumentException if the signal name of the position is null
 	 */
-	public Z3Expression getTracePosition(String signalname, String position) {
+	public Z3Exp getTracePosition(String signalname, String position) {
 		return this.traceEncoder.getTracePosition(signalname, position);
 	}
 

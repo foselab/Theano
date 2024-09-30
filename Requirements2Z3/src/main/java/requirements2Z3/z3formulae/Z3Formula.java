@@ -12,7 +12,7 @@ public abstract class Z3Formula {
 
 	public abstract String toString();
 
-	public static Z3Expression getEmpty() {
+	public static Z3Exp getEmpty() {
 		return empty;
 	}
 
@@ -20,7 +20,7 @@ public abstract class Z3Formula {
 		return z3true;
 	}
 
-	public static Z3Expression getZ3UnaryExpression(String arithmeticOperator, Z3Expression expression2) {
+	public static Z3Exp getZ3UnaryExpression(String arithmeticOperator, Z3Exp expression2) {
 		return new Z3UnaryExpression(arithmeticOperator, expression2);
 	}
 
@@ -28,8 +28,8 @@ public abstract class Z3Formula {
 		return z3false;
 	}
 
-	public static Predicate getPredicate(Z3Expression expression1, RelationalOperator operator,
-			Z3Expression expression2) {
+	public static Predicate getPredicate(Z3Exp expression1, RelationalOperator operator,
+			Z3Exp expression2) {
 		return new Predicate(expression1, operator, expression2);
 	}
 
@@ -171,22 +171,22 @@ public abstract class Z3Formula {
 		}
 	}
 
-	public static Z3Expression getConstant(String value) {
+	public static Z3Exp getConstant(String value) {
 		return new Constant(value);
 	}
 
-	public static Z3Expression getVariable(String variable) {
+	public static Z3Exp getVariable(String variable) {
 		return new Variable(variable);
 	}
 
-	public static Z3Expression getExpression(Z3Expression expression1, String arithmeticOperator,
-			Z3Expression expression2) {
+	public static Z3Exp getExpression(Z3Exp expression1, String arithmeticOperator,
+			Z3Exp expression2) {
 		return new ArithmeticExpression(expression1, arithmeticOperator, expression2);
 	}
 
 }
 
-class Empty extends Z3Expression {
+class Empty extends Z3Exp {
 
 	@Override
 	public String toString() {
@@ -341,11 +341,11 @@ class False extends Z3Formula {
 }
 
 class Predicate extends Z3Formula {
-	private final Z3Expression expression1;
+	private final Z3Exp expression1;
 	private final RelationalOperator operator;
-	private final Z3Expression expression2;
+	private final Z3Exp expression2;
 
-	public Predicate(Z3Expression expression1, RelationalOperator operator, Z3Expression expression2) {
+	public Predicate(Z3Exp expression1, RelationalOperator operator, Z3Exp expression2) {
 		this.expression1 = expression1;
 		this.operator = operator;
 		this.expression2 = expression2;

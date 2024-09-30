@@ -14,7 +14,7 @@ import requirements2Z3.rqt.True;
 import requirements2Z3.rqt.UnaryExpression;
 import requirements2Z3.rqt.Variables;
 import requirements2Z3.visitors.RTVisitor;
-import requirements2Z3.z3formulae.Z3Expression;
+import requirements2Z3.z3formulae.Z3Exp;
 import requirements2Z3.z3formulae.Z3Formula;
 
 public abstract class RT2Z3Visitor implements RTVisitor<Z3Formula> {
@@ -42,11 +42,11 @@ public abstract class RT2Z3Visitor implements RTVisitor<Z3Formula> {
 	}
 	
 	@Override
-	public Z3Expression visit(ArithmeticExpression arithmeticExpression) {
+	public Z3Exp visit(ArithmeticExpression arithmeticExpression) {
 		return  Z3Formula.getExpression(
-				(Z3Expression) arithmeticExpression.getLeft().accept(this), 
+				(Z3Exp) arithmeticExpression.getLeft().accept(this), 
 				arithmeticExpression.getOp().getOperator(), 
-				(Z3Expression) arithmeticExpression.getRight().accept(this));
+				(Z3Exp) arithmeticExpression.getRight().accept(this));
 	}
 	
 	@Override
@@ -61,7 +61,7 @@ public abstract class RT2Z3Visitor implements RTVisitor<Z3Formula> {
 
 	@Override
 	public Z3Formula visit(RelationalExpression relationalExpression) {
-		return Z3Formula.getPredicate((Z3Expression) relationalExpression.getExp1().accept(this), Z3Formula.getRelationalOperator(relationalExpression.getOp().toString()), (Z3Expression)relationalExpression.getExp2().accept(this));
+		return Z3Formula.getPredicate((Z3Exp) relationalExpression.getExp1().accept(this), Z3Formula.getRelationalOperator(relationalExpression.getOp().toString()), (Z3Exp)relationalExpression.getExp2().accept(this));
 	}
 		
 	@Override
@@ -75,8 +75,8 @@ public abstract class RT2Z3Visitor implements RTVisitor<Z3Formula> {
 	}
 
 	@Override
-	public Z3Expression visit(UnaryExpression unaryExpression) {
-		return Z3Formula.getZ3UnaryExpression(unaryExpression.getOp().toString(),(Z3Expression) unaryExpression.getExp().accept(this));
+	public Z3Exp visit(UnaryExpression unaryExpression) {
+		return Z3Formula.getZ3UnaryExpression(unaryExpression.getOp().toString(),(Z3Exp) unaryExpression.getExp().accept(this));
 	}
 
 	@Override

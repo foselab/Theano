@@ -4,7 +4,7 @@ import requirements2Z3.encodings.Encoder;
 import requirements2Z3.rqt.DurFormula;
 import requirements2Z3.rqt.Identifier;
 import requirements2Z3.rqt.TimestampDefinition;
-import requirements2Z3.z3formulae.Z3Expression;
+import requirements2Z3.z3formulae.Z3Exp;
 import requirements2Z3.z3formulae.Z3Formula;
 
 public class BeUfFs extends BoundedVisitor {
@@ -29,7 +29,7 @@ public class BeUfFs extends BoundedVisitor {
 	@Override
 	public Z3Formula visit(DurFormula dr) {
 	
-		Z3Expression constant = Z3Formula.getConstant(Double.toString(dr.getConstant()));
+		Z3Exp constant = Z3Formula.getConstant(Double.toString(dr.getConstant()));
 
 		Z3Formula part1 = Z3Formula.getPredicate(Z3Formula.getVariable("tau(i)"),Z3Formula.getRelationalOperator(">="),constant);
 		Z3Formula part2 = Z3Formula.getPredicate(constant,Z3Formula.getRelationalOperator(dr.getOp().toString()), Z3Formula.getVariable("Ts"));

@@ -1,11 +1,11 @@
 package requirements2Z3.z3formulae;
 
-public abstract class Z3Expression extends Z3Formula {
+public abstract class Z3Exp extends Z3Formula {
 	public abstract String toString();
 
 }
 
-class Variable extends Z3Expression {
+class Variable extends Z3Exp {
 	private final String variable;
 
 	public Variable(String variable) {
@@ -18,7 +18,7 @@ class Variable extends Z3Expression {
 	}
 }
 
-class Constant extends Z3Expression {
+class Constant extends Z3Exp {
 	private final String value;
 
 	public Constant(String value) {
@@ -31,12 +31,12 @@ class Constant extends Z3Expression {
 	}
 }
 
-class ArithmeticExpression extends Z3Expression {
-	private Z3Expression expression1;
+class ArithmeticExpression extends Z3Exp {
+	private Z3Exp expression1;
 	private String arithmeticOperator;
-	private Z3Expression expression2;
+	private Z3Exp expression2;
 
-	public ArithmeticExpression(Z3Expression expression1, String arithmeticOperator, Z3Expression expression2) {
+	public ArithmeticExpression(Z3Exp expression1, String arithmeticOperator, Z3Exp expression2) {
 		this.expression1 = expression1;
 		this.arithmeticOperator = arithmeticOperator;
 		this.expression2 = expression2;
@@ -48,11 +48,11 @@ class ArithmeticExpression extends Z3Expression {
 	}
 }
 
-class Z3UnaryExpression extends Z3Expression {
+class Z3UnaryExpression extends Z3Exp {
 	private String arithmeticOperator;
-	private Z3Expression expression2;
+	private Z3Exp expression2;
 
-	public Z3UnaryExpression(String arithmeticOperator, Z3Expression expression2) {
+	public Z3UnaryExpression(String arithmeticOperator, Z3Exp expression2) {
 		this.arithmeticOperator = arithmeticOperator;
 		this.expression2 = expression2;
 	}
@@ -63,7 +63,7 @@ class Z3UnaryExpression extends Z3Expression {
 	}
 }
 
-class RelationalOperator extends Z3Expression {
+class RelationalOperator extends Z3Exp {
 	private final String operator;
 
 	public RelationalOperator(String operator) {
