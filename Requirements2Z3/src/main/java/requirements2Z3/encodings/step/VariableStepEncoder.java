@@ -21,9 +21,9 @@ public class VariableStepEncoder extends StepEncoder {
 			nextPosition = position + " + 1";
 		}
 
-		return Z3Formula.getPredicate(this.getTraceEncoder().getTracePosition(signalname, position),
+		return Z3Formula.getPredicate(this.getTraceEncoder().getSig(signalname, position),
 				Z3Formula.getRelationalOperator("<"),
-				this.getTraceEncoder().getTracePosition(signalname, nextPosition));
+				this.getTraceEncoder().getSig(signalname, nextPosition));
 	}
 
 }

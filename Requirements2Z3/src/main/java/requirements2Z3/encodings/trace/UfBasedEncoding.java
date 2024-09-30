@@ -20,7 +20,7 @@ public class UfBasedEncoding implements TraceEncoder {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Z3Exp getTracePosition(String signalname, String position) {
+	public Z3Exp getSig(String signalname, String position) {
 		if (signalname.equals("tau")) {
 			return Z3Formula.getVariable(signalname + "(" + position + ")");
 		} else {

@@ -51,7 +51,7 @@ public abstract class StepEncoder {
 				return Z3Formula.getFalse();
 			}
 		} else {
-			return Z3Formula.getPredicate(this.getTraceEncoder().getTracePosition("tau", position),
+			return Z3Formula.getPredicate(this.getTraceEncoder().getSig("tau", position),
 					Z3Formula.getRelationalOperator("=="), Z3Formula.getConstant("0"));
 		}
 	}
@@ -71,14 +71,14 @@ public abstract class StepEncoder {
 		if (StringUtils.isNumeric(position)) {
 			int index = Integer.parseInt(position);
 			if (index == 0) {
-				return this.getTraceEncoder().getTracePosition(signalname, position);
+				return this.getTraceEncoder().getSig(signalname, position);
 			} else {
-				return this.getTraceEncoder().getTracePosition(signalname, position + "-1");
+				return this.getTraceEncoder().getSig(signalname, position + "-1");
 			}
 		} else {
 			return Z3Formula.getConstant("((" + position + "==0)*("
-					+ this.getTraceEncoder().getTracePosition(signalname, position) + ")+(" + position + ">0)*("
-					+ this.getTraceEncoder().getTracePosition(signalname, position + "-1") + "))");
+					+ this.getTraceEncoder().getSig(signalname, position) + ")+(" + position + ">0)*("
+					+ this.getTraceEncoder().getSig(signalname, position + "-1") + "))");
 		}
 	}
 
@@ -93,7 +93,7 @@ public abstract class StepEncoder {
 	 * @throws IllegalArgumentException if the signal name of the position is null
 	 */
 	public Z3Exp getTracePosition(String signalname, String position) {
-		return this.traceEncoder.getTracePosition(signalname, position);
+		return this.traceEncoder.getSig(signalname, position);
 	}
 
 	/**

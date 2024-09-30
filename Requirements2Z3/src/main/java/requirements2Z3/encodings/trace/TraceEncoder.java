@@ -21,6 +21,6 @@ public interface TraceEncoder {
 	 *         position.
 	 * @throws IllegalArgumentException if the signal name of the position is null
 	 */
-	public abstract Z3Exp getTracePosition(String signalname, String position);
+	public abstract Z3Exp getSig(String signalname, String position);
 
 }

@@ -20,7 +20,7 @@ public class ArBasedEncoding implements TraceEncoder {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Z3Exp getTracePosition(String signalname, String position) {
+	public Z3Exp getSig(String signalname, String position) {
 		return Z3Formula.getVariable(
 				signalname + "[" + position + "]");
 	}
