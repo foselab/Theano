@@ -42,27 +42,27 @@ public abstract class BoundedVisitor extends RT2Z3Visitor  {
 	}
 	
 	@Override
-	public Z3Formula visit(Variable variable) {
-		return this.getEncoder().getTracePosition(variable.getName(), String.valueOf(this.getIndex()));
+	public Z3Formula visit(Variable v) {
+		return this.getEncoder().getTracePosition(v.getName(), String.valueOf(this.getIndex()));
 	}
 
 	@Override
-	public Z3Formula visit(PrevExpression prevExpression)
+	public Z3Formula visit(PrevExpression p)
 	{
 		//if (this.index == 0) {
 		//	return this.getEncoder().getTracePosition(prevExpression.getId().getId(), String.valueOf(this.getIndex()));
 		//} else {
-			return this.getEncoder().getTracePosition(prevExpression.getId().getId(), String.valueOf(this.getIndex() - 1));
+			return this.getEncoder().getTracePosition(p.getId().getId(), String.valueOf(this.getIndex() - 1));
 		//}
 	}
 
 	@Override
-	public Z3Formula visit(IsStartup isStartup) {
+	public Z3Formula visit(IsStartup s) {
 		return this.getEncoder().getIsStartup("tau", String.valueOf(this.getIndex()));
 	}
 	
 	@Override
-	public Z3Formula visit(IsNotStartup isNotStartup) {
+	public Z3Formula visit(IsNotStartup ns) {
 		return Z3Formula.getNot(this.getEncoder().getIsStartup("tau", String.valueOf(this.getIndex())));
 	}
 

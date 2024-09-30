@@ -21,22 +21,22 @@ public abstract class UnboundedVisitor extends RT2Z3Visitor {
 	
 
 	@Override
-	public Z3Formula visit(Variable variable) {
-		return this.getEncoder().getTracePosition(variable.getName(), "i"); 
+	public Z3Formula visit(Variable v) {
+		return this.getEncoder().getTracePosition(v.getName(), "i"); 
 	}
 	
 	@Override
-	public Z3Formula visit(PrevExpression prevExpression) {
-		return this.getEncoder().getPrevValue(prevExpression.getId().getId(), "i");
+	public Z3Formula visit(PrevExpression p) {
+		return this.getEncoder().getPrevValue(p.getId().getId(), "i");
 	}
 
 	@Override
-	public Z3Formula visit(IsStartup isStartup) {
+	public Z3Formula visit(IsStartup s) {
 		return this.getEncoder().getIsStartup("tau", "i");
 	}
 
 	@Override
-	public Z3Formula visit(IsNotStartup isNotStartup) {
+	public Z3Formula visit(IsNotStartup ns) {
 		return Z3Formula.getNot(this.getEncoder().getIsStartup("tau", "i"));
 	}
 }

@@ -24,9 +24,9 @@ public class UeUfVs extends UnboundedVisitor  {
 	}
 
 	@Override
-	public Z3Formula visit(DurFormula durFormula) {
+	public Z3Formula visit(DurFormula dr) {
 		
-		Z3Expression constant = Z3Formula.getConstant(Double.toString(durFormula.getConstant()));
+		Z3Expression constant = Z3Formula.getConstant(Double.toString(dr.getConstant()));
 		return Z3Formula.getExists("j", Z3Formula.getAnd(
 				Z3Formula.getPredicate(Z3Formula.getVariable("j"), Z3Formula.getRelationalOperator("<="),
 						Z3Formula.getVariable("i")),
@@ -36,10 +36,10 @@ public class UeUfVs extends UnboundedVisitor  {
 						Z3Formula.getImplies(
 								Z3Formula.getAnd(
 										Z3Formula.getPredicate(Z3Formula.getVariable("j"),
-												Z3Formula.getDualOperator(durFormula.getOp().toString()), Z3Formula.getVariable("k")),
+												Z3Formula.getDualOperator(dr.getOp().toString()), Z3Formula.getVariable("k")),
 										Z3Formula.getPredicate(Z3Formula.getVariable("k"),
-												Z3Formula.getDualOperator(durFormula.getOp().toString()), Z3Formula.getVariable("i"))),
-								durFormula.getF().accept(this)))));
+												Z3Formula.getDualOperator(dr.getOp().toString()), Z3Formula.getVariable("i"))),
+								dr.getF().accept(this)))));
 	}
 	
 	@Override

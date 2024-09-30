@@ -27,19 +27,19 @@ public class BeArFs extends BoundedVisitor  {
 	}
 	
 	@Override
-	public Z3Formula visit(DurFormula durFormula) {
+	public Z3Formula visit(DurFormula dr) {
 
-		Z3Expression constant = Z3Formula.getConstant(Double.toString(durFormula.getConstant()));
+		Z3Expression constant = Z3Formula.getConstant(Double.toString(dr.getConstant()));
 
 		Z3Formula part1 = Z3Formula.getPredicate(Z3Formula.getVariable("tau[i]"),Z3Formula.getRelationalOperator(">="),constant);
-		Z3Formula part2 = Z3Formula.getPredicate(constant,Z3Formula.getRelationalOperator(durFormula.getOp().toString()),Z3Formula.getVariable("Ts"));
+		Z3Formula part2 = Z3Formula.getPredicate(constant,Z3Formula.getRelationalOperator(dr.getOp().toString()),Z3Formula.getVariable("Ts"));
 
 		Z3Formula part3 = Z3Formula.getTrue();
 
 		int lb = (int) (this.getIndex() - Float.parseFloat(constant.toString()) / this.ts);
 
 		for (int n = lb; n <= this.getIndex(); n++) {
-			part3 = Z3Formula.getAnd(part3,durFormula.getF().accept(new BeArFs(this.getEncoder(),n, this.ts)));
+			part3 = Z3Formula.getAnd(part3,dr.getF().accept(new BeArFs(this.getEncoder(),n, this.ts)));
 		}
 
 		return Z3Formula.getAnd(part1,part2,part3);

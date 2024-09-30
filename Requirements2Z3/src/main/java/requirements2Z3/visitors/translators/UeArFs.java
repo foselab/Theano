@@ -15,10 +15,10 @@ public class UeArFs extends UnboundedVisitor {
 
 	
 	@Override
-	public Z3Formula visit(DurFormula durFormula) {
+	public Z3Formula visit(DurFormula dr) {
 		
 		
-		Z3Expression constant=Z3Formula.getConstant(Double.toString(durFormula.getConstant()));
+		Z3Expression constant=Z3Formula.getConstant(Double.toString(dr.getConstant()));
 		
 		Z3Formula part1=Z3Formula.getPredicate(
 				Z3Formula.getVariable("tau[i]"), 
@@ -35,15 +35,15 @@ public class UeArFs extends UnboundedVisitor {
 						Z3Formula.getAnd(
 								Z3Formula.getPredicate(
 								Z3Formula.getConstant("i-"+constant+"/Ts"),
-								Z3Formula.getDualOperator(durFormula.getOp().toString()),
+								Z3Formula.getDualOperator(dr.getOp().toString()),
 								Z3Formula.getVariable("k"))
 						,
 						Z3Formula.getPredicate(
 								Z3Formula.getVariable("k"),
-								Z3Formula.getDualOperator(durFormula.getOp().toString()),
+								Z3Formula.getDualOperator(dr.getOp().toString()),
 								Z3Formula.getVariable("i")
 								))
-						, durFormula.getF().accept(this)));
+						, dr.getF().accept(this)));
 		
 		return Z3Formula.getAnd(part1,part2,part3);
 	}
