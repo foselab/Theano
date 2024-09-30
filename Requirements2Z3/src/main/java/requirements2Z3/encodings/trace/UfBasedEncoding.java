@@ -12,7 +12,7 @@ public class UfBasedEncoding implements TraceEncoder {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String defineTraceVariable() {
+	public String defTimestamp() {
 		return "tau = Function('tau', IntSort(), RealSort())\n";
 	}
 

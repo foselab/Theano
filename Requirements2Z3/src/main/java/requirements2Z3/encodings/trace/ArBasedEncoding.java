@@ -12,7 +12,7 @@ public class ArBasedEncoding implements TraceEncoder {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String defineTraceVariable() {
+	public String defTimestamp() {
 		return "tau = Array('tau', I, R)\n";
 	}
 

@@ -9,7 +9,7 @@ public interface TraceEncoder {
 	 * 
 	 * @return the String that must be used to define the trace
 	 */
-	public abstract String defineTraceVariable();
+	public abstract String defTimestamp();
 	
 	/**
 	 * Given a signal name and the position of the trace to be considered, returns a

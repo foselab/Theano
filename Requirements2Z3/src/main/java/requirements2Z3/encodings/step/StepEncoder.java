@@ -106,6 +106,6 @@ public abstract class StepEncoder {
 	}
 
 	public String defineTraceVariable() {
-		return this.traceEncoder.defineTraceVariable();
+		return this.traceEncoder.defTimestamp();
 	}
 }
