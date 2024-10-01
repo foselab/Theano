@@ -24,7 +24,7 @@ public class FixedStepEncoder extends StepEncoder {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Z3Formula getTracePositionMonotonicConstraint(String signalname, String position) {
+	public Z3Formula getMonConst(String signalname, String position) {
 
 		/*String nextPosition;
 		try {
@@ -38,7 +38,7 @@ public class FixedStepEncoder extends StepEncoder {
 						this.getTraceEncoder().getTracePosition(signalname, position)),
 				Z3Formula.getRelationalOperator("=="), Z3Formula.getVariable(Double.toString(ts)));*/
 		return Z3Formula.getPredicate(
-				this.getTraceEncoder().getSig(signalname, position),
+				this.traceEncoder.getSig(signalname, position),
 						Z3Formula.getRelationalOperator("=="),
 						Z3Formula.getConstant(Double.toString(ts*Integer.parseInt(position))));
 

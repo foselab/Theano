@@ -1,5 +1,7 @@
 package requirements2Z3.encodings;
 
+import org.apache.commons.lang3.StringUtils;
+
 import requirements2Z3.encodings.step.StepEncoder;
 import requirements2Z3.z3formulae.Z3Exp;
 import requirements2Z3.z3formulae.Z3Formula;
@@ -33,7 +35,7 @@ public abstract class Encoder {
 	 * @return a String that defines the variable used to encode the trace
 	 */
 	public String defineTraceVariable() {
-		return this.stepEncoder.defineTraceVariable();
+		return this.stepEncoder.defTimestamp();
 	}
 
 	protected StepEncoder getStepEncoder() {
@@ -51,7 +53,7 @@ public abstract class Encoder {
 	 * @throws IllegalArgumentException if the signal name of the position is null
 	 */
 	public Z3Exp getTracePosition(String signalname, String position) {
-		return this.stepEncoder.getTracePosition(signalname, position);
+		return this.stepEncoder.getSig(signalname, position);
 	}
 
 	/**
@@ -64,7 +66,17 @@ public abstract class Encoder {
 	 *         position.
 	 */
 	public Z3Formula getIsStartup(String signalname, String position) {
-		return this.stepEncoder.getIsStartup(signalname, position);
+		if (StringUtils.isNumeric(position)) {
+			int index = Integer.parseInt(position);
+			if (index == 0) {
+				return Z3Formula.getTrue();
+			} else {
+				return Z3Formula.getFalse();
+			}
+		} else {
+			return Z3Formula.getPredicate(this.stepEncoder.getSig("tau", position),
+					Z3Formula.getRelationalOperator("=="), Z3Formula.getConstant("0"));
+		}
 	}
 
 	/**
@@ -79,7 +91,18 @@ public abstract class Encoder {
 	 *         actual index such as '0')
 	 */
 	public Z3Exp getPrevValue(String signalname, String position) {
-		return this.stepEncoder.getPrevValue(signalname, position);
+		if (StringUtils.isNumeric(position)) {
+			int index = Integer.parseInt(position);
+			if (index == 0) {
+				return this.getStepEncoder().getSig(signalname, position);
+			} else {
+				return this.getStepEncoder().getSig(signalname, position + "-1");
+			}
+		} else {
+			return Z3Formula.getConstant("((" + position + "==0)*("
+					+ this.getStepEncoder().getSig(signalname, position) + ")+(" + position + ">0)*("
+					+ this.getStepEncoder().getSig(signalname, position + "-1") + "))");
+		}
 	}
 
 }

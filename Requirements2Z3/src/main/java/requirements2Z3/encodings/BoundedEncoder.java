@@ -35,7 +35,7 @@ public class BoundedEncoder extends Encoder {
 			if (i != 0) {
 				bulder.append(",");
 			}
-			bulder.append(this.getStepEncoder().getTracePositionMonotonicConstraint("tau", String.valueOf(i)));
+			bulder.append(this.getStepEncoder().getMonConst("tau", String.valueOf(i)));
 		}
 		bulder.append(")");
 

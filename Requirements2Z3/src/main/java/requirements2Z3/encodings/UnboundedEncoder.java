@@ -21,7 +21,7 @@ public class UnboundedEncoder extends Encoder {
 	@Override
 	public String getMonotonicityConstraint() {
 		return "And("
-					+ "ForAll(j,Implies(j>=0,("+this.getStepEncoder().getTracePositionMonotonicConstraint("tau", String.valueOf("j"))+"))"
+					+ "ForAll(j,Implies(j>=0,("+this.getStepEncoder().getMonConst("tau", String.valueOf("j"))+"))"
 							+ "),"
 					+ this.getTracePosition("tau","0")+"==0"
 				+ ")";
