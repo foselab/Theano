@@ -6,5 +6,5 @@ endvardef
 reqdef
 	cs<ts,th>prev(th);
 	cs>ts,th<prev(th);
-	(cs<=ts+2)&(cs>=ts-2),th==prev(th);
+	cs<=ts+2 & cs>=ts-2,th==prev(th);
 endreqdef
